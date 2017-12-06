@@ -1,0 +1,1241 @@
+{
+  "siteTitle": "Sportfreunde Winterbach e.V.",
+  "auth/argument-error": "Es ist ein Systemfehler aufgetreten. Bitte versuche es zu einem späteren Zeitpunkt erneut.",
+  "auth/invalid-email": "Du hast keine gültige E-Mail Adresse eingegeben.",
+  "auth/user-disabled": "Dein Benutzeraccount wurde von einem Administrator deaktiviert.",
+  "auth/user-not-found": "Ein Benutzer mit diesen Daten wurde nicht in unserem System gefunden.",
+  "auth/wrong-password": "Du hast ein falsches Passwort für diesen Account angegeben.",
+  "auth/send-verification": "Eine weitere E-Mail zur Bestätigung Deines Accounts wurde Dir gesendet.",
+  "auth/successful-signup": "Deine Registrierung war erfolgreich! Wir haben Dir eine E-Mail gesendet zum Bestätigen Deiner Adresse gesendet. Nach dem Klicken des Links in der Mail hast Du Zugriff auf das System.",
+  "Required": "Hier wird eine Eingabe benötigt",
+  "Global": {
+    "Login": {
+      "defaultLoginMessage": "Benutze die E-Mail <span style='font-weight: 500;'>demo@demo.com</span> und das Passwort <span style='font-weight: 500;'>demo123</span> für einen Demo&ndash;Zugang!",
+      "passwordResetSentMessage": "Eine E-Mail zum Zurücksetzen Deines Passwortes wurde gesendet.",
+      "adminArea": {
+        "title": "SFW Administration",
+        "description": "Administrations- und Verwaltungsoberfläche für die Seite www.sfwinterbach.com"
+      },
+      "newUserQuestion": "Du hast noch keinen Account?",
+      "CreateNewAccount": "Neuen Account erstellen!",
+      "Email": "E-Mail",
+      "reqEmail": "Gib Deine E-Mail Adresse zum Zurücksetzen Deines Passwortes an",
+      "forgotPasswordButton": "Passwort vergessen",
+      "loginButton": "Einloggen",
+      "alternativeLoginText": "Oder nutze Deine sozialen Netzwerke",
+      "facebook": "Über Facebook anmelden",
+      "twitter": "Über Twitter anmelden",
+      "googlePlus": "Über GooglePlus anmelden",
+      "FrontendLinkText": "Zur Hauptseite",
+      "LoginHeaderHintText": "Bitte gib Deinen Benutzernamen und Dein Passwort ein oder verwende die alternativen Logins.",
+      "LoginHeaderText": "Anmeldung",
+      "Password": "Passwort",
+      "pwRequest": "Anfordern",
+      "resendButtonText": "Erneut senden",
+      "resendVerificationMailMessage": "An die von Dir angegebene Email-Adresse wurde eine Bestätigungsmail gesendet. Bitte klicke auf den Link in der Email zum Bestätigen Deines Accounts. Falls Du keine Mail erhalten hast klicke bitte auf den folgenden Link:",
+      "InputEmail": {
+        "Required": "Du musst eine E-Mail Adresse eingeben."
+      }
+    },
+    "NotFound": {
+      "HeaderText": "404 - Seite nicht gefunden",
+      "Hint": "Die von Dir aufgerufene Seite existiert nicht. Sicherlich ein Fehler des Programmierers.",
+      "LoginLinkText": "Zur Anmeldung"
+    },
+    "Register": {
+      "alreadyRegisteredQuestion": "Du hast schon einen Account?",
+      "LoginInfoText": "Hier geht´s zum Login",
+      "FirstName": "Vorname",
+      "LastName": "Nachname",
+      "RepeatPassword": "Passwort erneut eingeben",
+      "shortRepeatPassword": "wiederholen",
+      "PasswordsDontMatch": "Die beiden Passwörter stimmen nicht überein",
+      "HeaderText": "Registrierung",
+      "Hint": "Gib Deine Daten in das nachfolgende Formular ein. Die Registrierung ist natürlich völlig kostenlos.",
+      "RegisterLinkText": "Registrieren",
+      "iAgree": "Ich bestätige die ",
+      "termsAndConditions": "Nutzungsbedinungen"
+    },
+    "SocialLogin": {
+      "Alternatives": "Alternative Möglichkeiten"
+    },
+    "VerifyEmail": {
+      "verifyText": "Wir haben Dir nach Deiner Registrierung eine E-Mail mit einem Freischaltungscode gesendet. Bitte verifiziere Deinen Account, danach kannst Du Dich einloggen. Bitte prüfe auch Deinen SPAM-Ordner, falls Du keine Mail finden kannst.",
+      "noMail": "Keine Mail erhalten?",
+      "ResendLinkText": "Mail erneut senden",
+      "LoginButton": "Zur Startseite",
+      "done": "E-Mail gesendet!",
+      "messageSent": "Eine neue Verifizierungsmail wurde an die von Dir hinterlegte E-Mail Adresse gesendet. Bitte wechsele in Dein Postfach und aktiviere dann Deinen Account.",
+      "UpdateStatus": "Aktualisieren"
+    }
+  },
+  "general": {
+    "articles": {
+      "detail": {
+        "assignedCategories": "Kategorien",
+        "assignedImages": "Verknüpfte Fotos",
+        "assignedTags": "Schlagworte",
+        "assignedTeams": "Mannschaften",
+        "editArticle": "Artikel editieren",
+        "matchDataTitle": "Spielinfos",
+        "matchEnd": "Ende",
+        "matchInfos": "Spieldaten",
+        "matchLocation": "Spielort",
+        "matchStart": "Beginn",
+        "matchType": "Spielart",
+        "noText": "Es wurde bisher weder eine Vorschau noch ein Artikeltext gespeichert.",
+        "overviewLink": "Zur Übersicht",
+        "preview": "Vorschau",
+        "text": "Text",
+        "writtenAt": "geschrieben am"
+      },
+      "edit": {
+        "author": "Author des Artikels",
+        "articleDate": "Datum des Artikels",
+        "assignedArticleCategories": "Artikel-Kategorien",
+        "assignedTags": "Schlagworte zum Artikel",
+        "assignedTeams": "Verknüpfte Mannschaft(en)",
+        "cancelCreate": "Abbrechen",
+        "chooseArticleCategories": "Wähle die Artikelkategorien",
+        "chooseAuthor": "Wähle den Author des Artikels",
+        "chooseLocation": "Wähle den Treffpunkt bzw. die Spielstätte",
+        "chooseTeam": "Wähle die Mannschaft",
+        "chooseTeams": "Wähle die dazugehörigen Mannschaften",
+        "createdByScript": "Importiert durch Script",
+        "deleteArticle": "Artikel löschen",
+        "featurePost": "Artikel auf der Startseite anzeigen?",
+        "guestGoals": "Tore Gastmannschaft",
+        "guestTeam": "Gastmannschaft",
+        "homeGoals": "Tore Heimmannschaft",
+        "homeTeam": "Heimmannschaft",
+        "isArticleAMatch": "Ist der Artikel ein Spielbericht?",
+        "isHomeTeam": "Ist es ein Heimspiel?",
+        "location": "Spielstätte / Treffpunkt",
+        "preview": "Vorschau",
+        "previewText": "Schreibe hier den Vorbericht zum o.a. Titel",
+        "previewTitle": "Artikel-Vorbericht",
+        "publicationDate": "Veröffentlichungsdatum",
+        "publishNow": "Jetzt veröffentlichen",
+        "saveAsDraft": "Als Entwurf speichern",
+        "settings": "Einstellungen",
+        "sidebar": "Weitere Einstellungen",
+        "teamName": "Verknüpfte Mannschaft",
+        "text": "Der Artikel-Text",
+        "textLabel": "Der Text",
+        "textTitle": "Artikel-Nachbericht",
+        "title": "Titel des Artikels",
+        "turnToStaticPage": "In einen statischen Artikel umwandeln",
+        "url": "Statische URL des Artikels",
+        "wordCount": "Wörter"
+      },
+      "list": {
+        "allArticles": "Alle Artikel anzeigen",
+        "articlesPerPage": "Artikel pro Seite",
+        "colTitles": {
+          "articleDate": "Datum",
+          "assignedArticleCategories": "Artikelkategorien",
+          "assignedTeamCategories": "Mannschaftsarten",
+          "assignedLocation": "Spielstätte",
+          "assignedSeason": "Spieljahr",
+          "assignedTeam": "Mannschaft",
+          "author": "Author",
+          "title": "Titel",
+          "assignedCategory": "Kategorie",
+          "isMatch": "Spielbericht?"
+        },
+        "createArticle": "Artikel erstellen",
+        "filterByAssignedSeason": "Spielzeit",
+        "filterByAssignedTeam": "Mannschaft",
+        "filterTitle": "Artikel filtern nach",
+        "noFilteredResult": "Es wurden noch keine Artikel mit diesen Suchkriterien erstellt",
+        "noResult": "Es wurden noch keine Artikel erstellt",
+        "title": "Artikel"
+      }
+    },
+    "buttons": {
+      "mediaLink": "Verknüpfte Medien",
+      "detailLink": "Details anzeigen",
+      "editLink": "Editieren",
+      "removeLink": "Löschen",
+      "publishLink": "Veröffentlichen",
+      "unPublishLink": "Sperren",
+      "listLink": "Zur Übersicht"
+    },
+    "categories": {
+      "edit": {
+        "addLocationToCategory": "Treffpunkte mit Kategorie verknüpfen",
+        "assignedObjects": "Verknüpfte",
+        "assignedObjectsTitle": "Verknüpfte Elemente",
+        "categoryDefaultPlaceholder": "Hauptkategorie wählen",
+        "chooseAssignedObjects": "Bitte wähle die verknüpften ",
+        "descriptionPlaceHolder": "Beschreibung der Kategorie",
+        "loadingLocations": "Lade alle Treffpunkte",
+        "mainTitle": "Wichtigste Daten",
+        "namePlaceholder": "Name der Kategorie",
+        "noAssignedObjects": "Es wurde noch keine Hauptkategorie ausgewählt.",
+        "noAssignedCategoryType": "-",
+        "noItemsFound": "Es wurden keine {{value}} gefunden. Du musst zuerst einige anlegen um sie später hier verknüpfen zu können.",
+        "possibleObjects": "Auswählbare ",
+        "removeLocationFromCategory": "Verknüpfte Treffpunkte entfernen",
+        "saveCategory": "Kategorie speichern",
+        "updateCategory": "Änderungen speichern"
+      },
+      "detail": {
+        "deleteLocation": "Verknüpfung entfernen",
+        "mainTitle": "Allgemeine Informationen",
+        "noArticles": "Es wurden noch keine Artikel mit dieser Kategorie verknüpft.",
+        "noLocations": "Es wurden noch keine Treffpunkte mit dieser Kategorie verknüpft.",
+        "noTeams": "Es wurden noch keine Mannschaften mit dieser Kategorie verknüpft."
+      },
+      "list": {
+        "allCategories": "Alle Kategorien",
+        "allCategoryTypes": "Alle Typen",
+        "categoriesByCategoryType": "Kategorien nach ihrem Typ",
+        "categoriesPerPage": "Kategorien pro Seite",
+        "colTitles": {
+          "name": "Titel",
+          "type": "Kategorie"
+        },
+        "createCategory": "Kategorie erstellen",
+        "filterByAssignedCategoryType": "Aus der Kategorie",
+        "filterTitle": "Kategorien filtern nach",
+        "fieldType": "Hauptkategorie",
+        "noMatchingResult": "Es wurden keine Kategorien mit diesen Suchkriterien gefunden.",
+        "noResult": "Es wurden noch keine Kategorien erstellt.",
+        "title": "Kategorien"
+      }
+    },
+    "club-managements": {
+      "edit": {
+        "club-managementTimeLineTitle": "Die ersten Vorsitzenden (Chronologie)"
+      }
+    },
+    "clubs": {
+      "edit": {
+        "assignedTeams": {
+          "season": "Saison",
+          "teamCount": "Anzahl der Mannschaften",
+          "teams": "Gemeldete Mannschaften"
+        },
+        "chooseLocation": "Bitte wähle die Heimspielstätte",
+        "clubId": "Fussball.de ID",
+        "clubUrl": "Vereinsseite",
+        "clubTimeLineTitle": "Wichtige Ereignisse im Verein",
+        "clubTitle": "Name des Vereins",
+        "calendarImport": "In Kalender importieren?",
+        "chooseClub": "Nach einem Verein filtern ...",
+        "clubColours": "Vereinsfarben",
+        "contact": "Ansprechpartner",
+        "description": "Kurzinfo zum Verein",
+        "detailTitle": "Weitere Informationen",
+        "files": {
+          "createFile": "Datei hinzufügen",
+          "description": "Beschreibung",
+          "name": "Name der Datei",
+          "title": "Dateien des Vereins"
+        },
+        "foundedIn": "Gründungsjahr",
+        "fussballDeId": "ID auf fussball.de",
+        "fussballDeUrl": "Link zu Fussball.de",
+        "history": "Die Geschichte des Vereins ...",
+        "historyTitle": "Vereinschronik",
+        "homepage": "Homepage (ohne http://)",
+        "honoraries": {
+          "assignedMediaGallery": "Bildergalerie der Ehrung",
+          "colTitles": {
+            "description": "Infotext",
+            "memberName": "Mitglied",
+            "since": "seit"
+          },
+          "createHonorary": "Ehrenmitglied erstellen",
+          "member": "Mitglied aus der Liste wählen",
+          "membersWithHonoraryStatus": "Nachfolgend sind alle Mitglieder, die als Ehrenmitglied gespeichert sind - aber noch kein Datum hinterlegt haben:",
+          "noGallery": "Mit keiner Galerie verküpfen",
+          "date": "Ernennung am",
+          "deleteHonoraryHonorary": "Ehrenmitglied löschen",
+          "infoText": "Leistungen des Mitglieds",
+          "saveHonorary": "Ehrenmitglied speichern",
+          "noHonoraries": "Es wurden bisher noch keine Ehrenmitglieder erstellt."
+        },
+        "honorariesTitle": "Ehrenmitglieder",
+        "isMainClub": "Ist es der Hauptverein?",
+        "location": "Heimspielstätte",
+        "locationTitle": "Vereinsheim und Heimspielstätte",
+        "logoTitle": "Vereinswappen",
+        "logoUrl": "Das Wappen des Vereins",
+        "mainTitle": "Wichtigste Daten",
+        "management": {
+          "addPosition": "Vorstandsposition hinzufügen",
+          "addPositionText": "Es fehlt eine Position im Vorstand?",
+          "chooseClub": "Bitte den Verein auswähllen",
+          "choosePosition": "Wähle das Amt des Mitgliedes im Vorstand",
+          "colTitles": {
+            "description": "Liste der Aufgaben",
+            "assignedClub": "Zu welchem Verein gehört das Amt?",
+            "memberName": "Mitglied",
+            "position": "Titel der Vorstandsaufgabe",
+            "since": "seit",
+            "till": "bis"
+          },
+          "createManagement": "Neues Vorstandsmitglied",
+          "deleteManagement": "Vorstandsmitglied löschen",
+          "editManagement": "Mitglied bearbeiten",
+          "member": "Mitglied aus der Liste wählen",
+          "moveDown": "In der Anzeige nach unten",
+          "moveUp": "In der Anzeige nach oben",
+          "noManagement": "Es wurden noch keine Vorstandsmitglieder erstellt",
+          "noPhotoFound": "Kein Foto des Vorstandes gefunden. Lade doch eins hoch!",
+          "noResult": "Es wurden keine Vorstandspositionen gefunden.",
+          "noFilteredResult": "Es wurden keine Vorstandspositionen für diesen Verein gefunden.",
+          "photoDescription": "Wer ist auf dem Bild zu sehen?",
+          "position": "Position im Vorstand",
+          "positionDescription": "Aufgabenfelder dieses Amtes",
+          "positions": "Ämter im Vorstand",
+          "saveManagement": "Position speichern"
+        },
+        "managementPhotoUrl": "Foto des Vorstandes",
+        "managementTitle": "Vorstand",
+        "mediaTitle": "Dateien",
+        "noHistory": "Es wurde noch kein Artikel über die Geschichte des Vereins verfasst!",
+        "noLogo": "Kein Vereinswappen vorhanden",
+        "positions": {
+          "firstNameAndLastName": "Vorname und Nachname"
+        },
+        "presidentsTitle": "Liste der bisherigen Präsidenten",
+        "presidentsList": {
+          "endDate": "im Amt bis",
+          "member": "Mitglied",
+          "savePresident": "Präsident speichern",
+          "startDate": "Im Amt seit"
+        },
+        "saveClub": "Verein speichern",
+        "seasonsTitle": "Mannschaften",
+        "stadiumTitle": "Spielstätte",
+        "timeLineClub": "Die Präsidenten-Chronik",
+        "timeLineTitle": "Wichtige Ereignisse im Verein",
+        "title": "Vereinsname",
+        "updateClub": "Änderungen speichern"
+      },
+      "list": {
+        "allClubs": "alle Vereine anzeigen",
+        "clubsPerPage": "Vereine pro Seite",
+        "colTitles": {
+          "name": "Vereinsname",
+          "description": "Beschreibung",
+          "logo": "Wappen",
+          "management": "Vorstand",
+          "teamsInCurrentSeason": "Mannschaften diese Saison",
+          "activeMen": "Aktive Herren",
+          "inactiveMen": "Inaktive",
+          "honoraries": "Ehrenmitglieder",
+          "youthMen": "männl. Jgd.",
+          "youthWomen": "weibl.",
+          "activeWomen": "aktive Frauen",
+          "inactiveWomen": "inaktive",
+          "activeAH": "Aktive AH",
+          "inactiveAH": "Inaktive",
+          "ahHonoraries": "Ehrenmitglieder"
+        },
+        "createClub": "Neuen Verein erstellen",
+        "filterTitle": "Vereine filtern nach ...",
+        "loadingClubs": "Vereine werden geladen",
+        "loadingManagements": "Die Positionen im Verein werden geladen",
+        "mainClubTitle": "Hauptverein",
+        "noLogo": "Kein Wappen vorhanden",
+        "noMatchingResult": "Es wurden keine Vereine mit diesen Suchkriterien gefunden.",
+        "noResult": "Es wurden noch keine Vereine erstellt.",
+        "title": "Vereine"
+      },
+      "media": {
+        "list": "Dateien des Vereins"
+      },
+      "timeLine": {
+        "addEvent": "Neues Ereignis",
+        "addManagement": "Neuer Vorsitzender",
+        "assignedArticle": "Mit Artikel verknüpfen",
+        "chooseArticle": "Artikel wählen",
+        "chooseColor": "Farbe wählen",
+        "color": "Farbe",
+        "date": "Datum",
+        "deleteEvent": "Ereignis löschen",
+        "name": "Vor- und Nachname",
+        "from": "von",
+        "icon": "Verknüpftes Icon",
+        "noEvents": "Es wurden noch keine Ereignisse gespeichert",
+        "saveTimeLine": "Ereignis speichern",
+        "subTitle": "Untertitel",
+        "table": "Tabelle",
+        "text": "Text",
+        "till": "bis",
+        "timeLine": "Diagramm",
+        "title": "Titel"
+      }
+    },
+    "dashboard": {
+      "currentBirthdays": "Heutige Geburtstage",
+      "endedMatchesWithoutResult": "Beendete Spiele ohne Ergebnis",
+      "endedMatchesWithResult": "Beendete Spiele mit Ergebnis",
+      "matchChart": {
+        "chartTitle": "Spiele der Mannschaften",
+        "totalArticles": "Artikel vorhanden"
+      },
+      "matchesWithoutResult": "Ergebnismeldung",
+      "upComingMatches": "Kommende Spiele",
+      "statistics": {
+        "applicationStatus": "Infos zur Anwendung",
+        "main": "Statistiken",
+        "newestUser": "Neuster Benutzer",
+        "usersOnline": "Momentan aktiv",
+        "weatherIn": "Wetter in"
+      }
+    },
+    "datetime": {
+      "months": {
+        "0": "Januar",
+        "1": "Februar",
+        "2": "März",
+        "3": "April",
+        "4": "Mai",
+        "5": "Juni",
+        "6": "Juli",
+        "7": "August",
+        "8": "September",
+        "9": "Oktober",
+        "10": "November",
+        "11": "Dezember"
+      },
+      "weekdays": {
+        "0": "Sonntag",
+        "1": "Montag",
+        "2": "Dienstag",
+        "3": "Mittwoch",
+        "4": "Donnerstag",
+        "5": "Freitag",
+        "6": "Samstag"
+      }
+    },
+    "home": "Startseite",
+    "locations": {
+      "detail": {
+        "assignedArticlesTitle": "Artikel zu diesem Treffpunkt",
+        "mainTitle": "Allgemeine Informationen",
+        "mapTitle": "Kartenansicht",
+        "mediaTitle": "Verknüpfte Dateien",
+        "noAssignedArticles": "Mit dieser Spielstätte wurden noch keine Artikel verknüpft.",
+        "title": "Treffpunkt-Details"
+      },
+      "edit": {
+        "addressTitle": "Adresse",
+        "categoryDefaultPlaceholder": "Bitte die Kategorie des Treffpunktes wählen",
+        "contactTitle": "Ansprechpartner",
+        "contact": {
+          "chooseMember": "Wähle das Mitglied aus der Liste",
+          "createContact": "Kontakt hinzufügen",
+          "createFromMemberListOrNewContact": "Soll der neue Kontakt mit einem Benutzer verknüpft werden oder nur die Kontaktdaten erfasst werden?",
+          "deleteContact": "Kontakt löschen",
+          "description": "Aufgaben",
+          "email": "E-Mail",
+          "firstName": "Vorname",
+          "fromMemberList": "Aus Mitgliederliste",
+          "fromForm": "Neuer Kontakt",
+          "lastName": "Nachname",
+          "member": "Mitglied wählen",
+          "noContacts": "Es wurde noch keine Kontaktperson für diesen Treffpunkt / diese Spielstätte hinterlegt.",
+          "phone": "Telefon / Handy",
+          "saveContact": "Kontakt speichern",
+          "showContactList": "Zur Übersicht"
+        },
+        "descriptionPlaceHolder": "Bitte eine kurze Beschreibung des Treffpunktes eingeben",
+        "mainTitle": "Wichtigste Daten",
+        "namePlaceholder": "Name des Treffpunktes / der Spielstätte",
+        "noLogo": "Kein Foto vorhanden",
+        "opening": "Öffnungszeiten",
+        "photoTitle": "Foto des Treffpunktes",
+        "priceList": "Preise",
+        "pricesPlaceholder": "Link zur Preisliste",
+        "saveLocation": "Treffpunkt speichern",
+        "updateLocation": "Änderungen speichern",
+        "uploadImage": "Foto hochladen"
+      },
+      "list": {
+        "title": "Spielstätten und Treffpunkte",
+        "allLocations": "Alle Treffpunkte",
+        "createLocation": "Treffpunkt hinzufügen",
+        "locationsPerPage": "Spielstätten / Seite",
+        "filterTitle": "Treffpunkte filtern nach",
+        "fieldType": "Platzart",
+        "categoryTypeSearchPlaceholder": "Nach der Hauptkategorie suchen",
+        "colTitles": {
+          "name": "Titel",
+          "type": "Kategorie",
+          "streetAndNr": "Straße, Nr.",
+          "zipCityCounty": "PLZ, Ort, Gemeinde"
+        },
+        "noMatchingResult": "Es wurden keine Treffpunkte mit den eingegebenen Suchkriterien gefunden",
+        "noResult": "Es wurden keine Treffpunkte gefunden"
+      },
+      "map": {
+        "resetMarkers": "Karte zurücksetzen"
+      },
+      "media": {
+        "upload": "Dateien hochladen",
+        "list": "Dateien dieser Spielstätte",
+        "fromExternalLink": "von externem Link laden"
+      }
+    },
+    "media": {
+      "allFiles": "Alle Dateien",
+      "assignedMedia": "Verknüpfte Dateien",
+      "inQueue": "in der Warteschlange",
+      "items": "Dateien",
+      "newGalleryPlaceholder": "Neue Galerie?",
+      "noItemsFound": "Es wurden noch keine Dateien hochgeladen",
+      "saveGallery": "Galerie speichern",
+      "galleries": "Vorhandene Galerien",
+      "linkPlaceholder": "Link zur Datei angeben",
+      "saveLink": "Speichern"
+    },
+    "members": {
+      "details": {
+        "clubTitle": "Vereinsdaten",
+        "contactTitle": "Kontaktdaten & Adresse",
+        "friendlyMatches": "Freundschaftsspiele",
+        "mainTitle": "Stammdaten",
+        "memberStatusTitle": "Mitgliederstatus",
+        "noClubData": "Keine Vereinsinformationen hinterlegt",
+        "noContactData": "Keine Kontaktinformationen hinterlegt",
+        "noDfbData": "Keine DFB.net Daten vorhanden.",
+        "noProfileYet": "Es wurde noch kein Steckbrief für diesen Benutzer ausgefüllt.",
+        "officialMatches": "offizielle Spiele",
+        "otherTitle": "Sonstiges",
+        "photoTitle": "Foto",
+        "salutation": "Anrede",
+        "title": "Titel",
+        "firstAndLastName": "Vor- und Nachname",
+        "birthday": "Geburtsdatum",
+        "age": "Alter",
+        "zodiac": "Sternzeichen",
+        "zodiacList": {
+          "Capricorn": "Steinbock",
+          "Aquarius": "Wassermann",
+          "Pisces": "Fische",
+          "Aries": "Widder",
+          "Taurus": "Stier",
+          "Gemini": "Zwillinge",
+          "Cancer": "Krebs",
+          "Leo": "Löwe",
+          "Virgo": "Jungfrau",
+          "Libra": "Waage",
+          "Scorpio": "Scorpion",
+          "Sagittarius": "Schütze"
+        },
+        "years": "Jahre",
+        "guestPlayerType": "Typ",
+        "guestPlayerSeason": "Saison",
+        "guestPlayerSince": "Datum",
+        "ageGroup": "Altersklasse",
+        "notSet": "nicht hinterlegt",
+        "oldMen": "Alte Herren",
+        "noProfileImage": "Es wurde noch kein Profilbild für das Mitglied hinterlegt"
+      },
+      "edit": {
+        "addressTitle": "Adresse",
+        "ahStates": {
+          "0": "Kein Mitglied",
+          "1": "Mitglied",
+          "2": "Ehrenmitglied"
+        },
+        "allowedToPlayFriendlyMatches": "Spielrecht Freundschaftsspiele",
+        "allowedToPlayOfficialMatches": "Spielrecht offizielle Spiele",
+        "contactTitle": "Kontaktdaten",
+        "chooseClub": "Der Stammverein des Mitglieds?",
+        "chooseSalutation": "Bitte die Anrede auswählen",
+        "county": "Landkreis",
+        "country": "Land",
+        "dfbTitle": "DFB.net Daten",
+        "driveTitle": "Google-Drive Daten",
+        "guestPlayerData": "Gastspieler-Daten",
+        "mainTitle": "Mitglieder-Details",
+        "miss": "Frau",
+        "mister": "Herr",
+        "noProfileImage": "Es wurde noch kein Foto dieses Mitglieds hochgeladen",
+        "otherTitle": "sonstige Infos",
+        "salutation": "Anrede",
+        "saveMember": "Mitglied speichern",
+        "states": {
+          "0": "NUR AH-Mitglied",
+          "1": "Mitglied",
+          "2": "Ehrenmitglied",
+          "3": "Mitglied Kind",
+          "4": "Mitglied Jugend",
+          "5": "Mitglied Familie",
+          "6": "Mitglied Turnen",
+          "?": "keine Angabe"
+        }
+      },
+      "interview": {
+        "answer": "Antwort",
+        "chooseMember": "Wer hat den Kommentar abgegeben?",
+        "createInterview": "Interview führen",
+        "delete": "Frage löschen",
+        "interviewPartner": "Interviewt wurde",
+        "newQuestionTo": "Neue Interview-Frage an ",
+        "noAnswers": "Es wurde bisher noch kein Interview mit diesem Mitglied geführt. Wie wärs, wenn Du damit anfängst?",
+        "noAnswersFromOthers": "Es wurden noch keine anderen Mitglieder zu diesem Mitglied befragt.",
+        "question": "Frage",
+        "saveQuestion": "Frage & Antwort speichern",
+        "title": "Interview",
+        "whatOthersSay": "Was die Anderen über ihn sagen"
+      },
+      "list": {
+        "AHStatisticsTitle": "AH-Mitglieder",
+        "allMembers": "Alle Mitglieder",
+        "birthdayListTitle": "Geburtstage",
+        "characteristics": "Steckbrief",
+        "createMember": "Mitglied hinzufügen",
+        "dfb": "DFB.net Daten",
+        "drive": "Google-Drive Daten",
+        "filterTitle": "Mitglieder filtern ...",
+        "filterByClub": "nach dem Verein",
+        "filterByGender": "nach Geschlecht",
+        "interview": "Interview",
+        "mainTitle": "Mitglieder",
+        "membersPerPage": "Mitglieder pro Seite",
+        "menOnly": "nur Männer",
+        "noAssignedClub": "-",
+        "noMatchingResult": "Es wurden keine Mitglieder mit diesen Suchkriterien gefunden",
+        "noResult": "Es sind noch keine Mitglieder vorhanden",
+        "salutation": "Anrede",
+        "lastName": "Nachname",
+        "firstName": "Vorname",
+        "street": "Straße",
+        "womenOnly": "nur Frauen",
+        "houseNumber": "Haus-Nr.",
+        "zip": "PLZ",
+        "city": "Ort",
+        "title": "Titel",
+        "memberStatus": "Mitgliedsstatus",
+        "clubJoined": "Vereinseintritt",
+        "clubLeft": "Vereinsaustritt",
+        "clubPayment": "Beitrag (Verein)",
+        "ahStatus": "AH-Status",
+        "ahJoined": "AH-Eintritt",
+        "ahLeft": "AH-Austritt",
+        "ahPayment": "Beitrag (AH)",
+        "phoneHome": "Telefon (zu Hause)",
+        "phoneWork": "Telefon (dienstl.)",
+        "phoneMobile": "Handy",
+        "email": "Email",
+        "fax": "Fax",
+        "birthday": "Geburtsdatum",
+        "functions": "Aufgaben im Verein",
+        "comment": "Kommentar",
+        "passNumber": "Pass-Nr.",
+        "ageGroup": "Altersklasse",
+        "officialRight": "Spielrecht Pflicht / Verband",
+        "friendlyRight": "Spielrecht Freundschaft / Privat",
+        "signOut": "Abmeldung",
+        "playerStatus": "Spielerstatus",
+        "guestPlayer": "Gast/Zweitspielrecht",
+        "season": "Spielzeit",
+        "matchType": "Spielart",
+        "passPrint": "Passdruck",
+        "allowedToPlay": "Einsetzbar",
+        "club": "Stammverein",
+        "statisticsTitle": "Mitglieder",
+        "statisticsTitleDetailed": "Detailierte Mitgliederstatistiken",
+        "statisticsTitleDetailedAH": "AH Statistik"
+      },
+      "profile": {
+        "bothFeet": "beidfüßig",
+        "prevVictories": "Bisherige Erfolge",
+        "prevLosses": "Größte Niederlagen",
+        "chooseStrongFoot": "Welches ist der starke Fuß?",
+        "favClub": "Verein",
+        "favDrink": "Getränk",
+        "favFood": "Essen",
+        "favorites": "Lieblings-",
+        "favPlayer": "Spieler",
+        "favTeam": "Team",
+        "favTrainer": "Trainer",
+        "leftFoot": "linker Fuß",
+        "media": {
+          "title": "Fotos & Videos"
+        },
+        "noFoot": "Kein guter Fuß :-)",
+        "position": "Position",
+        "prevClubs": "Vorherige Vereine",
+        "rightFoot": "rechter Fuß",
+        "saveProfile": "Profil speichern",
+        "shoeSize": "Schuhgröße",
+        "size": "Größe",
+        "soccerData": "Fußballspezifische Infos",
+        "statistics": {
+          "title": "Spielerstatistiken"
+        },
+        "strongFoot": "Starker Fuß",
+        "title": "Steckbrief"
+      }
+    },
+    "menu": {
+      "application": {
+        "updateApplication": "Änderungen speichern",
+        "main": "Einstellungen"
+      },
+      "article": {
+        "createArticle": "Artikel erstellen",
+        "main": "Artikel",
+        "dashboard": "Auswertungen",
+        "detail": "Artikeldetails",
+        "editArticle": "Artikel editieren",
+        "list": "Alle Artikel",
+        "matchList": "Spiel-Übersicht"
+      },
+      "category": {
+        "main": "Kategorien",
+        "detail": "Kategorie-Details",
+        "edit": "Kategorie editieren",
+        "list": "Alle Kategorien"
+      },
+      "club": {
+        "main": "Vereine",
+        "detail": "Vereins-Details",
+        "edit": "Verein editieren",
+        "list": "Alle Vereine",
+        "positions": "Positionen im Vorstand"
+      },
+      "dashboard": {
+        "main": "Startseite",
+        "statistics": "Statistiken"
+      },
+      "frontendLink": "Zum Frontend",
+      "location": {
+        "main": "Spielstätten",
+        "detail": "Treffpunktdetails",
+        "edit": "Treffpunkt editieren",
+        "list": "Alle Treffpunkte",
+        "map": "Kartenansicht",
+        "media": "Verknüpfte Inhalte"
+      },
+      "member": {
+        "main": "Mitglieder",
+        "detail": "Mitgliederdetails",
+        "list": "Alle Mitglieder",
+        "interviews": "Interviews",
+        "profile": "Steckbriefe",
+        "statistics": "Statistiken"
+      },
+      "season": {
+        "main": "Spielzeiten",
+        "detail": "Spielzeit-Details",
+        "edit": "Spielzeit editieren",
+        "list": "Alle Spielzeiten"
+      },
+      "sponsor": {
+        "main": "Sponsoren",
+        "detail": "Sponsor-Details",
+        "edit": "Sponsor editieren",
+        "create": "Sponsor erstellen",
+        "list": "Alle Sponsoren"
+      },
+      "task": {
+        "main": "Aufgaben & ToDos",
+        "nextVersion": "Planung nächste Version"
+      },
+      "team": {
+        "main": "Mannschaften",
+        "detail": "Mannschafts-Details",
+        "edit": "Mannschaft editieren",
+        "list": "Alle Mannschaften",
+        "team-statistics": "Statistiken"
+      },
+      "user": {
+        "detail": "Benutzerdetails",
+        "main": "Benutzer",
+        "list": "Alle Benutzer",
+        "edit": "Benutzer editieren",
+        "groups": "Benutzergruppen"
+      }
+    },
+    "pagination": {
+      "allItems": "Alle Einträge",
+      "categoryFilter": "Kategorien filtern nach",
+      "categoryPerPage": "Kategorien pro Seite",
+      "clubFilter": "Vereine filtern",
+      "clubPerPage": "Vereine pro Seite",
+      "itemsPerPage": "Einträge pro Seite",
+      "locationFilter": "Treffpunkte filtern",
+      "locationPerPage": "Treffpunkte pro Seite",
+      "memberFilter": "Mitglieder filtern",
+      "memberPerPage": "Mitglieder pro Seite",
+      "sponsorFilter": "Sponsoren filtern",
+      "sponsorsPerPage": "Sponsoren pro Seite",
+      "teamFilter": "Mannschaften filtern",
+      "teamPerPage": "Mannschaften pro Seite",
+      "userFilter": "Benutzer filtern",
+      "userPerPage": "Benutzer pro Seite",
+      "noFilter": "Einträge nicht filtern"
+    },
+    "permissions": {
+      "main": "Zugriffsfehler",
+      "title": "Fehlende Berechtigungen",
+      "text": "Du hast nicht die benötigten Rechte um diese Seite zu sehen oder diese Aktion durchzuführen."
+    },
+    "positions": {
+      "addPosition": "Position anlegen",
+      "chooseClub": "Bitte den Verein auswählen",
+      "chooseClubTitle": "Verein wählen",
+      "choosePositionTitle": "Amt wählen",
+      "closePreview": "Beschreibung schließen",
+      "edit": {
+        "description": "Die Aufgaben dieses Amtes (Beschreibung)",
+        "link": "Aufgaben editieren",
+        "positionTitle": "Amt erstellen / editieren",
+        "savePosition": "Amt speichern",
+        "title": "Amtsbezeichnung"
+      },
+      "formTitle": "Amt anzeigen / editieren",
+      "noPositions": "Es wurden noch keine Vorstandsämter erstellt",
+      "positionDetailTitle": "Beschreibung des Amtes"
+    },
+    "seasons": {
+      "edit": {
+        "assignedArticles": "Artikel in dieser Spielzeit",
+        "assignedTeams": "Ausgewählte Mannschaften",
+        "assignedTeamsTitle": "Verknüpfte Mannschaften",
+        "description": "Freitext zur Saison",
+        "descriptionPlaceholder": "Hier kannst Du schreiben, was Du willst!",
+        "mainTitle": "Wichtigste Informationen",
+        "noAssignedArticles": "Es wurden noch keine Artikel in dieser Spielzeit erstellt",
+        "possibleTeams": "Vorhandene Mannschaften",
+        "saveSeason": "Saison speichern",
+        "title": "Name der Saison",
+        "titlePlaceholder": "Name der Saison",
+        "updateSeason": "Änderungen speichern"
+      },
+      "list": {
+        "colTitles": {
+          "name": "Name"
+        },
+        "createSeason": "Spielzeit erstellen",
+        "currentSeasonTitle": "Aktuelle Spielzeit",
+        "graph": {
+          "articleChart": {
+            "legend": "Spielzeit",
+            "xAxisLabel": "Spieljahr",
+            "yAxisLabel": "Anzahl der Artikel"
+          },
+          "teamChart": {
+            "legend": "Spielzeit",
+            "xAxisLabel": "Spieljahr",
+            "yAxisLabel": "Anzahl der Mannschaften"
+          }
+        },
+        "noResult": "Es wurden noch keine Spielzeiten importiert oder erstellt.",
+        "noFilteredResults": "Die angegebenene Suchkriterien führten zu keinem Ergebnis.",
+        "articlesPerSeason": "Artikel pro Saison",
+        "teamsPerSeason": "Mannschaften pro Saison",
+        "title": "Spielzeiten"
+      },
+      "noSeasons": "Es wurden noch keine Saisons erstellt oder importiert."
+    },
+    "applications": {
+      "downtime": {
+        "checkbox": "Status der Hauptseite",
+        "isActive": "Wartungsmodus aktiv",
+        "message": "Nachricht an die Benutzer",
+        "messageDescription": "Eine kurze Information, warum die Seite offline ist und wann sie wahrscheinlich wieder verfügbar ist.",
+        "title": "Wartungsmodus aktivieren"
+      },
+      "mainTitle": "Einstellungen",
+      "staticPagesTitle": "Statische Seiten",
+      "page": {
+        "descriptionDescription": "Die Beschreibung hilft Suchmaschinen, passende Seiten zu filtern.",
+        "descriptionTitle": "Eine kurze Beschreibung der Seiteninhalte",
+        "emailDescription": "Hauptadresse der Seite. Anfragen und Berichte werden hierhin gesendet-",
+        "emailTitle": "E-Mail Adresse",
+        "settings": "Globale Einstellungen",
+        "title": "Seitentitel",
+        "titleDescription": "Der Name der Seite (wird in der Titelleiste des Browsers verwendet."
+      },
+      "registration": {
+        "isEnabled": "Anmeldungen erlauben",
+        "newUserLabel": "Rolle für neuer Benutzer",
+        "statusLabel": "Registrieren neuer Benutzer",
+        "title": "Benutzeranmeldung"
+      },
+      "social": {
+        "addProvider": "Seite hinzufügen",
+        "chooseProvider": "Wähle das Netzwerk aus der Liste",
+        "isRequiredLink": "Es muss ein Link angegeben werden!",
+        "isRequiredProvider": "Es muss ein Anbieter ausgewählt werden!",
+        "setLink": "Link zur Detailseite"
+      },
+      "socialTitle": "Soziale Netzwerke",
+      "staticTitle": "Statische Seiten",
+      "static": {
+        "addStaticPage": "Neue Seite erstellen",
+        "currentStaticPages": "Vorhandene Seiten",
+        "chooseStaticPage": "Du musst erst eine Seite aus der Liste wählen oder eine neue erstellen",
+        "createStaticPage": "Neue Seite erstellen",
+        "isEnabled": "Öffentlich sichtbar?",
+        "noStaticPagesFound": "Es wurden noch keine Seiten erstellt.",
+        "saveStaticPage": "Seite speichern",
+        "sectionTitle": "Kategorie",
+        "text": "Seiteninhalt",
+        "title": "Titel der Seite"
+      },
+      "updateApplication": "Einstellungen speichern",
+      "urlShortening": "Kurze Links erstellen?",
+      "urlShorteningService": "Anbieter",
+      "urlShorteningTitle": "Links"
+    },
+    "sponsors": {
+      "edit": {
+        "category": "Art des Sponsorings",
+        "description": "Firmeninformationen",
+        "descriptionPlaceholder": "Gib hier eine Kurzinfo zum Sponsor ein",
+        "endDate": "Ende",
+        "imageUrl": "Logo des Sponsors",
+        "info": "Interne Informationen zum Sponsor",
+        "infoPlaceholder": "Hat der Kunde z.B. 1/4 Seite im Heft gebucht?",
+        "internalInfoTitle": "Interne Informationen",
+        "link": "Link zu dessen Homepage",
+        "noImage": "Es wurde noch kein Logo des Sponsors hochgeladen",
+        "saveFirst": "Der Sponsor muss zuerst gespeichert werden um ein Logo hochzuladen.",
+        "saveSponsor": "Speichern",
+        "startDate": "Beginn des Sponsorings",
+        "title": "Name des Sponsors",
+        "updateSponsor": "Änderungen speichern",
+        "uploadLogo": "Logo hochladen"
+      },
+      "list": {
+        "allSponsorTypes": "Alle Sponsoren anzeigen",
+        "createSponsor": "Sponsor hinzufügen",
+        "deleteButton": "Löschen",
+        "editButton": "Editieren",
+        "editSponsorTitle": "Sponsor editieren",
+        "filterTitle": "Sponsoren filtern",
+        "mainTitle": "Sponsoren",
+        "newSponsorTitle": "Neuer Sponsor",
+        "noRandomSponsorFound": "Es wurden noch keine Sponsoren erstellt.",
+        "noResult": "Es wurden keine Sponsoren gefunden.",
+        "randomSponsorTitle": "Zufälliger Sponsor"
+      }
+    },
+    "tables": {
+      "colTitles": {
+        "assignedPlayers": "Spieler",
+        "creation": "Erstellung",
+        "description": "Beschreibung",
+        "hasPhoto": "Foto?",
+        "publication": "Veröffentlichung",
+        "publicationFrom": "Veröffentlicht von",
+        "publicationAt": "am",
+        "actions": "Aktionen",
+        "assignedObjects": "Verknüpfte Objekte",
+        "quickActions": "Links"
+      },
+      "notPublished": "nicht veröffentlicht",
+      "importedViaScript": "via Script",
+      "atDate": "am",
+      "atTime": "um"
+    },
+    "tasks": {
+      "edit": {
+        "cancel": "Abbrechen",
+        "chooseType": "Modul auswählen",
+        "createTask": "Aufgabe erstellen",
+        "description": "Beschreibung",
+        "priority": "Dringlichkeit",
+        "progress": "Fortschritt",
+        "saveTask": "Speichern",
+        "type": "Typ",
+        "title": "Aufgabe"
+      },
+      "form": "Erstellen",
+      "list": {
+        "done": "Erledigt",
+        "loadingData": "Lade die Daten ...",
+        "noItemsFound": "Hier gibt´s nichts zu tun :)"
+      },
+      "priorities": {
+        "high": "hoch",
+        "low": "niedrig",
+        "none": "keine",
+        "normal": "normal",
+        "urgent": "höchste Priorität"
+      },
+      "table": "Liste",
+      "title": "Aufgaben"
+    },
+    "teams": {
+      "detail": {
+        "matchPlan": {
+          "matchPlan": "Spielplan",
+          "allMatches": "Alle Spiele",
+          "pastMatches": "Letzte Spiele",
+          "upcomingMatches": "Nächste Spiele"
+        },
+        "mediaTitle": "Verknüpfte Dateien",
+        "noMatch": "Es wurden keine Spiele für diese Mannschaft gefunden.",
+        "noTeamLogo": "Es wurde noch kein Foto für diese Mannschaft hochgeladen."
+      },
+      "edit": {
+        "assignedArticleCategories": "Verknüpfte Artikelkategorien",
+        "assignedClub": "Verein",
+        "assignedTeamCategories": "Verknüpfte Mannschaftsarten",
+        "chooseArticleCategories": "Bitte die Artikelkategorien wählen",
+        "chooseClub": "Bitte wähle den Verein aus",
+        "chooseTeamCategories": "Bitte die Mannschaftsarten wählen",
+        "competitionsTitle": "Verknüpfte Wettbewerbe",
+        "externalLink": "Mannschaftsseite auf fussball.de",
+        "greetingsTitle": "Grußwort des Trainers",
+        "infoText": "Grußwort des Trainers / Infotext",
+        "lastMatchTitle": "Das letzte Spiel",
+        "mainCompetitionTitle": "Tabellen",
+        "mainTitle": "Wichtigste Daten",
+        "managementTitle": "Aufgaben in der Betreuung",
+        "membersTitle": "Spieler der Mannschaft",
+        "noClub": "Mannschaft gehört nicht zu einem Verein",
+        "noLogo": "Es wurde noch kein Mannschaftslogo hochgeladen",
+        "noManagement": "Es wurden noch keine Trainer oder Betreuer festgelegt.",
+        "noPlayers": "Zu dieser Mannschaft wurden noch keine Spieler hinzugefügt.",
+        "photoTitle": "Mannschaftslogo",
+        "photoDescriptionText": "Wer ist wo zu sehen auf dem Foto?",
+        "players": {
+          "addPlayers": "Spieler hinzufügen",
+          "formDescription": "Markiere mit gedrückter STRG-Taste die Spieler, die zur Mannschaft gehören.",
+          "noAssignedPlayers": "Dieser Mannschaft wurden noch keine Spieler hinzugefügt",
+          "playersInTeam": "Spieler in dieser Mannschaft",
+          "possiblePlayers": "Vorhandene Spieler",
+          "removePlayer": "Spieler entfernen"
+        },
+        "playersTitle": "Aufgaben innerhalb der Mannschaft",
+        "positions": {
+          "choosePerson": "Mitglied wählen",
+          "deletePosition": "Aufgabe löschen",
+          "savePosition": "Aufgabe speichern",
+          "currentPositions": "Bisherige Aufgaben",
+          "newPosition": "Neue Aufgabe erstellen",
+          "noManagementPositions": "Es wurden noch keine Aufgaben in der Mannschaftsbetreuung (Trainer, Betreuer, Physio etc.) vergeben.",
+          "noPlayerPositions": "Es wurden noch keine Aufgaben in der Mannschaft vergeben (Kapitän, Mannschaftsrat etc.)",
+          "position": "Aufgabe",
+          "positionDescription": "Was ist seine / ihre Aufgabe?",
+          "successMessage": "Die neue Aufgabe wurde gespeichert"
+        },
+        "season": "Verknüpfte Spielzeit",
+        "shortTitle": "Kurzname (meist SF Winterbach)",
+        "saveTeam": "Mannschaft speichern",
+        "statisticsTitle": "Statistiken zur Mannschaft",
+        "teamImageTitle": "Mannschaftsfoto",
+        "teamTitle": "Name der Mannschaft",
+        "timeLineTitle": "Ereignisse",
+        "training": {
+          "comments": "Bemerkungen",
+          "commentsExample": "Findet das Training zum Beispiel nur im Winter statt?",
+          "createTitle": "Neue Trainingseinheit erstellen",
+          "end": "Ende des Trainings",
+          "listTitle": "Bisherige Trainingseinheiten",
+          "location": "Trainingsort wählen",
+          "saveTraining": "Trainingseinheit speichern",
+          "start": "Beginn der Einheit",
+          "successMessage": "Die neue Trainingseinheit wurde gespeichert.",
+          "weekday": "An welchem Wochentag findet das Training statt?"
+        },
+        "trainingTitle": "Trainingszeiten und -orte",
+        "upcomingMatchTitle": "Nächstes Spiel",
+        "updateTeam": "Änderungen speichern",
+        "visitExternalLink": "Mannschaftsseite aufrufen"
+      },
+      "list": {
+        "allTeams": "Alle Mannschaften anzeigen",
+        "colTitles": {
+          "articleCategories": "Artikelkategorien",
+          "assignedPlayers": "Spieler",
+          "club": "Verein",
+          "externalLink": "Externer Link",
+          "fussballDe": "Fussball.de",
+          "hasPhoto": "Photo?",
+          "moreTitle": "Weitere Informationen",
+          "name": "Name",
+          "playersTitle": "Spielerliste",
+          "season": "Saison",
+          "teamCategories": "Mannschaftsarten",
+          "teamImage": "Mannschaftsfoto"
+        },
+        "createTeam": "Mannschaft hinzufügen",
+        "latestMatchPreviews": "Letzte Vorberichte",
+        "latestMatchReviews": "Letzte Spielberichte",
+        "noResult": "Es wurden noch keine Mannschaften erstellt.",
+        "teamOfTheMonth": "Mannschaft des Monats",
+        "teamsPerPage": "Mannschaften pro Seite",
+        "title": "Mannschaften"
+      },
+      "media": {
+        "list": "Dateien der Mannschaft"
+      }
+    },
+    "uploader": {
+      "changeImage": "Foto ändern",
+      "chooseFileType": "Den Dateityp wählen",
+      "deleteItem": "Datei löschen",
+      "fileCredits": "Rechteinhaber?",
+      "fileInput": "Link zur Datei",
+      "fileTitle": "Titel der Datei",
+      "moveItemToGallery": "In Galerie verschieben?",
+      "noGallery": "Keiner Galerie zuordnen",
+      "overallProgress": "Gesamtfortschritt",
+      "preview": "Dateivorschau",
+      "saveFromFileLink": "Datei speichern",
+      "saveToFireBase": "Datei in der DB speichern?",
+      "showCurrentFileList": "Bisherige Dateien anzeigen",
+      "showLinkInput": "Upload mit Link",
+      "showUnSplashUploader": "Foto von Unsplash einfügen",
+      "showUploader": "Uploader anzeigen",
+      "successfulUpload": "Die Datei wurde übertragen",
+      "uploaderTitle": "Datei hochladen",
+      "uploadViaLinkTitle": "Datei von einer URL speichern",
+      "viewFullSize": "Großansicht",
+      "wrongFileType": "Falscher Dateityp ausgewählt."
+    },
+    "users": {
+      "detail": {
+        "emailVerified": "verifiziert?",
+        "imageTitle": "Profilfoto",
+        "mainTitle": "Wichtigste Informationen",
+        "noImage": "Kein Profilfoto vorhanden",
+        "providerId": "Anmeldung über",
+        "socialLinks": "Soziale Netzwerke"
+      },
+      "edit": {
+        "assignedMember": "Verknüpftes Mitglied",
+        "assignedRole": "Rolle des Benutzers",
+        "createdArticles": "Erstellte Artikel",
+        "createdArticlesCount": "Erstellte Artikel",
+        "creationAt": "Registriert am",
+        "editUser": "Benutzer editieren",
+        "emailIsVerified": "Die E-Mail Adresse wurde bereits bestätigt.",
+        "emailNotVerified": "E-Mail Adresse wurde noch NICHT bestätigt.",
+        "group": "Benutzergruppe",
+        "groupDefaultPlaceholder": "Gruppe wählen",
+        "mainTitle": "Benutzerdaten",
+        "memberTitle": "Verknüpftes Mitglied",
+        "noImage": "Es ist noch kein Profilfoto vorhanden.",
+        "personal": {
+          "addressTitle": "2. Adresse",
+          "birthday": "Geburtsdatum",
+          "city": "Stadt",
+          "contactTitle": "3. Kontaktmöglichkeiten",
+          "county": "Landkreis",
+          "email": "E-Mail",
+          "fax": "Fax",
+          "firstName": "Vorname",
+          "lastName": "Nachname",
+          "houseNumber": "Hausnummer",
+          "mainTitle": "1. Persönliche Daten",
+          "phoneHome": "Telefon (zu Hause)",
+          "phoneMobile": "Handy",
+          "phoneWork": "Telefon (dienstl.)",
+          "socialTitle": "4. Soziale Netzwerke",
+          "streetName": "Straße",
+          "zip": "Postleitzahl"
+        },
+        "pictureUpload": "Profilfoto",
+        "profile": "Benutzerprofil",
+        "roles": {
+          "ADMINISTRATORS": "Administratoren",
+          "EDITORS": "Redakteuere",
+          "GUESTS": "Gäste",
+          "noAssignedRole": "Keiner Rolle zugewiesen"
+        },
+        "saveUser": "Benutzer speichern",
+        "todo": "Aufgaben des Benutzers",
+        "updateUser": "Änderungen speichern",
+        "uploadImage": "Foto hochladen",
+        "uploads": "Hochgeladene Dateien",
+        "uploadsCount": "Hochgeladene Dateien"
+      },
+      "list": {
+        "allUsers": "Alle Benutzer",
+        "colTitles": {
+          "firstName": "Vorname",
+          "lastName": "Nachname",
+          "onlineStatus": "Status",
+          "roles": "Rollen",
+          "status": "Benutzerstatus"
+        },
+        "createUser": "Benutzer hinzufügen",
+        "filterTitle": "Benutzer filtern nach",
+        "noMatchingResult": "Es wurden keine Benutzer mit diesen Suchkriterien gefunden.",
+        "noResult": "Es wurden keine Benutzer gefunden.",
+        "title": "Benutzer",
+        "usersPerPage": "Benutzer / Seite"
+      }
+    },
+    "weather": {
+      "closePreview": "Vorhersage schließen",
+      "showWeatherPreview": "Wettervorhersage"
+    },
+    "gotSuccess": "Fertig!",
+    "gotError": "Es ist ein Fehler aufgetreten:",
+    "changePicture": "Foto ändern",
+    "info": "Info!",
+    "isRequired": " wird benötigt",
+    "minimumOf": "Es werden mindestens ",
+    "charsRequired": " Zeichen benötigt",
+    "warning": "Achtung",
+    "cancel": "Abbrechen",
+    "name": "Name",
+    "category": "Kategorie",
+    "categoryType": "Hauptkategorie",
+    "description": "Beschreibung",
+    "street": "Straße",
+    "houseNumber": "Hausnummer",
+    "zip": "Postleitzahl",
+    "city": "Stadt / Ort",
+    "county": "Gemeinde / Landkreis",
+    "searchTitle": "Suche",
+    "searchFor": "Suchen nach ...",
+    "notSet": "nicht gesetzt",
+    "publication": {
+      "alreadyPublished": "Dieses Element wurde bereits veröffentlicht.",
+      "chooseDate": "Veröffentlichungsart auswählen",
+      "choosePublisher": "Wähle den Veröffentlichenden",
+      "from": "von",
+      "noPublicationNeeded": "Dieses Element muss nicht explizit veröffentlicht werden",
+      "publication": "Veröffentlichung",
+      "publicationDateLabel": "Veröffentlichungsdatum",
+      "publishNow": "JETZT veröffentlichen",
+      "saveAsDraft": "Als Entwurf speichern",
+      "selectDate": "Veröffentlichungszeitpunkt wählen",
+      "setPublicationDate": "Datum wählen",
+      "setPublicationTime": "Uhrzeit wählen"
+    },
+    "creation": {
+      "author": "Author",
+      "creation": "Erstellung",
+      "creationDate": "Datum",
+      "creationTime": "Uhrzeit",
+      "viaScript": "durch Script importiert"
+    },
+    "and": "und",
+    "assignedMedia": "Verknüpfte Dateien",
+    "birthdays": "Geburtstage",
+    "create": "Erstellen",
+    "delete": "Löschen",
+    "detail": "Details",
+    "displaying": "Zeige",
+    "edit": "Editieren",
+    "filteredRecords": "gefilterten Einträgen",
+    "from": "von",
+    "list": "Übersicht",
+    "no": "Nein",
+    "noTitle": "Unbenannt",
+    "oClock": "Uhr",
+    "only": "nur",
+    "pleaseWait": "Bitte warten ...",
+    "records": "Einträgen",
+    "yes": "Ja"
+  }
+}

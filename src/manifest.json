@@ -1,0 +1,20 @@
+{
+  "short_name": "sfw-adm",
+  "name": "SFW Admin-Backend",
+  "start_url": "/",
+
+  "theme_color": "#f48c5b",
+  "background_color": "#ffffff",
+
+  "display": "standalone",
+  "orientation": "portrait",
+
+  "icons": [
+    {
+      "src": "/assets/sfw/sfw.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+
+}
