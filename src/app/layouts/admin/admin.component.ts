@@ -36,7 +36,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   public config: PerfectScrollbarConfigInterface = {};
 
   constructor(private router: Router, public menuItems: MenuItemsService, public authService: AuthService,
-              public translate: TranslateService, zone: NgZone) {
+    public translate: TranslateService, zone: NgZone) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
     this.mediaMatcher.addListener(mql => zone.run(() => {

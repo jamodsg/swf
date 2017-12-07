@@ -50,7 +50,7 @@
     "@ngx-translate/core": "^9.0.1",
     "@ngx-translate/http-loader": "^2.0.0",
     "@swimlane/ngx-datatable": "^11.1.5",
-    "angular-calendar": "^0.5.0-beta.4",
+    "angular-calendar": "^0.22.1",
     "angular-tree-component": "^6.0.0",
     "angularfire2": "5.0.0-rc.5-next",
     "chart.js": "^2.7.1",

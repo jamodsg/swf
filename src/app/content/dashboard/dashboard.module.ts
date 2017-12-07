@@ -8,12 +8,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { DashboardComponent } from './dashboard.component';
-import { dashboardRoutes } from './dashboard.routing';
+import { DashboardRoutes } from './dashboard.routing';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(dashboardRoutes),
+    RouterModule.forChild(DashboardRoutes),
     MatIconModule,
     MatCardModule,
     MatButtonModule,
@@ -24,9 +24,7 @@ import { dashboardRoutes } from './dashboard.routing';
     NgxDatatableModule,
     FlexLayoutModule
   ],
-  declarations: [
-    DashboardComponent
-  ]
+  declarations: [DashboardComponent]
 })
 
 export class DashboardModule { }
