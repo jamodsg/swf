@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-title>
+    <mat-icon>people</mat-icon>
+    {{'general.menu.user.main' | translate}}
+  </mat-card-title>
+  <mat-card-subtitle></mat-card-subtitle>
+  <mat-card-content *ngIf="users$ && (users$ | async)?.length">
+
+    <pre>{{rows | json}}</pre>
+
+    <input matInput placeholder="Type to filter the name column..." required (keyup)='updateFilter($event)'>
+
+    <ngx-datatable
+      class='material'
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="10"
+      [rows]='users$ | async'>
+      <ngx-datatable-column name="Last Name"></ngx-datatable-column>
+      <ngx-datatable-column name="First Name"></ngx-datatable-column>
+      <ngx-datatable-column name="Email"></ngx-datatable-column>
+      <ngx-datatable-column name="Online Status"></ngx-datatable-column>
+
+      <ngx-datatable-column name="actions">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          Actions
+        </ng-template>
+        <ng-template let-row="row" let-value="email" ngx-datatable-cell-template>
+            <detail-link [objectId]="row.id"></detail-link>
+            <edit-link [objectId]="row.id"></edit-link>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+
+  </mat-card-content>
+</mat-card>
+
+<!--
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-9">
+      <user-list
+        [users]="userService.getUsers() | async"
+        (remove)="userService.removeUser($event)">
+      </user-list>
+    </div>
+    <div class="col-xl-3">
+      <tasks type="user"></tasks>
+    </div>
+  </div>
+</div>-->
