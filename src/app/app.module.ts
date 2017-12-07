@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
-    RouterModule.forRoot(appRoutes, /*{ enableTracing: environment.routerTracing } */)
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+    RouterModule.forRoot(appRoutes, { enableTracing: environment.routerTracing })
   ],
   bootstrap: [
     AppComponent
