@@ -55,6 +55,10 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/pages/pages.module#PagesModule'
       },
       {
+        path: 'users',
+        loadChildren: '../../content/user/user.module#UserModule'
+      },
+      {
         path: '**',
         redirectTo: 'dashboard'
       }
