@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "analyzer": "webpack-bundle-analyzer dist/stats.json"
+    "analyzer": "webpack-bundle-analyzer dist/stats.json",
     "ng": "ng",
     "rimraf": "rimraf",
     "changelog": "standard-changelog",
