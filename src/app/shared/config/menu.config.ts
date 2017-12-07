@@ -5,6 +5,28 @@ export const MENUITEMS = [
     type: 'link',
     icon: 'explore'
   },
+
+  {
+    state: 'users',
+    name: 'USERS',
+    type: 'link',
+    icon: 'people',
+    /* children: [
+      {
+        state: '',
+        name: 'LIST'
+      },
+      {
+        state: 'groups',
+        name: 'GROUPS'
+      },
+      {
+        state: 'statistics',
+        name: 'STATS'
+      }
+    ] */
+  },
+
   {
     state: 'apps',
     name: 'APPS',
