@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutWrap="wrap">
-  <div fxFlex.gt-sm="65" fxFlex.gt-xs="65" fxFlex="100">
+  <div fxFlex.gt-sm="100" fxFlex.gt-md="50" fxFlex.gt-lg="50" fxFlex="100">
     <mat-card>
       <mat-card-title>
         <mat-icon>list</mat-icon>
@@ -20,12 +20,14 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div fxFlex.gt-sm="35" fxFlex.gt-xs="35" fxFlex="100">
+  <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
     <categories-by-category-type
       [categories]="categories$ | async"
       [categoryTypes]="categoryTypes$ | async">
     </categories-by-category-type>
+  </div>
 
+  <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
     <tasks type="category"></tasks>
   </div>
 </div>
