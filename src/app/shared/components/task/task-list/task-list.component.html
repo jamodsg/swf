@@ -1,0 +1,19 @@
+<pre>{{tasks | json}}</pre>
+<div class="taskboard page-height">
+  <div class="taskboard-wrapper"
+       *ngFor="let type of taskService.getTaskTypes()| filterBy: ['title'] : type | orderBy : 'title'">
+    <div class="taskboard-list">
+      <div class="taskboard-header text-uppercase">
+        <strong>{{ 'general.menu.' + type.title + '.main' | translate }}</strong>
+      </div>
+      <!--<div class="taskboard-cards" *ngIf="tasks"> | filterBy: ['type'] : type
+        <div class="taskboard-task" *ngFor="let task of tasks |orderBy:'title'" [ngClass]="task.class">
+          {{task.priority}}
+          <div class="taskboard-task-title">{{task.title}}</div>
+          <small class="card-text text-muted">{{task.description}}</small>
+          <a href (click)="completeTask(task)">{{'general.tasks.list.done' | translate}}?</a>
+        </div>
+      </div>-->
+    </div>
+  </div>
+</div>

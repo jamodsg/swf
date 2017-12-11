@@ -202,6 +202,7 @@
         "fieldType": "Hauptkategorie",
         "noMatchingResult": "Es wurden keine Kategorien mit diesen Suchkriterien gefunden.",
         "noResult": "Es wurden noch keine Kategorien erstellt.",
+        "removeCategory": "Kategorie löschen",
         "title": "Kategorien"
       }
     },

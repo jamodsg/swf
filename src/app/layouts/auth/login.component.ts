@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   public form: FormGroup;
   public returnUrl: string = '';
   public isLoading: boolean = false;
+  public error: string;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private authService: AuthService) {
   }
@@ -36,7 +37,10 @@ export class LoginComponent implements OnInit {
         this.isLoading = false;
         this.router.navigate([this.returnUrl]).then();
       })
-      .catch((error: any) => console.log(error));
+      .catch((error: any) => {
+        this.isLoading = false;
+        this.error = error.message;
+      });
   }
 
 }

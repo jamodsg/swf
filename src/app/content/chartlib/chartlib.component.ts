@@ -268,7 +268,7 @@ export class ChartlibComponent {
   bubbleChartType = 'bubble';
 
   // Combo Chart
-  ComboChartData: Array<any> = [{
+  comboChartData: Array<any> = [{
     data: [6, 5, 8, 8, 5, 5, 4],
     label: 'Series A',
     borderWidth: 1,
@@ -280,8 +280,8 @@ export class ChartlibComponent {
     borderWidth: 1,
     type: 'bar',
   }];
-  ComboChartLabels: Array<any> = ['1', '2', '3', '4', '5', '6', '7'];
-  ComboChartOptions: any = Object.assign({
+  comboChartLabels: Array<any> = ['1', '2', '3', '4', '5', '6', '7'];
+  comboChartOptions: any = Object.assign({
     animation: false,
     scales: {
       xAxes: [{

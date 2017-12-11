@@ -15,6 +15,6 @@ export const mainRoutes: Routes = [
   {
     path: '',
     loadChildren: '../admin/admin.module#AdminModule',
-    canActivate: [AuthGuard, EditorGuard]
+    canActivate: [AuthGuard/*, EditorGuard*/]
   }
 ];

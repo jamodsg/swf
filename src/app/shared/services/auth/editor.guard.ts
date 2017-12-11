@@ -14,7 +14,10 @@ export class EditorGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.authService.user$.pipe(
       take(1),
-      map((user: IUser) => user && user.assignedRoles.editor ? true : false),
+      map((user: IUser) => {
+        console.log(user);
+        return user && user.assignedRoles && user.assignedRoles.editor ? true : false;
+      }),
       tap(isEditor => {
         if (!isEditor) {
           console.error('Access denied - Editors only');

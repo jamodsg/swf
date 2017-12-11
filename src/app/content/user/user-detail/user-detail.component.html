@@ -62,39 +62,39 @@
 
   </div>
 </div>
-  <!--
-                            <li class="m-nav__item" *ngIf="user">
-                              <a class="m-nav__link" [routerLink]="['/users/edit', user.id]">
-                                <i class="m-nav__link-icon fa fa-pencil"></i>
-                                <span class="m-nav__link-text">{{'general.edit' | translate }}</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__item" *ngIf="user">
-                              <a class="m-nav__link" (click)="removeUser(user)">
-                                <i class="m-nav__link-icon fa fa-remove"></i>
-                                <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__separator m-nav__separator--fit"></li>
-                            <li class="m-nav__item">
-                              <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                 [routerLink]="['/users/list']">
-                                {{'general.menu.user.list' | translate}}
-                     -->
+<!--
+                          <li class="m-nav__item" *ngIf="user">
+                            <a class="m-nav__link" [routerLink]="['/users/edit', user.id]">
+                              <i class="m-nav__link-icon fa fa-pencil"></i>
+                              <span class="m-nav__link-text">{{'general.edit' | translate }}</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__item" *ngIf="user">
+                            <a class="m-nav__link" (click)="removeUser(user)">
+                              <i class="m-nav__link-icon fa fa-remove"></i>
+                              <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__separator m-nav__separator--fit"></li>
+                          <li class="m-nav__item">
+                            <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                               [routerLink]="['/users/list']">
+                              {{'general.menu.user.list' | translate}}
+                   -->
 
-  <!--</div>
+<!--</div>
 
-        <h3 class="m-portlet__head-text">{{'general.users.detail.imageTitle' | translate }}</h3>
-      </div>
+      <h3 class="m-portlet__head-text">{{'general.users.detail.imageTitle' | translate }}</h3>
     </div>
   </div>
-  <div class="m-portlet__bod text-center m--padding-15">
-    <img *ngIf="user.photoURL; else noPhotoTemplate" [src]="user.photoURL" class="img img-responsive img-circle"/>
-    <p *ngIf="user && !user.photoURL">{{'general.users.detail.noImage' | translate }}</p>
-  -->
+</div>
+<div class="m-portlet__bod text-center m--padding-15">
+  <img *ngIf="user.photoURL; else noPhotoTemplate" [src]="user.photoURL" class="img img-responsive img-circle"/>
+  <p *ngIf="user && !user.photoURL">{{'general.users.detail.noImage' | translate }}</p>
+-->
 
-  <ng-template #loadingTemplate>Lade</ng-template>
+<ng-template #loadingTemplate>Lade</ng-template>
 
-  <ng-template #noPhotoTemplate>
-    <img src="./assets/sfw/placeholder/avatar_male.jpg">
-  </ng-template>
+<ng-template #noPhotoTemplate>
+  <img src="./assets/sfw/placeholder/avatar_male.jpg">
+</ng-template>

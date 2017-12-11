@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="65" fxFlex.gt-xs="65" fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>list</mat-icon>
+        {{'general.menu.category.main' | translate}}
+      </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+      <mat-card-content>
+        <!-- [articles]="articles$ | async"
+          [locations]="locations$ | async"
+          [teams]="teams$ | async"-->
+        <category-list
+          [categories]="categories$ | async"
+          [categoryTypes]="categoryTypes$ | async"
+          (updateFilter)="updateFilter($event)"
+          (remove)="removeCategory($event)"
+          (update)="updateCategory($event)">
+        </category-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="35" fxFlex.gt-xs="35" fxFlex="100">
+    <categories-by-category-type
+      [categories]="categories$ | async"
+      [categoryTypes]="categoryTypes$ | async">
+    </categories-by-category-type>
+
+    <tasks type="category"></tasks>
+  </div>
+</div>

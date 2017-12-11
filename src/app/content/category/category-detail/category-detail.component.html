@@ -1,0 +1,69 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card class="mat-card-top">
+      <mat-card-title>
+        <mat-icon>details</mat-icon>
+        {{'general.menu.category.detail' | translate}}
+      </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+
+      <mat-card-content *ngIf="category; else loadingTemplate">
+        <table>
+          <tr>
+            <td>{{'general.categories.list.colTitles.name' | translate}}</td>
+            <td>{{category.title}}</td>
+          </tr>
+          <tr>
+            <td>{{'general.tables.colTitles.description' | translate}}</td>
+            <td>{{category.description}}</td>
+          </tr>
+          <tr>
+            <td>{{'general.categories.list.colTitles.type' | translate}}</td>
+            <td>
+              <span
+                *ngFor="let categoryType of categoryTypes$ | async | filterBy: ['id'] : category.assignedCategoryType">
+                {{ 'general.menu.' + categoryType.link + '.main' | translate}}
+              </span>
+            </td>
+          </tr>
+          <!--<tr>
+            <td>{{'general.tables.colTitles.creation' | translate}}</td>
+            <td>
+              <user-avatar *ngIf="category.creation.from !== 'system'"
+                           [authorId]="category.creation.from"></user-avatar>
+              <span *ngIf="category.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
+              <creation-date [creation]="category.creation.at"></creation-date>
+            </td>
+          </tr>-->
+        </table>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <div class="button-row">
+          <a mat-raised-button color="primary" [routerLink]="['/categories']">
+            {{'general.menu.category.list' | translate}}
+          </a>
+          <a mat-raised-button color="accent" [routerLink]="['/categories/edit', category.id]">
+            {{'general.edit' | translate }}
+          </a>
+          <a mat-raised-button color="warn" (click)="removeCategory(category)">
+            {{'general.delete' | translate }}
+          </a>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100" *ngIf="category">
+    <category-assigned-objects
+      [categoryTypes]="categoryTypes$ | async"
+      [category]="category"
+      [showList]="true">
+    </category-assigned-objects>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  Laden <!--<app-loading-indicator></app-loading-indicator>-->
+</ng-template>

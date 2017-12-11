@@ -1,11 +1,11 @@
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, Route, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
-import { TranslateService } from '@ngx-translate/core';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 import { MenuItemsService } from '../../shared/services/menu/menu-items.service';
 import { AuthService } from '../../shared/services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 const SMALL_WIDTH_BREAKPOINT = 960;
 
@@ -35,10 +35,18 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(private router: Router, public menuItems: MenuItemsService, public authService: AuthService,
-    public translate: TranslateService, zone: NgZone) {
+  constructor(private router: Router,
+              public menuItems: MenuItemsService,
+              private translate: TranslateService,
+              public authService: AuthService,
+              private zone: NgZone) {
+
+    translate.addLangs(['de', 'en', 'fr']);
+    translate.setDefaultLang('de');
+
     const browserLang: string = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+    translate.use(browserLang.match(/en|fr/) ? browserLang : 'de');
+
     this.mediaMatcher.addListener(mql => zone.run(() => {
       this.mediaMatcher = mql;
     }));

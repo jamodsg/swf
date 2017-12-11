@@ -20,15 +20,10 @@ export class UnAuthGuard implements CanActivate {
       map((user: IUser) => !user),
       tap(isLoggedOut => {
         if (!isLoggedOut) {
-          console.error('You´r already logged in - redirecting ...');
+          console.error('You´re already logged in - redirecting ...');
           this.router.navigate(['/']).then();
         }
       })
     );
-    /* return this.auth.authState.take(1).map(authState => !authState).do(isLoggedOut => {
-      if (!isLoggedOut) {
-        this.router.navigate(['/']).then();
-      }
-    }); */
   }
 }

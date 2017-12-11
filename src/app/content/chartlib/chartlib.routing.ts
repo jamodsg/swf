@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { ChartlibComponent } from './chartlib.component';
 
-export const ChartlibRoutes: Routes = [{
+export const chartlibRoutes: Routes = [{
   path: '',
   component: ChartlibComponent
 }];

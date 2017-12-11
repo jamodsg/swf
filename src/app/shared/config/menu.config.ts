@@ -1,14 +1,19 @@
 export const MENUITEMS = [
   {
     state: '/',
-    name: 'HOME',
+    name: 'dashboard',
     type: 'link',
-    icon: 'explore'
+    icon: 'dashboard'
   },
-
+  {
+    state: 'categories',
+    name: 'category',
+    type: 'link',
+    icon: 'list',
+  },
   {
     state: 'users',
-    name: 'USERS',
+    name: 'user',
     type: 'link',
     icon: 'people',
     /* children: [

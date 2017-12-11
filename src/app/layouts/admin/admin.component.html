@@ -59,7 +59,7 @@
         <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getAll()" group="{{menuitem.state}}">
           <a appAccordionToggle class="relative" [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
-            <span>{{ menuitem.name | translate }}</span>
+            <span>{{ 'general.menu.' + menuitem.name + '.main' | translate }}</span>
             <span fxFlex></span>
             <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
           </a>
@@ -92,6 +92,7 @@
         </mat-list-item>
 
         <mat-divider></mat-divider>
+        <pre>{{translate.currentLang | json}}</pre>
         <pre>{{authService.user$ | async | json}}</pre>
 
       </mat-nav-list>

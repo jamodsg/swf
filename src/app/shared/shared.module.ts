@@ -13,19 +13,22 @@ import { LinkModule } from './components/links/link.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
+import { CreationModule } from './components/creation/creation.module';
+import { TaskModule } from './components/task/task.module';
 
 @NgModule({
   declarations: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
-    ToggleFullscreenDirective
+    ToggleFullscreenDirective,
   ],
   exports: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
     CommonModule,
+    CreationModule,
     FlexLayoutModule,
     LinkModule,
     MatCardModule,
@@ -37,6 +40,7 @@ import { NgPipesModule } from 'ngx-pipes';
     NgPipesModule,
     NgxDatatableModule,
     ReactiveFormsModule,
+    TaskModule,
     ToggleFullscreenDirective,
     TranslateModule
   ],
