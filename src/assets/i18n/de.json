@@ -1230,6 +1230,8 @@
     "edit": "Editieren",
     "filteredRecords": "gefilterten Einträgen",
     "from": "von",
+    "items": "Einträge",
+    "itemsPerPage": "Einträge pro Seite",
     "list": "Übersicht",
     "no": "Nein",
     "noTitle": "Unbenannt",
@@ -1237,6 +1239,7 @@
     "only": "nur",
     "pleaseWait": "Bitte warten ...",
     "records": "Einträgen",
+    "typeToFilter": "Suchen ...",
     "yes": "Ja"
   }
 }
