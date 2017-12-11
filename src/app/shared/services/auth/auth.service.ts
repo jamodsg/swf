@@ -7,10 +7,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { IUser } from '../../interfaces/user.interface';
 import * as moment from 'moment';
 import * as firebase from 'firebase/app';
-import AuthProvider = firebase.auth.AuthProvider;
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
+import AuthProvider = firebase.auth.AuthProvider;
 
 // Presence System
 // https://www.youtube.com/watch?v=2ZDeT5hLIBQ&feature=push-u&attr_tag=EDwjeHaWKNSWOoZT-6
@@ -20,17 +20,15 @@ import 'rxjs/add/observable/fromEvent';
 @Injectable()
 export class AuthService implements OnDestroy {
 
-  public authUser: firebase.User = null;
-  public authState: Observable<IUser>;
+  public user$: Observable<IUser>;
 
   private mouseEvents: ISubscription;
   private timer: ISubscription;
   private authSubscription: ISubscription;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
-    this.authState = this.afAuth.authState.switchMap(user => {
+    this.user$ = this.afAuth.authState.switchMap(user => {
       if (user) {
-        this.authUser = user;
         this.updateOnConnect();
         this.updateOnIdle();
         return this.afs.doc<IUser>(`users/${user.uid}`).valueChanges();
@@ -47,7 +45,7 @@ export class AuthService implements OnDestroy {
   }
 
   get id(): string {
-    return this.authState ? this.afAuth.auth.currentUser.uid : '';
+    return this.user$ ? this.afAuth.auth.currentUser.uid : '';
   }
 
   signIn(credentials) {
@@ -90,7 +88,11 @@ export class AuthService implements OnDestroy {
       delete values.password;
       values.providerId = authUser.providerId;
       values.id = authUser.uid;
-      values.assignedRole = '';
+      values.assignedRoles = {
+        subscriber: true,
+        editor: false,
+        admin: false
+      };
       values.emailVerified = authUser.emailVerified;
       values.creation = this.getCreation();
       return this.updateUser(values);
@@ -143,6 +145,33 @@ export class AuthService implements OnDestroy {
 
   private updateUser(data: any): Promise<void> {
     return this.afs.doc('users/' + this.id).update(data);
+  }
+
+  private checkAuthorization(user: IUser, allowedRoles: string[]): boolean {
+    if (!user) {
+      return false;
+    }
+    for (const role in allowedRoles) {
+      if (user.assignedRoles[role]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  canRead(user: IUser): boolean {
+    const allowed = ['admin', 'editor', 'subscriber'];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  canEdit(user: IUser): boolean {
+    const allowed = ['admin', 'editor'];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  canDelete(user: IUser): boolean {
+    const allowed = ['admin'];
+    return this.checkAuthorization(user, allowed);
   }
 
   public getCreation(): ICreation {

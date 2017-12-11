@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
-import * as firebase from 'firebase/app';
+import { map, take, tap } from 'rxjs/operators';
+import { IUser } from '../../interfaces/user.interface';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -14,17 +15,16 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.authState.take(1).map(authState => !!authState).do(isLoggedIn => {
-      // console.log('AuthGuard:' + isLoggedIn);
-      if (!isLoggedIn) {
-        this.router.navigate(['/login']).then();
-      }
-      /* Redirect, if user hasn´t verified his email
-      if (!this.authService.authUser.emailVerified && this.authService.authUser.providerId === 'firebase') {
-        console.log('not verified');
-        // this.router.navigate(['/login'], { queryParams: { 'verify-email': true } }).then();
-      }*/
-    });
+    return this.authService.user$.pipe(
+      take(1),
+      map((user: IUser) => !!user),
+      tap(isLoggedIn => {
+        if (!isLoggedIn) {
+          this.router.navigate(['/login']).then();
+          console.error('Access denied - Authorized Users only');
+        }
+      })
+    );
   }
 
 }
