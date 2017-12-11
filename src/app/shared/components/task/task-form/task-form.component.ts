@@ -68,4 +68,8 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
+  cancel() {
+
+  }
+
 }
