@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-/*
 import { UserResolver } from './user.resolver';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+/*
 import { UserEditAssignedUploadsComponent } from './user-edit/user-edit-assigned-uploads/user-edit-assigned-uploads.component';
 import { UserEditAssignedTodosComponent } from './user-edit/user-edit-assigned-todos/user-edit-assigned-todos.component';
 import { UserEditAssignedArticlesComponent } from './user-edit/user-edit-assigned-articles/user-edit-assigned-articles.component';
@@ -13,7 +13,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 export const userRoutes: Routes = [
   {
     path: '',
-    component: UsersComponent
+    component: UsersComponent,
+    pathMatch: 'full'
   }/*,
   {
     path: 'edit/:userId',
@@ -45,13 +46,16 @@ export const userRoutes: Routes = [
         pathMatch: 'full'
       }
     ]
-  },
+  }*/,
   {
     path: 'detail/:userId',
     component: UserDetailComponent,
-    resolve: {
+    /* resolve: {
       user: UserResolver
-    },
-    pathMatch: 'full'
-  }*/
+    } */
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];

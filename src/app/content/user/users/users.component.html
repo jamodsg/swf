@@ -1,54 +1,72 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-teal">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>local_offer</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>103</h2>
+          <p>Benutzer</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-purple">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>phone</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>230</h2>
+          <p>Administratoren</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-red">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>notifications</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>323</h2>
+          <p>Redakteuere</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-indigo">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>email</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>870</h2>
+          <p>Gäste</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
 <mat-card>
   <mat-card-title>
     <mat-icon>people</mat-icon>
     {{'general.menu.user.main' | translate}}
   </mat-card-title>
   <mat-card-subtitle></mat-card-subtitle>
-  <mat-card-content *ngIf="users$ && (users$ | async)?.length">
+  <mat-card-content>
 
-    <pre>{{rows | json}}</pre>
-
-    <input matInput placeholder="Type to filter the name column..." required (keyup)='updateFilter($event)'>
-
-    <ngx-datatable
-      class='material'
-      [columns]="columns"
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="'auto'"
-      [limit]="10"
-      [rows]='users$ | async'>
-      <ngx-datatable-column name="Last Name"></ngx-datatable-column>
-      <ngx-datatable-column name="First Name"></ngx-datatable-column>
-      <ngx-datatable-column name="Email"></ngx-datatable-column>
-      <ngx-datatable-column name="Online Status"></ngx-datatable-column>
-
-      <ngx-datatable-column name="actions">
-        <ng-template let-column="column" ngx-datatable-header-template>
-          Actions
-        </ng-template>
-        <ng-template let-row="row" let-value="email" ngx-datatable-cell-template>
-            <detail-link [objectId]="row.id"></detail-link>
-            <edit-link [objectId]="row.id"></edit-link>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+    <user-list
+      [users]="users$ | async"
+      (updateFilter)="updateFilter($event)"
+      (remove)="removeUser($event)"
+      (update)="updateUser($event)">
+    </user-list>
 
   </mat-card-content>
 </mat-card>
-
-<!--
-<div class="m-content">
-  <div class="row">
-    <div class="col-xl-9">
-      <user-list
-        [users]="userService.getUsers() | async"
-        (remove)="userService.removeUser($event)">
-      </user-list>
-    </div>
-    <div class="col-xl-3">
-      <tasks type="user"></tasks>
-    </div>
-  </div>
-</div>-->

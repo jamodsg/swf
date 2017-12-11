@@ -14,6 +14,7 @@ export class UserResolver implements Resolve<IUser> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IUser> {
     return this.userService.getUserById(route.params['userId']).take(1).map((user: IUser) => {
+      console.log(user);
       if (route.params['userId'] === 'new') {
         return this.userService.setNewUser();
       } else if (user && user.id) {

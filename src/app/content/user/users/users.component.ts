@@ -13,7 +13,7 @@ export class UsersComponent {
   rows = [];
   temp = [];
 
-  users$: Observable<IUser[]>;
+  users$: Observable<IUser[]> = null;
 
   columns = [
     { prop: 'email' },
@@ -25,18 +25,15 @@ export class UsersComponent {
   ];
 
   constructor(public userService: UserService) {
-    this.users$ = userService.users$; /* .subscribe((users: IUser[]) => {
-      this.temp = [...users];
-      this.rows = users;
-    }); */
+    this.users$ = userService.users$;
   }
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-    const temp = this.temp.filter(function(d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-    this.rows = temp;
+  removeUser($event) {
+    this.userService.removeUser($event).then();
+  }
+
+  updateUser($event) {
+    this.userService.updateUser($event.user.id, $event.user).then();
   }
 
 }

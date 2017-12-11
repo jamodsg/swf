@@ -1,0 +1,65 @@
+<div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
+  <div fxFlex.gt-sm="50%" fxFlex="100">
+
+    <mat-form-field>
+      <mat-select placeholder="itemsPerPage" formControlName="limit">
+        <mat-option value="">All Items</mat-option>
+        <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }} items</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxFlex.gt-sm="50%" fxFlex="100">
+    <input
+      style="padding:8px; margin:15px auto; width:30%;"
+      placeholder="Type to filter the name column..."
+      formControlName="searchFor" />
+  </div>
+
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <ngx-datatable
+      *ngIf="users; else loadingTemplate"
+      class='material'
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="10"
+      [rows]="users | filterBy: ['firstName', 'lastName', 'email'] : searchFor">
+      <ngx-datatable-column name="Last Name"></ngx-datatable-column>
+      <ngx-datatable-column name="First Name"></ngx-datatable-column>
+      <ngx-datatable-column name="Email"></ngx-datatable-column>
+      <ngx-datatable-column name="Online Status"></ngx-datatable-column>
+
+      <ngx-datatable-column name="actions">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          Actions
+        </ng-template>
+        <ng-template let-row="row" let-value="email" ngx-datatable-cell-template>
+          <detail-link [objectId]="row.id"></detail-link>
+          <edit-link [objectId]="row.id"></edit-link>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-footer>
+        <ng-template
+          ngx-datatable-footer-template
+          let-rowCount="rowCount"
+          let-pageSize="pageSize"
+          let-selectedCount="selectedCount"
+          let-curPage="curPage"
+          let-offset="offset">
+          <div style="padding: 5px 10px">
+            <div class="">Rows: {{rowCount}} | Size: {{pageSize}} | Current: {{curPage}} | Offset: {{offset}}</div>
+          </div>
+        </ng-template>
+      </ngx-datatable-footer>
+
+    </ngx-datatable>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  LADEN
+</ng-template>
