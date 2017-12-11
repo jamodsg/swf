@@ -125,7 +125,7 @@ export class DashboardComponent {
     pointHoverBorderColor: 'rgba(148,159,177,0.8)'
   }];
   comboChartLegend = true;
-  ComboChartData: Array<any> = [{
+  comboChartData: Array<any> = [{
     data: [6, 5, 8, 8, 5, 5, 4],
     label: 'Series A',
     borderWidth: 1,
@@ -137,7 +137,7 @@ export class DashboardComponent {
     borderWidth: 1,
     type: 'bar',
   }];
-  ComboChartOptions: any = Object.assign({
+  comboChartOptions: any = Object.assign({
     animation: false,
     scales: {
       xAxes: [{
@@ -175,10 +175,13 @@ export class DashboardComponent {
     message: 'Do you have Paris recommendations instead?',
     photo: 'assets/images/face4.jpg',
     subject: 'Brunch this weekend?',
-  },];
+  }
+  ];
 
   constructor() {
-    this.fetch((data) => { this.rows = data; });
+    this.fetch((data) => {
+      this.rows = data;
+    });
   }
 
   // project table

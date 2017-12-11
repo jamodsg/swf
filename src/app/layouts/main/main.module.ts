@@ -13,6 +13,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { EditorGuard } from '../../shared/services/auth/editor.guard';
+import { AdminGuard } from '../../shared/services/auth/admin.guard';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,6 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     AngularFireAuth,
     AuthGuard,
+    EditorGuard,
     AuthService,
     TranslateService,
     UnAuthGuard

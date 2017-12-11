@@ -1,6 +1,5 @@
 import { ICreation } from './creation.interface';
-// import { IRole } from './role.interface';
-// import { IMember } from './member.interface';
+import { IRole } from './role.interface';
 
 export interface IUser {
   id?: string;
@@ -15,7 +14,7 @@ export interface IUser {
   photoURL?: string;
 
   onlineStatus?: string;
-  assignedRole: string;
+  assignedRoles: IRole;
   // assignedMember?: IMember | string;
 
   social?: {

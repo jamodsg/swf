@@ -92,8 +92,7 @@
         </mat-list-item>
 
         <mat-divider></mat-divider>
-        <pre>{{authService.authState | async | json}}</pre>
-
+        <pre>{{authService.user$ | async | json}}</pre>
 
       </mat-nav-list>
     </mat-sidenav>

@@ -12,9 +12,8 @@ export class UserService {
 
   users$: Observable<IUser[]>;
 
-
   constructor(private afs: AngularFirestore) {
-    this.collectionRef = this.afs.collection(this.path);
+    this.collectionRef = this.afs.collection<IUser>(this.path);
     this.users$ = this.collectionRef.valueChanges();
   }
 
@@ -41,7 +40,11 @@ export class UserService {
       lastName: '',
       email: '',
       providerId: 'firebase',
-      assignedRole: ''
+      assignedRoles: {
+        subscriber: true,
+        editor: false,
+        admin: false
+      }
     };
   }
 
