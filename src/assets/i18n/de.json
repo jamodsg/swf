@@ -7,6 +7,7 @@
   "auth/wrong-password": "Du hast ein falsches Passwort für diesen Account angegeben.",
   "auth/send-verification": "Eine weitere E-Mail zur Bestätigung Deines Accounts wurde Dir gesendet.",
   "auth/successful-signup": "Deine Registrierung war erfolgreich! Wir haben Dir eine E-Mail gesendet zum Bestätigen Deiner Adresse gesendet. Nach dem Klicken des Links in der Mail hast Du Zugriff auf das System.",
+  "permission-denied": "Du hast keine Berechtigungen um diese Aktion durchzuführen.",
   "Required": "Hier wird eine Eingabe benötigt",
   "Global": {
     "Login": {
