@@ -9,10 +9,12 @@ import { NgPipesModule } from 'ngx-pipes';
 import { TaskService } from '../../services/task/task.service';
 import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,

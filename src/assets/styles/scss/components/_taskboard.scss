@@ -1,7 +1,7 @@
-@import "../material.variables";
-@import "../mixins/bi-app/bi-app-ltr";
-@import "../app.variables";
-@import "../mixins";
+@import '../material.variables';
+@import '../mixins/bi-app/bi-app-ltr';
+@import '../app.variables';
+@import '../mixins';
 
 .taskboard {
   overflow-x: auto;
@@ -58,7 +58,7 @@
     }
   }
   .taskboard-task::after {
-    content: "";
+    content: '';
     position: absolute;
     border: 4px solid transparent;
     top: 0;

@@ -26,6 +26,7 @@ export class TaskFormComponent implements OnInit {
   public titleMaxLength: number = 30;
   public form: FormGroup;
   public task: ITask;
+  public error: any;
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
@@ -53,7 +54,10 @@ export class TaskFormComponent implements OnInit {
   }
 
   saveTask() {
-    this.taskService.createTask(this.task).then(() => this.hideAndResetForm());
+    this.taskService.createTask(this.task).then(
+      () => this.hideAndResetForm(),
+      (error: any) => this.error = error
+    );
   }
 
   hideAndResetForm() {
