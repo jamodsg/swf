@@ -16,7 +16,7 @@
           </tr>
           <tr>
             <td>{{'general.tables.colTitles.description' | translate}}</td>
-            <td>{{category.description}}</td>
+            <td [innerHtml]="category.description"></td>
           </tr>
           <tr>
             <td>{{'general.categories.list.colTitles.type' | translate}}</td>
