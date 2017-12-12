@@ -741,6 +741,9 @@
         "list": "Alle Sponsoren"
       },
       "task": {
+        "closed": "Erledigte",
+        "my": "Meine Aufgaben",
+        "open": "Offene Aufgaben",
         "main": "Aufgaben & ToDos",
         "nextVersion": "Planung nächste Version"
       },
@@ -756,7 +759,8 @@
         "main": "Benutzer",
         "list": "Alle Benutzer",
         "edit": "Benutzer editieren",
-        "groups": "Benutzergruppen"
+        "roles": "Rollen",
+        "statistics": "Statistiken"
       }
     },
     "pagination": {
