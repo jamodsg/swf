@@ -148,15 +148,17 @@ export class AuthService implements OnDestroy {
   }
 
   private checkAuthorization(user: IUser, allowedRoles: string[]): boolean {
-    if (!user) {
-      return false;
-    }
     for (const role in allowedRoles) {
-      if (user.assignedRoles[role]) {
+      if (user && user.assignedRoles[allowedRoles[role]]) {
         return true;
       }
     }
     return false;
+  }
+
+  canWrite(user: IUser): boolean {
+    const allowed = ['admin', 'editor'];
+    return this.checkAuthorization(user, allowed);
   }
 
   canRead(user: IUser): boolean {
