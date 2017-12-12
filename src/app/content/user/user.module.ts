@@ -10,6 +10,8 @@ import { userRoutes } from './user-routing.module';
 import { UserService } from '../../shared/services/user/user.service';
 import { SharedModule } from '../../shared/shared.module';
 import { UserListComponent } from './user-list/user-list.component';
+import { RolesComponent } from './roles/roles.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 /*
 import { UserEditMainProfileComponent } from './user-edit/user-edit-main-profile/user-edit-main-profile.component';
 import { UserEditAssignedArticlesComponent } from './user-edit/user-edit-assigned-articles/user-edit-assigned-articles.component';
@@ -30,6 +32,8 @@ import { UserEditAssignedUploadsComponent } from './user-edit/user-edit-assigned
     UserListComponent, */
     UsersComponent,
     UserListComponent,
+    RolesComponent,
+    StatisticsComponent,
     /* UserEditAssignedArticlesComponent,
     UserEditAssignedTodosComponent,
     UserEditAssignedUploadsComponent, */

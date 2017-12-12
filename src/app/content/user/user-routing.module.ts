@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { UserResolver } from './user.resolver';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { RolesComponent } from './roles/roles.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 /*
 import { UserEditAssignedUploadsComponent } from './user-edit/user-edit-assigned-uploads/user-edit-assigned-uploads.component';
 import { UserEditAssignedTodosComponent } from './user-edit/user-edit-assigned-todos/user-edit-assigned-todos.component';
@@ -53,6 +54,14 @@ export const userRoutes: Routes = [
     /* resolve: {
       user: UserResolver
     } */
+  },
+  {
+    path: 'roles',
+    component: RolesComponent
+  },
+  {
+    path: 'statistics',
+    component: StatisticsComponent
   },
   {
     path: '**',
