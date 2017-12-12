@@ -14,24 +14,49 @@ export const MENUITEMS = [
   {
     state: 'users',
     name: 'user',
-    type: 'link',
+    type: 'sub',
     icon: 'people',
-    /* children: [
+    children: [
       {
         state: '',
-        name: 'LIST'
+        name: 'main',
+        icon: 'accessibility'
       },
       {
-        state: 'groups',
-        name: 'GROUPS'
+        state: 'roles',
+        name: 'roles',
+        icon: 'people'
       },
       {
         state: 'statistics',
-        name: 'STATS'
+        name: 'statistics',
+        icon: 'trending_up'
       }
-    ] */
+    ]
   },
-
+  {
+    state: 'tasks',
+    name: 'task',
+    type: 'sub',
+    icon: 'bug_report',
+    children: [
+      {
+        state: '',
+        name: 'open',
+        icon: 'lock_open'
+      },
+      {
+        state: 'closed-tasks',
+        name: 'closed',
+        icon: 'close'
+      },
+      {
+        state: 'own-tasks',
+        name: 'my',
+        icon: 'person'
+      }
+    ]
+  },
   {
     state: 'apps',
     name: 'APPS',
