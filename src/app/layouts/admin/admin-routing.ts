@@ -62,6 +62,10 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/category/category.module#CategoryModule'
       },
       {
+        path: 'sponsors',
+        loadChildren: '../../content/sponsor/sponsor.module#SponsorModule'
+      },
+      {
         path: 'tasks',
         loadChildren: '../../content/todo/todo.module#TodoModule'
       },

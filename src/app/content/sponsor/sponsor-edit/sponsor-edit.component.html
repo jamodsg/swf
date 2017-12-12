@@ -1,0 +1,153 @@
+<form class="form-horizontal" novalidate (ngSubmit)="saveCategory()" [formGroup]="form">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+      <div class="mat-card-top">
+        <mat-card *ngIf="sponsor; else loadingTemplate">
+          <mat-card-title>
+            <mat-icon>mode_edit</mat-icon>
+            {{ sponsor.id ? ('general.menu.sponsor.edit' | translate) : ('general.menu.sponsor.create' | translate)}}
+          </mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+
+          <mat-card-content>
+
+            <div fxLayout="row" fxLayoutWrap="wrap" class="form-container">
+
+              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-form-field hintLabel="Max {{titleMaxLength}} characters" style="width: 95%">
+                  <input matInput maxlength="{{titleMaxLength}}"
+                         placeholder="{{'general.sponsors.edit.title' | translate}}"
+                         formControlName="title">
+                  <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-form-field style="width: 95%">
+                  <input matInput
+                         placeholder="{{'general.sponsors.edit.link' | translate}}"
+                         formControlName="externalLink">
+                </mat-form-field>
+              </div>
+
+              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-form-field style="width: 95%">
+                  <input matInput
+                         placeholder="{{'general.sponsors.edit.startDate' | translate}}"
+                         formControlName="startDate">
+                </mat-form-field>
+              </div>
+
+              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-form-field style="width: 95%">
+                  <input matInput
+                         placeholder="{{'general.sponsors.edit.endDate' | translate}}"
+                         formControlName="endDate">
+                </mat-form-field>
+              </div>
+
+
+              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                <div class="example-container">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'general.sponsors.edit.category' | translate}}"
+                                formControlName="assignedCategories" multiple>
+                      <!--<mat-option *ngFor="let category of categories | filterBy: ['assignedCategoryType']: categoryTypes[0].id"
+                                  [value]="category.id">
+                        {{category.title}}
+                      </mat-option>-->
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
+                <label>{{'general.sponsors.edit.description' | translate}}</label>
+                <quill-editor [style]="{height: '250px'}"
+                              formControlName="description"
+                              placeholder="{{'general.sponsors.edit.description' | translate}}">
+                </quill-editor>
+              </div>
+
+              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
+                <label>{{'general.sponsors.edit.info' | translate}}</label>
+                <quill-editor [style]="{height: '250px'}"
+                              formControlName="internalInfo"
+                              placeholder="{{'general.sponsors.edit.info' | translate}}">
+                </quill-editor>
+              </div>
+
+              <!--
+              <div class="col-xl-6">
+      <h5>{{'general.sponsors.edit.imageUrl' | translate}}</h5>
+      <img [src]="sponsor.imageUrl" class="img-fluid img-thumbnail" *ngIf="sponsor.imageUrl; else noLogoTemplate"/>
+      <media-uploader
+        *ngIf="showUploader"
+        [objectId]="sponsor.id ? sponsor.id : ''"
+        [objectType]="objectType"
+        [uploaderOptions]="uploaderOptions"
+        (uploadCompleted)="uploadCompleted($event)">
+      </media-uploader>
+      <div class="text-center m--margin-top-15">
+        <button class="btn btn-primary" (click)="toggleUploader()" *ngIf="!showUploader">
+          {{'general.sponsors.edit.uploadLogo' | translate}}
+        </button>
+      </div>
+    </div>
+    -->
+
+            </div>
+
+            <!--<creation-form class="form-container"
+                           [form]="form"
+                           [users]="users$ | async">
+            </creation-form>-->
+          </mat-card-content>
+
+          <mat-card-actions>
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
+                {{'general.sponsors.edit.saveSponsor' | translate}}
+              </button>
+              <a mat-raised-button color="accent" (click)="cancel()">
+                {{'general.cancel' | translate}}
+              </a>
+              <a mat-raised-button color="warn"
+                 (click)="removeSponsor()"
+                 *ngIf="sponsor.id">
+                {{'general.sponsors.list.removeCategory' | translate}}
+              </a>
+            </div>
+          </mat-card-actions>
+
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+<ng-template #loadingTemplate>
+  Lade ...
+</ng-template>
+
+
+<!--<sponsor-edit-main
+  [form]="form"
+  [sponsor]="sponsor"
+  [categoryTypes]="categoryTypeService.getCategoryTypes() | async | filterBy: ['link']: 'sponsors'"
+  [sponsors]="categoryService.getCategories() | async"
+  (setLogo)="setLogo($event)">
+</sponsor-edit-main>
+
+ <button class="btn btn-success" (click)="saveSponsor()" [disabled]="!form.valid ||isSubmitting || isCanceled">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" *ngIf="isSubmitting"></i>
+    {{ sponsor.id
+    ? ('general.sponsors.edit.updateSponsor' | translate)
+    : ('general.sponsors.edit.saveSponsor' | translate)}}
+  </button>
+  <button class="btn btn-danger" (click)="cancel()" [disabled]="isSubmitting || isCanceled">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" *ngIf="isCanceled"></i>
+    {{'general.cancel' | translate}}
+  </button>-->

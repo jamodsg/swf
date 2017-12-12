@@ -73,8 +73,20 @@ export const MENUITEMS = [
   {
     state: 'sponsors',
     name: 'sponsor',
-    type: 'link',
+    type: 'sub',
     icon: 'euro_symbol',
+    children: [
+      {
+        state: '',
+        name: 'list',
+        icon: 'list',
+      },
+      {
+        state: 'create',
+        name: 'create',
+        icon: 'euro_symbol'
+      }
+    ]
   },
   {
     state: 'teams',
