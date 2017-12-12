@@ -54,9 +54,16 @@ export const adminRoutes: Routes = [
         path: 'pages',
         loadChildren: '../../content/pages/pages.module#PagesModule'
       },
+      ///////////////////
+      // added Modules
+      ///////////////////
       {
         path: 'categories',
         loadChildren: '../../content/category/category.module#CategoryModule'
+      },
+      {
+        path: 'tasks',
+        loadChildren: '../../content/todo/todo.module#TodoModule'
       },
       {
         path: 'users',
