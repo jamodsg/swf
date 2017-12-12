@@ -6,10 +6,98 @@ export const MENUITEMS = [
     icon: 'dashboard'
   },
   {
+    state: 'articles',
+    name: 'article',
+    type: 'sub',
+    icon: 'text_format',
+    children: [
+      {
+        state: '',
+        name: 'list',
+        icon: 'textsms'
+      },
+      {
+        state: 'matches',
+        name: 'match',
+        icon: 'games'
+      },
+      {
+        state: 'dashboard',
+        name: 'dashboard',
+        icon: 'trending_up'
+      }
+    ]
+  },
+  {
     state: 'categories',
     name: 'category',
     type: 'link',
     icon: 'list',
+  },
+  {
+    state: 'clubs',
+    name: 'club',
+    type: 'link',
+    icon: 'business',
+  },
+  {
+    state: 'locations',
+    name: 'location',
+    type: 'link',
+    icon: 'location_on',
+  },
+  {
+    state: 'members',
+    name: 'member',
+    type: 'sub',
+    icon: 'nature_people',
+    children: [
+      {
+        state: '',
+        name: 'main',
+        icon: 'list',
+      },
+      {
+        state: 'statistics',
+        name: 'statistics',
+        icon: 'trending_up'
+      }
+    ]
+  },
+  {
+    state: 'settings',
+    name: 'setting',
+    type: 'link',
+    icon: 'settings',
+  },
+  {
+    state: 'sponsors',
+    name: 'sponsor',
+    type: 'link',
+    icon: 'euro_symbol',
+  },
+  {
+    state: 'teams',
+    name: 'team',
+    type: 'sub',
+    icon: 'people_outline',
+    children: [
+      {
+        state: '',
+        name: 'main',
+        icon: 'list',
+      },
+      {
+        state: 'teamOfTheMonth',
+        name: 'teamOfTheMonth',
+        icon: 'event'
+      },
+      {
+        state: 'media',
+        name: 'media',
+        icon: 'cloud_upload'
+      }
+    ]
   },
   {
     state: 'users',

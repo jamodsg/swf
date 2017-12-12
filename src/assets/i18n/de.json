@@ -691,7 +691,7 @@
         "detail": "Artikeldetails",
         "editArticle": "Artikel editieren",
         "list": "Alle Artikel",
-        "matchList": "Spiel-Übersicht"
+        "match": "Spielbegegnungen"
       },
       "category": {
         "main": "Kategorien",
@@ -733,6 +733,9 @@
         "edit": "Spielzeit editieren",
         "list": "Alle Spielzeiten"
       },
+      "setting": {
+        "main": "Einstellungen"
+      },
       "sponsor": {
         "main": "Sponsoren",
         "detail": "Sponsor-Details",
@@ -752,7 +755,9 @@
         "detail": "Mannschafts-Details",
         "edit": "Mannschaft editieren",
         "list": "Alle Mannschaften",
-        "team-statistics": "Statistiken"
+        "media": "Neue Uploads",
+        "team-statistics": "Statistiken",
+        "teamOfTheMonth": "Team des Monats"
       },
       "user": {
         "detail": "Benutzerdetails",
