@@ -1,0 +1,70 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{ 'general.menu.club.edit' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['../']">
+            <span class="m-nav__link-text">{{'general.menu.club.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{ 'general.edit' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<form class="form-horizontal" novalidate (ngSubmit)="saveClub()" [formGroup]="form">
+  <div class="m-content">
+    <div class="row">
+
+      <div class="col-xl-10">
+        <club-edit-main [club]="club" [form]="form" (removeClub)="removeClub($event)"></club-edit-main>
+      </div>
+
+      <div class="col-xl-2">
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">{{ 'general.clubs.edit.logoTitle' | translate }}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="m-portlet__body">
+            <div class="text-center" style="margin-bottom: 15px;">
+              <img *ngIf="club.logoUrl" [src]="club.logoUrl" class="img-thumbnail img-fluid"/>
+              <p *ngIf="!club.logoUrl">{{ 'general.clubs.edit.noLogo' | translate}}</p>
+              <media-uploader
+                [objectType]="'club'"
+                [objectId]="club.id"
+                [uploaderOptions]="uploaderOptions"
+                (uploadCompleted)="logoUploadCompleted($event)">
+              </media-uploader>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+
+<!--
+    <router-outlet></router-outlet>
+
+
+    {{ 'general.clubs.edit.honorariesTitle' | translate }}
+    <club-honoraries-list [club]="club"
+                          [members]="memberService.members$ | async
+                            | filterBy: ['clubData.assignedClub'] : club.id
+                            | filterBy: ['clubData.status'] : '2'">
+    </club-honoraries-list>
+-->

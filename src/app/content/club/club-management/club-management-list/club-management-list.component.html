@@ -1,0 +1,86 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{'general.menu.club.positions' | translate}}</h3>
+      </div>
+    </div>
+    <div class="m-portlet__head-tools">
+      <ul class="m-portlet__nav">
+        <li class="m-portlet__nav-item">
+          <form [formGroup]="formGroup">
+            <select formControlName="assignedClub" class="form-control" *ngIf="clubs">
+              <option value="" disabled>{{'general.clubs.edit.chooseClub' | translate}}</option>
+              <option value="">{{'general.pagination.noFilter' | translate}}</option>
+              <option *ngFor="let club of clubs | orderBy: ['title']" [value]="club.id">
+                {{club.title}}
+              </option>
+            </select>
+          </form>
+        </li>
+        <li class="m-portlet__nav-item">
+          <a class="btn btn-info" [routerLink]="['./edit/new']">
+            <i class="m-nav__link-icon fa fa-pencil"></i> {{'general.clubs.edit.management.addPosition' | translate}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="m-portlet__body">
+
+    <div class="row" *ngIf="positions && clubs; else noClubsOrPositionsTemplate">
+
+      <div class="col-md-12" *ngIf="positions.length === 0">
+        <p>{{'general.clubs.edit.management.noResult' | translate}}</p>
+      </div>
+
+      <div class="col-md-12"
+           *ngIf="positions.length > 0 && (positions | filterBy: ['assignedClub'] : filterByClubId).length === 0">
+        <p>{{'general.clubs.edit.management.noFilteredResult' | translate}}</p>
+      </div>
+
+      <div class="col-xl-6"
+           *ngFor="let position of positions | filterBy: ['assignedClub'] : filterByClubId | orderBy: ['assignedClub','title']">
+
+        <h5>{{position.title}}</h5>
+
+        <small *ngIf="position.assignedClub">
+          <a [routerLink]="['clubs/detail', position.assignedClub]">
+            {{(clubs | filterBy: ['id']: position.assignedClub)[0].title}}
+          </a>
+        </small>
+
+        <ul class="pull-right">
+          <li class="m-nav__item">
+            <a class="m-nav__link" [routerLink]="['./edit', position.id]">
+              <i class="m-nav__link-icon fa fa-pencil"></i>
+              <span class="m-nav__link-text">{{'general.edit' | translate}}</span>
+            </a>
+          </li>
+          <li class="m-nav__item">
+            <a class="m-nav__link" href (click)="removeManagement(position)">
+              <i class="m-nav__link-icon fa fa-remove"></i>
+              <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
+            </a>
+          </li>
+        </ul>
+        <p [innerHtml]="sanitizer.bypassSecurityTrustHtml(position.description)"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noClubsOrPositionsTemplate>
+  <div class="row">
+    <div class="col-xl-12" *ngIf="!clubs; else noPositionsTemplate">
+      <app-loading-indicator message="{{'general.clubs.list.loadingClubs' | translate}}"></app-loading-indicator>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noPositionsTemplate>
+  <div class="col-xl-12">
+    <app-loading-indicator message="{{'general.clubs.list.loadingManagement' | translate}}"></app-loading-indicator>
+  </div>
+</ng-template>

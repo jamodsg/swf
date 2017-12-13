@@ -1,0 +1,113 @@
+<ng-sidebar-container>
+  <ng-sidebar
+    [sidebarClass]="'media-center-sidebar'"
+    [(opened)]="_opened"
+    [mode]="_MODES[_modeNum]"
+    [keyClose]="_keyClose"
+    [position]="'right'"
+    [dock]="_dock"
+    [dockedSize]="'50px'"
+    [autoCollapseHeight]="_autoCollapseHeight"
+    [autoCollapseWidth]="_autoCollapseWidth"
+    [closeOnClickOutside]="_closeOnClickOutside"
+    [closeOnClickBackdrop]="_closeOnClickBackdrop"
+    [showBackdrop]="_showBackdrop"
+    [animate]="_animate"
+    [trapFocus]="_trapFocus"
+    [autoFocus]="_autoFocus"
+    [ariaLabel]="'My sidebar'"
+    (onOpenStart)="_onOpenStart()"
+    (onOpened)="_onOpened()"
+    (onCloseStart)="_onCloseStart()"
+    (onClosed)="_onClosed()">
+    <media-uploader-unsplash (_toggleOpened)="_toggleOpened()"></media-uploader-unsplash>
+  </ng-sidebar>
+
+
+  <div ng-sidebar-content>
+    <div class="row">
+      <div class="col-xl-9">
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">{{'general.media.assignedMedia' | translate}}</h3>
+              </div>
+            </div>
+            <div class="m-portlet__head-tools">
+              <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                  <a (click)="_toggleOpened()"
+                     class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+                    <i class="fa fa-image"></i>
+                  </a>
+                  <a (click)="toggleUploader()"
+                     class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+                    <i [ngClass]="showUploader ? 'fa fa-list' : 'fa fa-upload'"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-portlet__body">
+            <media-uploader
+              *ngIf="showUploader; else showGalleryTemplate"
+              [objectId]="objectId"
+              [objectType]="objectType"
+              [uploaderOptions]="uploaderOptions"
+              (uploadCompleted)="uploadCompleted($event)">
+            </media-uploader>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3">
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">{{'general.media.galleries' | translate}}</h3>
+              </div>
+            </div>
+            <div class="m-portlet__head-tools">
+              <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                  <a (click)="toggleGalleryForm()"
+                     class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+                    <i [ngClass]="showGalleryForm ? 'fa fa-list' : 'fa fa-plus'"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="m-portlet__body">
+            <media-gallery-list
+              *ngIf="!showGalleryForm; else galleryFormTemplate"
+              [assignedGalleries]="mediaGalleryService.mediaGalleries$ | async | filterBy: ['assignedItem'] : objectId">
+            </media-gallery-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-sidebar-container>
+
+<ng-template #galleryFormTemplate>
+  <media-gallery-form
+    (toggleGalleryForm)="toggleGalleryForm()"
+    (setMediaGallery)="setMediaGallery($event)"
+    [assignedItem]="objectId"
+    [assignedItemType]="objectType"></media-gallery-form>
+</ng-template>
+
+
+<ng-template #showGalleryTemplate>
+  <media-gallery
+    [assignedItem]="objectId"
+    [items]="mediaItemService.mediaItems$
+          | async
+          | filterBy: ['assignedItem'] : objectId
+          | filterBy: ['assignedItemType'] : objectType"
+  ></media-gallery>
+</ng-template>

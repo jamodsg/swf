@@ -1,0 +1,36 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.club.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/clubs']">
+            <span class="m-nav__link-text">{{'general.menu.club.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.list' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-8">
+      <club-list
+        [clubs]="clubService.getClubs() | async"
+        (remove)="clubService.removeClub($event)"
+        (update)="clubService.updateClub($event.club.id, $event.club)">
+      </club-list>
+    </div>
+    <div class="col-xl-4">
+      <tasks type="club"></tasks>
+      <main-club-info [clubs]="clubService.getClubs() | async"></main-club-info>
+    </div>
+  </div>
+</div>

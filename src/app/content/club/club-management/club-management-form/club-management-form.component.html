@@ -1,0 +1,64 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{'general.menu.club.positions' | translate}}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-portlet__body">
+    <div class="row" *ngIf="clubManagement; else loadingTemplate">
+      <div class="col-md-12">
+        <form [formGroup]="managementGroup" (submit)="saveManagement(managementGroup.value)">
+
+          <div class="row">
+            <div class="col-xl-6">
+              <div class="form-group">
+                <label class="control-label">{{'general.clubs.edit.management.colTitles.position' | translate}}</label>
+                <input class="form-control" formControlName="title"
+                       placeholder="{{'general.clubs.edit.management.colTitles.position' | translate}}">
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">{{'general.clubs.edit.management.colTitles.assignedClub' |
+                  translate}}</label>
+                <select formControlName="assignedClub" class="form-control"
+                        title="{{'general.clubs.edit.management.colTitles.assignedClub' | translate}}">
+                  <option value="" selected disabled>{{ 'general.clubs.edit.management.chooseClub' | translate}}
+                  </option>
+                  <option *ngFor="let club of (clubService.getClubs() | async | orderBy: ['title'])" [value]="club.id">
+                    {{club.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="form-group">
+                <label class="control-label">
+                  {{'general.clubs.edit.management.colTitles.description' | translate}}
+                </label>
+                <textarea formControlName="description" class="form-control"
+                                placeholder="{{'general.clubs.edit.management.colTitles.description' | translate}}">
+                </textarea>
+              </div>
+            </div>
+
+            <div class="col-xl-12 text-right">
+              <input type="submit" class="btn btn-success" [disabled]="!managementGroup.valid"
+                     value="{{ 'general.clubs.edit.management.saveManagement' | translate}}"/>
+              <button type="button" class="btn btn-warning" title="{{ 'general.cancel' | translate}}"
+                      (click)="cancel()">
+                <i class="fa fa-cancel"></i> {{ 'general.cancel' | translate}}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

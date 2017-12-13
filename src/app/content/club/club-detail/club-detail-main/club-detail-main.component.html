@@ -1,0 +1,166 @@
+<div class="m-portlet__body">
+  <ul class="nav nav-pills" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#m_tabs_5_1">{{'general.clubs.edit.mainTitle' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_2">{{'general.clubs.edit.seasonsTitle' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_3">{{'general.clubs.edit.honorariesTitle' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_4">{{'general.clubs.edit.historyTitle' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_5">{{'general.clubs.edit.managementTitle' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_6">{{'general.clubs.edit.mediaTitle' | translate }}</a>
+    </li>
+  </ul>
+  <div class="tab-content" *ngIf="club">
+    <div class="tab-pane active" id="m_tabs_5_1" role="tabpanel">
+      <div class="row">
+        <div class="col-xl-6">
+          <table class="table table-bordered table-striped table-responsive table-hover">
+            <tbody>
+            <tr>
+              <td>{{ 'general.clubs.edit.clubTitle' | translate }}</td>
+              <td>{{ club.title }}</td>
+            </tr>
+            <tr>
+              <td>{{ 'general.description' | translate }}</td>
+              <td>{{club.description}}</td>
+            </tr>
+            <tr>
+              <td>{{ 'general.tables.colTitles.creation' | translate }}</td>
+              <td>
+                <user-avatar *ngIf="club.creation.from && club.creation.from !== 'system'"
+                             [authorId]="club.creation.from"></user-avatar>
+                <span *ngIf="club.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
+                <creation-date *ngIf="club.creation.at" [creation]="club.creation.at"></creation-date>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ 'general.clubs.edit.clubId' | translate }}</td>
+              <td>{{club.fussballde.clubId}}</td>
+            </tr>
+            <tr>
+              <td>{{ 'general.clubs.edit.clubUrl' | translate }}</td>
+              <td><a href="{{club.fussballde.clubUrl}}" target="_blank">{{club.fussballde.clubUrl}}</a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-xl-6">
+          <table class="table table-bordered table-striped table-responsive table-hover">
+            <tr>
+              <td>{{'general.clubs.edit.stadiumTitle' | translate}}</td>
+              <td>
+                <a *ngIf="locations" href [routerLink]="['/locations/detail', club.assignedLocation]">
+                  {{ (locations | filterBy: ['id'] : club.assignedLocation)[0].title }}
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ 'general.clubs.edit.contact' | translate }}</td>
+              <td>{{club.info.contact}}</td>
+            </tr>
+            <tr>
+              <td>{{ 'general.clubs.edit.foundedIn' | translate }}</td>
+              <td>{{club.info.founding}}</td>
+            </tr>
+            <tr>
+              <td>{{ 'general.clubs.edit.clubColours' | translate }}</td>
+              <td>{{club.info.clubColours}}</td>
+            </tr>
+            <tr *ngIf="club.info.website">
+              <td>{{ 'general.clubs.edit.homepage' | translate }}</td>
+              <td><a target="_blank" [href]="'http://' + club.info.website">{{club.info.website}}</a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="m_tabs_5_2" role="tabpanel">
+      <club-assigned-teams
+        [club]="club"
+        [seasons]="seasonService.getSeasons() | async"
+        [teams]="teamService.getTeams() | async">
+      </club-assigned-teams>
+    </div>
+
+    <div class="tab-pane" id="m_tabs_5_3" role="tabpanel">
+      Ehrenmitglieder
+      <ul>
+        <li>Tabelle mit Name des Ehrenmitglieds</li>
+        <li>Verknüpfter Artikel zur Ehrung des Mitglieds</li>
+        <li>Datum der Ehrung</li>
+      </ul>
+      <router-outlet name="honorary"></router-outlet>
+    </div>
+
+    <div class="tab-pane" id="m_tabs_5_4" role="tabpanel">
+      <div class="row">
+        <div class="col-xl-6">
+          <h3>{{'general.clubs.edit.history' | translate }}</h3>
+          <p *ngIf="club.history !== ''" [innerHtml]="sanitizer.bypassSecurityTrustHtml(club.history)"></p>
+          <div class="alert alert-warning" *ngIf="club.history === ''">
+            <strong>{{ 'general.warning' | translate }}</strong> {{'general.clubs.edit.noHistory' | translate}}
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <h3>{{'general.clubs.edit.timeLineTitle' | translate }} Timeline der Erfolge des Vereins</h3>
+          <!--<club-timeline-list [club]="club"></club-timeline-list>-->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tab-pane" id="m_tabs_5_5" role="tabpanel">
+      <div class="row">
+        <div class="col-xl-6">
+          <img class="img img-fluid" [src]="club.management.photoUrl"
+               *ngIf="club.management.photoUrl; else noPhotoTemplate"/>
+          <p style="margin: 15px 0;" class="text-center" [innerHTML]="club.management.photoDescription"></p>
+        </div>
+        <div class="col-xl-6">
+          <p>
+            Liste aller bisherigen Vorstandsmitglieder:<br/>
+            Bsp:
+          </p>
+          <ul>
+            <li>1. Vorsitzender:
+              <ul>
+                <li>1920 - 1924 Werner Jung</li>
+                <li>1924 - 1946 Bernd Walter</li>
+                <li>....</li>
+                <li>2016 - heute Volker Morsch</li>
+              </ul>
+            </li>
+            <li>2. Vorsitzender
+              <ul>
+                <li>....</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <router-outlet name="management"></router-outlet>
+    </div>
+
+    <div class="tab-pane" id="m_tabs_5_6" role="tabpanel">
+      Media
+    </div>
+
+  </div>
+</div>
+
+<ng-template #noPhotoTemplate>
+  <div class="alert alert-warning">
+    <strong>{{ 'general.warning' | translate }}</strong> {{'general.clubs.edit.management.noPhotoFound' | translate}}
+  </div>
+</ng-template>
