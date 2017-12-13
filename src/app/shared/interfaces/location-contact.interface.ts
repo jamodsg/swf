@@ -1,6 +1,5 @@
 import { IAddress } from './address.interface';
 import { IContact } from './contact.interface';
-import { IMember } from './member.interface';
 
 export interface ILocationContact {
 

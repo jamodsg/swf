@@ -1,8 +1,8 @@
-import { ICreation } from './creation.interface';
-import { IAddress } from './address.interface';
-import { ITimeLineEvent } from './time-line-event.interface';
 import { IClubManagement } from './club-management.interface';
 import { IClubHonorary } from './club-honorary.interface';
+import { IAddress } from '../address.interface';
+import { ITimeLineEvent } from '../time-line-event.interface';
+import { ICreation } from '../creation.interface';
 
 export interface IClub {
   id?: string;
@@ -25,7 +25,7 @@ export interface IClub {
   info: {
     founding?: string;
     clubColours?: string;
-    contact?: string;
+    assignedContact?: string;
     website?: string;
   };
 

@@ -1,5 +1,5 @@
-import { IMember } from './member.interface';
-import { IArticle } from './article.interface';
+import { IMember } from '../member/member.interface';
+import { IArticle } from '../article.interface';
 
 export interface IClubHonorary {
   id?: string;

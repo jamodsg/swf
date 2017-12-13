@@ -1,6 +1,6 @@
 import { ICreation } from './creation.interface';
 import { IArticle } from './article.interface';
-import { IMediaItem } from './media-item.interface';
+import { IMediaItem } from './media/media-item.interface';
 
 export interface ITimeLineEvent {
   id?: string;

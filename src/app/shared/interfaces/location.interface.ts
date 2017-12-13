@@ -1,12 +1,12 @@
 import { ICreation } from './creation.interface';
 import { ICategory } from './category.interface';
 import { ILocationContact } from './location-contact.interface';
-import { IMediaGallery } from './media-gallery.interface';
+import { IMediaGallery } from './media/media-gallery.interface';
 import { IAddress } from './address.interface';
 
 export interface ILocation {
   id?: string;
-  isImported: false;
+  isImported: boolean;
   title: string;
   text: string;
   assignedCategory?: string | ICategory;

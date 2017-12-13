@@ -1,4 +1,4 @@
-import { ICreation } from './creation.interface';
+import { ICreation } from '../creation.interface';
 
 export interface IMediaGallery {
   id?: string;

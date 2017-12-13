@@ -5,8 +5,8 @@ import { ICategory } from './category.interface';
 import { ITag } from './tag.interface';
 import { ISeason } from './season.interface';
 import { ICreation } from './creation.interface';
-import { IModification } from './modification.interface';
-import { IPublication } from './publication.interface';
+// import { IModification } from './modification.interface';
+// import { IPublication } from './publication.interface';
 
 export interface IArticle {
   id?: string;
@@ -22,8 +22,8 @@ export interface IArticle {
   articleDate?: Date;
 
   creation: ICreation;
-  modification?: IModification[];
-  publication?: IPublication;
+  // modification?: IModification[];
+  // publication?: IPublication;
 
   assignedCategories?: ICategory[];
   assignedTeams?: ITeam[];
