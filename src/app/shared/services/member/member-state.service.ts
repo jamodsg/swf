@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMemberState } from '../../interfaces/member-state.interface';
+import { IMemberState } from '../../interfaces/member/member-state.interface';
 
 @Injectable()
 export class MemberStateService {

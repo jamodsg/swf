@@ -1,14 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ILocation } from '../../interfaces/location.interface';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AuthService } from '../auth/auth.service';
-import * as firebase from 'firebase';
-import { IAddress } from '../../interfaces/address.interface';
-import { CategoryService } from '../category/category.service';
 
 @Injectable()
 export class LocationService {
@@ -18,7 +12,6 @@ export class LocationService {
   locations$: Observable<ILocation[]>;
 
   constructor(private afs: AngularFirestore,
-              private categoryService: CategoryService,
               private authService: AuthService) {
     this.collectionRef = this.afs.collection<ILocation>(this.path);
     this.locations$ = this.collectionRef.valueChanges();
@@ -51,19 +44,18 @@ export class LocationService {
     }).valueChanges();
   } */
 
-  setNewLocation() {
-    const address: IAddress = {};
-    const data: ILocation = {
+  setNewLocation(): Observable<ILocation> {
+    return Observable.of({
       id: this.afs.createId(),
       isImported: false,
       assignedCategory: '',
       title: '',
       text: ' ',
-      address: address,
+      address: {},
+      assignedImages: [],
+      assignedMediaGalleries: [],
       creation: this.authService.getCreation()
-    };
-    this.createLocation(data).then();
-    return data;
+    });
   }
 
 }

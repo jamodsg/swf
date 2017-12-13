@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { IClub } from '../../interfaces/club.interface';
+import { IClub } from '../../interfaces/club/club.interface';
 import {
   AngularFirestore,
   AngularFirestoreCollection
@@ -37,8 +37,8 @@ export class ClubService {
     return this.afs.doc<IClub>(this.path + '/' + clubId).valueChanges();
   }
 
-  setNewClub(): IClub {
-    return {
+  setNewClub(): Observable<IClub> {
+    return Observable.of({
       title: '',
       description: '',
       info: { },
@@ -52,6 +52,6 @@ export class ClubService {
         positions: [],
         assignedManagementEvents: []
       }
-    };
+    });
   }
 }
