@@ -230,6 +230,7 @@
         "contact": "Ansprechpartner",
         "description": "Kurzinfo zum Verein",
         "detailTitle": "Weitere Informationen",
+        "editClub": "Verein editieren",
         "files": {
           "createFile": "Datei hinzufügen",
           "description": "Beschreibung",
