@@ -1,70 +1,260 @@
-<div class="m-subheader">
-  <div class="d-flex align-items-center">
-    <div class="mr-auto">
-      <h3 class="m-subheader__title">{{ 'general.menu.club.edit' | translate}}</h3>
-      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-        <li class="m-nav__item m-nav__item--home">
-          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item">
-          <a class="m-nav__link" [routerLink]="['../']">
-            <span class="m-nav__link-text">{{'general.menu.club.main' | translate}}</span>
-          </a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item">{{ 'general.edit' | translate}}</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<form novalidate (ngSubmit)="saveClub()" [formGroup]="form">
+  <div fxLayout="row" fxLayoutWrap="wrap">
 
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+      <div class="mat-card-top" *ngIf="club; else loadingTemplate">
+        <mat-card>
+          <mat-card-title>
+            <mat-icon>mode_edit</mat-icon>
+            {{ club.id ? ('general.menu.club.edit' | translate) : 'general.menu.club.create' | translate }}
+          </mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
 
-<form class="form-horizontal" novalidate (ngSubmit)="saveClub()" [formGroup]="form">
-  <div class="m-content">
-    <div class="row">
+          <mat-card-content>
 
-      <div class="col-xl-10">
-        <club-edit-main [club]="club" [form]="form" (removeClub)="removeClub($event)"></club-edit-main>
-      </div>
+            <mat-tab-group class="demo-tab-group" [dynamicHeight]="true">
+              <mat-tab label="{{'general.clubs.edit.mainTitle' | translate}}">
+                <div fxLayout="row" fxLayoutWrap="wrap">
 
-      <div class="col-xl-2">
-        <div class="m-portlet">
-          <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-              <div class="m-portlet__head-title">
-                <h3 class="m-portlet__head-text">{{ 'general.clubs.edit.logoTitle' | translate }}</h3>
-              </div>
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <input matInput
+                             placeholder="{{'general.clubs.edit.title' | translate}}"
+                             formControlName="title"/>
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <mat-select placeholder="{{'general.clubs.edit.location' | translate}}"
+                                  formControlName="assignedLocation">
+                        <mat-option *ngFor="let location of locations$ | async | orderBy: ['title']"
+                                    [value]="location.id">{{location.title}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint align="end">{{'general.clubs.edit.chooseLocation' | translate}}</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="info">
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <input matInput
+                             placeholder="{{'general.clubs.edit.foundedIn' | translate}}"
+                             formControlName="founding"/>
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <input matInput
+                             placeholder="{{'general.clubs.edit.clubColours' | translate}}"
+                             formControlName="clubColours"/>
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <input matInput
+                             placeholder="{{'general.clubs.edit.homepage' | translate}}"
+                             formControlName="website"/>
+                      <!--<mat-hint align="end" *ngIf="isUrl(form.controls['website'].value)">
+                        <a [href[="form.controls['website'].value">
+                          {{'general.clubs.edit.visitHomepage' | translate}}
+                        </a>
+                      </mat-hint>-->
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <mat-select placeholder="{{'general.clubs.edit.contact' | translate}}"
+                                  formControlName="assignedContact">
+                        <mat-option *ngFor="let member of members$ | async | orderBy: ['lastName', 'firstName']"
+                                    [value]="member.id">
+                          {{member.lastName}} {{member.firstName}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint align="end">{{'general.clubs.edit.contact' | translate}}</mat-hint>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="fussballde">
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <input matInput
+                             placeholder="{{'general.clubs.edit.fussballDeId' | translate}}"
+                             formControlName="clubId"/>
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                      <input matInput
+                             placeholder="{{'general.clubs.edit.fussballDeUrl' | translate}}"
+                             formControlName="clubUrl"/>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
+                    <label>{{'general.clubs.edit.description' | translate}}</label>
+                    <quill-editor
+                      [style]="{height: '150px'}"
+                      formControlName="description">
+                    </quill-editor>
+                  </div>
+                </div>
+
+              </mat-tab>
+
+              <mat-tab label="{{ 'general.clubs.edit.historyTitle' | translate }}">
+                <label>{{'general.clubs.edit.history' | translate}}</label>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="60" fxFlex.gt-xs="100" fxFlex="100">
+                    <quill-editor
+                      [style]="{height: '400px'}"
+                      formControlName="history">
+                    </quill-editor>
+                  </div>
+                  <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="100">
+                    TimeLine
+                    <!-- <time-line
+                  [item]="club"
+                  [itemType]="'club'"
+                  [timeLineEvents]="club.assignedClubEvents"
+                  (removeTimeLineEvent)="removeClubTimeLineEvent($event)"
+                ></time-line>-->
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}" formGroupName="management">
+                <img *ngIf="club.management && club.management.photoUrl" [src]="club.management.photoUrl"/>
+                <!--<media-uploader
+                  [objectId]="club.id"
+                  [objectType]="'clubManagement'"
+                  [uploaderOptions]="uploaderOptions"
+                  (uploadCompleted)="uploadCompleted($event)">
+                </media-uploader>
+                <br/>-->
+
+                <quill-editor
+                  [style]="{height: '400px'}"
+                  formControlName="photoDescription">
+                </quill-editor>
+
+              </mat-tab>
+
+              <mat-tab label="{{ 'general.clubs.edit.stadiumTitle' | translate }}">
+                Heimspielstätte und Vereinsheim
+              </mat-tab>
+
+              <mat-tab label="{{ 'general.clubs.edit.mediaTitle' | translate }}">
+                Dateien
+              </mat-tab>
+
+              <mat-tab
+                label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    <creation-form
+                      [form]="form">
+                    </creation-form>
+                  </div>
+                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                    Publication
+                    <!--<publication-form [item]="club"></publication-form>-->
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="{{ 'general.clubs.edit.honorariesTitle' | translate}}">
+                Ehrenmitglieder
+              </mat-tab>
+
+            </mat-tab-group>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
+                {{ club.id ? ('general.clubs.edit.editClub' | translate) : 'general.clubs.edit.saveClub' | translate}}
+              </button>
+              <a mat-raised-button color="accent" (click)="cancel()">
+                {{'general.cancel' | translate}}
+              </a>
             </div>
-          </div>
-          <div class="m-portlet__body">
-            <div class="text-center" style="margin-bottom: 15px;">
-              <img *ngIf="club.logoUrl" [src]="club.logoUrl" class="img-thumbnail img-fluid"/>
-              <p *ngIf="!club.logoUrl">{{ 'general.clubs.edit.noLogo' | translate}}</p>
-              <media-uploader
-                [objectType]="'club'"
-                [objectId]="club.id"
-                [uploaderOptions]="uploaderOptions"
-                (uploadCompleted)="logoUploadCompleted($event)">
-              </media-uploader>
-            </div>
-          </div>
-        </div>
+          </mat-card-actions>
+        </mat-card>
       </div>
-
     </div>
   </div>
 </form>
 
+<!--
+
+<positions
+  [item]="club"
+  [itemType]="'club-management'"
+  [positions]="club.management.positions"
+  [showMembersFromList]="true"
+  [showPositionsFromList]="true"
+  (removePosition)="removeManagementPosition($event)">
+</positions>
+</div>
+<div class="col-xl-12">
+<time-line
+  [item]="club"
+  [itemType]="'club-management'"
+  [timeLineEvents]="club.management.assignedManagementEvents"
+  (removeTimeLineEvent)="removeManagementTimeLineEvent($event)"
+></time-line>
+</div>
+</div>
+</div>
+
+<div class="col-xl-2">
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{ 'general.clubs.edit.logoTitle' | translate }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="m-portlet__body">
+    <div class="text-center" style="margin-bottom: 15px;">
+      <img *ngIf="club.logoUrl" [src]="club.logoUrl" class="img-thumbnail img-fluid"/>
+      <p *ngIf="!club.logoUrl">{{ 'general.clubs.edit.noLogo' | translate}}</p>
+      <!--<media-uploader
+        [objectType]="'club'"
+        [objectId]="club.id"
+        [uploaderOptions]="uploaderOptions"
+        (uploadCompleted)="logoUploadCompleted($event)">
+      </media-uploader>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+</form>
+
 
 <!--
-    <router-outlet></router-outlet>
+<router-outlet></router-outlet>
 
 
-    {{ 'general.clubs.edit.honorariesTitle' | translate }}
-    <club-honoraries-list [club]="club"
-                          [members]="memberService.members$ | async
-                            | filterBy: ['clubData.assignedClub'] : club.id
-                            | filterBy: ['clubData.status'] : '2'">
-    </club-honoraries-list>
+{{ 'general.clubs.edit.honorariesTitle' | translate }}
+<club-honoraries-list [club]="club"
+                  [members]="memberService.members$ | async
+                    | filterBy: ['clubData.assignedClub'] : club.id
+                    | filterBy: ['clubData.status'] : '2'">
+</club-honoraries-list>
 -->

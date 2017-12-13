@@ -1,33 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClubService } from '../../../../../shared/services/club/club.service';
-import { FileUploaderOptions } from '../../../../../shared/interfaces/file/file-uploader-options.interface';
-import { FileItem } from '../../../../../shared/interfaces/file/file-item.interface';
-import { IClub } from '../../../../../shared/interfaces/club.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IClub } from '../../../shared/interfaces/club/club.interface';
+import { FileUploaderOptions } from 'ng2-file-upload';
+import { ClubService } from '../../../shared/services/club/club.service';
+import Quill from 'quill';
+import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
+import { LocationService } from '../../../shared/services/location/location.service';
+import { Observable } from 'rxjs/Observable';
+import { ILocation } from '../../../shared/interfaces/location.interface';
+import { IMember } from '../../../shared/interfaces/member/member.interface';
+import { MemberService } from '../../../shared/services/member/member.service';
+
+const parchment = Quill.import('parchment');
+const block = parchment.query('block');
+block.tagName = 'DIV';
+Quill.register(block, true);
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  selector: 'club-edit',
   templateUrl: 'club-edit.component.html'
 })
 export class ClubEditComponent implements OnInit {
 
   public club: IClub;
   public form: FormGroup;
+  public locations$: Observable<ILocation[]>;
+  public members$: Observable<IMember[]>;
+
+  @ViewChild('description') description: QuillEditorComponent;
 
   public uploaderOptions: FileUploaderOptions = {
-    uploadFolder: 'club',
+    // uploadFolder: 'club',
     autoUpload: true,
-    multipleUpload: false,
-    showQueue: false,
-    showDropZone: false,
+    // multipleUpload: false,
+    // showQueue: false,
+    // showDropZone: false,
     allowedFileType: ['image']
   };
 
   constructor(public clubService: ClubService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router) {
+              private locationService: LocationService,
+              private memberService: MemberService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router) {
+    this.locations$ = locationService.locations$;
+    this.members$ = memberService.members$;
   }
 
   ngOnInit() {
@@ -37,39 +56,28 @@ export class ClubEditComponent implements OnInit {
       title: [this.club.title, [Validators.required, Validators.minLength(5)]],
       description: this.club.description,
       assignedLocation: this.club.assignedLocation,
-      isMainClub: this.club.isMainClub,
+      creation: this.initCreation(),
       management: this.initManagement(),
       history: this.club.history,
       info: this.initInfo(),
       fussballde: this.initFussballDe()
     });
 
-    this.form.valueChanges.subscribe((changes: IClub) => {
-      this.club.title = changes.title;
-      this.club.assignedLocation = changes.assignedLocation;
-      this.club.description = changes.description;
-      this.club.management.photoDescription = changes.management.photoDescription;
-      this.club.isMainClub = changes.isMainClub;
-      this.club.history = changes.history;
-      this.club.fussballde = {
-        clubId: changes.fussballde.clubId,
-        clubUrl: changes.fussballde.clubUrl
-      };
-      this.club.info = {
-        contact: changes.info.contact,
-        founding: changes.info.founding,
-        clubColours: changes.info.clubColours,
-        website: changes.info.website
-      };
-    });
   }
 
   initInfo() {
     return this.fb.group({
-      contact: this.club.info.contact,
-      founding: this.club.info.founding,
-      clubColours: this.club.info.clubColours,
-      website: this.club.info.website
+      assignedContact: this.club.info && this.club.info.assignedContact ? this.club.info.assignedContact : '',
+      founding: this.club.info && this.club.info.founding ? this.club.info.founding : '',
+      clubColours: this.club.info && this.club.info.clubColours ? this.club.info.clubColours : '',
+      website: this.club.info && this.club.info.website ? this.club.info.website : '',
+    });
+  }
+
+  initCreation() {
+    return this.fb.group({
+      at: this.club.creation.at,
+      from: this.club.creation.from
     });
   }
 
@@ -91,23 +99,32 @@ export class ClubEditComponent implements OnInit {
   saveClub() {
     let action;
     if (this.club.id) {
-      action = this.clubService.updateClub(this.club.id, this.club);
+      action = this.clubService.updateClub(this.club.id, this.form.getRawValue());
     } else {
       action = this.clubService.createClub(this.club);
     }
     action.then(
-      () => this.router.navigate(['/clubs']),
+      () => this.redirectToList(),
       (error: any) => console.log(error)
     );
   }
 
-  logoUploadCompleted(fileItem: FileItem) {
+  /* logoUploadCompleted(fileItem: FileItem) {
     this.club.logoUrl = fileItem.url;
     // this.clubService.updateClub(this.club.id, this.club).then();
+  } */
+
+  cancel() {
+    this.redirectToList();
   }
 
-  removeClub(club: IClub) {
-    console.log(club);
+  redirectToList() {
+    this.router.navigate(['/clubs']).then();
+  }
+
+  isUrl(url: string) {
+    console.log(url);
+    return true;
   }
 
 }

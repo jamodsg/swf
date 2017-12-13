@@ -1,141 +1,22 @@
-<div class="row">
+<div fxLayout="row" fxLayoutWrap="wrap">
 
-  <div class="col-xl-12">
-
-    <div class="m-portlet">
-      <div class="m-portlet__head">
-        <div class="m-portlet__head-caption">
-          <div class="m-portlet__head-title">
-            <h3 class="m-portlet__head-text">{{ 'general.clubs.list.title' | translate}}</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="m-portlet__body">
-
-        <div class="m-section" *ngIf="clubs">
-          <div class="m-section__content">
-
-            <!-- BEGIN -->
-            <div class="row align-items-center">
-
-              <div class="col-xl-8 order-2 order-xl-1">
-                <div class="form-group m-form__group row align-items-center">
-
-                  <!-- itemsPerPage -->
-                  <div class="col-xl-4">
-                    <table-items-per-page
-                      [items]="clubs.length"
-                      [itemType]="'club'"
-                      [config]="config"
-                      (setItemsPerPage)="setItemsPerPage($event)">
-                    </table-items-per-page>
-                  </div>
-
-                  <!-- Filter -->
-                  <!--<div class="col-xl-4">
-                    <table-item-filter
-                      [filterOptions]="categories | filterBy: ['assignedCategoryType.id']: categoryTypes[0].id | orderBy: 'title'"
-                      [filterOption]="'title'"
-                      [filterValue]="'id'"
-                      [itemType]="'club'"
-                      [currentFilter]="currentFilter"
-                      (setFilter)="setFilter($event)">
-                    </table-item-filter>
-                  </div>-->
-
-                  <!-- Suche  -->
-                  <div class="col-xl-6">
-                    <table-search-input (searchFor)="searchFor($event)"></table-search-input>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                <a [routerLink]="['edit', 'new']" title="{{ 'general.clubs.list.createClub' | translate}}"
-                   class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
-                  <span><i class="icon-plus"></i> {{ 'general.clubs.list.createClub' | translate}}</span>
-                </a>
-                <div class="m-separator m-separator--dashed d-xl-none"></div>
-              </div>
-            </div>
-
-            <div class="m-datatable m-datatable--default">
-
-              <table class="table table-striped table-bordered table-hover">
-                <thead>
-                <tr role="row" class="heading">
-                  <th scope="col" class="text-left">
-                    <a href (click)="toggleOrdering('title')">
-                      {{'general.clubs.list.colTitles.name' | translate}}
-                      <span *ngIf="sortOrder === '-title'">&uarr;</span>
-                      <span *ngIf="sortOrder === 'title'">&darr;</span>
-                    </a>
-                  </th>
-                  <!--<th scope="col" translate>{{'general.clubs.list.colTitles.management'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.activeMen'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.inactiveMen'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.honoraries'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.youthMen'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.youthWomen'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.activeWomen'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.inactiveWomen'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.activeAH'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.inactiveAH'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.ahHonoraries'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.logo'}}</th>
-                  <th scope="col" translate>{{'general.clubs.list.colTitles.management'}}</th>-->
-                  <th scope="col" class="text-left">
-                    <a href (click)="toggleOrdering('title')">
-                      {{'general.clubs.list.colTitles.teamsInCurrentSeason' | translate}}
-                      <span *ngIf="sortOrder === '-title'">&uarr;</span>
-                      <span *ngIf="sortOrder === 'title'">&darr;</span>
-                    </a>
-                  </th>
-                  <th scope="col" translate>{{'general.tables.colTitles.actions'}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr club-item [club]="club" *ngFor="let club of clubs | filterBy: filterFields : searchFor | paginate: config | orderBy: sortOrder">
-                </tr>
-                <tr *ngIf="!clubs">
-                  <td colspan="5"><app-loading-indicator></app-loading-indicator></td>
-                </tr>
-                <tr *ngIf="clubs && clubs.length === 0">
-                  <td colspan="5"><p>{{'general.clubs.list.noResult' | translate }}</p></td>
-                </tr>
-                <tr *ngIf="clubs && clubs.length > 0 && ( clubs
-                    | filterBy: filterFields : searchString).length === 0">
-                  <td colspan="5">{{'general.clubs.list.noMatchingResult' | translate }}</td>
-                </tr>
-                </tbody>
-              </table>
-
-              <table-navigation
-                class="m-datatable__pager m-datatable--paging-loaded clearfix" *ngIf="clubs.length > 0"
-                pagination-template
-                #p="paginationApi"
-                [id]="config.id"
-                (pageChange)="setPage($event)"
-                [p]="p"
-                [currentFilter]="currentFilterValue"
-                [searchString]="searchString"
-                [config]="config"
-                [items]="clubs"
-                [filteredItems]="clubs | filterBy: filterFields : searchString">
-              </table-navigation>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
+  <div fxFlex.gt-xs="33" fxFlex="100" *ngFor="let club of clubs$ as club">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="club-header-image" [ngStyle]="club.logoUrl ? ' background-image: url(' + club.logoUrl + ')' : ''"></div>
+        <mat-card-title>{{club.title}}</mat-card-title>
+        <mat-card-subtitle>
+          <a *ngIf="club.fussballde.clubUrl" [href]="club.fussballde.clubUrl">Fussball.de</a>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+      <mat-card-content [innerHtml]="club.description"></mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['/clubs/detail', club.id]">VIEW</button>
+        <button mat-raised-button color="accent" [routerLink]="['/clubs/edit', club.id]">EDIT</button>
+        <button mat-raised-button color="warn" (click)="remove.emit(club)">DELETE</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
-</div>
 
-<ng-template #loadingTemplate>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>
+</div>

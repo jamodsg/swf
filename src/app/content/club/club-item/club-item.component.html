@@ -5,7 +5,7 @@
 </td>
 <td><!--{{ (teams | filterBy: ['assignedClub']: club.id).length }}-->ToDo</td>
 <td>
-  <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
+  <!--detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
                [showText]="false" type="clubs" [object]="club"></detail-link>
   <edit-link [cssClass]="'btn btn-circle btn-icon-only btn-warning btn-raised'" [showIcon]="true"
              [showText]="false" type="clubs" [object]="club"></edit-link>
@@ -16,5 +16,5 @@
   <button class="btn btn-circle btn-icon-only btn-raised" title="{{'general.clubs.edit.locationTitle' | translate}}"
           [routerLink]="['./stadium', club.id]">
     <i class="fa fa-home"></i>
-  </button>
+  </button>-->
 </td>

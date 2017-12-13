@@ -1,14 +1,10 @@
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { Routes } from '@angular/router';
 import { ClubsComponent } from './clubs/clubs.component';
-import { ModuleWithProviders } from '@angular/core';
 import { ClubResolver } from './club.resolver';
 import { ClubEditComponent } from './club-edit/club-edit.component';
 import { ClubDetailComponent } from './club-detail/club-detail.component';
 
-export const routes: Routes = [
+export const clubRoutes: Routes = [
   {
     path: '',
     component: ClubsComponent,
@@ -19,16 +15,14 @@ export const routes: Routes = [
     component: ClubEditComponent,
     resolve: {
       club: ClubResolver
-    },
-    pathMatch: 'full'
+    }
   },
   {
     path: 'detail/:clubId',
     component: ClubDetailComponent,
     resolve: {
       club: ClubResolver
-    },
-    pathMatch: 'full',
+    }/* ,
     children: [
       {
         path: 'honorary',
@@ -39,8 +33,8 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'honorary'
       }
-    ]
-  },
+    ] */
+  }/* ,
   {
     path: 'positions',
     loadChildren: './club-management/club-management.module#ClubManagementModule'
@@ -69,5 +63,3 @@ export const routes: Routes = [
     redirectTo: ''
   }
 ];
-
-export const clubRoutingModule: ModuleWithProviders = RouterModule.forChild(routes);

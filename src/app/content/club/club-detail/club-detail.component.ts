@@ -1,24 +1,12 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router
-} from '@angular/router';
-import { SeasonService } from '../../../../../shared/services/season/season.service';
-import { TeamService } from '../../../../../shared/services/team/team.service';
-import { MemberService } from '../../../../../shared/services/member/member.service';
-import { IClub } from '../../../../../shared/interfaces/club.interface';
-import { ClubService } from '../../../../../shared/services/club/club.service';
+import { Component } from '@angular/core';
 
 @Component({
-  // selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  selector: 'club-detail',
   templateUrl: 'club-detail.component.html'
 })
 
-export class ClubDetailComponent implements OnInit {
-
+export class ClubDetailComponent {
+  /*
   public club: IClub;
 
   constructor(public route: ActivatedRoute,
@@ -39,5 +27,5 @@ export class ClubDetailComponent implements OnInit {
       (error: any) => console.log(error)
     );
   }
-
+  */
 }
