@@ -45,12 +45,12 @@ export class ClubService {
       creation: this.authService.getCreation(),
       fussballde: { },
       assignedFiles: [],
-      assignedClubEvents: [],
+      timeLine: [],
       assignedLocation: null,
       honoraries: [],
       management: {
         positions: [],
-        assignedManagementEvents: []
+        timeLine: []
       }
     });
   }

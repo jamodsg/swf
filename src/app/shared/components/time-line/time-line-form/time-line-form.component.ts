@@ -1,17 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { ITimeLineEvent } from '../../../interfaces/time-line-event.interface';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ClubService } from '../../../services/club/club.service';
 
@@ -21,28 +10,33 @@ import { ClubService } from '../../../services/club/club.service';
 })
 export class TimeLineFormComponent implements OnInit {
 
-  @Input() item: any;
+  @Input() form: FormGroup;
+  @Input() groupName: string;
+
+  @Output() showForm: EventEmitter<boolean> = new EventEmitter(false);
+
+  /* @Input() item: any;
   @Input() itemType: string;
   @Input() showForm: boolean;
   @Output() toggleForm = new EventEmitter(false);
 
   public timeLineGroup: FormGroup;
-  public timeLineEvent: ITimeLineEvent;
+  public timeLineEvent: ITimeLineEvent; */
 
   public colors = ['primary', 'warning', 'danger', 'success', 'info', 'none'];
-  public config = {
-    // uiColor: '#99000'
-  };
+
 
   constructor(private fb: FormBuilder,
-    private afs: AngularFirestore,
-    private authService: AuthService,
-    private clubService: ClubService,
-    /* public articleService: ArticleService */) {
+              private afs: AngularFirestore,
+              private authService: AuthService,
+              private clubService: ClubService,
+              /* public articleService: ArticleService */) {
   }
+
 
   ngOnInit() {
 
+    /*
     if (this.itemType === 'club') {
       this.timeLineGroup = this.fb.group({
         title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
@@ -93,9 +87,15 @@ export class TimeLineFormComponent implements OnInit {
       });
 
     }
+    */
   }
 
+  cancel() {
+    this.form.controls[this.groupName].reset();
+    this.showForm.emit(false);
+  }
 
+  /*
   saveTimeLineEvent() {
     let action: any;
 
@@ -120,5 +120,5 @@ export class TimeLineFormComponent implements OnInit {
       (error: any) => console.log(error)
     );
   }
-
+  */
 }

@@ -1,99 +1,83 @@
-<form novalidate (submit)="saveTimeLineEvent()" [formGroup]="timeLineGroup">
+<div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
 
-  <div class="row">
-    <div class="col-md-6" *ngIf="itemType === 'club'">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.title' | translate}}</label>
-        <input formControlName="title" class="form-control"
-               placeholder="{{ 'general.clubs.timeLine.title' | translate}}">
-      </div>
-    </div>
-    <div class="col-md-6" *ngIf="itemType === 'club'">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.subTitle' | translate}}</label>
-        <input formControlName="subTitle" class="form-control"
-               placeholder="{{ 'general.clubs.timeLine.subTitle' | translate}}">
-      </div>
-    </div>
+  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" formArrayName="timeLine">
+    <div class="mat-card-top" *ngFor="let control of form.get(groupName).controls; let i = index">
+      <mat-card>
+        <mat-card-content [formGroupName]="i">
+          <div fxLayout="row" fxLayoutWrap="wrap">
 
-    <div class="col-md-6" *ngIf="itemType === 'club-management'">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.name' | translate}}</label>
-        <input formControlName="title" class="form-control"
-               placeholder="{{ 'general.clubs.timeLine.name' | translate}}">
-      </div>
-    </div>
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="{{ 'general.timeLine.title' | translate}}" formControlName="title"/>
+              </mat-form-field>
+            </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.date' | translate}}</label>
-        <input formControlName="date" class="form-control" placeholder="{{ 'general.clubs.timeLine.date' | translate}}"
-               type="date">
-      </div>
-    </div>
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="{{ 'general.timeLine.subTitle' | translate}}" formControlName="subTitle"/>
+              </mat-form-field>
+            </div>
 
-    <div class="col-md-6" *ngIf="itemType === 'club-management'">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.till' | translate}}</label>
-        <input formControlName="till" class="form-control" placeholder="{{ 'general.clubs.timeLine.till' | translate}}"
-               type="date">
-      </div>
-    </div>
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="{{ 'general.timeLine.startDate' | translate}}"
+                       formControlName="startDate"/>
+              </mat-form-field>
+            </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.icon' | translate}}</label>
-        <input formControlName="icon" class="form-control" placeholder="{{ 'general.clubs.timeLine.icon' | translate}}">
-      </div>
-    </div>
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="{{ 'general.timeLine.endDate' | translate}}" formControlName="endDate"/>
+              </mat-form-field>
+            </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.assignedArticle' | translate}}</label>
-        <select formControlName="assignedArticle" class="form-control"
-                title="{{ 'general.clubs.timeLine.assignedArticle' | translate}}">
-          <option value="" selected>{{ 'general.clubs.timeLine.chooseArticle' | translate}}</option>
-          <option *ngFor="let article of articleService.getArticles() | async | orderBy: ['-articleDate']"
-                  [value]="article.id">{{article.title}}
-          </option>
-        </select>
-      </div>
-    </div>
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="{{ 'general.timeLine.icon' | translate}}" formControlName="icon"/>
+              </mat-form-field>
+            </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.color' | translate}}</label>
-        <select formControlName="color" class="form-control" title="{{ 'general.clubs.timeLine.color' | translate}}">
-          <option value="" selected>{{ 'general.clubs.timeLine.chooseColor' | translate}}</option>
-          <option *ngFor="let color of colors"
-                  [value]="color">{{color | translate}}
-          </option>
-        </select>
-      </div>
-    </div>
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field>
+                <mat-select placeholder="{{ 'general.timeLine.assignedArticle' | translate}}"
+                            formControlName="assignedArticle">
+                  <!--<mat-option *ngFor="let article of articles$ | async | orderBy: ['title']"
+                              [value]="article.id">{{article.title}}
+                  </mat-option>-->
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-    <div class="col-xl-12" *ngIf="itemType === 'club'">
-      <div class="form-group">
-        <label class="control-label">{{ 'general.clubs.timeLine.text' | translate}}</label>
-        <!--<ckeditor
-          formControlName="text"
-          [config]="config"
-          [readonly]="false"
-          debounce="500">
-        </ckeditor>-->
-      </div>
-    </div>
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field>
+                <mat-select placeholder="{{ 'general.timeLine.color' | translate}}"
+                            formControlName="color">
+                  <mat-option *ngFor="let color of colors" [value]="color">{{color | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-    <div class="col-xl-12 text-right">
-      <button class="btn btn-success" [title]="('general.clubs.timeLine.saveTimeLine' | translate)"
-              [disabled]="!timeLineGroup.valid">
-        <i [class]="'fa fa-save'"></i>
-        {{ ('general.clubs.timeLine.saveTimeLine' | translate) }}
-      </button>
-
-      <button class="btn btn-warning" (click)="toggleForm.emit()" title="{{ 'general.cancel' | translate}}">
-        <i class="fa fa-cancel"></i> {{ 'general.cancel' | translate}}
-      </button>
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
+              <label>{{ 'general.timeLine.text' | translate}}</label>
+              <quill-editor
+                [style]="{height: '150px'}"
+                formControlName="text">
+              </quill-editor>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="button-row">
+            <!--<button mat-raised-button color="primary" type="button" (click)="saveTimeLineEvent()">
+              {{ club.id ? ('general.clubs.edit.editClub' | translate) : 'general.clubs.edit.saveClub' | translate}}
+            </button>-->
+            <a mat-raised-button color="accent" (click)="cancel()">
+              {{'general.cancel' | translate}}
+            </a>
+          </div>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
-</form>
+</div>
+

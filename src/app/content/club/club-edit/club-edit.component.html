@@ -12,7 +12,7 @@
 
           <mat-card-content>
 
-            <mat-tab-group class="demo-tab-group" [dynamicHeight]="true">
+            <mat-tab-group [dynamicHeight]="true">
               <mat-tab label="{{'general.clubs.edit.mainTitle' | translate}}">
 
                 <div fxLayout="row" fxLayoutWrap="wrap">
@@ -126,22 +126,44 @@
               <mat-tab label="{{ 'general.clubs.edit.historyTitle' | translate }}">
                 <label>{{'general.clubs.edit.history' | translate}}</label>
                 <div fxLayout="row" fxLayoutWrap="wrap">
+
                   <div fxFlex.gt-sm="60" fxFlex.gt-xs="100" fxFlex="100">
                     <quill-editor
                       [style]="{height: '400px'}"
                       formControlName="history">
                     </quill-editor>
                   </div>
-                  <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="100">
-                    <pre>{{club | json}}</pre>
-                    <!-- [item]="club"
-                      [itemType]="'club'"
-                      [timeLineEvents]="club.assignedClubEvents"
-                      (removeTimeLineEvent)="removeClubTimeLineEvent($event)" -->
-                    <time-line
+
+                  <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="100" style="padding: 0 20px;">
+
+                    <button type="button"
+                            mat-raised-button
+                            color="primary"
+                            (click)="showForm = false"
+                            [disabled]="!showForm">
+                      {{'general.timeLine.listEvents' | translate}}
+                    </button>
+
+                    <button type="button"
+                            mat-raised-button
+                            color="brand"
+                            (click)="showForm = true"
+                            [disabled]="showForm">git st
+                      {{'general.timeLine.addEvent' | translate}}
+                    </button>
+
+                    <time-line-form
+                      *ngIf="showForm"
                       [form]="form"
-                      [timeLineEvents]="club.assignedClubEvents">
-                    </time-line>
+                      [groupName]="'timeLine'"
+                      (showForm)="showForm = false">
+                    </time-line-form>
+
+                    <span *ngIf="!showForm">
+                      List Events
+                    </span>
+
+
                   </div>
                 </div>
               </mat-tab>

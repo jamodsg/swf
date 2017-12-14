@@ -9,10 +9,12 @@ import { FormGroup } from '@angular/forms';
 export class TimeLineComponent {
 
   @Input() form: FormGroup;
-  @Input() timeLineEvents: ITimeLineEvent[];
+  @Input() groupName: string;
+  @Input() title: string;
+  // @Input() timeLineEvents: ITimeLineEvent[];
 
   showTable: boolean = false;
-  showForm: boolean = false;
+  showForm: boolean = true;
 
   constructor() {
   }

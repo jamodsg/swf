@@ -222,7 +222,6 @@
         "chooseLocation": "Bitte wähle die Heimspielstätte",
         "clubId": "Fussball.de ID",
         "clubUrl": "Vereinsseite",
-        "clubTimeLineTitle": "Wichtige Ereignisse im Verein",
         "clubTitle": "Name des Vereins",
         "calendarImport": "In Kalender importieren?",
         "chooseClub": "Nach einem Verein filtern ...",
@@ -351,27 +350,6 @@
       },
       "media": {
         "list": "Dateien des Vereins"
-      },
-      "timeLine": {
-        "addEvent": "Neues Ereignis",
-        "addManagement": "Neuer Vorsitzender",
-        "assignedArticle": "Mit Artikel verknüpfen",
-        "chooseArticle": "Artikel wählen",
-        "chooseColor": "Farbe wählen",
-        "color": "Farbe",
-        "date": "Datum",
-        "deleteEvent": "Ereignis löschen",
-        "name": "Vor- und Nachname",
-        "from": "von",
-        "icon": "Verknüpftes Icon",
-        "noEvents": "Es wurden noch keine Ereignisse gespeichert",
-        "saveTimeLine": "Ereignis speichern",
-        "subTitle": "Untertitel",
-        "table": "Tabelle",
-        "text": "Text",
-        "till": "bis",
-        "timeLine": "Diagramm",
-        "title": "Titel"
       }
     },
     "dashboard": {
@@ -1087,6 +1065,21 @@
       "media": {
         "list": "Dateien der Mannschaft"
       }
+    },
+    "timeLine": {
+      "addEvent": "Neues Ereignis",
+      "assignedArticle": "Mit Artikel verknüpfen",
+      "color": "Farbe",
+      "deleteEvent": "Ereignis löschen",
+      "endDate": "bis",
+      "icon": "Verknüpftes Icon",
+      "listEvents": "Liste",
+      "noEvents": "Es wurden noch keine Ereignisse gespeichert",
+      "saveTimeLine": "Ereignis speichern",
+      "startDate": "Datum",
+      "subTitle": "Untertitel",
+      "text": "Text",
+      "title": "Titel"
     },
     "uploader": {
       "changeImage": "Foto ändern",

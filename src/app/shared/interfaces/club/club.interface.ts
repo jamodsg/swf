@@ -20,7 +20,7 @@ export interface IClub {
 
   assignedFiles: any; // IMediaItem[];
   assignedLocation: string;
-  assignedClubEvents: ITimeLineEvent[];
+  timeLine: ITimeLineEvent[];
 
   info: {
     founding?: string;
@@ -35,7 +35,7 @@ export interface IClub {
     positions: IClubManagement[];
     photoUrl?: string;
     photoDescription?: string;
-    assignedManagementEvents: ITimeLineEvent[];
+    timeLine: ITimeLineEvent[];
   };
 
   creation: ICreation;

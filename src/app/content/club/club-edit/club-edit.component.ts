@@ -28,6 +28,8 @@ export class ClubEditComponent implements OnInit {
   public locations$: Observable<ILocation[]>;
   public members$: Observable<IMember[]>;
 
+  public showForm: boolean;
+
   @ViewChild('description') description: QuillEditorComponent;
 
   public uploaderOptions: FileUploaderOptions = {
@@ -47,6 +49,7 @@ export class ClubEditComponent implements OnInit {
               private router: Router) {
     this.locations$ = locationService.locations$;
     this.members$ = memberService.members$;
+    this.showForm = false;
   }
 
   ngOnInit() {
@@ -60,9 +63,22 @@ export class ClubEditComponent implements OnInit {
       management: this.initManagement(),
       history: this.club.history,
       info: this.initInfo(),
-      fussballde: this.initFussballDe()
+      fussballde: this.initFussballDe(),
+      timeLine: this.fb.array([this.initTimeLine()])
     });
+  }
 
+  initTimeLine() {
+    return this.fb.group({
+      title: '',
+      subTitle: '',
+      startDate: '',
+      endDate: '',
+      icon: '',
+      assignedArticle: '',
+      color: '',
+      text: ''
+    });
   }
 
   initInfo() {
