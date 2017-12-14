@@ -13,6 +13,7 @@ import { MatButtonModule, MatInputModule, MatTabsModule } from '@angular/materia
 import { QuillModule } from 'ngx-quill';
 import { LocationService } from '../../shared/services/location/location.service';
 import { MemberService } from '../../shared/services/member/member.service';
+import { MediaModule } from '../../shared/components/media/media.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MemberService } from '../../shared/services/member/member.service';
     MatButtonModule,
     MatInputModule,
     MatTabsModule,
+    MediaModule,
     QuillModule,
     RouterModule.forChild(clubRoutes),
     SharedModule
