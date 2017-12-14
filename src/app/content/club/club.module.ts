@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { clubRoutes } from './club-routing.module';
 import { ClubListComponent } from './club-list/club-list.component';
 import { ClubsComponent } from './clubs/clubs.component';
-import { ClubItemComponent } from './club-item/club-item.component';
 import { ClubResolver } from './club.resolver';
 import { ClubEditComponent } from './club-edit/club-edit.component';
 import { ClubDetailComponent } from './club-detail/club-detail.component';
@@ -29,7 +28,6 @@ import { MemberService } from '../../shared/services/member/member.service';
     ClubDetailComponent,
     ClubEditComponent,
     /*ClubFilesComponent, */
-    ClubItemComponent,
     ClubListComponent,
     // ClubManagementFotoComponent,
     // ClubMediaComponent,
