@@ -1,4 +1,23 @@
-<div class="row">
+<div class="uploader-content">
+    <section class="image-uploader">
+      <div class="upload-form">
+        <span accept="image/gif,image/jpg,image/jpeg,image/png,image/svg+xml" class="x-file-input">
+          <input tabindex="0" accept="image/gif,image/jpg,image/jpeg,image/png,image/svg+xml" class="x-file--input" type="file">
+          <label><div mat-raised-button color="primary"><span>Upload post image</span></div></label>
+        </span>
+        <div class="image-uploader-unsplash">
+          <mat-icon>add_a_photo</mat-icon>
+        </div>
+      </div>
+
+      <a title="Delete" class="image-cancel">
+        <mat-icon>delete</mat-icon>
+      </a>
+
+    </section>
+</div>
+
+<!--<div class="row">
 
   <div class="col-md-12" *ngIf="uploader?.error">
     <div class="alert alert-danger" role="alert">
@@ -28,7 +47,6 @@
     </div>
   </div>
 
-  <!-- Queue List -->
   <div class="col-md-12" *ngIf="uploaderOptions.showQueue && uploader?.queue?.length > 0">
 
     <h4>Upload queue</h4>
@@ -80,7 +98,6 @@
     </table>
   </div>
 
-  <!-- Queue Progress -->
   <div class="col-md-12" *ngIf="uploader?.queue?.length > 0 && showQueue">
     <h4>Queue progress:</h4>
     <div class="progress">
@@ -104,4 +121,4 @@
     </button>
   </div>
 
-</div>
+</div>-->

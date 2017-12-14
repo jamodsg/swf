@@ -6,7 +6,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   selector: 'media-uploader',
   templateUrl: 'media-uploader.component.html',
   styleUrls: [
-    'media-uploader.css'
+    'media-uploader.component.css'
   ]
 })
 export class MediaUploaderComponent implements OnInit {
