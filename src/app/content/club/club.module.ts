@@ -9,11 +9,12 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { ClubService } from '../../shared/services/club/club.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatInputModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatTabsModule } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
 import { LocationService } from '../../shared/services/location/location.service';
 import { MemberService } from '../../shared/services/member/member.service';
 import { MediaModule } from '../../shared/components/media/media.module';
+import { TimeLineModule } from '../../shared/components/time-line/time-line.module';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { MediaModule } from '../../shared/components/media/media.module';
     MediaModule,
     QuillModule,
     RouterModule.forChild(clubRoutes),
-    SharedModule
+    SharedModule,
+    TimeLineModule
   ],
   declarations: [
     ClubDetailComponent,

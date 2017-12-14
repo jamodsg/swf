@@ -1,0 +1,32 @@
+<div class="table-responsive" *ngIf="timeLineEvents && timeLineEvents.length > 0; else noEventsTemplate">
+
+  <table class="table table-striped table-bordered table-hover table-sm" *ngIf="showTable">
+    <thead>
+    <tr>
+      <th>{{ 'general.clubs.timeLine.title' | translate}}</th>
+      <th>{{ 'general.clubs.timeLine.date' | translate}}</th>
+      <th *ngIf="showActionLinks">{{ 'general.tables.colTitles.actions' | translate}}</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let timeLineEvent of timeLineEvents">
+      <td class="text-left">{{timeLineEvent.title}}</td>
+      <td class="text-left">{{timeLineEvent.date}}</td><!-- | date: 'dd.MM.yy' -->
+      <td *ngIf="showActionLinks">
+        <button type="button" class="btn btn-danger btn-sm" (click)="deleteTimeLineEvent.emit(timeLineEvent)"
+                title="{{ 'general.clubs.timeLine.deleteEvent' | translate}}">
+          <i class="fa fa-remove"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <div *ngIf="!showTable">
+    <time-line-graph-horizontal [timeLineEvents]="timeLineEvents"></time-line-graph-horizontal>
+  </div>
+
+</div>
+
+<ng-template #noEventsTemplate>
+  <div class="alert alert-warning" role="alert">{{ 'general.clubs.timeLine.noEvents' | translate}}</div>
+</ng-template>
+

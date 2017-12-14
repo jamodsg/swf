@@ -1,0 +1,99 @@
+<form novalidate (submit)="saveTimeLineEvent()" [formGroup]="timeLineGroup">
+
+  <div class="row">
+    <div class="col-md-6" *ngIf="itemType === 'club'">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.title' | translate}}</label>
+        <input formControlName="title" class="form-control"
+               placeholder="{{ 'general.clubs.timeLine.title' | translate}}">
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="itemType === 'club'">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.subTitle' | translate}}</label>
+        <input formControlName="subTitle" class="form-control"
+               placeholder="{{ 'general.clubs.timeLine.subTitle' | translate}}">
+      </div>
+    </div>
+
+    <div class="col-md-6" *ngIf="itemType === 'club-management'">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.name' | translate}}</label>
+        <input formControlName="title" class="form-control"
+               placeholder="{{ 'general.clubs.timeLine.name' | translate}}">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.date' | translate}}</label>
+        <input formControlName="date" class="form-control" placeholder="{{ 'general.clubs.timeLine.date' | translate}}"
+               type="date">
+      </div>
+    </div>
+
+    <div class="col-md-6" *ngIf="itemType === 'club-management'">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.till' | translate}}</label>
+        <input formControlName="till" class="form-control" placeholder="{{ 'general.clubs.timeLine.till' | translate}}"
+               type="date">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.icon' | translate}}</label>
+        <input formControlName="icon" class="form-control" placeholder="{{ 'general.clubs.timeLine.icon' | translate}}">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.assignedArticle' | translate}}</label>
+        <select formControlName="assignedArticle" class="form-control"
+                title="{{ 'general.clubs.timeLine.assignedArticle' | translate}}">
+          <option value="" selected>{{ 'general.clubs.timeLine.chooseArticle' | translate}}</option>
+          <option *ngFor="let article of articleService.getArticles() | async | orderBy: ['-articleDate']"
+                  [value]="article.id">{{article.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.color' | translate}}</label>
+        <select formControlName="color" class="form-control" title="{{ 'general.clubs.timeLine.color' | translate}}">
+          <option value="" selected>{{ 'general.clubs.timeLine.chooseColor' | translate}}</option>
+          <option *ngFor="let color of colors"
+                  [value]="color">{{color | translate}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-xl-12" *ngIf="itemType === 'club'">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.timeLine.text' | translate}}</label>
+        <!--<ckeditor
+          formControlName="text"
+          [config]="config"
+          [readonly]="false"
+          debounce="500">
+        </ckeditor>-->
+      </div>
+    </div>
+
+    <div class="col-xl-12 text-right">
+      <button class="btn btn-success" [title]="('general.clubs.timeLine.saveTimeLine' | translate)"
+              [disabled]="!timeLineGroup.valid">
+        <i [class]="'fa fa-save'"></i>
+        {{ ('general.clubs.timeLine.saveTimeLine' | translate) }}
+      </button>
+
+      <button class="btn btn-warning" (click)="toggleForm.emit()" title="{{ 'general.cancel' | translate}}">
+        <i class="fa fa-cancel"></i> {{ 'general.cancel' | translate}}
+      </button>
+    </div>
+  </div>
+</form>

@@ -133,13 +133,15 @@
                     </quill-editor>
                   </div>
                   <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="100">
-                    TimeLine
-                    <!-- <time-line
-                  [item]="club"
-                  [itemType]="'club'"
-                  [timeLineEvents]="club.assignedClubEvents"
-                  (removeTimeLineEvent)="removeClubTimeLineEvent($event)"
-                ></time-line>-->
+                    <pre>{{club | json}}</pre>
+                    <!-- [item]="club"
+                      [itemType]="'club'"
+                      [timeLineEvents]="club.assignedClubEvents"
+                      (removeTimeLineEvent)="removeClubTimeLineEvent($event)" -->
+                    <time-line
+                      [form]="form"
+                      [timeLineEvents]="club.assignedClubEvents">
+                    </time-line>
                   </div>
                 </div>
               </mat-tab>

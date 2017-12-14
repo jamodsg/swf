@@ -1,0 +1,44 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <div class="mat-card-top" *ngIf="timeLineEvents; else loadingTemplate">
+      <mat-card>
+        <mat-card-title>{{ 'general.'+ itemType + 's.edit.'+itemType+'TimeLineTitle' | translate}}</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+
+          <time-line-list
+            *ngIf="!showForm; else formTemplate"
+            [timeLineEvents]="timeLineEvents | orderBy: ['date']"
+            [showTable]="showTable"
+            [showActionLinks]="true">
+            <!--
+            (deleteTimeLineEvent)="removeTimeLineEvent.emit($event)" -->
+          </time-line-list>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="toggleTableView()">
+            <mat-icon *ngIf="showTable">view_list</mat-icon>
+            <mat-icon *ngIf="!showTable">event_note</mat-icon>
+          </button>
+          <button mat-raised-button color="brand" (click)="toggleForm()"><mat-icon>note_add</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  Lade ...
+</ng-template>
+
+<ng-template #formTemplate>
+  Form
+  <!--<time-line-form
+    [item]="item"
+    [itemType]="itemType"
+    [showForm]="showForm"
+    (toggleForm)="toggleForm()">
+  </time-line-form>-->
+</ng-template>
