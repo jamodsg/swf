@@ -6,7 +6,7 @@
         <div mat-card-avatar class="club-header-image" [ngStyle]="club.logoUrl ? ' background-image: url(' + club.logoUrl + ')' : ''"></div>
         <mat-card-title>{{club.title}}</mat-card-title>
         <mat-card-subtitle>
-          <a *ngIf="club.fussballde.clubUrl" [href]="club.fussballde.clubUrl">Fussball.de</a>
+          <a target="_blank" *ngIf="club.fussballde.clubUrl" [href]="club.fussballde.clubUrl">Fussball.de</a>
         </mat-card-subtitle>
       </mat-card-header>
       <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
