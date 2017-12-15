@@ -3,7 +3,9 @@ import { IArticle } from './article.interface';
 import { IMediaItem } from './media/media-item.interface';
 
 export interface ITimeLineEvent {
+
   id?: string;
+
   title: string;
   subTitle?: string;
   text?: string;
@@ -18,8 +20,8 @@ export interface ITimeLineEvent {
   assignedMediaItem?: IMediaItem;
   assignedArticle?: IArticle;
 
-  date: any;
-  till?: any;
+  startDate: any;
+  endDate?: any;
 
   creation?: ICreation;
 }

@@ -7,11 +7,11 @@ import { ITimeLineEvent } from '../../../interfaces/time-line-event.interface';
 })
 export class TimeLineListComponent {
 
-  @Input() item: any;
+  /* @Input() item: any;
   @Input() showTable: boolean = true;
   @Input() showForm: boolean = true;
-  @Input() showActionLinks: boolean = true;
-  @Input() timeLineEvents: ITimeLineEvent[];
+  @Input() showActionLinks: boolean = true; */
+  @Input() events: ITimeLineEvent[];
 
   @Output() deleteTimeLineEvent = new EventEmitter(false);
 

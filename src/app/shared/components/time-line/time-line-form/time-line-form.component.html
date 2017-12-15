@@ -1,8 +1,9 @@
 <div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
 
   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" formArrayName="timeLine">
-    <div class="mat-card-top" *ngFor="let control of form.get(groupName).controls; let i = index">
-      <mat-card>
+    <div class="mat-card-top" *ngFor="let control of form.get(groupName).controls; let i = index; let last = last">
+
+      <mat-card *ngIf="last">
         <mat-card-content [formGroupName]="i">
           <div fxLayout="row" fxLayoutWrap="wrap">
 
@@ -68,15 +69,21 @@
         </mat-card-content>
         <mat-card-actions>
           <div class="button-row">
-            <!--<button mat-raised-button color="primary" type="button" (click)="saveTimeLineEvent()">
-              {{ club.id ? ('general.clubs.edit.editClub' | translate) : 'general.clubs.edit.saveClub' | translate}}
-            </button>-->
-            <a mat-raised-button color="accent" (click)="cancel()">
+            <button mat-raised-button
+                    color="primary"
+                    type="button"
+                    (click)="saveTimeLineEvent.emit(true)">
+              {{ 'general.timeLine.saveEvent' | translate}}
+            </button>
+            <a mat-raised-button
+               color="accent"
+               (click)="cancelAddingEvent.emit(true)">
               {{'general.cancel' | translate}}
             </a>
           </div>
         </mat-card-actions>
       </mat-card>
+
     </div>
   </div>
 </div>

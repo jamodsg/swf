@@ -1,4 +1,6 @@
-<div class="table-responsive" *ngIf="timeLineEvents && timeLineEvents.length > 0; else noEventsTemplate">
+<pre>{{events | json}}</pre>
+
+<div class="table-responsive" *ngIf="events && events.length > 0; else noEventsTemplate">
 
   <table class="table table-striped table-bordered table-hover table-sm" *ngIf="showTable">
     <thead>

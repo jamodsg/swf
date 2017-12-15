@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { ClubService } from '../../shared/services/club/club.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatTabsModule } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
 import { LocationService } from '../../shared/services/location/location.service';
 import { MemberService } from '../../shared/services/member/member.service';
@@ -41,6 +41,7 @@ import { TimeLineModule } from '../../shared/components/time-line/time-line.modu
     ClubManagementTimelineFormComponent,
     ClubManagementTimelineListComponent */
   ],
+  exports: [],
   providers: [
     ClubResolver,
     ClubService,

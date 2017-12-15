@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
-import { FileUploaderOptions } from 'ng2-file-upload';
 import { ClubService } from '../../../shared/services/club/club.service';
 import Quill from 'quill';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
@@ -11,6 +10,8 @@ import { Observable } from 'rxjs/Observable';
 import { ILocation } from '../../../shared/interfaces/location.interface';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { MemberService } from '../../../shared/services/member/member.service';
+import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.interface';
+import { createLoweredSymbol } from '@angular/compiler';
 
 const parchment = Quill.import('parchment');
 const block = parchment.query('block');
@@ -27,19 +28,10 @@ export class ClubEditComponent implements OnInit {
   public form: FormGroup;
   public locations$: Observable<ILocation[]>;
   public members$: Observable<IMember[]>;
-
   public showForm: boolean;
 
   @ViewChild('description') description: QuillEditorComponent;
 
-  public uploaderOptions: FileUploaderOptions = {
-    // uploadFolder: 'club',
-    autoUpload: true,
-    // multipleUpload: false,
-    // showQueue: false,
-    // showDropZone: false,
-    allowedFileType: ['image']
-  };
 
   constructor(public clubService: ClubService,
               private locationService: LocationService,
@@ -56,7 +48,7 @@ export class ClubEditComponent implements OnInit {
     this.route.data.subscribe((data: { club: IClub }) => this.club = data.club);
 
     this.form = this.fb.group({
-      title: [this.club.title, [Validators.required, Validators.minLength(5)]],
+      title: [this.club.title, [Validators.required, Validators.minLength(10)]],
       description: this.club.description,
       assignedLocation: this.club.assignedLocation,
       creation: this.initCreation(),
@@ -64,24 +56,45 @@ export class ClubEditComponent implements OnInit {
       history: this.club.history,
       info: this.initInfo(),
       fussballde: this.initFussballDe(),
-      timeLine: this.fb.array([this.initTimeLine()])
+      timeLine: this.initTimeLine('timeLine', this.club.timeLine)
     });
   }
 
-  initTimeLine() {
-    return this.fb.group({
-      title: '',
-      subTitle: '',
-      startDate: '',
-      endDate: '',
-      icon: '',
-      assignedArticle: '',
-      color: '',
-      text: ''
-    });
+  addTimeLineEvent(formControl: string, event: ITimeLineEvent): void {
+    this.form.controls[formControl]['controls'].push(this.fb.group({
+      title: [event ? event.title : '', [Validators.required, Validators.minLength(20)]],
+      subTitle: event ? event.subTitle : '',
+      startDate: event ? event.startDate : '',
+      endDate: event ? event.endDate : '',
+      icon: event ? event.icon : '',
+      assignedArticle: event ? event.assignedArticle : '',
+      color: event ? event.color : '',
+      text: [event ? event.text : '', [Validators.required, Validators.minLength(20)]]
+    }));
+    this.showForm = true;
   }
 
-  initInfo() {
+  saveTimeLineEvent(event: ITimeLineEvent) {
+
+  }
+
+  cancelAddingEvent(formControl): void {
+    this.form.controls[formControl]['controls'].splice(-1, 1);
+    this.showForm = false;
+  }
+
+  initTimeLine(formControl: string, events: ITimeLineEvent[]): FormArray {
+    if (!events) {
+      return this.fb.array([]);
+    }
+    const timeLine = [];
+    /* for (let i = 0; i < events.length; i++) {
+      timeLine.push(this.addTimeLineEvent(formControl, events[i]));
+    } */
+    return this.fb.array(timeLine);
+  }
+
+  initInfo(): FormGroup {
     return this.fb.group({
       assignedContact: this.club.info && this.club.info.assignedContact ? this.club.info.assignedContact : '',
       founding: this.club.info && this.club.info.founding ? this.club.info.founding : '',
@@ -90,21 +103,21 @@ export class ClubEditComponent implements OnInit {
     });
   }
 
-  initCreation() {
+  initCreation(): FormGroup {
     return this.fb.group({
       at: this.club.creation.at,
       from: this.club.creation.from
     });
   }
 
-  initFussballDe() {
+  initFussballDe(): FormGroup {
     return this.fb.group({
       clubId: this.club.fussballde.clubId,
       clubUrl: this.club.fussballde.clubUrl
     });
   }
 
-  initManagement() {
+  initManagement(): FormGroup {
     return this.fb.group({
       positions: this.club.management ? this.club.management.positions : [],
       photoUrl: this.club.management ? this.club.management.photoUrl : '',
@@ -112,7 +125,7 @@ export class ClubEditComponent implements OnInit {
     });
   }
 
-  saveClub() {
+  saveClub(): void {
     let action;
     if (this.club.id) {
       action = this.clubService.updateClub(this.club.id, this.form.getRawValue());

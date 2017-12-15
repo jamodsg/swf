@@ -132,22 +132,16 @@
                       [style]="{height: '400px'}"
                       formControlName="history">
                     </quill-editor>
+
+                    <pre>{{club | json}}</pre>
                   </div>
 
                   <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="100" style="padding: 0 20px;">
 
                     <button type="button"
                             mat-raised-button
-                            color="primary"
-                            (click)="showForm = false"
-                            [disabled]="!showForm">
-                      {{'general.timeLine.listEvents' | translate}}
-                    </button>
-
-                    <button type="button"
-                            mat-raised-button
                             color="brand"
-                            (click)="showForm = true"
+                            (click)="addTimeLineEvent('timeLine')"
                             [disabled]="showForm">
                       {{'general.timeLine.addEvent' | translate}}
                     </button>
@@ -156,13 +150,15 @@
                       *ngIf="showForm"
                       [form]="form"
                       [groupName]="'timeLine'"
+                      (cancelAddingEvent)="cancelAddingEvent('timeLine')"
                       (showForm)="showForm = false">
-                    </time-line-form>
+                    </time-line-form><!--
+                      (saveTimeLineEvent)="saveTimeLineEvent('timeLine')"-->
 
-                    <span *ngIf="!showForm">
-                      List Events
-                    </span>
-
+                    <time-line-list
+                      *ngIf="!showForm"
+                      [events]="club.timeLine">
+                    </time-line-list>
 
                   </div>
                 </div>
