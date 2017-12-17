@@ -10,8 +10,10 @@ export class TimeLineFormComponent {
 
   @Input() form: FormGroup;
   @Input() groupName: string;
+  @Input() titleMinLength: number;
+  @Input() textMinLength: number;
 
-  @Output() cancelAddingEvent: EventEmitter<boolean> = new EventEmitter(false);
+  @Output() cancelAddingEvent: EventEmitter<any> = new EventEmitter(false);
   @Output() saveTimeLineEvent: EventEmitter<ITimeLineEvent> = new EventEmitter(false);
 
   public colors = ['primary', 'warning', 'danger', 'success', 'info', 'none'];

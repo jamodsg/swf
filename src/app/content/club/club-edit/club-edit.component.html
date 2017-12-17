@@ -133,7 +133,7 @@
                       formControlName="history">
                     </quill-editor>
 
-                    <pre>{{club | json}}</pre>
+                    <pre>{{form.value | json}}</pre>
                   </div>
 
                   <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="100" style="padding: 0 20px;">
@@ -150,10 +150,12 @@
                       *ngIf="showForm"
                       [form]="form"
                       [groupName]="'timeLine'"
-                      (cancelAddingEvent)="cancelAddingEvent('timeLine')"
+                      [textMinLength]="textMinLength"
+                      [titleMinLength]="titleMinLength"
+                      (cancelAddingEvent)="cancelAddingEvent($event)"
+                      (saveTimeLineEvent)="saveTimeLineEvent($event)"
                       (showForm)="showForm = false">
-                    </time-line-form><!--
-                      (saveTimeLineEvent)="saveTimeLineEvent('timeLine')"-->
+                    </time-line-form>
 
                     <time-line-list
                       *ngIf="!showForm"
@@ -213,7 +215,8 @@
 
           <mat-card-actions>
             <div class="button-row">
-              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
+              <!-- [disabled]="!form.valid || isLoading" -->
+              <button mat-raised-button color="primary" type="submit">
                 {{ club.id ? ('general.clubs.edit.editClub' | translate) : 'general.clubs.edit.saveClub' | translate}}
               </button>
               <a mat-raised-button color="accent" (click)="cancel()">
@@ -248,39 +251,6 @@
 </div>
 </div>
 </div>
-
-<div class="col-xl-2">
-<div class="m-portlet">
-  <div class="m-portlet__head">
-    <div class="m-portlet__head-caption">
-      <div class="m-portlet__head-title">
-        <h3 class="m-portlet__head-text">{{ 'general.clubs.edit.logoTitle' | translate }}</h3>
-      </div>
-    </div>
-  </div>
-  <div class="m-portlet__body">
-    <div class="text-center" style="margin-bottom: 15px;">
-      <img *ngIf="club.logoUrl" [src]="club.logoUrl" class="img-thumbnail img-fluid"/>
-      <p *ngIf="!club.logoUrl">{{ 'general.clubs.edit.noLogo' | translate}}</p>
-      <!--<media-uploader
-        [objectType]="'club'"
-        [objectId]="club.id"
-        [uploaderOptions]="uploaderOptions"
-        (uploadCompleted)="logoUploadCompleted($event)">
-      </media-uploader>
-    </div>
-  </div>
-</div>
-</div>
-
-</div>
-</div>
-</form>
-
-
-<!--
-<router-outlet></router-outlet>
-
 
 {{ 'general.clubs.edit.honorariesTitle' | translate }}
 <club-honoraries-list [club]="club"

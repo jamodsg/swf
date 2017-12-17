@@ -3,13 +3,20 @@
   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" formArrayName="timeLine">
     <div class="mat-card-top" *ngFor="let control of form.get(groupName).controls; let i = index; let last = last">
 
-      <mat-card *ngIf="last">
-        <mat-card-content [formGroupName]="i">
+      <mat-card [formGroupName]="i" *ngIf="last">
+        <mat-card-content>
           <div fxLayout="row" fxLayoutWrap="wrap">
 
             <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
               <mat-form-field>
-                <input matInput placeholder="{{ 'general.timeLine.title' | translate}}" formControlName="title"/>
+                <input matInput
+                       placeholder="{{ 'general.timeLine.title' | translate}}"
+                       formControlName="title"
+                       [minlength]="titleMinLength"
+                />
+                <mat-hint align="end" *ngIf="!form.get(groupName).controls[i]['controls'].title.valid ">
+                  {{titleMinLength}} characters required
+                </mat-hint>
               </mat-form-field>
             </div>
 
@@ -64,12 +71,14 @@
                 [style]="{height: '150px'}"
                 formControlName="text">
               </quill-editor>
+              <mat-hint align="end">{{textMinLength}} characters required</mat-hint>
             </div>
           </div>
         </mat-card-content>
         <mat-card-actions>
           <div class="button-row">
             <button mat-raised-button
+                    [disabled]="!form.get(groupName).controls[i]['controls'].title.valid  || !form.get(groupName).controls[i]['controls'].text.valid"
                     color="primary"
                     type="button"
                     (click)="saveTimeLineEvent.emit(true)">
@@ -77,7 +86,7 @@
             </button>
             <a mat-raised-button
                color="accent"
-               (click)="cancelAddingEvent.emit(true)">
+               (click)="cancelAddingEvent.emit({ formControl: groupName, index: i })">
               {{'general.cancel' | translate}}
             </a>
           </div>

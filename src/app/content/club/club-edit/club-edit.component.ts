@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
@@ -11,7 +11,6 @@ import { ILocation } from '../../../shared/interfaces/location.interface';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.interface';
-import { createLoweredSymbol } from '@angular/compiler';
 
 const parchment = Quill.import('parchment');
 const block = parchment.query('block');
@@ -20,7 +19,8 @@ Quill.register(block, true);
 
 @Component({
   selector: 'club-edit',
-  templateUrl: 'club-edit.component.html'
+  templateUrl: 'club-edit.component.html',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClubEditComponent implements OnInit {
 
@@ -30,8 +30,10 @@ export class ClubEditComponent implements OnInit {
   public members$: Observable<IMember[]>;
   public showForm: boolean;
 
-  @ViewChild('description') description: QuillEditorComponent;
+  public titleMinLength: number = 4;
+  public textMinLength: number = 5;
 
+  @ViewChild('description') description: QuillEditorComponent;
 
   constructor(public clubService: ClubService,
               private locationService: LocationService,
@@ -62,32 +64,35 @@ export class ClubEditComponent implements OnInit {
 
   addTimeLineEvent(formControl: string, event: ITimeLineEvent): void {
     this.form.controls[formControl]['controls'].push(this.fb.group({
-      title: [event ? event.title : '', [Validators.required, Validators.minLength(20)]],
+      title: [event ? event.title : '', [Validators.required, Validators.minLength(this.titleMinLength)]],
       subTitle: event ? event.subTitle : '',
       startDate: event ? event.startDate : '',
       endDate: event ? event.endDate : '',
       icon: event ? event.icon : '',
       assignedArticle: event ? event.assignedArticle : '',
       color: event ? event.color : '',
-      text: [event ? event.text : '', [Validators.required, Validators.minLength(20)]]
+      text: [event ? event.text : '', [Validators.required, Validators.minLength(this.textMinLength)]]
     }));
     this.showForm = true;
   }
 
   saveTimeLineEvent(event: ITimeLineEvent) {
-
+    console.log(this.form.getRawValue());
+    this.showForm = false;
   }
 
-  cancelAddingEvent(formControl): void {
-    this.form.controls[formControl]['controls'].splice(-1, 1);
+  // remove last element of formControl
+  cancelAddingEvent(event): void {
+    const control = <FormArray>this.form.controls[event.formControl];
+    control.removeAt(event.index);
     this.showForm = false;
   }
 
   initTimeLine(formControl: string, events: ITimeLineEvent[]): FormArray {
-    if (!events) {
-      return this.fb.array([]);
-    }
     const timeLine = [];
+    if (!events || events.length === 0) {
+      // timeLine.push(this.addTimeLineEvent(formControl, null));
+    }
     /* for (let i = 0; i < events.length; i++) {
       timeLine.push(this.addTimeLineEvent(formControl, events[i]));
     } */

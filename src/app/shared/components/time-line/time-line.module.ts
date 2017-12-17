@@ -12,7 +12,6 @@ import {
 } from '@angular/material';
 import { NgPipesModule } from 'ngx-pipes';
 import { QuillModule } from 'ngx-quill';
-import { FocusDirective } from '../../directives/focus/focus.directive';
 
 @NgModule({
   imports: [
