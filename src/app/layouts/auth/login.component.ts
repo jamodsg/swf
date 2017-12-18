@@ -1,46 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../shared/services/auth/auth.service';
+import { Component } from '@angular/core';
+import { zoomIn, zoomOut } from 'ng-animate';
+import { state, style, transition, trigger, useAnimation } from '@angular/animations';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-layout',
   styles: [':host .mat-drawer-content {padding: 0;} .mat-drawer-container {z-index: 1000}'],
-  templateUrl: './login.component.html'
+  styleUrls: [
+    'login.component.scss'
+  ],
+  templateUrl: './login.component.html',
+  animations: [
+    trigger('authAnimation', [
+      state('1', style({
+        opacity: 1,
+        transform: 'scale(1.0)'
+      })),
+      state('0', style({
+        opacity: 0,
+        transform: 'scale(0.0)'
+      })),
+      transition('1 => 0', useAnimation(zoomOut)),
+      transition('0 => 1', useAnimation(zoomIn)),
+    ])
+  ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  public form: FormGroup;
-  public returnUrl: string = '';
-  public isLoading: boolean = false;
-  public error: string;
+  public loading: boolean = false;
+  public nameMinLength: number = 5;
+  public passwordMinLength: number = 5;
+  public passwordMaxLength: number = 25;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private authService: AuthService) {
+  public showSignInForm: boolean = true;
+  public showSignUpForm: boolean = false;
+  public showPasswordForm: boolean = false;
+
+  constructor(public sanitizer: DomSanitizer) {
   }
 
-  ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.form = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
-    });
+  toggleFormVisibility($event: any[]) {
+    for (const key in $event) {
+      this[key] = $event[key];
+    }
   }
 
-  onSubmit() {
-    this.isLoading = true;
-    const credentials = {
-      email: this.form.value.email,
-      password: this.form.value.password
-    };
-    this.authService.signIn(credentials)
-      .then(() => {
-        this.isLoading = false;
-        this.router.navigate([this.returnUrl]).then();
-      })
-      .catch((error: any) => {
-        this.isLoading = false;
-        this.error = error.message;
-      });
+  signUpComplete($event) {
+    console.log($event);
+    // this.signUpStatus = $event;
   }
 
 }

@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div fxLayout="column" fxLayoutAlign="space-around">
+
+    <ng-template #signInAlertContainer></ng-template>
+
+    <div class="pb-1">
+      <mat-form-field style="width: 100%">
+        <input matInput placeholder="{{'Global.Login.Email' | translate}}" formControlName="email">
+      </mat-form-field>
+      <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">
+        {{'Global.Login.Email' | translate}}
+      </small>
+    </div>
+    <div class="pb-1">
+      <mat-form-field style="width: 100%">
+        <input matInput type="password" placeholder="{{'Global.Login.Password' | translate}}" formControlName="password">
+      </mat-form-field>
+      <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="mat-text-warn">
+        {{'Global.Login.Password' | translate}}
+      </small>
+    </div>
+
+    <div class="mat-text-warn" *ngIf="error">{{error}}</div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
+      <mat-progress-spinner mode="indeterminate" *ngIf="isLoading"></mat-progress-spinner>
+      {{ 'Global.Login.loginButton' | translate }}
+    </button>
+  </div>
+  <div class="pt-1 pb-1 text-xs-center">
+    <a (click)="togglePasswordForm()">{{'Global.Login.forgotPasswordButton' | translate}}?</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a (click)="toggleSignUpForm()">{{'Global.Login.CreateNewAccount' | translate}}</a>
+  </div>
+</form>

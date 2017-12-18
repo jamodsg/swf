@@ -1,0 +1,9 @@
+.session {
+  background-image:    url('/assets/sfw/background.jpg');
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+  /*grayScale*/
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}

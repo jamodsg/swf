@@ -27,7 +27,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { googleMapsConfig } from '../../shared/config/google-maps.config';
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,
