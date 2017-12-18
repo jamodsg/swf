@@ -67,9 +67,10 @@ export class SignInComponent implements OnInit {
         this.router.navigate([this.returnUrl]).then();
       })
       .catch((error: any) => {
+        this.isLoading = false;
         this.showDemoLoginMessage = false;
         this.showAlert('signInAlertContainer');
-        this.alertService.error(error);
+        this.alertService.error(error.code);
         this.loading = false;
       });
   }

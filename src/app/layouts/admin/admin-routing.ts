@@ -66,6 +66,10 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/club/club.module#ClubModule'
       },
       {
+        path: 'locations',
+        loadChildren: '../../content/location/location.module#LocationModule'
+      },
+      {
         path: 'sponsors',
         loadChildren: '../../content/sponsor/sponsor.module#SponsorModule'
       },
