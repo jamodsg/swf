@@ -39,9 +39,6 @@ package-lock.json
 functions/package-lock.json
 functions/node_modules
 functions/index.js
-src/environments/environment.prod.ts
-src/environments/environment.dev.ts
-src/environments/environment.ts
 
 # e2e
 /e2e/*.js
