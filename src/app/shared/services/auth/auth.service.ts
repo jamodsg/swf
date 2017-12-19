@@ -84,18 +84,19 @@ export class AuthService implements OnDestroy {
 
   register(values: IUser): Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(values.email, values.password).then((authUser) => {
-      authUser.sendEmailVerification().then();
-      delete values.password;
-      values.providerId = authUser.providerId;
-      values.id = authUser.uid;
-      values.assignedRoles = {
-        subscriber: true,
-        editor: false,
-        admin: false
-      };
-      values.emailVerified = authUser.emailVerified;
-      values.creation = this.getCreation();
-      return this.updateUser(values);
+      authUser.sendEmailVerification().then(() => {
+        delete values.password;
+        values.providerId = authUser.providerId;
+        values.id = authUser.uid;
+        values.assignedRoles = {
+          subscriber: true,
+          editor: false,
+          admin: false
+        };
+        values.emailVerified = authUser.emailVerified;
+        values.creation = this.getCreation();
+        return this.setUser(values);
+      });
     });
   }
 
@@ -108,8 +109,9 @@ export class AuthService implements OnDestroy {
   }
 
   signOut(): Promise<any> {
-    return this.updateUser({ onlineStatus: 'offline' }).then(
-      () => {
+    return this.updateUser({
+      onlineStatus: 'offline'}
+      ).then(() => {
         this.mouseEvents.unsubscribe();
         this.timer.unsubscribe();
         return this.afAuth.auth.signOut();
@@ -126,8 +128,9 @@ export class AuthService implements OnDestroy {
 
   private updateOnIdle() {
     this.mouseEvents = Observable.fromEvent(document, 'mousemove').throttleTime(30000).subscribe(() => {
-      this.updateUser({ onlineStatus: 'online' }).then();
-      this.resetTimer();
+      this.updateUser({
+        onlineStatus: 'online'
+      }).then(() => this.resetTimer());
     });
   }
 
@@ -137,10 +140,16 @@ export class AuthService implements OnDestroy {
     }
 
     this.timer = Observable.timer(40000).subscribe(() => {
-      this.updateUser({ onlineStatus: 'away' }).then(
+      this.updateUser({
+        onlineStatus: 'away'
+      }).then(
         // () => this.router.navigate(['/locked']).then()
       );
     });
+  }
+
+  private setUser(data: any): Promise<void> {
+    return this.afs.doc('users/' + this.id).set(data);
   }
 
   private updateUser(data: any): Promise<void> {

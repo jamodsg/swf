@@ -36,6 +36,8 @@ export class LoginComponent {
   public showSignUpForm: boolean = false;
   public showPasswordForm: boolean = false;
 
+  public signUpStatus;
+
   constructor(public sanitizer: DomSanitizer) {
   }
 
@@ -46,8 +48,7 @@ export class LoginComponent {
   }
 
   signUpComplete($event) {
-    console.log($event);
-    // this.signUpStatus = $event;
+    this.signUpStatus = $event;
   }
 
 }
