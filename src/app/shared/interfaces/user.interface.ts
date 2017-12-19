@@ -14,7 +14,7 @@ export interface IUser {
   photoURL?: string;
 
   onlineStatus?: string;
-  assignedRoles: IRole;
+  assignedRoles: IRole | string;
   // assignedMember?: IMember | string;
 
   social?: {
