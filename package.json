@@ -58,6 +58,8 @@
     "d3": "^4.12.0",
     "dragula": "^3.7.2",
     "firebase": "^4.7.0",
+    "firebase-admin": "^5.5.1",
+    "firestore-backup": "^1.0.1",
     "hammerjs": "^2.0.8",
     "intl": "^1.2.5",
     "leaflet": "^1.2.0",
