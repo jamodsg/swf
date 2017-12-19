@@ -34,10 +34,14 @@
                    [limit]="form.controls['limit'].value"
                    [rows]="locations | orderBy: ['title'] | filterBy: ['title'] : form.controls['searchFor'].value">
       <ngx-datatable-column name="Title"></ngx-datatable-column>
-      <ngx-datatable-column name="Assigned Category"></ngx-datatable-column>
+      <ngx-datatable-column name="Assigned Category">
+        <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
+          {{row.assignedCategory}}
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column name="Address" fxHide.xs>
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
-          {{row.address.streetName}} {{row.address.houseNumber}}<br/>
+          {{row.address.streetName}} {{row.address.houseNumber !== 0 ? row.address.houseNumber : ''}}<br/>
           {{row.address.zip}} {{row.address.city}}
         </ng-template>
       </ngx-datatable-column>
