@@ -1,31 +1,32 @@
 import { RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { LocationsComponent } from './locations/locations.component';
+import { LocationResolver } from './location.resolver';
+import { LocationDetailComponent } from './location-detail/location-detail.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: LocationsComponent,
     pathMatch: 'full'
-  }/*,
+  }, /*
   {
-    path: 'edit/:id',
+    path: 'edit/:locationId',
     component: LocationEditComponent,
     resolve: {
       location: LocationResolver
     },
     pathMatch: 'full'
-  },
+  },*/
   {
-    path: 'detail/:id',
+    path: 'detail/:locationId',
     component: LocationDetailComponent,
     resolve: {
       location: LocationResolver
     },
-    pathMatch: 'full'
-  },
+  }/*,
   {
-    path: 'media/:id',
+    path: 'media/:locationId',
     component: LocationMediaComponent,
     resolve: {
       location: LocationResolver

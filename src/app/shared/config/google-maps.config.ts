@@ -1,3 +1,3 @@
 export const googleMapsConfig = {
-  apiKey: 'AIzaSyAlh44-sGd54y10C3nzclDGRT-FniOOkOk'
+  apiKey: 'AIzaSyC8JCblfpel8P3xMJdictrcivfOd2tD-NI'
 };
