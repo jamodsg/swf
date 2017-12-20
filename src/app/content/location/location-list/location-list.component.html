@@ -2,8 +2,10 @@
 
   <div fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex.gt-md="30" fxFlex="100">
     <mat-form-field style="width: 95%">
-      <mat-select placeholder="{{ 'general.itemsPerPage' | translate}}" formControlName="limit">
-        <mat-option [value]="locations.length" *ngIf="locations">{{ 'general.allItems' | translate}}</mat-option>
+      <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
+        <mat-option [value]="locations.length" *ngIf="locations">
+          {{ 'general.pagination.allItems' | translate}}
+        </mat-option>
         <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
           {{ 'general.items' | translate}}
         </mat-option>
@@ -12,7 +14,7 @@
   </div>
 
   <div fxFlex.gt-xs="50" fxFlex.gt-sm="40" fxFlex="100" style="margin-bottom: 15px">
-    <input matInput style="padding:10px; width: 90%"
+    <input matInput style="padding:10px; width: 90%;"
            placeholder="{{ 'general.typeToFilter' | translate}}"
            formControlName="searchFor"/>
   </div>
@@ -36,7 +38,7 @@
       <ngx-datatable-column name="Title"></ngx-datatable-column>
       <ngx-datatable-column name="Assigned Category">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
-          {{row.assignedCategory}}
+          <span>{{(categories | filterBy: ['id'] : row.assignedCategory)[0].title}}</span>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Address" fxHide.xs>
