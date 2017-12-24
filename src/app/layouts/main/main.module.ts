@@ -1,24 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { mainRoutes } from './main.routing';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { environment } from '../../../environments/environment';
 import { AuthGuard } from '../../shared/services/auth/auth.guard';
 import { AuthService } from '../../shared/services/auth/auth.service';
-import { UnAuthGuard } from '../../shared/services/auth/unauth.guard';
-import { environment } from '../../../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { EditorGuard } from '../../shared/services/auth/editor.guard';
+import { UnAuthGuard } from '../../shared/services/auth/unauth.guard';
 import { SharedModule } from '../../shared/shared.module';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { mainRoutes } from './main.routing';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
 @NgModule({
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -40,9 +40,9 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     AngularFireAuth,
     AuthGuard,
-    EditorGuard,
     AuthService,
-    UnAuthGuard
+    EditorGuard,
+    UnAuthGuard,
   ]
 })
 export class MainModule { }
