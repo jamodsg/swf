@@ -1,0 +1,29 @@
+<h3 style="margin-top: 25px;">{{'general.locations.edit.contactTitle' | translate}}</h3>
+<table *ngIf="members && location.assignedContacts && location.assignedContacts.length > 0; else noContactsTemplate">
+  <tr *ngFor="let contact of location.assignedContacts; let i = index">
+    <td>
+      <a [routerLink]="['/members/detail', contact.assignedMember]" *ngIf="contact.isMember">
+        {{ (members | filterBy: ['id'] : contact.assignedMember)[0].lastName}}
+        {{ (members | filterBy: ['id'] : contact.assignedMember)[0].firstName}}
+      </a>
+      <span *ngIf="!contact.isMember">
+        {{contact.lastName}} {{contact.firstName}}<br/>
+        <a *ngIf="contact.contact.email" [href]="'mailto:' + contact.contact.email">{{contact.contact.email}} ,</a>
+        {{contact.contact.phoneMobile}}
+      </span>
+    </td>
+    <td>{{contact.description}}</td>
+    <td *ngIf="showLinks">
+      <button mat-raised-button
+              color="danger"
+              (click)="removeContact(i)"
+              title="{{ 'general.locations.edit.contact.deleteContact' | translate}}">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+</table>
+
+<ng-template #noContactsTemplate>
+  <p>{{ 'general.locations.edit.contact.noContacts' | translate}}</p>
+</ng-template>

@@ -2,8 +2,10 @@
 
   <div fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex.gt-md="30" fxFlex="100">
     <mat-form-field style="width: 95%">
-      <mat-select placeholder="{{ 'general.itemsPerPage' | translate}}" formControlName="limit">
-        <mat-option [value]="categories.length" *ngIf="categories">{{ 'general.allItems' | translate}}</mat-option>
+      <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
+        <mat-option [value]="categories.length" *ngIf="categories">
+          {{ 'general.pagination.allItems' | translate}}
+        </mat-option>
         <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
           {{ 'general.items' | translate}}
         </mat-option>

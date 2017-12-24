@@ -7,29 +7,49 @@ import { SharedModule } from '../../shared/shared.module';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { LocationService } from '../../shared/services/location/location.service';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatTableModule, MatTabsModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LocationDetailComponent } from './location-detail/location-detail.component';
+import { MemberService } from '../../shared/services/member/member.service';
+import { LocationDetailMainComponent } from './location-detail/location-detail-main/location-detail-main.component';
+import { LocationDetailMapComponent } from './location-detail/location-detail-map/location-detail-map.component';
+import { AgmCoreModule } from '@agm/core';
+import { MapsService } from '../../shared/services/maps/maps.service';
+import { HttpClientModule } from '@angular/common/http';
+import { LocationDetailContactComponent } from './location-detail/location-detail-contact/location-detail-contact.component';
+import { ArticleService } from '../../shared/services/article/article.service';
 
 @NgModule({
   imports: [
+    AgmCoreModule,
     FlexLayoutModule,
+    HttpClientModule,
     locationRoutingModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
+    MatTableModule,
+    MatTabsModule,
     SharedModule
   ],
   declarations: [
+    LocationDetailComponent,
+    LocationDetailContactComponent,
+    LocationDetailMapComponent,
     LocationListComponent,
-    LocationsComponent
+    LocationsComponent,
+    LocationDetailMainComponent
   ],
   providers: [
+    ArticleService,
     CategoryService,
     CategoryTypeService,
     LocationResolver,
-    LocationService
+    LocationService,
+    MapsService,
+    MemberService
   ]
 })
 export class LocationModule {
