@@ -88,60 +88,52 @@
             </mat-tab-group>
 
 
-
-
-
-
-
-
-
-              <!--
-              <div class="col-xl-6">
-      <h5>{{'general.sponsors.edit.imageUrl' | translate}}</h5>
-      <img [src]="sponsor.imageUrl" class="img-fluid img-thumbnail" *ngIf="sponsor.imageUrl; else noLogoTemplate"/>
-      <media-uploader
-        *ngIf="showUploader"
-        [objectId]="sponsor.id ? sponsor.id : ''"
-        [objectType]="objectType"
-        [uploaderOptions]="uploaderOptions"
-        (uploadCompleted)="uploadCompleted($event)">
-      </media-uploader>
-      <div class="text-center m--margin-top-15">
-        <button class="btn btn-primary" (click)="toggleUploader()" *ngIf="!showUploader">
-          {{'general.sponsors.edit.uploadLogo' | translate}}
-        </button>
-      </div>
+            <!--
+            <div class="col-xl-6">
+    <h5>{{'general.sponsors.edit.imageUrl' | translate}}</h5>
+    <img [src]="sponsor.imageUrl" class="img-fluid img-thumbnail" *ngIf="sponsor.imageUrl; else noLogoTemplate"/>
+    <media-uploader
+      *ngIf="showUploader"
+      [objectId]="sponsor.id ? sponsor.id : ''"
+      [objectType]="objectType"
+      [uploaderOptions]="uploaderOptions"
+      (uploadCompleted)="uploadCompleted($event)">
+    </media-uploader>
+    <div class="text-center m--margin-top-15">
+      <button class="btn btn-primary" (click)="toggleUploader()" *ngIf="!showUploader">
+        {{'general.sponsors.edit.uploadLogo' | translate}}
+      </button>
     </div>
-    -->
+  </div>
+  -->
 
-            </div>
-
-            <!--<creation-form class="form-container"
-                           [form]="form"
-                           [users]="users$ | async">
-            </creation-form>-->
-          </mat-card-content>
-
-          <mat-card-actions>
-            <div class="button-row">
-              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
-                {{'general.sponsors.edit.saveSponsor' | translate}}
-              </button>
-              <a mat-raised-button color="accent" (click)="cancel()">
-                {{'general.cancel' | translate}}
-              </a>
-              <a mat-raised-button color="warn"
-                 (click)="removeSponsor()"
-                 *ngIf="sponsor.id">
-                {{'general.sponsors.list.removeCategory' | translate}}
-              </a>
-            </div>
-          </mat-card-actions>
-
-        </mat-card>
       </div>
 
+      <!--<creation-form class="form-container"
+                     [form]="form"
+                     [users]="users$ | async">
+      </creation-form>-->
+      </mat-card-content>
+
+      <mat-card-actions>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
+            {{'general.sponsors.edit.saveSponsor' | translate}}
+          </button>
+          <a mat-raised-button color="accent" (click)="cancel()">
+            {{'general.cancel' | translate}}
+          </a>
+          <a mat-raised-button color="warn"
+             (click)="removeSponsor()"
+             *ngIf="sponsor.id">
+            {{'general.sponsors.list.removeCategory' | translate}}
+          </a>
+        </div>
+      </mat-card-actions>
+
+      </mat-card>
     </div>
+
   </div>
 </form>
 
