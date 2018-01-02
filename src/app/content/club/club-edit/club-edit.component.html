@@ -1,8 +1,14 @@
-<form novalidate (ngSubmit)="saveClub()" [formGroup]="form">
-  <div fxLayout="row" fxLayoutWrap="wrap">
+<form novalidate
+      (ngSubmit)="saveClub()"
+      [formGroup]="form">
+  <div fxLayout="row"
+       fxLayoutWrap="wrap">
 
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-      <div class="mat-card-top" *ngIf="club; else loadingTemplate">
+    <div fxFlex.gt-sm="100"
+         fxFlex.gt-xs="100"
+         fxFlex="100">
+      <div class="mat-card-top"
+           *ngIf="club; else loadingTemplate">
         <mat-card>
           <mat-card-title>
             <mat-icon>mode_edit</mat-icon>
@@ -15,20 +21,28 @@
             <mat-tab-group [dynamicHeight]="true">
               <mat-tab label="{{'general.clubs.edit.mainTitle' | translate}}">
 
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                  <div fxFlex.gt-sm="80" fxFlex.gt-xs="100" fxFlex="100">
+                <div fxLayout="row"
+                     fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="80"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
                     <!-- main-data -->
-                    <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxLayout="row"
+                         fxLayoutWrap="wrap">
 
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <input matInput
                                  placeholder="{{'general.clubs.edit.title' | translate}}"
-                                 formControlName="title"/>
+                                 formControlName="title" />
                         </mat-form-field>
                       </div>
 
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <mat-select placeholder="{{'general.clubs.edit.location' | translate}}"
                                       formControlName="assignedLocation">
@@ -41,28 +55,36 @@
                       </div>
                     </div>
                     <!-- infos -->
-                    <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="info">
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                    <div fxLayout="row"
+                         fxLayoutWrap="wrap"
+                         formGroupName="info">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <input matInput
                                  placeholder="{{'general.clubs.edit.foundedIn' | translate}}"
-                                 formControlName="founding"/>
+                                 formControlName="founding" />
                         </mat-form-field>
                       </div>
 
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <input matInput
                                  placeholder="{{'general.clubs.edit.clubColours' | translate}}"
-                                 formControlName="clubColours"/>
+                                 formControlName="clubColours" />
                         </mat-form-field>
                       </div>
 
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <input matInput
                                  placeholder="{{'general.clubs.edit.homepage' | translate}}"
-                                 formControlName="website"/>
+                                 formControlName="website" />
                           <!--<mat-hint align="end" *ngIf="isUrl(form.controls['website'].value)">
                             <a [href[="form.controls['website'].value">
                               {{'general.clubs.edit.visitHomepage' | translate}}
@@ -71,7 +93,9 @@
                         </mat-form-field>
                       </div>
 
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <mat-select placeholder="{{'general.clubs.edit.contact' | translate}}"
                                       formControlName="assignedContact">
@@ -86,37 +110,48 @@
 
                     </div>
                     <!-- fussball.de -->
-                    <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="fussballde">
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                    <div fxLayout="row"
+                         fxLayoutWrap="wrap"
+                         formGroupName="fussballde">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <input matInput
                                  placeholder="{{'general.clubs.edit.fussballDeId' | translate}}"
-                                 formControlName="clubId"/>
+                                 formControlName="clubId" />
                         </mat-form-field>
                       </div>
 
-                      <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                      <div fxFlex.gt-sm="25"
+                           fxFlex.gt-xs="100"
+                           fxFlex="100">
                         <mat-form-field>
                           <input matInput
                                  placeholder="{{'general.clubs.edit.fussballDeUrl' | translate}}"
-                                 formControlName="clubUrl"/>
+                                 formControlName="clubUrl" />
                         </mat-form-field>
                       </div>
                     </div>
 
                   </div>
-                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                  <div fxFlex.gt-sm="20"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
                     <media-uploader [uploaderOptions]="{}"></media-uploader>
                   </div>
                 </div>
 
 
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
+                <div fxLayout="row"
+                     fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="100"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100"
+                       style="margin-top: 25px;">
                     <label>{{'general.clubs.edit.description' | translate}}</label>
-                    <quill-editor
-                      [style]="{height: '150px'}"
-                      formControlName="description">
+                    <quill-editor [style]="{height: '150px'}"
+                                  formControlName="description">
                     </quill-editor>
                   </div>
                 </div>
@@ -125,18 +160,23 @@
 
               <mat-tab label="{{ 'general.clubs.edit.historyTitle' | translate }}">
                 <label>{{'general.clubs.edit.history' | translate}}</label>
-                <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxLayout="row"
+                     fxLayoutWrap="wrap">
 
-                  <div fxFlex.gt-sm="60" fxFlex.gt-xs="100" fxFlex="100">
-                    <quill-editor
-                      [style]="{height: '400px'}"
-                      formControlName="history">
+                  <div fxFlex.gt-sm="60"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
+                    <quill-editor [style]="{height: '400px'}"
+                                  formControlName="history">
                     </quill-editor>
 
                     <pre>{{form.value | json}}</pre>
                   </div>
 
-                  <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="100" style="padding: 0 20px;">
+                  <div fxFlex.gt-sm="40"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100"
+                       style="padding: 0 20px;">
 
                     <button type="button"
                             mat-raised-button
@@ -146,28 +186,28 @@
                       {{'general.timeLine.addEvent' | translate}}
                     </button>
 
-                    <time-line-form
-                      *ngIf="showForm"
-                      [form]="form"
-                      [groupName]="'timeLine'"
-                      [textMinLength]="textMinLength"
-                      [titleMinLength]="titleMinLength"
-                      (cancelAddingEvent)="cancelAddingEvent($event)"
-                      (saveTimeLineEvent)="saveTimeLineEvent($event)"
-                      (showForm)="showForm = false">
+                    <time-line-form *ngIf="showForm"
+                                    [form]="form"
+                                    [groupName]="'timeLine'"
+                                    [textMinLength]="textMinLength"
+                                    [titleMinLength]="titleMinLength"
+                                    (cancelAddingEvent)="cancelAddingEvent($event)"
+                                    (saveTimeLineEvent)="saveTimeLineEvent($event)"
+                                    (showForm)="showForm = false">
                     </time-line-form>
 
-                    <time-line-list
-                      *ngIf="!showForm"
-                      [events]="club.timeLine">
+                    <time-line-list *ngIf="!showForm"
+                                    [events]="club.timeLine">
                     </time-line-list>
 
                   </div>
                 </div>
               </mat-tab>
 
-              <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}" formGroupName="management">
-                <img *ngIf="club.management && club.management.photoUrl" [src]="club.management.photoUrl"/>
+              <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}"
+                       formGroupName="management">
+                <img *ngIf="club.management && club.management.photoUrl"
+                     [src]="club.management.photoUrl" />
                 <!--<media-uploader
                   [objectId]="club.id"
                   [objectType]="'clubManagement'"
@@ -176,9 +216,8 @@
                 </media-uploader>
                 <br/>-->
 
-                <quill-editor
-                  [style]="{height: '400px'}"
-                  formControlName="photoDescription">
+                <quill-editor [style]="{height: '400px'}"
+                              formControlName="photoDescription">
                 </quill-editor>
 
               </mat-tab>
@@ -191,15 +230,18 @@
                 Dateien
               </mat-tab>
 
-              <mat-tab
-                label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
-                    <creation-form
-                      [form]="form">
+              <mat-tab label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
+                <div fxLayout="row"
+                     fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="20"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
+                    <creation-form [form]="form">
                     </creation-form>
                   </div>
-                  <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100">
+                  <div fxFlex.gt-sm="20"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
                     Publication
                     <!--<publication-form [item]="club"></publication-form>-->
                   </div>
@@ -216,10 +258,14 @@
           <mat-card-actions>
             <div class="button-row">
               <!-- [disabled]="!form.valid || isLoading" -->
-              <button mat-raised-button color="primary" type="submit">
+              <button mat-raised-button
+                      color="primary"
+                      type="submit">
                 {{ club.id ? ('general.clubs.edit.editClub' | translate) : 'general.clubs.edit.saveClub' | translate}}
               </button>
-              <a mat-raised-button color="accent" (click)="cancel()">
+              <a mat-raised-button
+                 color="accent"
+                 (click)="cancel()">
                 {{'general.cancel' | translate}}
               </a>
             </div>

@@ -1,16 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IClub } from '../../../shared/interfaces/club/club.interface';
-import { ClubService } from '../../../shared/services/club/club.service';
-import Quill from 'quill';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
-import { LocationService } from '../../../shared/services/location/location.service';
+import Quill from 'quill';
 import { Observable } from 'rxjs/Observable';
+
+import { IClub } from '../../../shared/interfaces/club/club.interface';
 import { ILocation } from '../../../shared/interfaces/location.interface';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
-import { MemberService } from '../../../shared/services/member/member.service';
 import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.interface';
+import { ClubService } from '../../../shared/services/club/club.service';
+import { LocationService } from '../../../shared/services/location/location.service';
+import { MemberService } from '../../../shared/services/member/member.service';
 
 const parchment = Quill.import('parchment');
 const block = parchment.query('block');
@@ -35,12 +36,14 @@ export class ClubEditComponent implements OnInit {
 
   @ViewChild('description') description: QuillEditorComponent;
 
-  constructor(public clubService: ClubService,
-              private locationService: LocationService,
-              private memberService: MemberService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router) {
+  constructor(
+    public clubService: ClubService,
+    private locationService: LocationService,
+    private memberService: MemberService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
     this.locations$ = locationService.locations$;
     this.members$ = memberService.members$;
     this.showForm = false;
@@ -83,7 +86,7 @@ export class ClubEditComponent implements OnInit {
 
   // remove last element of formControl
   cancelAddingEvent(event): void {
-    const control = <FormArray>this.form.controls[event.formControl];
+    const control = <FormArray> this.form.controls[event.formControl];
     control.removeAt(event.index);
     this.showForm = false;
   }
