@@ -43,8 +43,20 @@ export const MENUITEMS = [
   {
     state: 'locations',
     name: 'location',
-    type: 'link',
+    type: 'sub',
     icon: 'location_on',
+    children: [
+      {
+        state: '',
+        name: 'list',
+        icon: 'list'
+      },
+      {
+        state: 'map',
+        name: 'map',
+        icon: 'map'
+      }
+    ]
   },
   {
     state: 'members',
