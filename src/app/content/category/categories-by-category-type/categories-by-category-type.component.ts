@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { ICategory } from '../../../shared/interfaces/category.interface';
 import { ICategoryType } from '../../../shared/interfaces/category-type.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'categories-by-category-type',
@@ -33,7 +34,7 @@ export class CategoriesByCategoryTypeComponent implements OnChanges {
     }
   }, this.globalChartOptions);
 
-  constructor() {
+  constructor(private translateService: TranslateService) {
   }
 
   ngOnChanges() {
@@ -45,7 +46,9 @@ export class CategoriesByCategoryTypeComponent implements OnChanges {
             categoryCounter++;
           }
         }
-        this.doughnutChartLabels.push(this.categoryTypes[i].link);
+        this.translateService.get('general.menu.' + this.categoryTypes[i].link + '.main').subscribe(
+          (translation: string) => this.doughnutChartLabels.push(translation)
+        );
         this.doughnutChartData.push(categoryCounter);
       }
       this.isDataAvailable = true;
