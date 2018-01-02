@@ -19,6 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocationDetailContactComponent } from './location-detail/location-detail-contact/location-detail-contact.component';
 import { ArticleService } from '../../shared/services/article/article.service';
 import { LocationMapComponent } from './location-map/location-map.component';
+import { LocationDetailMediaComponent } from './location-detail/location-detail-media/location-detail-media.component';
+import { LocationEditComponent } from './location-edit/location-edit.component';
+import { QuillModule } from 'ngx-quill';
+import { UserService } from '../../shared/services/user/user.service';
 
 @NgModule({
   imports: [
@@ -33,12 +37,15 @@ import { LocationMapComponent } from './location-map/location-map.component';
     MatSelectModule,
     MatTableModule,
     MatTabsModule,
+    QuillModule,
     SharedModule
   ],
   declarations: [
     LocationDetailComponent,
     LocationDetailContactComponent,
     LocationDetailMapComponent,
+    LocationDetailMediaComponent,
+    LocationEditComponent,
     LocationListComponent,
     LocationMapComponent,
     LocationsComponent,
