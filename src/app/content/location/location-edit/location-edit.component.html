@@ -1,116 +1,162 @@
-<div class="m-subheader">
-  <div class="d-flex align-items-center">
-    <div class="mr-auto">
-      <h3 class="m-subheader__title">{{'general.menu.location.edit' | translate}}</h3>
-      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-        <li class="m-nav__item m-nav__item--home">
-          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item">
-          <a class="m-nav__link" [routerLink]="['/locations']">
-            <span class="m-nav__link-text">{{'general.menu.location.main' | translate}}</span>
-          </a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item">
-          <a class="m-nav__link" [routerLink]="['/locations/detail', location.id]">
-            <span class="m-nav__link-text">{{location.title}}</span>
-          </a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item">{{'general.edit' | translate}}</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<form novalidate
+      (ngSubmit)="saveLocation()"
+      [formGroup]="form">
+  <div fxLayout="row"
+       fxLayoutWrap="wrap">
 
-<div class="m-content">
+    <div fxFlex.gt-sm="100"
+         fxFlex.gt-xs="100"
+         fxFlex="100">
+      <div class="mat-card-top"
+           *ngIf="categories$ && categoryTypes$ && location; else loadingTemplate">
 
-  <div class="row">
-    <div class="col-xl-8">
-      <div class="m-portlet">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">{{'general.menu.location.edit' | translate}}</h3>
-            </div>
-          </div>
-        </div>
-        <div class="m-portlet__body">
-          <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#m_tabs_1_1">
-                <i class="la la-exclamation-triangle"></i>
-                {{'general.locations.edit.mainTitle' | translate}}
+        <mat-card>
+          <mat-card-title>
+            <mat-icon>mode_edit</mat-icon>
+            {{ location.id ? ('general.menu.location.edit' | translate) : 'general.menu.location.create' | translate }}
+          </mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+
+          <mat-card-content>
+
+            <mat-tab-group [dynamicHeight]="true">
+              <mat-tab label="{{'general.locations.edit.mainTitle' | translate}}">
+
+                <div fxLayout="column">
+
+                  <div>
+                    <mat-form-field fxFlex.gt-sm="24"
+                                    fxFlex.gt-xs="100"
+                                    fxFlex="25">
+                      <input matInput
+                             placeholder="{{'general.locations.edit.namePlaceholder' | translate}}"
+                             formControlName="title"/>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlexOffset="1"
+                                    fxFlex.gt-sm="24"
+                                    fxFlex.gt-xs="100"
+                                    fxFlex="25">
+                      <mat-select placeholder="{{'general.category' | translate}}"
+                                  formControlName="category">
+                        <mat-option *ngFor="let category of (categories$ | async | orderBy: ['title'])"
+                                    [value]="category.id">
+                          {{category.title}}
+                          {{category.assignedCategoryType}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint align="end" *ngIf="!form.controls['category']">
+                        {{'general.locations.edit.chooseLocation' | translate}}
+                      </mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlexOffset="1"
+                                    fxFlex.gt-sm="24"
+                                    fxFlex.gt-xs="100"
+                                    fxFlex="100">
+                      <input matInput
+                             placeholder="{{'general.locations.edit.priceList' | translate}}"
+                             formControlName="prices"/>
+                    </mat-form-field>
+                  </div>
+
+                  <div>
+                    <div fxFlex.gt-sm="49"
+                         fxFlex.gt-xs="100"
+                         fxFlex="100">
+                      <label>{{'general.locations.edit.opening' | translate}}</label><br/>
+                      <quill-editor [style]="{height: '150px'}"
+                                    formControlName="opening">
+                      </quill-editor>
+                    </div>
+
+
+                    <div fxFlexOffset="1"
+                         fxFlex.gt-sm="50"
+                         fxFlex.gt-xs="100"
+                         fxFlex="100">
+                      <label>{{'general.description' | translate}}</label><br/>
+                      <quill-editor [style]="{height: '150px'}"
+                                    formControlName="text">
+                      </quill-editor>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab
+                label="{{'general.locations.edit.addressTitle' | translate}} {{'general.and' | translate }} {{'general.locations.edit.contactTitle' | translate}}">
+                <div fxLayout="row"
+                     fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="49"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
+                    <location-edit-address
+                      [form]="form">
+                    </location-edit-address>
+                  </div>
+                  <div fxFlexOffset="1"
+                       fxFlex.gt-sm="50"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
+                    <location-edit-contact
+                      (addLocationContact)="addLocationContact($event)"
+                      [form]="form">
+                    </location-edit-contact>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="{{ 'general.locations.edit.mediaTitle' | translate }}">
+                Dateien
+              </mat-tab>
+
+              <mat-tab
+                label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
+                <div fxLayout="row"
+                     fxLayoutWrap="wrap">
+                  <div fxFlex.gt-sm="20"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
+                    <creation-form [form]="form"></creation-form>
+                  </div>
+                  <div fxFlex.gt-sm="20"
+                       fxFlex.gt-xs="100"
+                       fxFlex="100">
+                    Publication
+                    <!--<publication-form [form]="location"></publication-form>-->
+                  </div>
+                </div>
+              </mat-tab>
+
+
+            </mat-tab-group>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <div class="button-row">
+              <!-- [disabled]="!form.valid || isLoading" -->
+              <button mat-raised-button
+                      color="primary"
+                      type="submit">
+                {{ location.id
+                ? ('general.locations.edit.editLocation' | translate)
+                : 'general.locations.edit.saveLocation' | translate}}
+              </button>
+              <a mat-raised-button
+                 color="accent"
+                 (click)="cancel()">
+                {{'general.cancel' | translate}}
               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">
-                <i class="fa fa-clock-o"></i>
-                {{'general.tables.colTitles.creation' | translate }}
-                {{'general.and' | translate }}
-                {{'general.tables.colTitles.publication' | translate }}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">
-                <i class="fa fa-address-card"></i>
-                {{'general.locations.edit.addressTitle' | translate}}
-                {{'general.and' | translate }}
-                {{'general.locations.edit.contactTitle' | translate}}
-              </a>
-            </li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
-              <location-edit-main
-                [form]="form"
-                [categoryTypes]="categoryTypes | async | filterBy: ['link'] : 'location'"
-                [categories]="categories$ | async">
-              </location-edit-main>
             </div>
-            <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-              <div class="row">
-                <div class="col-xl-6">
-                  <creation-form
-                    [form]="form"
-                    [users]="users$ | async">
-                  </creation-form>
-                </div>
-                <div class="col-xl-6">
-                  <publication-form
-                    [item]="location">
-                  </publication-form>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
-              <div class="row">
-                <div class="col-xl-6">
-                  <location-edit-address
-                    [form]="form">
-                  </location-edit-address>
-                </div>
-                <div class="col-xl-6">
-                  <location-edit-contact
-                    [members]="members$ | async"
-                    [location]="location">
-                  </location-edit-contact>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="m-portlet__foot text-right">
-          <button class="btn btn-success" (click)="saveLocation()">
-            {{'general.locations.edit.updateLocation' | translate }}
-          </button>
-          <button class="btn btn-danger" (click)="cancel()">{{'general.cancel' | translate}}</button>
-        </div>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
+  </div>
+</form>
 
+<!--
     <div class="col-xl-4">
       <div class="m-portlet">
         <div class="m-portlet__head">
@@ -136,33 +182,12 @@
           <div class="text-center m--margin-top-15">
             <button class="btn btn-primary" (click)="toggleUploader()" *ngIf="!showUploader">
               {{'general.locations.edit.uploadImage' | translate}}
-            </button>-->
-          </div>
+            </button>
+        </div>
 
-        </div>
-      </div>
-
-      <div class="m-portlet">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">{{'general.locations.detail.mapTitle' | translate}}</h3>
-            </div>
-          </div>
-        </div>
-        <div class="m-portlet__body">
-          <location-detail-map
-            [location]="location">
-          </location-detail-map>
-        </div>
       </div>
     </div>
 
-  </div>
-</div>
-
 <ng-template #noLogoTemplate>
-  <div class="alert alert-warning">
-    <strong>{{ 'general.warning' | translate }}</strong> {{'general.locations.edit.noLogo' | translate}}
-  </div>
-</ng-template>
+  {{'general.locations.edit.noLogo' | translate}}
+</ng-template> -->

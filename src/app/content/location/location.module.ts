@@ -22,7 +22,8 @@ import { LocationMapComponent } from './location-map/location-map.component';
 import { LocationDetailMediaComponent } from './location-detail/location-detail-media/location-detail-media.component';
 import { LocationEditComponent } from './location-edit/location-edit.component';
 import { QuillModule } from 'ngx-quill';
-import { UserService } from '../../shared/services/user/user.service';
+import { LocationEditAddressComponent } from './location-edit/location-edit-address/location-edit-address.component';
+import { LocationEditContactComponent } from './location-edit/location-edit-contact/location-edit-contact.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,9 @@ import { UserService } from '../../shared/services/user/user.service';
     LocationDetailContactComponent,
     LocationDetailMapComponent,
     LocationDetailMediaComponent,
+    LocationEditAddressComponent,
     LocationEditComponent,
+    LocationEditContactComponent,
     LocationListComponent,
     LocationMapComponent,
     LocationsComponent,
