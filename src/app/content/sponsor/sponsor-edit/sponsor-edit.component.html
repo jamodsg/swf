@@ -12,71 +12,88 @@
 
           <mat-card-content>
 
-            <div fxLayout="row" fxLayoutWrap="wrap" class="form-container">
+            <mat-tab-group [dynamicHeight]="true">
+              <mat-tab label="{{'general.sponsors.edit.mainTitle' | translate}}">
+                <div fxLayout="row" fxLayoutWrap="wrap" class="form-container">
 
-              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field hintLabel="Max {{titleMaxLength}} characters" style="width: 95%">
-                  <input matInput maxlength="{{titleMaxLength}}"
-                         placeholder="{{'general.sponsors.edit.title' | translate}}"
-                         formControlName="title">
-                  <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
-                </mat-form-field>
-              </div>
+                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field hintLabel="Max {{titleMaxLength}} characters" style="width: 95%">
+                      <input matInput maxlength="{{titleMaxLength}}"
+                             placeholder="{{'general.sponsors.edit.title' | translate}}"
+                             formControlName="title">
+                      <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
+                    </mat-form-field>
+                  </div>
 
-              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field style="width: 95%">
-                  <input matInput
-                         placeholder="{{'general.sponsors.edit.link' | translate}}"
-                         formControlName="externalLink">
-                </mat-form-field>
-              </div>
+                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field style="width: 95%">
+                      <input matInput
+                             placeholder="{{'general.sponsors.edit.link' | translate}}"
+                             formControlName="externalLink">
+                    </mat-form-field>
+                  </div>
 
-              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field style="width: 95%">
-                  <input matInput
-                         placeholder="{{'general.sponsors.edit.startDate' | translate}}"
-                         formControlName="startDate">
-                </mat-form-field>
-              </div>
+                </div>
 
-              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field style="width: 95%">
-                  <input matInput
-                         placeholder="{{'general.sponsors.edit.endDate' | translate}}"
-                         formControlName="endDate">
-                </mat-form-field>
-              </div>
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
+                  <label>{{'general.sponsors.edit.description' | translate}}</label>
+                  <quill-editor [style]="{height: '250px'}"
+                                formControlName="description"
+                                placeholder="{{'general.sponsors.edit.description' | translate}}">
+                  </quill-editor>
+                </div>
+              </mat-tab>
 
-
-              <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
-                <div class="example-container">
-                  <mat-form-field>
-                    <mat-select placeholder="{{'general.sponsors.edit.category' | translate}}"
-                                formControlName="assignedCategories" multiple>
-                      <!--<mat-option *ngFor="let category of categories | filterBy: ['assignedCategoryType']: categoryTypes[0].id"
-                                  [value]="category.id">
-                        {{category.title}}
-                      </mat-option>-->
-                    </mat-select>
+              <mat-tab label="{{'general.sponsors.edit.moreTitle' | translate}}">
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-form-field style="width: 95%">
+                    <input matInput
+                           placeholder="{{'general.sponsors.edit.startDate' | translate}}"
+                           formControlName="startDate">
                   </mat-form-field>
                 </div>
-              </div>
 
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
-                <label>{{'general.sponsors.edit.description' | translate}}</label>
-                <quill-editor [style]="{height: '250px'}"
-                              formControlName="description"
-                              placeholder="{{'general.sponsors.edit.description' | translate}}">
-                </quill-editor>
-              </div>
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-form-field style="width: 95%">
+                    <input matInput
+                           placeholder="{{'general.sponsors.edit.endDate' | translate}}"
+                           formControlName="endDate">
+                  </mat-form-field>
+                </div>
 
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
-                <label>{{'general.sponsors.edit.info' | translate}}</label>
-                <quill-editor [style]="{height: '250px'}"
-                              formControlName="internalInfo"
-                              placeholder="{{'general.sponsors.edit.info' | translate}}">
-                </quill-editor>
-              </div>
+
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+                  <div class="example-container">
+                    <mat-form-field>
+                      <mat-select placeholder="{{'general.sponsors.edit.category' | translate}}"
+                                  formControlName="assignedCategories" multiple>
+                        <!--<mat-option *ngFor="let category of categories | filterBy: ['assignedCategoryType']: categoryTypes[0].id"
+                                    [value]="category.id">
+                          {{category.title}}
+                        </mat-option>-->
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
+                  <label>{{'general.sponsors.edit.info' | translate}}</label>
+                  <quill-editor [style]="{height: '250px'}"
+                                formControlName="internalInfo"
+                                placeholder="{{'general.sponsors.edit.info' | translate}}">
+                  </quill-editor>
+                </div>
+              </mat-tab>
+
+            </mat-tab-group>
+
+
+
+
+
+
+
+
 
               <!--
               <div class="col-xl-6">

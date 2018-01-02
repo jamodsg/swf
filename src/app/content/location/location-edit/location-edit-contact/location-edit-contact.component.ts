@@ -30,7 +30,6 @@ export class LocationEditContactComponent {
     /* if (this.showForm) {
       this.addAssignedContact.emit(true);
     } */
-    this.form.reset();
   }
 
   toggleList(i: number) {

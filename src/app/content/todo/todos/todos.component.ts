@@ -23,7 +23,7 @@ export class TodosComponent implements OnInit {
       subTasks: [
         {
           cssClass: 'danger', title: 'Nächstes Spiel (letzte Spiele gegen dieses Team, Serien von Siegen oder\n' +
-            '  Niederlagen, Livebericht, Schiedsrichter, Fotos des Spiels, Timeline mit den Toren und Karten)'
+          '  Niederlagen, Livebericht, Schiedsrichter, Fotos des Spiels, Timeline mit den Toren und Karten)'
         },
         { cssClass: 'warning', title: 'Wie spielten die Mannschaften z.B. im Pokal gegeneinander' },
         { cssClass: 'danger', title: 'Wie hat die A-Jugend im Pokal gegen die Mannschaft gespielt' },
@@ -68,7 +68,7 @@ export class TodosComponent implements OnInit {
         {
           cssClass: 'danger',
           title: 'Heim&ndash; und Gastmannschaft, Schiedsrichter, Ergebnis, Startaufstellung, ' +
-            'Auswechselungen, Karten, Torschützen, sonstige Vorkommnisse'
+          'Auswechselungen, Karten, Torschützen, sonstige Vorkommnisse'
         }
       ]
     },
@@ -77,18 +77,18 @@ export class TodosComponent implements OnInit {
       subTasks: [
         {
           cssClass: 'danger', title: 'Allgemeine Daten ' +
-            '(Beginn, Ende des Turniers), was ist das Dorfturnier, erfolgreichste Sieger'
+          '(Beginn, Ende des Turniers), was ist das Dorfturnier, erfolgreichste Sieger'
         },
         { cssClass: 'warning', title: 'Spielplan als Download' },
         { cssClass: 'danger', title: 'Download der Anträge zur Mannschaftsmeldung, Online-Anmeldung' },
         { cssClass: 'warning', title: 'Satzung und Regelwerk als HTML-Ansicht und als Download (PDF)' },
         {
           cssClass: 'danger', title: 'Vorstellung der ' +
-            'Bands (Flyer, Videos, Youtube-Links, Text), Export in ical, Programmhinweise (Text)'
+          'Bands (Flyer, Videos, Youtube-Links, Text), Export in ical, Programmhinweise (Text)'
         },
         {
           cssClass: 'warning', title: 'Vorstellung der ' +
-            'Mannschaften (Spielfarbe, Mannschaftsfoto, Einzelfotos, Text, bisherige Erfolge)'
+          'Mannschaften (Spielfarbe, Mannschaftsfoto, Einzelfotos, Text, bisherige Erfolge)'
         },
         { cssClass: 'danger', title: 'Spielpaarungen (evtl. automatischer Generator)' },
         { cssClass: 'warning', title: 'Tabellenstände (evtl. automatische Berechnung)' },
@@ -102,7 +102,7 @@ export class TodosComponent implements OnInit {
         { cssClass: 'warning', title: 'E-Mail an Administratoren zur Freischaltung des Accounts' },
         {
           cssClass: 'danger', title: 'Benutzergruppen ' +
-            '(mindestens Gast, freigeschaltete Benutzer und Administratoren)'
+          '(mindestens Gast, freigeschaltete Benutzer und Administratoren)'
         },
         { cssClass: 'warning', title: 'Benutzerrollen (Redakteure, Team-Leiter, Administratoren)' },
         { cssClass: 'danger', title: 'Benutzerliste (Sperren, Aktivieren von Accounts, Rechte zuweisen)' }
@@ -116,12 +116,12 @@ export class TodosComponent implements OnInit {
         { cssClass: 'warning', title: 'Kontaktformular' },
         {
           cssClass: 'danger', title: 'Cronjobs: Geburtstagserinnerung, ' +
-            'Spieler der Woche, Mannschaft des Monats, Ehrenmitglied der Saison,\n' +
-            '  Sponsor des Monats'
+          'Spieler der Woche, Mannschaft des Monats, Ehrenmitglied der Saison,\n' +
+          '  Sponsor des Monats'
         },
         {
           cssClass: 'warning', title: 'Veranstaltungen -> ' +
-            'Flyer hochladen, Plakate / Flyer etc. auf der Startseite anzeigen'
+          'Flyer hochladen, Plakate / Flyer etc. auf der Startseite anzeigen'
         },
         { cssClass: 'danger', title: 'Sport-Nachrichten aus aller Welt' },
         { cssClass: 'warning', title: 'Tags, Kommentare, Likes, Social Sharing (Facebook, Twitter, Email)' },

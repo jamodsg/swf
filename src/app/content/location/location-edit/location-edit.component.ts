@@ -24,12 +24,12 @@ export class LocationEditComponent implements OnInit {
   public categoryTypes$: Observable<ICategoryType[]>;
 
   constructor(private router: Router,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              public categoryService: CategoryService,
-              public memberService: MemberService,
-              public categoryTypeService: CategoryTypeService,
-              public locationService: LocationService) {
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    public categoryService: CategoryService,
+    public memberService: MemberService,
+    public categoryTypeService: CategoryTypeService,
+    public locationService: LocationService) {
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
   }
@@ -79,7 +79,7 @@ export class LocationEditComponent implements OnInit {
     control.push(this.initLocationContact(contact));
   }
 
-  initLocationContact(contact: ILocationContact){
+  initLocationContact(contact: ILocationContact) {
     return this.fb.group({
       isMember: contact ? contact.isMember : '',
       description: contact ? contact.description : '',
@@ -91,7 +91,7 @@ export class LocationEditComponent implements OnInit {
     });
   }
 
-  removeAssignedContact(contact: ILocationContact){
+  removeAssignedContact(contact: ILocationContact) {
     console.log(contact);
   }
 

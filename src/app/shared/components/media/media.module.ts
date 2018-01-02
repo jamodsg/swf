@@ -5,6 +5,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
 import { FileUploadModule } from 'ng2-file-upload';
+import { MediaCenterComponent } from './media-center/media-center.component';
+import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
+import { MediaGalleryFormComponent } from './media-gallery-form/media-gallery-form.component';
+import { MediaGalleryItemComponent } from './media-gallery-item/media-gallery-item.component';
+import { MediaGalleryListComponent } from './media-gallery-list/media-gallery-list.component';
 
 @NgModule({
   imports: [
@@ -15,6 +20,11 @@ import { FileUploadModule } from 'ng2-file-upload';
     TranslateModule
   ],
   declarations: [
+    MediaCenterComponent,
+    MediaGalleryComponent,
+    MediaGalleryFormComponent,
+    MediaGalleryItemComponent,
+    MediaGalleryListComponent,
     MediaUploaderComponent,
     /*
     FileSelectDirective,
