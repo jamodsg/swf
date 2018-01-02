@@ -427,16 +427,16 @@
           "showContactList": "Zur Übersicht"
         },
         "descriptionPlaceHolder": "Bitte eine kurze Beschreibung des Treffpunktes eingeben",
+        "editLocation": "Änderungen speichern",
         "mainTitle": "Wichtigste Daten",
         "mapTitle": "Kartenansicht",
+        "mediaTitle": "Verknüpfte Dateien",
         "namePlaceholder": "Name des Treffpunktes / der Spielstätte",
         "noLogo": "Kein Foto vorhanden",
         "opening": "Öffnungszeiten",
         "photoTitle": "Foto des Treffpunktes",
-        "priceList": "Preise",
-        "pricesPlaceholder": "Link zur Preisliste",
+        "priceList": "Link zur Preisliste",
         "saveLocation": "Treffpunkt speichern",
-        "updateLocation": "Änderungen speichern",
         "uploadImage": "Foto hochladen"
       },
       "list": {
