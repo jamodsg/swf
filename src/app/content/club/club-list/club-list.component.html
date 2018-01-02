@@ -12,9 +12,15 @@
       <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
       <mat-card-content [innerHtml]="club.description"></mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" [routerLink]="['/clubs/detail', club.id]">VIEW</button>
-        <button mat-raised-button color="accent" [routerLink]="['/clubs/edit', club.id]">EDIT</button>
-        <button mat-raised-button color="warn" (click)="remove.emit(club)">DELETE</button>
+        <button mat-raised-button color="primary" [routerLink]="['/clubs/detail', club.id]">
+          {{'general.detail' | translate }}
+        </button>
+        <button mat-raised-button color="accent" [routerLink]="['/clubs/edit', club.id]">
+          {{'general.edit' | translate }}
+        </button>
+        <button mat-raised-button color="warn" (click)="remove.emit(club)">
+          {{'general.delete' | translate }}
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

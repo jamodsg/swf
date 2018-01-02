@@ -50,7 +50,9 @@
                                         [value]="location.id">{{location.title}}
                             </mat-option>
                           </mat-select>
-                          <mat-hint align="end">{{'general.clubs.edit.chooseLocation' | translate}}</mat-hint>
+                          <mat-hint align="end" *ngIf="!form.controls['assignedLocation']">
+                            {{'general.clubs.edit.chooseLocation' | translate}}
+                          </mat-hint>
                         </mat-form-field>
                       </div>
                     </div>
