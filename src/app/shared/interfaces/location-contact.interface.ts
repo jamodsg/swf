@@ -13,5 +13,4 @@ export interface ILocationContact {
 
   contact?: IContact;
   address?: IAddress;
-  locationId: string;
 }
