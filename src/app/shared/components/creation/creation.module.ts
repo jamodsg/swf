@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
 import { MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
+import { UserService } from '../../services/user/user.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule } 
     CreationFormComponent
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    UserService
   ]
 })
 export class CreationModule {
