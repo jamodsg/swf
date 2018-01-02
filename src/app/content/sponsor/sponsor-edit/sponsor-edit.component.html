@@ -107,34 +107,32 @@
   </div>
   -->
 
+            <!--<creation-form class="form-container"
+                           [form]="form"
+                           [users]="users$ | async">
+            </creation-form>-->
+          </mat-card-content>
+
+          <mat-card-actions>
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
+                {{'general.sponsors.edit.saveSponsor' | translate}}
+              </button>
+              <a mat-raised-button color="accent" (click)="cancel()">
+                {{'general.cancel' | translate}}
+              </a>
+              <a mat-raised-button color="warn"
+                 (click)="removeSponsor()"
+                 *ngIf="sponsor.id">
+                {{'general.sponsors.list.removeCategory' | translate}}
+              </a>
+            </div>
+          </mat-card-actions>
+
+        </mat-card>
       </div>
 
-      <!--<creation-form class="form-container"
-                     [form]="form"
-                     [users]="users$ | async">
-      </creation-form>-->
-      </mat-card-content>
-
-      <mat-card-actions>
-        <div class="button-row">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
-            {{'general.sponsors.edit.saveSponsor' | translate}}
-          </button>
-          <a mat-raised-button color="accent" (click)="cancel()">
-            {{'general.cancel' | translate}}
-          </a>
-          <a mat-raised-button color="warn"
-             (click)="removeSponsor()"
-             *ngIf="sponsor.id">
-            {{'general.sponsors.list.removeCategory' | translate}}
-          </a>
-        </div>
-      </mat-card-actions>
-
-      </mat-card>
     </div>
-
-  </div>
 </form>
 
 <ng-template #loadingTemplate>
