@@ -5,12 +5,6 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { TaskService } from '../../../services/task/task.service';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 
-import Quill from 'quill';
-const parchment = Quill.import('parchment');
-const block = parchment.query('block');
-block.tagName = 'DIV';
-Quill.register(block, true);
-
 @Component({
   selector: 'task-form',
   templateUrl: './task-form.component.html'
