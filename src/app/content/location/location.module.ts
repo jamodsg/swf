@@ -18,6 +18,7 @@ import { MapsService } from '../../shared/services/maps/maps.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationDetailContactComponent } from './location-detail/location-detail-contact/location-detail-contact.component';
 import { ArticleService } from '../../shared/services/article/article.service';
+import { LocationMapComponent } from './location-map/location-map.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { ArticleService } from '../../shared/services/article/article.service';
     LocationDetailContactComponent,
     LocationDetailMapComponent,
     LocationListComponent,
+    LocationMapComponent,
     LocationsComponent,
     LocationDetailMainComponent
   ],

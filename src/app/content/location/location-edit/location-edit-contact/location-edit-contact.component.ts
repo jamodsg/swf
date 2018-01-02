@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MemberService } from '../../../../../../shared/services/member/member.service';
-import { ILocation } from '../../../../../../shared/interfaces/location.interface';
-import { IMember } from '../../../../../../shared/interfaces/member.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ILocationContact } from '../../../../../../shared/interfaces/location-contact.interface';
-import { IContact } from '../../../../../../shared/interfaces/contact.interface';
-import { LocationService } from '../../../../../../shared/services/location/location.service';
+import { ILocation } from '../../../../shared/interfaces/location.interface';
+import { IMember } from '../../../../shared/interfaces/member/member.interface';
+import { ILocationContact } from '../../../../shared/interfaces/location-contact.interface';
+import { MemberService } from '../../../../shared/services/member/member.service';
+import { LocationService } from '../../../../shared/services/location/location.service';
+import { IContact } from '../../../../shared/interfaces/contact.interface';
 
 @Component({
   selector: 'location-edit-contact',

@@ -66,8 +66,8 @@
             <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
               <location-edit-main
                 [form]="form"
-                [categoryTypes]="categoryTypeService.getCategoryTypes() | async | filterBy: ['link'] : 'location'"
-                [categories]="categoryService.getCategories() | async">
+                [categoryTypes]="categoryTypes | async | filterBy: ['link'] : 'location'"
+                [categories]="categories$ | async">
               </location-edit-main>
             </div>
             <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
@@ -75,22 +75,26 @@
                 <div class="col-xl-6">
                   <creation-form
                     [form]="form"
-                    [users]="userService.getUsers() | async"
-                  ></creation-form>
+                    [users]="users$ | async">
+                  </creation-form>
                 </div>
                 <div class="col-xl-6">
-                  <publication-form [item]="location"></publication-form>
+                  <publication-form
+                    [item]="location">
+                  </publication-form>
                 </div>
               </div>
             </div>
             <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
               <div class="row">
                 <div class="col-xl-6">
-                  <location-edit-address [form]="form"></location-edit-address>
+                  <location-edit-address
+                    [form]="form">
+                  </location-edit-address>
                 </div>
                 <div class="col-xl-6">
                   <location-edit-contact
-                    [members]="memberService.getMembers() | async"
+                    [members]="members$ | async"
                     [location]="location">
                   </location-edit-contact>
                 </div>
@@ -121,7 +125,7 @@
           <img [src]="location.imageUrl" class="img-fluid img-thumbnail"
                *ngIf="location.imageUrl; else noLogoTemplate"/>
 
-          <media-uploader
+          <!--<media-uploader
             *ngIf="showUploader"
             [objectId]="location.id"
             [objectType]="objectType"
@@ -132,7 +136,7 @@
           <div class="text-center m--margin-top-15">
             <button class="btn btn-primary" (click)="toggleUploader()" *ngIf="!showUploader">
               {{'general.locations.edit.uploadImage' | translate}}
-            </button>
+            </button>-->
           </div>
 
         </div>
@@ -147,7 +151,9 @@
           </div>
         </div>
         <div class="m-portlet__body">
-          <location-detail-map [location]="location"></location-detail-map>
+          <location-detail-map
+            [location]="location">
+          </location-detail-map>
         </div>
       </div>
     </div>

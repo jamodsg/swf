@@ -1,0 +1,81 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="75" fxFlex="100">
+    <mat-card class="mat-card-top">
+      <mat-card-title>
+        <mat-icon>map</mat-icon>
+        {{'general.menu.location.map' | translate | translate}}
+      </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+
+      <mat-card-content>
+        <agm-map
+          [latitude]="lat"
+          [longitude]="lng"
+          [zoom]="zoom"
+          [disableDefaultUI]="true"
+          [zoomControl]="true">
+
+          <agm-marker
+            *ngFor="let m of markers; let i = index"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [label]="m.label">
+          </agm-marker>
+        </agm-map>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex.gt-sm="25" fxFlex="100">
+
+    <button mat-raised-button
+            color="brand"
+            *ngIf="markers.length > 0"
+            (click)="resetMarkers()">
+      {{'general.locations.map.resetMarkers' | translate}}
+    </button>
+
+    <ul>
+      <li (click)="toggleLocationMarker(location)" style="cursor: hand"
+          *ngFor="let location of locations$ | async | filterBy: ['assignedCategory'] : filterKey| orderBy: ['title']">
+        {{location.title}}
+        <span class="pull-right">
+          <mat-icon *ngIf="selectedLocations.indexOf(location.id) > -1">check</mat-icon>
+        </span>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+
+<!--
+          <div class="m-form__group m-form__group--inline">
+            <div class="m-form__label">
+              <label class="m-label m-label--single">{{ 'general.locations.list.filterTitle' | translate}}:</label>
+            </div>
+            <div class="m-form__control">
+              <div
+                class="btn-group bootstrap-select form-control m-bootstrap-select m-bootstrap-select--solid">
+                <button type="button" class="btn dropdown-toggle bs-placeholder btn-default" role="button"
+                        data-toggle="dropdown" title="{{'general.locations.list.filterTitle' | translate}}">
+              <span class="filter-option pull-left">
+                {{ !filterType  ? ('general.locations.list.allLocations' | translate)
+                : ('general.only' | translate) + ' ' + filterTitle}}
+              </span>
+                  <span class="bs-caret"><span class="caret"></span></span>
+                </button>
+                <div class="dropdown-menu open" role="combobox">
+                  <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                    <li data-original-index="0" [ngClass]="{'selected': filterKey === ''}">
+                      <a tabindex="0" class="" role="option" (click)="setFilter('', null)">
+                        <span class="text">{{'general.locations.list.allLocations' | translate}}</span>
+                        <span [ngClass]="{'glyphicon glyphicon-ok check-mark': filterType === '' }"></span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>-->
