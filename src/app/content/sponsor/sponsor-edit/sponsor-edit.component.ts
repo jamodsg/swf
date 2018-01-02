@@ -30,10 +30,10 @@ export class SponsorEditComponent implements OnInit {
   // private mediaItem: IMediaItem;
 
   constructor(private route: ActivatedRoute,
-              private fb: FormBuilder,
-              private router: Router,
-              // private mediaItemService: MediaItemService,
-              private sponsorService: SponsorService,
+    private fb: FormBuilder,
+    private router: Router,
+    // private mediaItemService: MediaItemService,
+    private sponsorService: SponsorService,
               // public categoryTypeService: CategoryTypeService,
               /*public categoryService: CategoryService*/) {
   }

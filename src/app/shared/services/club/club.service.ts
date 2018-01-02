@@ -41,9 +41,9 @@ export class ClubService {
     return Observable.of({
       title: '',
       description: '',
-      info: { },
+      info: {},
       creation: this.authService.getCreation(),
-      fussballde: { },
+      fussballde: {},
       assignedFiles: [],
       timeLine: [],
       assignedLocation: null,

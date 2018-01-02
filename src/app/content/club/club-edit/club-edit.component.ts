@@ -86,7 +86,7 @@ export class ClubEditComponent implements OnInit {
 
   // remove last element of formControl
   cancelAddingEvent(event): void {
-    const control = <FormArray> this.form.controls[event.formControl];
+    const control = <FormArray>this.form.controls[event.formControl];
     control.removeAt(event.index);
     this.showForm = false;
   }

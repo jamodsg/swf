@@ -21,7 +21,7 @@ import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } fr
 })
 export class CalendarDialogComponent {
   constructor(public dialogRef: MatDialogRef<CalendarDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 }
 

@@ -35,11 +35,11 @@ export class CategoryEditComponent implements OnInit {
   public titleMaxLength: number = 30;
 
   constructor(private categoryService: CategoryService,
-              private categoryTypeService: CategoryTypeService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router,
-              private userService: UserService) {
+    private categoryTypeService: CategoryTypeService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService) {
   }
 
   ngOnInit() {

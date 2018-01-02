@@ -17,9 +17,9 @@ export class CategoryDetailComponent implements OnInit {
   public categoryTypes$: Observable<ICategoryType[]>;
 
   constructor(private categoryService: CategoryService,
-              private categoryTypeService: CategoryTypeService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private categoryTypeService: CategoryTypeService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
   }
 

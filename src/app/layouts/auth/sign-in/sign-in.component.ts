@@ -30,11 +30,11 @@ export class SignInComponent implements OnInit {
   public error: string;
 
   constructor(private alertService: AlertService,
-              private authService: AuthService,
-              private cfr: ComponentFactoryResolver,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router) {
+    private authService: AuthService,
+    private cfr: ComponentFactoryResolver,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit() {

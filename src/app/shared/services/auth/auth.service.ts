@@ -34,7 +34,7 @@ export class AuthService implements OnDestroy {
         if (user) {
           this.updateOnConnect();
           this.updateOnIdle();
-          return this.afs.doc<IUser>(`users/${ user.uid }`).valueChanges();
+          return this.afs.doc<IUser>(`users/${user.uid}`).valueChanges();
         } else {
           return Observable.of(null);
         }

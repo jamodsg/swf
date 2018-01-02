@@ -12,7 +12,7 @@ export class LocationService {
   locations$: Observable<ILocation[]>;
 
   constructor(private afs: AngularFirestore,
-              private authService: AuthService) {
+    private authService: AuthService) {
     this.collectionRef = this.afs.collection<ILocation>(this.path);
     this.locations$ = this.collectionRef.valueChanges();
   }

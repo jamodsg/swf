@@ -22,11 +22,11 @@ export class LocationDetailComponent implements OnInit {
   members$: Observable<IMember[]>;
 
   constructor(private route: ActivatedRoute,
-              // private articleService: ArticleService,
-              public categoryService: CategoryService,
-              public memberService: MemberService,
-              private locationService: LocationService,
-              private router: Router) {
+    // private articleService: ArticleService,
+    public categoryService: CategoryService,
+    public memberService: MemberService,
+    private locationService: LocationService,
+    private router: Router) {
     // this.articles$ = articleService.articles$;
     this.categories$ = categoryService.categories$;
     this.members$ = memberService.members$;

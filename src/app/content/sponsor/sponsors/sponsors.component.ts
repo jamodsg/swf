@@ -19,8 +19,8 @@ export class SponsorsComponent {
   public categoryTypes$: Observable<ICategoryType[]>;
 
   constructor(public categoryService: CategoryService,
-              public categoryTypeService: CategoryTypeService,
-              public sponsorService: SponsorService) {
+    public categoryTypeService: CategoryTypeService,
+    public sponsorService: SponsorService) {
 
     /* this.categories$ = categoryService.categories$.map((categories: ICategory[]) => {
         return categories.filter((category: ICategory) => {

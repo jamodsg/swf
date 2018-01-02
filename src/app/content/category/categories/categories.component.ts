@@ -19,8 +19,8 @@ export class CategoriesComponent {
   // teams$: Observable<ITeam[]>; */
 
   constructor(// private articleService: ArticleService,
-              private categoryService: CategoryService,
-              private categoryTypeService: CategoryTypeService,
+    private categoryService: CategoryService,
+    private categoryTypeService: CategoryTypeService,
               /* private locationService: LocationService,
               private sponsorService: SponsorService,
               private teamService: TeamService */) {
