@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IAddress } from '../../../../../../sfw-metro/src/app/shared/interfaces/address.interface';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { IAddress } from '../../interfaces/address.interface';
 
 @Injectable()
 export class MapsService {
