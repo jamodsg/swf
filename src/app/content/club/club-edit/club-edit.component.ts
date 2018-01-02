@@ -2,9 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
-import Quill from 'quill';
 import { Observable } from 'rxjs/Observable';
-
 import { IClub } from '../../../shared/interfaces/club/club.interface';
 import { ILocation } from '../../../shared/interfaces/location.interface';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
@@ -13,15 +11,9 @@ import { ClubService } from '../../../shared/services/club/club.service';
 import { LocationService } from '../../../shared/services/location/location.service';
 import { MemberService } from '../../../shared/services/member/member.service';
 
-const parchment = Quill.import('parchment');
-const block = parchment.query('block');
-block.tagName = 'DIV';
-Quill.register(block, true);
-
 @Component({
   selector: 'club-edit',
-  templateUrl: 'club-edit.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'club-edit.component.html'
 })
 export class ClubEditComponent implements OnInit {
 

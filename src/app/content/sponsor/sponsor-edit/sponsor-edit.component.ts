@@ -4,12 +4,6 @@ import { ISponsor } from '../../../shared/interfaces/sponsor.interface';
 import { SponsorService } from '../../../shared/services/sponsor/sponsor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
-import Quill from 'quill';
-
-const parchment = Quill.import('parchment');
-const block = parchment.query('block');
-block.tagName = 'DIV';
-Quill.register(block, true);
 
 @Component({
   selector: 'sponsor-edit',

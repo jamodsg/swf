@@ -7,14 +7,8 @@ import { ICategoryType } from '../../../shared/interfaces/category-type.interfac
 import { CategoryService } from '../../../shared/services/category/category.service';
 import { CategoryTypeService } from '../../../shared/services/category-type/category-type.service';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
-import Quill from 'quill';
 import { UserService } from '../../../shared/services/user/user.service';
 import { IUser } from '../../../shared/interfaces/user.interface';
-
-const parchment = Quill.import('parchment');
-const block = parchment.query('block');
-block.tagName = 'DIV';
-Quill.register(block, true);
 
 @Component({
   selector: 'category-edit',
