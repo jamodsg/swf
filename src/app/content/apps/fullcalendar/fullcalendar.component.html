@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span fxFlex fxHide="false" fxHide.gt-xs>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+    <span fxFlex fxHide="false" fxHide.gt-xs>{{ viewDate }}</span> <!-- | calendarDate:(view + 'ViewTitle'):'en' -->
   </mat-toolbar-row>
-  <mat-toolbar-row>   
-    <span fxFlex fxShow="false" fxShow.gt-xs>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+  <mat-toolbar-row>
+    <span fxFlex fxShow="false" fxShow.gt-xs>{{ viewDate }}</span> <!-- | calendarDate:(view + 'ViewTitle'):'en' -->
 
     <div fxShow="false" fxShow.gt-xs>
       <button mat-button (click)="view = 'month'" [class.active]="view === 'month'">Month</button>

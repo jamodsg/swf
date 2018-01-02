@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="text-right">
+      <a class="btn btn-warning" (click)="toggleForm()">
+        <i [ngClass]="showForm ? 'fa fa-list' : 'fa fa-plus'"></i>
+        {{ showForm ?
+        ('general.locations.edit.contact.showContactList' | translate) :
+        ('general.locations.edit.contact.createContact' | translate)}}
+      </a>
+    </div>
+
+    <br/>
+
+    <div *ngIf="!showForm; else formTemplate">
+      <div *ngIf="location.assignedContacts; else noContactsFound">
+        <location-contact-list [location]="location" [members]="members"></location-contact-list>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noContactsFound>
+  <div class="alert alert-info">
+    <strong>{{ 'general.info' | translate}}</strong> {{ 'general.locations.edit.contact.noContacts' | translate}}
+  </div>
+</ng-template>
+
+
+<ng-template #formTemplate>
+
+  <div class="text-center" *ngIf="showList === 0">
+    <p class="text-left">{{ 'general.locations.edit.contact.createFromMemberListOrNewContact' | translate}}</p>
+    <button class="btn btn-primary" (click)="toggleList(1)">
+      {{ 'general.locations.edit.contact.fromMemberList' | translate}}
+    </button>
+    <button class="btn btn-primary" (click)="toggleList(2)">
+      {{ 'general.locations.edit.contact.fromForm' | translate}}
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" *ngIf="showList === 1" [formGroup]="memberForm">
+      <div class="form-group form-md-line-input">
+        <label class="control-label">{{'general.locations.edit.contact.member' | translate}}</label>
+        <select class="form-control" formControlName="assignedMember">
+          <option value="" selected disabled>{{'general.locations.edit.contact.chooseMember' | translate}}</option>
+          <option
+            *ngFor="let member of memberService.getMembers() | async | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
+            [value]="member.id">
+            {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label class="control-label">{{'general.locations.edit.contact.description' | translate}}</label>
+        <textarea class="form-control" formControlName="description"
+                  placeholder="{{'general.locations.edit.contact.description' | translate}}">
+        </textarea>
+      </div>
+    </div>
+
+    <div class="col-xl-12" *ngIf="showList === 2" [formGroup]="contactForm">
+      <div class="form-body">
+
+        <div class="form-group form-md-line-input">
+          <label>{{'general.locations.edit.contact.firstName' | translate}}</label>
+          <input class="form-control" formControlName="firstName"
+                 placeholder="{{'general.locations.edit.contact.firstName' | translate}}">
+        </div>
+
+        <div class="form-group form-md-line-input">
+          <label>{{'general.locations.edit.contact.lastName' | translate}}</label>
+          <input class="form-control" formControlName="lastName"
+                 placeholder="{{'general.locations.edit.contact.lastName' | translate}}">
+        </div>
+      </div>
+
+      <div class="form-body" formGroupName="contact">
+        <div class="form-group form-md-line-input">
+          <label>{{'general.locations.edit.contact.phone' | translate}}</label>
+          <input class="form-control" formControlName="phoneMobile"
+                 placeholder="{{'general.locations.edit.contact.phone' | translate}}">
+        </div>
+
+        <div class="form-group form-md-line-input">
+          <label>{{'general.locations.edit.contact.email' | translate}}</label>
+          <input class="form-control" formControlName="email"
+                 placeholder="{{'general.locations.edit.contact.email' | translate}}">
+        </div>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group form-md-line-input">
+          <label class="control-label">{{'general.locations.edit.contact.description' | translate}}</label>
+          <textarea class="form-control" formControlName="description"
+                    placeholder="{{'general.locations.edit.contact.description' | translate}}">
+        </textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-12 text-right" *ngIf="showList !== 0">
+      <button class="btn btn-success" (click)="saveContact()">
+        {{'general.locations.edit.contact.saveContact' | translate}}
+      </button>
+      <button class="btn btn-danger" (click)="toggleForm()">{{'general.cancel' | translate}}</button>
+    </div>
+
+  </div>
+</ng-template>

@@ -1,0 +1,34 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xl-12" formGroupName="address">
+    <div class="form-body">
+      <div class="form-group form-md-line-input">
+        <label translate>{{'general.street'}}</label>
+        <input class="form-control" formControlName="streetName"
+                placeholder="{{'general.street' | translate }}" required>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label translate>{{'general.houseNumber'}}</label>
+        <input type="number" class="form-control" formControlName="houseNumber"
+               placeholder="{{'general.houseNumber' | translate}}">
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label translate>{{'general.zip'}}</label>
+        <input class="form-control" formControlName="zip"
+               placeholder="{{'general.zip' | translate }}" >
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label translate>{{'general.city'}}</label>
+        <input  class="form-control" formControlName="city" placeholder="{{'general.city' | translate }}">
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label translate>{{'general.county'}}</label>
+        <input  class="form-control" formControlName="county" placeholder="{{'general.county' | translate }}">
+      </div>
+    </div>
+  </div>
+</div>
+

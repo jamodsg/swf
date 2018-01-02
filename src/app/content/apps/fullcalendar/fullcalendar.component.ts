@@ -1,45 +1,29 @@
-import { Component, ChangeDetectionStrategy, Inject, ViewChild, TemplateRef } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
-import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays } from 'date-fns';
+import { Subject } from 'rxjs/Subject';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 
 @Component({
   selector: 'app-calendar-dialog',
   template: `
-  <h5 class="mt-0">Event action occurred</h5>
-  <div>
-    Action:
-    <pre>{{ data?.action }}</pre>
-  </div>
-  <div>
-    Event:
-    <pre>{{ data?.event | json }}</pre>
-  </div>
-  <button md-button type="button" (click)="dialogRef.close()">Close dialog</button>`
+    <h5 class="mt-0">Event action occurred</h5>
+    <div>
+      Action:
+      <pre>{{ data?.action }}</pre>
+    </div>
+    <div>
+      Event:
+      <pre>{{ data?.event | json }}</pre>
+    </div>
+    <button md-button type="button" (click)="dialogRef.close()">Close dialog</button>`
 })
 export class CalendarDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<CalendarDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<CalendarDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 }
-
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours
-} from 'date-fns';
-
-import { Subject } from 'rxjs/Subject';
-
-/* import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar'; */
 
 const colors: any = {
   red: {
@@ -64,7 +48,7 @@ const colors: any = {
 })
 export class FullcalendarComponent {
 
-  /*
+
   dialogRef: MatDialogRef<CalendarDialogComponent>;
   lastCloseResult: string;
   actionsAlignment: string;
@@ -96,12 +80,14 @@ export class FullcalendarComponent {
 
   actions: CalendarEventAction[] = [{
     label: '<i class="editButton"></i>',
-    onClick: ({event}: {event: CalendarEvent}): void => {
+    onClick: ({ event }: { event: CalendarEvent }): void => {
       this.handleEvent('Edited', event);
     }
   }, {
     label: '<i class="deleteButton"></i>',
-    onClick: ({event}: {event: CalendarEvent}): void => {
+    onClick: ({ event }: {
+      event: CalendarEvent
+    }): void => {
       this.events = this.events.filter(iEvent => iEvent !== event);
       this.handleEvent('Deleted', event);
     }
@@ -140,9 +126,10 @@ export class FullcalendarComponent {
 
   activeDayIsOpen = true;
 
-  constructor(public dialog: MatDialog, @Inject(DOCUMENT) doc: any) {}
+  constructor(public dialog: MatDialog, @Inject(DOCUMENT) doc: any) {
+  }
 
-  dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {
+  dayClicked({ date, events }: { date: Date, events: CalendarEvent[] }): void {
 
     if (isSameMonth(date, this.viewDate)) {
       if (
@@ -157,7 +144,7 @@ export class FullcalendarComponent {
     }
   }
 
-  eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
+  eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
     this.handleEvent('Dropped or resized', event);
@@ -165,7 +152,10 @@ export class FullcalendarComponent {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.config.data = {event, action};
+    this.config.data = {
+      event,
+      action
+    };
     this.dialogRef = this.dialog.open(CalendarDialogComponent, this.config);
 
     this.dialogRef.afterClosed().subscribe((result: string) => {
@@ -188,5 +178,5 @@ export class FullcalendarComponent {
     });
     this.refresh.next();
   }
-  */
+
 }
