@@ -1,9 +1,9 @@
-<mat-toolbar color="primary">
+<!--<mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span fxFlex fxHide="false" fxHide.gt-xs>{{ viewDate }}</span> <!-- | calendarDate:(view + 'ViewTitle'):'en' -->
+    <span fxFlex fxHide="false" fxHide.gt-xs>{{ viewDate }}</span> <!-- | calendarDate:(view + 'ViewTitle'):'en' --
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <span fxFlex fxShow="false" fxShow.gt-xs>{{ viewDate }}</span> <!-- | calendarDate:(view + 'ViewTitle'):'en' -->
+    <span fxFlex fxShow="false" fxShow.gt-xs>{{ viewDate }}</span> <!-- | calendarDate:(view + 'ViewTitle'):'en' --
 
     <div fxShow="false" fxShow.gt-xs>
       <button mat-button (click)="view = 'month'" [class.active]="view === 'month'">Month</button>
@@ -19,14 +19,14 @@
 
     <span fxFlex fxHide="false" fxHide.gt-xs></span>
 
-    <!--<button mat-icon-button mwlCalendarPreviousView
+    <button mat-icon-button mwlCalendarPreviousView
         [view]="view"
         [(viewDate)]="viewDate"><mat-icon>chevron_left</mat-icon></button>
     <button mat-icon-button mwlCalendarToday
         [(viewDate)]="viewDate"><mat-icon>today</mat-icon></button>
     <button mat-icon-button mwlCalendarNextView
         [view]="view"
-        [(viewDate)]="viewDate"><mat-icon>chevron_right</mat-icon></button>-->
+        [(viewDate)]="viewDate"><mat-icon>chevron_right</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -59,4 +59,4 @@
       (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-day-view>
   </div>
-</mat-card>
+</mat-card>-->
