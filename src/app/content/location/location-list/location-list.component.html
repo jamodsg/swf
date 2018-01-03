@@ -1,31 +1,39 @@
-<div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
+<div fxLayout="row" [formGroup]="form">
 
-  <div fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex.gt-md="30" fxFlex="100">
-    <mat-form-field style="width: 95%">
-      <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
-        <mat-option [value]="locations.length" *ngIf="locations">
-          {{ 'general.pagination.allItems' | translate}}
-        </mat-option>
-        <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
-          {{ 'general.items' | translate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+  <mat-form-field fxFlex.gt-xs="33"
+                  fxFlex="100">
+    <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
+      <mat-option [value]="locations.length" *ngIf="locations">
+        {{ 'general.pagination.allItems' | translate}}
+      </mat-option>
+      <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
+        {{ 'general.items' | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <div fxFlex.gt-xs="50" fxFlex.gt-sm="40" fxFlex="100" style="margin-bottom: 15px">
-    <input matInput style="padding:10px; width: 90%;"
+  <mat-form-field fxFlexOffset="1"
+                  fxFlex.gt-xs="33"
+                  fxFlex="100">
+    <input matInput
            placeholder="{{ 'general.typeToFilter' | translate}}"
            formControlName="searchFor"/>
-  </div>
+  </mat-form-field>
 
-  <div fxFlex.gt-xs="25" fxFlex.gt-sm="35" fxFlex="100" style="margin-bottom: 15px">
+  <div fxFlexOffset="1"
+       fxFlex.gt-xs="33"
+       fxFlex="100"
+       style="margin-bottom: 15px">
     <a mat-raised-button color="primary" [routerLink]="['./edit/new']">
       {{ 'general.locations.list.createLocation' | translate}}
     </a>
   </div>
+</div>
 
-  <div fxFlex.gt-sm="100%" fxFlex="100" *ngIf="categories && categoryTypes && locations; else loadingTemplate">
+<div fxLayout="row" [formGroup]="form">
+
+  <div fxFlex="100"
+       *ngIf="categories && categoryTypes && locations; else loadingTemplate">
     <ngx-datatable #myTable
                    class='material'
                    [columns]="columns"
@@ -35,23 +43,24 @@
                    [rowHeight]="'auto'"
                    [limit]="form.controls['limit'].value"
                    [rows]="locations | orderBy: ['title'] | filterBy: ['title'] : form.controls['searchFor'].value">
-      <ngx-datatable-column name="Title"></ngx-datatable-column>
-      <ngx-datatable-column name="Assigned Category">
+      <ngx-datatable-column name="{{'general.locations.list.colTitles.name' | translate}}">
+        <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
+          {{row.title}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="{{'general.locations.list.colTitles.type' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
           <span>{{(categories | filterBy: ['id'] : row.assignedCategory)[0].title}}</span>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Address" fxHide.xs>
+      <ngx-datatable-column name="{{'general.locations.list.colTitles.address' | translate}}" fxHide.xs>
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
           {{row.address.streetName}} {{row.address.houseNumber !== 0 ? row.address.houseNumber : ''}}<br/>
           {{row.address.zip}} {{row.address.city}}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="actions">
-        <ng-template let-column="column" ngx-datatable-header-template>
-          Actions
-        </ng-template>
+      <ngx-datatable-column name="{{'general.tables.colTitles.actions' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
           <div class="button-row">
             <detail-link [objectId]="row.id"></detail-link>
