@@ -692,10 +692,11 @@
       },
       "frontendLink": "Zum Frontend",
       "location": {
-        "main": "Spielstätten",
+        "create": "Treffpunkt erstellen",
         "detail": "Treffpunktdetails",
         "edit": "Treffpunkt editieren",
         "list": "Alle Treffpunkte",
+        "main": "Spielstätten",
         "map": "Kartenansicht",
         "media": "Verknüpfte Inhalte"
       },
