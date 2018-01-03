@@ -5,7 +5,13 @@ import { ICategory } from '../../../../shared/interfaces/category.interface';
 
 @Component({
   selector: 'location-detail-main',
-  templateUrl: './location-detail-main.component.html'
+  templateUrl: './location-detail-main.component.html',
+  styles: [
+    `span {
+      display: block;
+      width: 25%
+    }`
+  ]
 })
 export class LocationDetailMainComponent implements OnInit {
 

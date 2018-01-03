@@ -1,45 +1,37 @@
-<table>
-  <tr>
-    <td>{{'general.locations.list.colTitles.name' | translate}}</td>
-    <td>{{location.title}}</td>
-  </tr>
-  <tr>
-    <td>{{'general.locations.list.colTitles.type' | translate}}</td>
-    <td>
-      <a *ngFor="let category of categories$ | async | filterBy: ['id']: location.assignedCategory"
-         [routerLink]="['/categories/detail', location.assignedCategory]">{{category.title}}
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>{{'general.locations.list.colTitles.streetAndNr' | translate}}</td>
-    <td>{{location.address.streetName}}
-      {{location.address.houseNumber !== 0 ? location.address.houseNumber : ''}}
-    </td>
-  </tr>
-  <tr>
-    <td>{{'general.locations.list.colTitles.zipCityCounty' | translate}}</td>
-    <td>{{location.address.zip}} {{location.address.city}}<br/>{{location.address.county}}</td>
-  </tr>
-  <!--<tr>
-    <td>{{'general.tables.colTitles.creation' | translate}}</td>
-    <td>
-      <user-avatar *ngIf="location.creation.from && location.creation.from !== 'system'"
-                   [authorId]="location.creation.from"></user-avatar>
-      <span *ngIf="location.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
-      <creation-date *ngIf="location.creation.at" [creation]="location.creation.at"></creation-date>
-    </td>
-  </tr>-->
-  <tr *ngIf="location.opening">
-    <td>{{ 'general.locations.edit.opening' | translate }}</td>
-    <td [innerHtml]="location.opening"></td>
-  </tr>
-  <tr *ngIf="location.prices">
-    <td>{{'general.locations.edit.pricesPlaceholder' | translate }}</td>
-    <td>
-      <a [href]="location.prices" target="_blank">
-        {{ 'general.locations.edit.priceList' | translate}}
-      </a>
-    </td>
-  </tr>
-</table>
+<mat-list *ngIf="categories$">
+  <mat-list-item>
+    <span>{{'general.locations.list.colTitles.name' | translate}}</span>
+    {{location.title}}
+  </mat-list-item>
+  <mat-list-item>
+    <span>{{'general.locations.list.colTitles.type' | translate}}</span>
+    <a *ngFor="let category of categories$ | async | filterBy: ['id']: location.assignedCategory"
+       [routerLink]="['/categories/detail', location.assignedCategory]">{{category.title}}
+    </a>
+  </mat-list-item>
+  <mat-list-item>
+    <span>{{'general.locations.list.colTitles.address' | translate}}</span>
+    {{location.address.streetName}} {{location.address.houseNumber !== 0 ? location.address.houseNumber : ''}}<br/>
+    {{location.address.zip}} {{location.address.city}}<br/>{{location.address.county}}
+  </mat-list-item>
+  <mat-list-item *ngIf="location.prices">
+    <span>{{'general.locations.edit.prices' | translate }}</span>
+    <a [href]="location.prices" target="_blank">
+      {{ 'general.locations.edit.priceList' | translate}}
+    </a>
+  </mat-list-item>
+  <mat-list-item *ngIf="location.opening">
+    <span>{{ 'general.locations.edit.opening' | translate }}</span>
+    <div [innerHtml]="location.opening"></div>
+  </mat-list-item>
+</mat-list>
+
+<!--<tr>
+  <td>{{'general.tables.colTitles.creation' | translate}}</td>
+  <td>
+    <user-avatar *ngIf="location.creation.from && location.creation.from !== 'system'"
+                 [authorId]="location.creation.from"></user-avatar>
+    <span *ngIf="location.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
+    <creation-date *ngIf="location.creation.at" [creation]="location.creation.at"></creation-date>
+  </td>
+</tr>-->
