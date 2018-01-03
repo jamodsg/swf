@@ -7,7 +7,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { LocationService } from '../../shared/services/location/location.service';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatListModule, MatOptionModule, MatSelectModule, MatTableModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatOptionModule, MatSelectModule, MatTableModule,
+  MatTabsModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { MemberService } from '../../shared/services/member/member.service';
@@ -24,6 +27,7 @@ import { LocationEditComponent } from './location-edit/location-edit.component';
 import { QuillModule } from 'ngx-quill';
 import { LocationEditAddressComponent } from './location-edit/location-edit-address/location-edit-address.component';
 import { LocationEditContactComponent } from './location-edit/location-edit-contact/location-edit-contact.component';
+import { LocationContactFormComponent } from './location-edit/location-contact-form/location-contact-form.component';
 
 @NgModule({
   imports: [
@@ -32,6 +36,7 @@ import { LocationEditContactComponent } from './location-edit/location-edit-cont
     HttpClientModule,
     locationRoutingModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
@@ -43,6 +48,7 @@ import { LocationEditContactComponent } from './location-edit/location-edit-cont
     SharedModule
   ],
   declarations: [
+    LocationContactFormComponent,
     LocationDetailComponent,
     LocationDetailContactComponent,
     LocationDetailMapComponent,

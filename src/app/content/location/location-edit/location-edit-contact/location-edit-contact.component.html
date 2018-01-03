@@ -1,151 +1,21 @@
-<div fxLayout="column">
-
+<div fxLayout="column" [formGroup]="form">
   <h3>{{'general.locations.edit.contactTitle' | translate}}</h3>
 
-  <div *ngIf="!showForm; else formTemplate">
-
-    <button *ngIf="!showForm"
-            mat-raised-button
-            color="warn"
-            type="button"
-            (click)="toggleForm()">
-      {{'general.locations.edit.contact.createContact' | translate}}
-    </button>
-
+  <div formArrayName="assignedContacts">
     <div *ngFor="let contact of form.controls.assignedContacts.controls; let i=index">
       <div>
-        <span>Address {{i + 1}}</span>
-        <span>Löschen</span>
+        <span>{{'general.locations.edit.contactTitle' | translate}} {{i + 1}}</span>
+        <button mat-raised-button
+                type="button"
+                color="warn"
+                (click)="removeLocationContact.emit(i)">
+          {{ 'general.locations.edit.contact.deleteContact' | translate}}
+        </button>
       </div>
-
       <div [formGroupName]="i">
-        <!--<div>
-          <label>street</label>
-          <input type="text" formControlName="street">
-          <small [hidden]="myForm.controls.addresses.controls[i].controls.street.valid">
-            Street is required
-          </small>
-        </div>
-        <div>
-          <label>postcode</label>
-          <input type="text" formControlName="postcode">
-        </div>
-        <div>-->
+        <location-contact-form [form]="form.controls.assignedContacts.controls[i]"></location-contact-form>
       </div>
-
     </div>
-
   </div>
+
 </div>
-
-
-<ng-template #formTemplate>
-
-  <div [formGroup]="form">
-    <div *ngIf="showList === 0">
-      <button mat-raised-button
-              type="button"
-              color="primary"
-              (click)="toggleList(1)">
-        {{ 'general.locations.edit.contact.fromMemberList' | translate}}
-      </button>
-
-      <button mat-raised-button
-              type="button"
-              (click)="toggleList(2)">
-        {{ 'general.locations.edit.contact.fromForm' | translate}}
-      </button>
-
-      <button mat-raised-button
-              color="warn"
-              type="button"
-              (click)="toggleForm()">
-        {{'general.cancel' | translate}}
-      </button>
-    </div>
-
-    <!--<div fxLayout="column"
-         *ngIf="showList !== 0"
-         formGroupName="assignedContacts">
-
-      <div *ngIf="showList === 2">
-        <mat-form-field fxFlex.gt-sm="49"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100">
-          <input matInput
-                 placeholder="{{'general.locations.edit.contact.firstName' | translate}}"
-                 formControlName="firstName"/>
-        </mat-form-field>
-
-        <mat-form-field fxFlexOffset="1"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100">
-          <input matInput
-                 placeholder="{{'general.locations.edit.contact.lastName' | translate}}"
-                 formControlName="lastName"/>
-        </mat-form-field>
-      </div>
-
-      <div formGroupName="contact" *ngIf="showList === 2">
-
-        <mat-form-field fxFlex.gt-sm="49"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100">
-          <input matInput
-                 placeholder="{{'general.locations.edit.contact.phone' | translate}}"
-                 formControlName="phoneMobile"/>
-        </mat-form-field>
-
-        <mat-form-field fxFlexOffset="1"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100">
-          <input matInput
-                 placeholder="{{'general.locations.edit.contact.email' | translate}}"
-                 formControlName="email"/>
-        </mat-form-field>
-      </div>
-
-      <div *ngIf="showList === 1">
-        <mat-form-field fxFlex="100">
-          <mat-select placeholder="{{'general.locations.edit.contact.member' | translate}}"
-                      formControlName="assignedMember">
-            <mat-option
-              *ngFor="let member of members$ | async | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
-              [value]="member.id">
-              {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date:
-              'dd.MM.yy'}}
-            </mat-option>
-          </mat-select>
-          <mat-hint>
-            {{'general.locations.edit.contact.chooseMember' | translate}}
-          </mat-hint>
-        </mat-form-field>
-      </div>
-
-      <label>{{'general.locations.edit.contact.description' | translate}}</label><br/>
-      <quill-editor [style]="{height: '150px'}"
-                    formControlName="description">
-      </quill-editor>
-    </div>-->
-
-    <div *ngIf="showList !== 0" style="margin-top: 25px">
-
-      <button mat-raised-button
-              color="accent"
-              type="button"
-              (click)="saveContact()">
-        {{'general.locations.edit.contact.saveContact' | translate}}
-      </button>
-
-      <button mat-raised-button
-              color="warn"
-              type="button"
-              (click)="toggleForm()">
-        {{'general.cancel' | translate}}
-      </button>
-
-    </div>
-  </div>
-</ng-template>

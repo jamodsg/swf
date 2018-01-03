@@ -1,52 +1,22 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ILocation } from '../../../../shared/interfaces/location.interface';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
-import { MemberService } from '../../../../shared/services/member/member.service';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'location-edit-contact',
   templateUrl: './location-edit-contact.component.html'
 })
-export class LocationEditContactComponent {
+export class LocationEditContactComponent implements OnInit {
 
   @Input() form: FormGroup;
-  @Output() addLocationContact: EventEmitter<boolean> = new EventEmitter(false);
+  @Input() members: IMember[];
+  @Output() removeLocationContact: EventEmitter<boolean> = new EventEmitter(false);
 
-  @Input() location: ILocation;
-  public members$: Observable<IMember[]>;
-
-  showForm: boolean = false;
-  showList: number = 0;
-
-  constructor(public memberService: MemberService) {
-    this.members$ = memberService.members$;
+  constructor() {
   }
 
-  toggleForm() {
-    this.showList = 0;
-    this.showForm = !this.showForm;
-    /* if (this.showForm) {
-      this.addAssignedContact.emit(true);
-    } */
+  ngOnInit() {
+    console.log(this.form);
   }
-
-  toggleList(i: number) {
-    this.showList = i;
-  }
-
-  /*
-  saveContact() {
-    if (!this.location.assignedContacts) {
-      this.location.assignedContacts = [];
-    }
-    this.location.assignedContacts.push(this.locationContact);
-    this.locationService.updateLocation(this.location.id, this.location).then(
-      () => {
-        this.toggleForm();
-      }
-    );
-  } */
 
 }

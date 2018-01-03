@@ -8,7 +8,7 @@
          fxFlex.gt-xs="100"
          fxFlex="100">
       <div class="mat-card-top"
-           *ngIf="categories$ && categoryTypes$ && location; else loadingTemplate">
+           *ngIf="categories$ && categoryTypes$ && location && members$; else loadingTemplate">
 
         <mat-card>
           <mat-card-title>
@@ -96,9 +96,18 @@
                        fxFlex.gt-xs="100"
                        fxFlex="100">
                     <location-edit-contact
-                      (addLocationContact)="addLocationContact($event)"
+                      [members]="members$ | async"
+                      (removeLocationContact)="removeLocationContact($event)"
                       [form]="form">
                     </location-edit-contact>
+
+                    <button mat-raised-button
+                            type="button"
+                            color="primary"
+                            (click)="addLocationContact()">
+                      {{ 'general.locations.edit.contact.createContact' | translate}}
+                    </button>
+
                   </div>
                 </div>
               </mat-tab>

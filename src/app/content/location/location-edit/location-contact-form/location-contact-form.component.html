@@ -1,0 +1,77 @@
+<div [formGroup]="form" style="margin-bottom: 30px">
+
+  <div fxLayout="column">
+
+    <mat-checkbox class="example-margin"
+                  formControlName="isMember"
+                  fxFlex="100">
+      {{'general.locations.edit.contact.isMember' | translate}}
+    </mat-checkbox>
+
+    <div *ngIf="form.controls['isMember'].value === true">
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="{{'general.locations.edit.contact.member' | translate}}"
+                    formControlName="assignedMember">
+          <mat-option
+            *ngFor="let member of members$ | async | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
+            [value]="member.id">
+            {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date:
+            'dd.MM.yy'}}
+          </mat-option>
+        </mat-select>
+        <mat-hint>
+          {{'general.locations.edit.contact.chooseMember' | translate}}
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="form.controls['isMember'].value === false">
+      <mat-form-field fxFlex.gt-sm="49"
+                      fxFlex.gt-xs="100"
+                      fxFlex="100">
+        <input matInput
+               placeholder="{{'general.locations.edit.contact.firstName' | translate}}"
+               formControlName="firstName"/>
+      </mat-form-field>
+
+      <mat-form-field fxFlexOffset="1"
+                      fxFlex.gt-sm="50"
+                      fxFlex.gt-xs="100"
+                      fxFlex="100">
+        <input matInput
+               placeholder="{{'general.locations.edit.contact.lastName' | translate}}"
+               formControlName="lastName"/>
+      </mat-form-field>
+
+      <div formGroupName="contact">
+
+        <mat-form-field fxFlexOffset="1"
+                        fxFlex.gt-sm="49"
+                        fxFlex.gt-xs="100"
+                        fxFlex="100">
+          <input matInput
+                 placeholder="{{'general.locations.edit.contact.phone' | translate}}"
+                 formControlName="phoneMobile"/>
+        </mat-form-field>
+
+        <mat-form-field fxFlexOffset="1"
+                        fxFlex.gt-sm="49"
+                        fxFlex.gt-xs="100"
+                        fxFlex="100">
+          <input matInput
+                 placeholder="{{'general.locations.edit.contact.email' | translate}}"
+                 formControlName="email"/>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <label style="margin-top: 15px;">
+      {{'general.locations.edit.contact.description' | translate}}
+    </label><br/>
+    <quill-editor [style]="{height: '150px'}"
+                  formControlName="description">
+    </quill-editor>
+
+  </div>
+</div>

@@ -61,7 +61,12 @@ export const MENUITEMS = [
         state: 'map',
         name: 'map',
         icon: 'map'
-      }
+      }/*,
+      {
+        state: 'edit',
+        name: 'create',
+        icon: 'note_add'
+      }*/
     ]
   },
   {

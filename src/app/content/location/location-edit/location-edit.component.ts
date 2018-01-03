@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { ICategory } from '../../../shared/interfaces/category.interface';
 import { ICategoryType } from '../../../shared/interfaces/category-type.interface';
 import { ILocationContact } from '../../../shared/interfaces/location-contact.interface';
+import { MemberService } from '../../../shared/services/member/member.service';
+import { IMember } from '../../../shared/interfaces/member/member.interface';
 
 @Component({
   selector: 'location-edit',
@@ -21,15 +23,18 @@ export class LocationEditComponent implements OnInit {
   public form: FormGroup;
   public categories$: Observable<ICategory[]>;
   public categoryTypes$: Observable<ICategoryType[]>;
+  public members$: Observable<IMember[]>;
 
   constructor(private router: Router,
               private fb: FormBuilder,
               private route: ActivatedRoute,
               public categoryService: CategoryService,
               public categoryTypeService: CategoryTypeService,
-              public locationService: LocationService) {
+              public locationService: LocationService,
+              private memberService: MemberService) {
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
+    this.members$ = memberService.members$;
   }
 
   ngOnInit() {
@@ -56,39 +61,46 @@ export class LocationEditComponent implements OnInit {
     }
   }
 
-  initAssignedContacts() {
-    /* const locationContacts = [];
-    if (this.location.assignedContacts) {
-      for (let i = 0; i < this.location.assignedContacts.length; i++) {
-        locationContacts.push(this.addLocationContact(this.location.assignedContacts[i]));
-      }
-    }*/
-    return this.fb.array([]);
+  initAssignedContacts(){
+    const formArray = [];
+    for (let i = 0; i < this.location.assignedContacts.length; i++) {
+      formArray.push(this.initLocationContact(this.location.assignedContacts[i]));
+    }
+    return this.fb.array(formArray);
   }
 
-  addLocationContact() {
-    const contact: ILocationContact = {
-      isMember: false,
-      description: ''
-    };
-    const control = <FormArray>this.form.controls['assignedContacts'];
-    control.push(this.initLocationContact(contact));
-  }
-
-  initLocationContact(contact: ILocationContact) {
+  initLocationContact(contact: ILocationContact): FormGroup {
     return this.fb.group({
       isMember: contact ? contact.isMember : '',
       description: contact ? contact.description : '',
       assignedMember: contact ? contact.assignedMember : '',
       firstName: contact ? contact.firstName : '',
       lastName: contact ? contact.lastName : '',
-      contact: contact ? contact.contact : '',
+      contact: this.initContactData(contact),
       address: contact ? contact.address : '',
     });
   }
 
-  removeAssignedContact(contact: ILocationContact) {
-    console.log(contact);
+  addLocationContact(): void {
+    const control = <FormArray>this.form.controls['assignedContacts'];
+    const contact: ILocationContact = {
+      isMember: false,
+      description: '',
+    };
+    const addCtrl = this.initLocationContact(contact);
+    control.push(addCtrl);
+  }
+
+  removeLocationContact(i: number) {
+    const control = <FormArray>this.form.controls['assignedContacts'];
+    control.removeAt(i);
+  }
+
+  initContactData(contact: ILocationContact) {
+    return this.fb.group({
+      email: contact.contact ? contact.contact.email : '',
+      phoneMobile: contact.contact ? contact.contact.phoneMobile : '',
+    })
   }
 
   initCreation(): FormGroup {
@@ -113,7 +125,7 @@ export class LocationEditComponent implements OnInit {
     if (this.location.id) {
       action = this.locationService.updateLocation(this.location.id, this.form.getRawValue());
     } else {
-      action = this.locationService.createLocation(this.location);
+      action = this.locationService.createLocation(this.form.getRawValue());
     }
     action.then(
       () => this.navigateToList(),
