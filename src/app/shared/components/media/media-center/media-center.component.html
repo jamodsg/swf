@@ -1,4 +1,4 @@
-<ng-sidebar-container>
+<!--<ng-sidebar-container>
   <ng-sidebar
     [sidebarClass]="'media-center-sidebar'"
     [(opened)]="_opened"
@@ -21,10 +21,9 @@
     (onCloseStart)="_onCloseStart()"
     (onClosed)="_onClosed()">
     <media-uploader-unsplash (_toggleOpened)="_toggleOpened()"></media-uploader-unsplash>
-  </ng-sidebar>
+  </ng-sidebar>-->
 
-
-  <div ng-sidebar-content>
+  <div><!-- ng-sidebar-content -->
     <div class="row">
       <div class="col-xl-9">
         <div class="m-portlet">
@@ -82,16 +81,16 @@
           </div>
 
           <div class="m-portlet__body">
-            <media-gallery-list
+            <!--<media-gallery-list
               *ngIf="!showGalleryForm; else galleryFormTemplate"
               [assignedGalleries]="mediaGalleryService.mediaGalleries$ | async | filterBy: ['assignedItem'] : objectId">
-            </media-gallery-list>
+            </media-gallery-list>-->
           </div>
         </div>
       </div>
     </div>
   </div>
-</ng-sidebar-container>
+<!--/ng-sidebar-container>-->
 
 <ng-template #galleryFormTemplate>
   <media-gallery-form
