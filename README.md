@@ -3,7 +3,7 @@
 [![Dependency Status](https://david-dm.org/Meistercoach83/sfw/status.svg)](https://david-dm.org/Meistercoach83/sfw)
 [![devDependency Status](https://david-dm.org/Meistercoach83/sfw/dev-status.svg)](https://david-dm.org/Meistercoach83/sfw)
 
-[![GitHub version](https://badge.fury.io/gh/Meistercoach83%2Fsfw.svg)](https://badge.fury.io/gh/Meistercoach83%2F-sfw)
+[![GitHub version](https://badge.fury.io/gh/Meistercoach83%2Fsfw.svg)](https://badge.fury.io/gh/Meistercoach83%2Fsfw)
 
 ## Based on
 - Primer Admin Theme
