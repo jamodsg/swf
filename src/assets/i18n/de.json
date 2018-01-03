@@ -448,10 +448,9 @@
         "fieldType": "Platzart",
         "categoryTypeSearchPlaceholder": "Nach der Hauptkategorie suchen",
         "colTitles": {
+          "address": "Adresse",
           "name": "Titel",
-          "type": "Kategorie",
-          "streetAndNr": "Straße, Nr.",
-          "zipCityCounty": "PLZ, Ort, Gemeinde"
+          "type": "Kategorie"
         },
         "noMatchingResult": "Es wurden keine Treffpunkte mit den eingegebenen Suchkriterien gefunden",
         "noResult": "Es wurden keine Treffpunkte gefunden"
@@ -699,6 +698,9 @@
         "main": "Spielstätten",
         "map": "Kartenansicht",
         "media": "Verknüpfte Inhalte"
+      },
+      "media": {
+        "main": "Media-Uploader"
       },
       "member": {
         "main": "Mitglieder",
