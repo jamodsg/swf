@@ -18,6 +18,7 @@ export class LocationService {
   }
 
   createLocation(location: ILocation): Promise<void> {
+    location.id = this.afs.createId();
     return this.afs.collection(this.path).doc(location.id).set(location);
   }
 
@@ -46,7 +47,6 @@ export class LocationService {
 
   setNewLocation(): Observable<ILocation> {
     return Observable.of({
-      id: this.afs.createId(),
       isImported: false,
       assignedCategory: '',
       title: '',
