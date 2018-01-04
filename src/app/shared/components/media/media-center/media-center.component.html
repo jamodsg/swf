@@ -49,13 +49,13 @@
             </div>
           </div>
           <div class="m-portlet__body">
-            <media-uploader
+            <!--<media-uploader
               *ngIf="showUploader; else showGalleryTemplate"
               [objectId]="objectId"
               [objectType]="objectType"
               [uploaderOptions]="uploaderOptions"
               (uploadCompleted)="uploadCompleted($event)">
-            </media-uploader>
+            </media-uploader>-->
           </div>
         </div>
       </div>
@@ -93,20 +93,20 @@
 <!--/ng-sidebar-container>-->
 
 <ng-template #galleryFormTemplate>
-  <media-gallery-form
+  <!--<media-gallery-form
     (toggleGalleryForm)="toggleGalleryForm()"
     (setMediaGallery)="setMediaGallery($event)"
     [assignedItem]="objectId"
-    [assignedItemType]="objectType"></media-gallery-form>
+    [assignedItemType]="objectType"></media-gallery-form>-->
 </ng-template>
 
 
 <ng-template #showGalleryTemplate>
-  <media-gallery
+ <!-- <media-gallery
     [assignedItem]="objectId"
     [items]="mediaItemService.mediaItems$
           | async
           | filterBy: ['assignedItem'] : objectId
           | filterBy: ['assignedItemType'] : objectType"
-  ></media-gallery>
+  ></media-gallery>-->
 </ng-template>

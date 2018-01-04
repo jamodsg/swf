@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
+import { IUploaderConfig } from '../../../interfaces/media/uploader-config.interface';
+import { MediaUploaderService } from '../../../services/media/media-uploader.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'media-uploader',
   templateUrl: 'media-uploader.component.html',
   styleUrls: [
@@ -11,36 +12,30 @@ import { AuthService } from '../../../services/auth/auth.service';
 })
 export class MediaUploaderComponent implements OnInit {
 
-  // https://blog.rsuter.com/angular-2-typescript-property-decorator-that-converts-input-values-to-the-correct-type/
   @Input() uploaderOptions: any = {};
-  @Input() showQueue: boolean;
-  @Input() showDropZone: boolean;
-  @Input() multipleUpload: boolean;
-
+  @Input() uploaderConfig: IUploaderConfig = {
+    showDropZone: true,
+    showQueue: false,
+    multiple: true,
+    autoUpload: false
+  };
   @Output() notifyParentComponent = new EventEmitter(false);
 
-  public hasBaseDropZoneOver: boolean = false;
-  public hasAnotherDropZoneOver: boolean = false;
-  // public uploader: FileUploader;
-
-  constructor(public authService: AuthService) {
+  constructor(private authService: AuthService,
+              private mediaUploaderService: MediaUploaderService) {
   }
 
   ngOnInit() {
-    /* this.uploader = new FileUploader(this.uploaderOptions, this.authService);
-    this.uploader.onCompleteItem = (item: FileItem) => {
-      this.notifyParentComponent.emit(item);
-    }; */
   }
 
-  public fileOverBase(e: any): void {
-    console.log(e);
-    this.hasBaseDropZoneOver = e;
+  onFileChange(event){
+    if(this.uploaderConfig.autoUpload && event.target.files.length > 0) {
+      this.uploadFiles(event.target.files);
+    }
   }
 
-  public fileOverAnother(e: any): void {
-    console.log(e);
-    this.hasAnotherDropZoneOver = e;
+  uploadFiles(files){
+    this.mediaUploaderService.uploadFiles(files, this.uploaderOptions);
   }
 
 }

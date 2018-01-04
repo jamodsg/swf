@@ -70,8 +70,8 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/location/location.module#LocationModule'
       },
       {
-        path: 'media',
-        loadChildren: '../../content/media/media.module#MediaModule'
+        path: 'uploader',
+        loadChildren: '../../content/uploader/uploader.module#UploaderModule'
       },
       {
         path: 'sponsors',

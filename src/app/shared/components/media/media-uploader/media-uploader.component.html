@@ -1,13 +1,23 @@
-<div class="uploader-content">
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
     <section class="image-uploader">
       <div class="upload-form">
-        <span accept="image/gif,image/jpg,image/jpeg,image/png,image/svg+xml" class="x-file-input">
-          <input tabindex="0" accept="image/gif,image/jpg,image/jpeg,image/png,image/svg+xml" class="x-file--input" type="file">
-          <label><div mat-raised-button color="primary"><span>Upload post image</span></div></label>
+        <span class="x-file-input">
+          <!--
+          accept="image/gif,image/jpg,image/jpeg,image/png,image/svg+xml" -->
+          <input class="x-file--input" type="file" (change)="onFileChange($event)" [multiple]="uploaderConfig.multiple">
+          <label>
+            <span *ngIf="!isUploading">Upload post image</span>
+            <span *ngIf="isUploading">{{uploadPercent | async}}</span>
+          </label>
         </span>
-        <div class="image-uploader-unsplash">
+        <!--<a class="image-uploader-unsplash">
           <mat-icon>add_a_photo</mat-icon>
-        </div>
+        </a>-->
       </div>
 
       <a title="Delete" class="image-cancel">
@@ -15,110 +25,8 @@
       </a>
 
     </section>
+  </div>
 </div>
 
-<!--<div class="row">
-
-  <div class="col-md-12" *ngIf="uploader?.error">
-    <div class="alert alert-danger" role="alert">
-      <strong>Error!</strong> {{uploader?.error}}
-    </div>
-  </div>
-
-  <div class="col-md-12" *ngIf="uploader?.success && uploader?.queue?.length === 0">
-    <div class="alert alert-success" role="alert">
-      <strong>Fertig!</strong> {{uploader?.success.response}}
-    </div>
-  </div>
-
-  <div class="col-md-12" *ngIf="uploaderOptions.showDropZone">
-    <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
-         [uploader]="uploader" class="well my-drop-zone"> Base drop zone
-    </div>
-    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
-         (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="well my-drop-zone"> Another drop zone
-    </div>
-  </div>
-
-  <div class="col-md-12">
-    <div class="form-group">
-      <input type="file" *ngIf="uploaderOptions.multipleUpload" ng2FileSelect [uploader]="uploader" multiple/>
-      <input type="file" *ngIf="!uploaderOptions.multipleUpload" ng2FileSelect [uploader]="uploader"/>
-    </div>
-  </div>
-
-  <div class="col-md-12" *ngIf="uploaderOptions.showQueue && uploader?.queue?.length > 0">
-
-    <h4>Upload queue</h4>
-    <p>Queue length: {{ uploader?.queue?.length }}</p>
-
-    <table class="table table-responsible table-bordered table-condensed table-dashed">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Progress</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of uploader?.queue">
-        <td>
-          <img src="" imgPreview [image]="item?._file" class="img img-responsive"/><br/>
-          <strong>{{ item?.file?.name }}</strong>
-        </td>
-        <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-        <td>
-          <div class="progress" style="margin-bottom: 0;">
-            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-          </div>
-        </td>
-        <td class="text-center">
-          <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-          <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-          <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-        </td>
-        <td>
-          <button type="button" class="btn btn-success btn-xs"
-                  (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-            <span class="glyphicon glyphicon-upload"></span> Upload
-          </button>
-          <button type="button" class="btn btn-warning btn-xs"
-                  (click)="item.cancel()" [disabled]="!item.isUploading">
-            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-          </button>
-          <button type="button" class="btn btn-danger btn-xs"
-                  (click)="item.remove()">
-            <span class="glyphicon glyphicon-trash"></span> Remove
-          </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="col-md-12" *ngIf="uploader?.queue?.length > 0 && showQueue">
-    <h4>Queue progress:</h4>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader?.progress + '%' }"></div>
-    </div>
-  </div>
-
-  <div class="col-md-12" *ngIf="!uploader?.options.autoUpload && uploader?.queue?.length > 0">
-    <button type="button" class="btn btn-success btn-s" (click)="uploader?.uploadAll()"
-            [disabled]="!uploader?.getNotUploadedItems().length">
-      <span *ngIf="uploader?.isUploading" class="glyphicon glyphicon-repeat fast-right-spinner"></span>
-      <span *ngIf="!uploader?.isUploading" class="glyphicon glyphicon-upload"></span> Upload <span *ngIf="uploaderOptions.multipleUpload">all</span>
-    </button>
-    <button type="button" class="btn btn-warning btn-s" (click)="uploader?.cancelAll()"
-            [disabled]="!uploader?.isUploading">
-      <span class="glyphicon glyphicon-ban-circle"></span> Cancel <span *ngIf="uploaderOptions.multipleUpload">all</span>
-    </button>
-    <button type="button" class="btn btn-danger btn-s" (click)="uploader?.clearQueue()"
-            [disabled]="!uploader?.queue.length">
-      <span class="glyphicon glyphicon-trash"></span> Remove <span *ngIf="uploaderOptions.multipleUpload">all</span>
-    </button>
-  </div>
-
-</div>-->
+<pre>{{uploaderConfig | json}}</pre>
+<pre>{{uploaderOptions | json}}</pre>

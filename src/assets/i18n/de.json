@@ -699,9 +699,6 @@
         "map": "Kartenansicht",
         "media": "Verknüpfte Inhalte"
       },
-      "media": {
-        "main": "Media-Uploader"
-      },
       "member": {
         "main": "Mitglieder",
         "detail": "Mitgliederdetails",
@@ -741,6 +738,9 @@
         "media": "Neue Uploads",
         "team-statistics": "Statistiken",
         "teamOfTheMonth": "Team des Monats"
+      },
+      "uploader": {
+        "main": "Media-Uploader"
       },
       "user": {
         "detail": "Benutzerdetails",

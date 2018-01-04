@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MediaComponent } from './media.component';
+import { MediaComponent } from './uploader.component';
 
 describe('MediaComponent', () => {
   let component: MediaComponent;

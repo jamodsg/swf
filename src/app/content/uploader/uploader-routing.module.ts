@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { MediaComponent } from './media.component';
+import { UploaderComponent } from './uploader.component';
 
-export const mediaRoutes: Routes = [
+export const uploaderRoutes: Routes = [
   {
     path: '',
-    component: MediaComponent,
+    component: UploaderComponent,
     pathMatch: 'full'
   },
   {

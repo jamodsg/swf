@@ -10,9 +10,12 @@ import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
 import { MediaGalleryFormComponent } from './media-gallery-form/media-gallery-form.component';
 import { MediaGalleryItemComponent } from './media-gallery-item/media-gallery-item.component';
 import { MediaGalleryListComponent } from './media-gallery-list/media-gallery-list.component';
+import { MediaUploaderService } from '../../services/media/media-uploader.service';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   imports: [
+    AngularFireStorageModule,
     CommonModule,
     FileUploadModule,
     MatIconModule,
@@ -41,6 +44,7 @@ import { MediaGalleryListComponent } from './media-gallery-list/media-gallery-li
     MediaUploaderUnsplashComponent */
   ],
   exports: [
+    MediaCenterComponent,
     MediaUploaderComponent
     /*
     FileSelectDirective,
@@ -52,6 +56,9 @@ import { MediaGalleryListComponent } from './media-gallery-list/media-gallery-li
     MediaGalleryListComponent,
     MediaCenterComponent,
     MediaThumbnailComponent */
+  ],
+  providers: [
+    MediaUploaderService
   ]
 })
 

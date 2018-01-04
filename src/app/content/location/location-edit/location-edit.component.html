@@ -57,7 +57,7 @@
                   </div>
 
                   <div>
-                    <div fxFlex.gt-sm="49"
+                    <div fxFlex.gt-sm="24"
                          fxFlex.gt-xs="100"
                          fxFlex="100">
                       <label>{{'general.locations.edit.opening' | translate}}</label><br/>
@@ -68,7 +68,7 @@
 
 
                     <div fxFlexOffset="1"
-                         fxFlex.gt-sm="50"
+                         fxFlex.gt-sm="24"
                          fxFlex.gt-xs="100"
                          fxFlex="100">
                       <label>{{'general.description' | translate}}</label><br/>
@@ -76,6 +76,18 @@
                                     formControlName="text">
                       </quill-editor>
                     </div>
+
+                    <div fxFlexOffset="1"
+                         fxFlex.gt-sm="24"
+                         fxFlex.gt-xs="100"
+                         fxFlex="100">
+                      <label>{{'general.locations.edit.photoTitle' | translate}}</label><br/>
+                      <media-uploader
+                        [uploaderOptions]="logoUploaderOptions"
+                        [uploaderConfig]="logoUploaderConfig">
+                      </media-uploader>
+                    </div>
+
                   </div>
                 </div>
               </mat-tab>

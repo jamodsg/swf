@@ -2,7 +2,8 @@ import { ICreation } from '../creation.interface';
 
 export interface IMediaItem {
 
-  id?: string;
+  id: string;
+
   title: string;
   url: string;
   description: string;

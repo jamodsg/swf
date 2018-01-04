@@ -11,6 +11,9 @@ import { ICategoryType } from '../../../shared/interfaces/category-type.interfac
 import { ILocationContact } from '../../../shared/interfaces/location-contact.interface';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
+import { FileUploaderOptions } from 'ng2-file-upload';
+import { IUploaderConfig, IUploderOptions } from '../../../shared/interfaces/media/uploader-config.interface';
+import { IMediaItem } from '../../../shared/interfaces/media/media-item.interface';
 
 @Component({
   selector: 'location-edit',
@@ -24,6 +27,15 @@ export class LocationEditComponent implements OnInit {
   public categories$: Observable<ICategory[]>;
   public categoryTypes$: Observable<ICategoryType[]>;
   public members$: Observable<IMember[]>;
+
+  public logoUploaderConfig: IUploaderConfig = {
+    showDropZone: true,
+    showQueue: false,
+    multiple: true,
+    autoUpload: true
+  };
+
+  public logoUploaderOptions: IUploderOptions;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -40,6 +52,12 @@ export class LocationEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { location: ILocation }) => {
       this.location = data.location;
+
+      this.logoUploaderOptions = {
+        id: this.location.id,
+        path: 'locations'
+      };
+
     });
 
     this.form = this.fb.group({
