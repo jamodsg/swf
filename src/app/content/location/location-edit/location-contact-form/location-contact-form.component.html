@@ -2,18 +2,18 @@
 
   <div fxLayout="column">
 
-    <mat-checkbox class="example-margin"
+    <mat-checkbox *ngIf="members && members.length > 0"
                   formControlName="isMember"
                   fxFlex="100">
       {{'general.locations.edit.contact.isMember' | translate}}
     </mat-checkbox>
 
-    <div *ngIf="form.controls['isMember'].value === true">
+    <div *ngIf="form.controls['isMember'].value === true && members">
       <mat-form-field fxFlex="100">
         <mat-select placeholder="{{'general.locations.edit.contact.member' | translate}}"
                     formControlName="assignedMember">
           <mat-option
-            *ngFor="let member of members$ | async | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
+            *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
             [value]="member.id">
             {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date:
             'dd.MM.yy'}}

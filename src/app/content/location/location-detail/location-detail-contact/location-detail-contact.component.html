@@ -2,7 +2,7 @@
 
 <mat-list *ngIf="members; else loadingTemplate">
 
-  <mat-list-item *ngIf="location.assignedContacts.length === 0">
+  <mat-list-item *ngIf="!location.assignedContacts || location.assignedContacts.length === 0">
     <p>{{ 'general.locations.edit.contact.noContacts' | translate}}</p>
   </mat-list-item>
 

@@ -16,7 +16,6 @@ export class LocationEditContactComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.form);
   }
 
 }

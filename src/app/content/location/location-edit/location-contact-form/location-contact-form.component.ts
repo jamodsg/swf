@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { IMember } from '../../../../shared/interfaces/member/member.interface';
 
 @Component({
   selector: 'location-contact-form',
@@ -8,6 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class LocationContactFormComponent {
 
   @Input() form: FormGroup;
+  @Input() members: IMember[];
 
   constructor() {
   }

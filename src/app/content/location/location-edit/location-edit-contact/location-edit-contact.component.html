@@ -13,7 +13,10 @@
         </button>
       </div>
       <div [formGroupName]="i">
-        <location-contact-form [form]="form.controls.assignedContacts.controls[i]"></location-contact-form>
+        <location-contact-form
+          [members]="members"
+          [form]="form.controls.assignedContacts.controls[i]">
+        </location-contact-form>
       </div>
     </div>
   </div>
