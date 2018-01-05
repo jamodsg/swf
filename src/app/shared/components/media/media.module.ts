@@ -3,7 +3,7 @@ import { MediaUploaderComponent } from './media-uploader/media-uploader.componen
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatProgressBarModule } from '@angular/material';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MediaCenterComponent } from './media-center/media-center.component';
 import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
@@ -19,6 +19,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     CommonModule,
     FileUploadModule,
     MatIconModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     TranslateModule
   ],

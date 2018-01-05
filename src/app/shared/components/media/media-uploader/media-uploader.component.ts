@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
-import { IUploaderConfig } from '../../../interfaces/media/uploader-config.interface';
+import { IUploaderConfig, IUploderOptions } from '../../../interfaces/media/uploader-config.interface';
 import { MediaUploaderService } from '../../../services/media/media-uploader.service';
 
 @Component({
@@ -12,7 +12,10 @@ import { MediaUploaderService } from '../../../services/media/media-uploader.ser
 })
 export class MediaUploaderComponent implements OnInit {
 
-  @Input() uploaderOptions: any = {};
+  @Input() uploaderOptions: IUploderOptions = {
+    maxFileSize: 100,
+  };
+
   @Input() uploaderConfig: IUploaderConfig = {
     showDropZone: true,
     showQueue: false,
@@ -21,21 +24,37 @@ export class MediaUploaderComponent implements OnInit {
   };
   @Output() notifyParentComponent = new EventEmitter(false);
 
+  public errors: any;
+  public uploaderResponse: any[];
+  public image: string;
+
   constructor(private authService: AuthService,
-              private mediaUploaderService: MediaUploaderService) {
+              public mediaUploaderService: MediaUploaderService) {
   }
 
   ngOnInit() {
   }
 
-  onFileChange(event){
-    if(this.uploaderConfig.autoUpload && event.target.files.length > 0) {
-      this.uploadFiles(event.target.files);
+  onFileChange(event) {
+    this.errors = null;
+    this.image = null;
+    if (this.uploaderConfig.autoUpload && event.target.files.length > 0) {
+      if(!this.uploaderConfig.multiple){
+        console.log(event.target.files);
+        this.image = event.target.files[0];
+      }
+      // this.uploadFiles(event.target.files);
     }
   }
 
-  uploadFiles(files){
-    this.mediaUploaderService.uploadFiles(files, this.uploaderOptions);
+  uploadFiles(files) {
+    this.mediaUploaderService.uploadFiles(files, this.uploaderOptions).subscribe(
+      (uploaderResponse: any[]) => {
+        console.log(uploaderResponse);
+        this.uploaderResponse = uploaderResponse;
+      },
+      (error: any) => this.errors = error
+    );
   }
 
 }

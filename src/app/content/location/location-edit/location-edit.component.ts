@@ -11,9 +11,7 @@ import { ICategoryType } from '../../../shared/interfaces/category-type.interfac
 import { ILocationContact } from '../../../shared/interfaces/location-contact.interface';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
-import { FileUploaderOptions } from 'ng2-file-upload';
 import { IUploaderConfig, IUploderOptions } from '../../../shared/interfaces/media/uploader-config.interface';
-import { IMediaItem } from '../../../shared/interfaces/media/media-item.interface';
 
 @Component({
   selector: 'location-edit',
@@ -31,11 +29,17 @@ export class LocationEditComponent implements OnInit {
   public logoUploaderConfig: IUploaderConfig = {
     showDropZone: true,
     showQueue: false,
-    multiple: true,
+    multiple: false,
     autoUpload: true
   };
 
-  public logoUploaderOptions: IUploderOptions;
+  public logoUploaderOptions: IUploderOptions = {
+    // maxFileSize: 1000000000,
+    // allowedMimeType: ['image/gif', 'image/tiff'],
+    allowedFileType: ['image'],
+    path: 'locations',
+    queueLimit: 1
+  };
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -52,12 +56,7 @@ export class LocationEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { location: ILocation }) => {
       this.location = data.location;
-
-      this.logoUploaderOptions = {
-        id: this.location.id,
-        path: 'locations'
-      };
-
+      this.logoUploaderOptions.id = this.location.id;
     });
 
     this.form = this.fb.group({
@@ -79,9 +78,9 @@ export class LocationEditComponent implements OnInit {
     }
   }
 
-  initAssignedContacts(){
+  initAssignedContacts() {
     const formArray = [];
-    if(this.location.assignedContacts) {
+    if (this.location.assignedContacts) {
       for (let i = 0; i < this.location.assignedContacts.length; i++) {
         formArray.push(this.initLocationContact(this.location.assignedContacts[i]));
       }
