@@ -45,10 +45,10 @@
       {{'Global.Register.termsAndConditions' | translate}}
     </div>
 
-    <div class="mat-text-warn" *ngIf="error">{{error}}</div>
+    <!--<div class="mat-text-warn" *ngIf="error">{{error}}</div>-->
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
-      <mat-progress-spinner mode="indeterminate" *ngIf="isLoading"></mat-progress-spinner>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
       {{'Global.Register.RegisterLinkText' | translate}}
     </button>
   </div>

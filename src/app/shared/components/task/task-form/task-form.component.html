@@ -47,7 +47,7 @@
 
     <mat-card-actions>
       <div class="button-row">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
           {{ 'general.tasks.edit.saveTask' | translate }}
         </button>
         <a mat-raised-button color="accent" (click)="cancel()">

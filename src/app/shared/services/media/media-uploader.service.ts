@@ -52,7 +52,7 @@ export class MediaUploaderService {
 
         if (typeof some.size !== 'number') {
           return Observable.throw({
-            message: 'The file specified is no longer valid' ,
+            message: 'The file specified is no longer valid',
             file: some.name
           });
         }

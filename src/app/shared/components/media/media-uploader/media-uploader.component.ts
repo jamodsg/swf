@@ -29,7 +29,7 @@ export class MediaUploaderComponent implements OnInit {
   public image: string;
 
   constructor(private authService: AuthService,
-              public mediaUploaderService: MediaUploaderService) {
+    public mediaUploaderService: MediaUploaderService) {
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class MediaUploaderComponent implements OnInit {
     this.errors = null;
     this.image = null;
     if (this.uploaderConfig.autoUpload && event.target.files.length > 0) {
-      if(!this.uploaderConfig.multiple){
+      if (!this.uploaderConfig.multiple) {
         console.log(event.target.files);
         this.image = event.target.files[0];
       }

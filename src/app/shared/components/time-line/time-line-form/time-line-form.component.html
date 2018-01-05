@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
 
   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" formArrayName="timeLine">
-    <div class="mat-card-top" *ngFor="let control of form.get(groupName).controls; let i = index; let last = last">
+    <!--<div class="mat-card-top" *ngFor="let control of form.get(groupName).controls; let i = index; let last = last">
 
       <mat-card [formGroupName]="i" *ngIf="last">
         <mat-card-content>
@@ -51,7 +51,7 @@
                             formControlName="assignedArticle">
                   <!--<mat-option *ngFor="let article of articles$ | async | orderBy: ['title']"
                               [value]="article.id">{{article.title}}
-                  </mat-option>-->
+                  </mat-option>--
                 </mat-select>
               </mat-form-field>
             </div>
@@ -93,7 +93,7 @@
         </mat-card-actions>
       </mat-card>
 
-    </div>
+    </div>-->
   </div>
 </div>
 

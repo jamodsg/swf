@@ -1,12 +1,12 @@
-<div class="row" *ngIf="items && items.length > 0; else noMediaItemsTemplate">
-  <!--<media-gallery-item class="col-xl-4"
+<!--<div class="row" *ngIf="items && items.length > 0; else noMediaItemsTemplate">
+  <media-gallery-item class="col-xl-4"
        *ngFor="let item of items"
        [item]="item"
        [assignedGalleries]="mediaGalleryService.mediaGalleries$ | async | filterBy: ['assignedItem'] : assignedItem"
        (updateMediaItem)="updateMediaItem($event)"
        (removeMediaItem)="removeMediaItem($event)">
-  </media-gallery-item>-->
-</div>
+  </media-gallery-item>
+</div>-->
 
 <ng-template #noMediaItemsTemplate>
   <!--<div class="row">

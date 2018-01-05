@@ -8,9 +8,9 @@ describe('LocationContactFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationContactFormComponent ]
+      declarations: [LocationContactFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

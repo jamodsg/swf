@@ -2,7 +2,7 @@
   <h3>{{'general.locations.edit.contactTitle' | translate}}</h3>
 
   <div formArrayName="assignedContacts">
-    <div *ngFor="let contact of form.controls.assignedContacts.controls; let i=index">
+    <div *ngFor="let contact of form.controls['assignedContacts']['controls']; let i=index">
       <div>
         <span>{{'general.locations.edit.contactTitle' | translate}} {{i + 1}}</span>
         <button mat-raised-button

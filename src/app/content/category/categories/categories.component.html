@@ -9,11 +9,11 @@
       <mat-card-content>
         <!-- [articles]="articles$ | async"
           [locations]="locations$ | async"
-          [teams]="teams$ | async"-->
+          [teams]="teams$ | async"
+          (updateFilter)="updateFilter($event)"-->
         <category-list
           [categories]="categories$ | async"
           [categoryTypes]="categoryTypes$ | async"
-          (updateFilter)="updateFilter($event)"
           (remove)="removeCategory($event)"
           (update)="updateCategory($event)">
         </category-list>

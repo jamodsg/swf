@@ -60,10 +60,10 @@
   </mat-card-title>
   <mat-card-subtitle></mat-card-subtitle>
   <mat-card-content>
-
+<!--
+      (updateFilter)="updateFilter($event)" -->
     <user-list
       [users]="users$ | async"
-      (updateFilter)="updateFilter($event)"
       (remove)="removeUser($event)"
       (update)="updateUser($event)">
     </user-list>

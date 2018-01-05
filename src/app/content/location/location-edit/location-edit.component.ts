@@ -42,12 +42,12 @@ export class LocationEditComponent implements OnInit {
   };
 
   constructor(private router: Router,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              public categoryService: CategoryService,
-              public categoryTypeService: CategoryTypeService,
-              public locationService: LocationService,
-              private memberService: MemberService) {
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    public categoryService: CategoryService,
+    public categoryTypeService: CategoryTypeService,
+    public locationService: LocationService,
+    private memberService: MemberService) {
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
     this.members$ = memberService.members$;

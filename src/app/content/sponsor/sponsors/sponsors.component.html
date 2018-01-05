@@ -1,5 +1,5 @@
 <mat-sidenav-container class="background-none shadow-none">
-  <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
+  <mat-sidenav #sponsorsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
 
     <!--<div class="pl-1 pr-1 pb-1">
       <h3>Price</h3>
@@ -22,19 +22,20 @@
 
   </mat-sidenav>
   <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
-    <button (click)="productsnav.toggle()" mat-icon-button>
+    <button (click)="sponsorsnav.toggle()" mat-icon-button>
       <mat-icon>short_text</mat-icon>
     </button>
     <span class="mr-1 ml-1">Filter</span>
   </mat-toolbar>
 
   <div fxLayout="row" fxLayoutWrap="wrap">
-    <div fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let product of products">
+    <div fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let sponsor of sponsors$">
       <mat-card>
         <div class="media-grid">
           <figure>
-            <div class="product-badge" *ngIf="product.status === 'sale'"><span>Sale</span></div>
-            <img src="assets/images/unsplash/{{ product.id }}.jpg">
+            <!-- *ngIf="sponsor.status === 'sale'" -->
+            <div class="sponsor-badge"><span>Sale</span></div>
+            <img src="assets/images/unsplash/{{ sponsor.id }}.jpg">
             <figcaption>
               <p>
                 <a href="javascript:;" matTooltip="Add to cart" matTooltipPosition="left">
@@ -56,12 +57,12 @@
         <mat-card-content>
           <div fxLayout="row" fxLayoutAlign="center center">
             <div fxFlex>
-              <p class="ma-0">{{ product.name }}</p>
-              <p class="ma-0 pa-0 text-md">{{ product.description }}</p>
+              <p class="ma-0">{{ sponsor.title }}</p>
+              <p class="ma-0 pa-0 text-md">{{ sponsor.description }}</p>
             </div>
             <div class="mat-text-primary text-xl">
-              <span class="strikethrough mat-text-muted text-sm" *ngIf="product.discounted === 'discounted'">$ {{ product.discount }}</span>
-              <span> $ {{ product.price }}</span>
+              <span class="strikethrough mat-text-muted text-sm">{{ sponsor.description }}</span>
+              <span> $ {{ sponsor.internalInfo }}</span>
             </div>
           </div>
         </mat-card-content>

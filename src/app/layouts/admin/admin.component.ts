@@ -37,7 +37,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
     public menuItems: MenuItemsService,
-    private translate: TranslateService,
+    public translate: TranslateService,
     public authService: AuthService,
     private zone: NgZone) {
 
