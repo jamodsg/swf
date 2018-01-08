@@ -73,6 +73,7 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
       title: [this.location.title, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       assignedCategory: [this.location.assignedCategory, [Validators.required]],
       prices: this.location.prices,
+      imageUrl: this.location.imageUrl,
       opening: this.location.opening,
       text: this.location.text,
       address: this.initAddress(),
@@ -88,11 +89,18 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     }
   }
 
-  logoUploadCompleted($event: Upload) {
-    $event.downloadUrl.subscribe((downloadUrl: string) => {
+  logoUploadCompleted(upload: Upload) {
+    upload.downloadUrl.subscribe((downloadUrl: string) => {
       this.location.imageUrl = downloadUrl;
-      this.location.id ? this.locationService.updateLocation(this.location.id, this.location) : this.locationService.createLocation(this.location);
+      this.saveLocation(false);
+      console.log(this.location);
     });
+  }
+
+  removedMedia(event){
+    console.log(event);
+    this.location.imageUrl = '';
+    this.saveLocation(false);
   }
 
   initAssignedContacts() {
@@ -156,7 +164,7 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     });
   }
 
-  saveLocation() {
+  saveLocation(redirect: boolean = true) {
     let action;
     if (this.location.id) {
       action = this.locationService.updateLocation(this.location.id, this.form.getRawValue());
@@ -166,19 +174,21 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     action.then(
       () => {
         this.savedLocation = this.location;
-        this.navigateToList();
+        this.navigateToList(redirect);
       },
       (error: any) => console.log(error)
     );
   }
 
-  navigateToList() {
-    this.router.navigate(['/locations']).then();
+  navigateToList(redirect: boolean) {
+    if(redirect){
+      this.router.navigate(['/locations']).then();
+    }
   }
 
   cancel() {
     this.savedLocation = this.location;
-    this.navigateToList();
+    this.navigateToList(true);
   }
 
 }

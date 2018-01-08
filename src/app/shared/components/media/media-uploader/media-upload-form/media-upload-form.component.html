@@ -1,7 +1,10 @@
-<div class="image-uploader" [style.backgroundImage]="'url('+ currentImageUrl +')'">
+<div class="image-uploader" [formGroup]="form">
   <div class="upload-form">
     <label *ngIf="currentUploads.length === 0">
-      <input type="file" class="button" (change)="onFileChange($event)" [multiple]="uploaderConfig.multiple">
+      <input type="file"
+             formControlName="imageUrl"
+             (change)="onFileChange($event)"
+             [multiple]="uploaderConfig.multiple">
 
       <button *ngIf="!uploaderConfig.autoUpload"
               type="button"

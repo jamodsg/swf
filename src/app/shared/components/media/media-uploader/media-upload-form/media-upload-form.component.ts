@@ -3,6 +3,7 @@ import { IUploaderConfig } from '../../../../interfaces/media/uploader-config.in
 import { MediaUploaderService } from '../../../../services/media/media-uploader.service';
 import { IUploderOptions } from '../../../../interfaces/media/uploader-options.interface';
 import { Upload } from '../../../../services/media/upload.class';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'media-upload-form',
@@ -16,8 +17,10 @@ export class MediaUploadFormComponent implements OnInit {
   @Input() uploaderOptions: IUploderOptions;
   @Input() uploaderConfig: IUploaderConfig;
   @Input() currentImageUrl: string;
+  @Input() form: FormGroup;
 
-  @Output() notifyParentComponent = new EventEmitter(false);
+  @Output() uploadCompleted = new EventEmitter(false);
+  @Output() removedMedia = new EventEmitter(false);
 
   public selectedFiles: FileList | null;
   public currentUploads: Upload[] = [];
@@ -36,7 +39,8 @@ export class MediaUploadFormComponent implements OnInit {
   }
 
   deleteMedia(currentImageUrl: string) {
-    this.mediaUploaderService.deleteFile(currentImageUrl);
+    console.log(currentImageUrl);
+    // this.mediaUploaderService.deleteFileStorage(currentImageUrl);
   }
 
   uploadFile() {
@@ -48,7 +52,7 @@ export class MediaUploadFormComponent implements OnInit {
       this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).then(
         () => {
           this.currentUploads.splice(this.currentUploads.indexOf(fileUpload), 1);
-          this.notifyParentComponent.emit(fileUpload);
+          this.uploadCompleted.emit(fileUpload);
         },
         (error: any) => console.log('Error ' + error)
       );

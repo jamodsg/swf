@@ -78,13 +78,14 @@
                     </div>
 
                     <div fxFlexOffset="1"
-                         fxFlex.gt-sm="24"
+                         fxFlex.gt-sm="50"
                          fxFlex.gt-xs="100"
                          fxFlex="100">
                       <label>{{'general.locations.edit.photoTitle' | translate}}</label><br/>
                       <media-uploader
-                        (notifyParentComponent)="logoUploadCompleted($event)"
-                        [currentImageUrl]="location ? location.imageUrl : ''"
+                        (uploadCompleted)="logoUploadCompleted($event)"
+                        (removedMedia)="removedMedia($event)"
+                        [form]="form"
                         [uploaderOptions]="logoUploaderOptions"
                         [uploaderConfig]="logoUploaderConfig">
                       </media-uploader>

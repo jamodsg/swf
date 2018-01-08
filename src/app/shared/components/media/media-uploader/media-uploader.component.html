@@ -6,8 +6,9 @@
        fxFlex="100">
 
     <media-upload-form
-      (notifyParentComponent)="notifyParentComponent.emit($event)"
-      [currentImageUrl]="currentImageUrl"
+      (uploadCompleted)="uploadCompleted.emit($event)"
+      (removedMedia)="removedMedia.emit($event)"
+      [form]="form"
       [uploaderOptions]=uploaderOptions
       [uploaderConfig]="uploaderConfig">
     </media-upload-form>

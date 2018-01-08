@@ -7,7 +7,6 @@ import { FileType } from '../../interfaces/media/file-type.interface';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { IUploderOptions } from '../../interfaces/media/uploader-options.interface';
 import { Upload } from './upload.class';
-import * as firebase from 'firebase';
 
 export type FilterFunction = {
   name: string,
@@ -23,12 +22,15 @@ export class MediaUploaderService {
   };
 
   private _failFilterIndex: number;
+  private uploadId: string;
 
   constructor(private storage: AngularFireStorage, private afs: AngularFirestore) {
   }
 
   public upload(upload: Upload, options): Promise<any> {
-    const uploadPath = options.path + '/' + options.id + '/' + this.afs.createId();
+    this.uploadId = this.afs.createId();
+
+    const uploadPath = options.path + '/' + options.id + '/' + this.uploadId;
 
     this.setOptions(options);
     const arrayOfFilters = this._getFilters(this.options.filters);
@@ -41,8 +43,12 @@ export class MediaUploaderService {
     }
 
     if (this._isValidFile(upload, arrayOfFilters, this.options)) {
-      const task = this.storage.upload(uploadPath, upload.file);
-      upload.id = this.afs.createId();
+      const task = this.storage.upload(uploadPath, upload.file, {
+        customMetadata: {
+          id: this.uploadId,
+        }
+      });
+      upload.id = this.uploadId;
       upload.percentageChanges = task.percentageChanges();
       upload.downloadUrl = task.downloadURL();
       upload.name = upload.file.name;
