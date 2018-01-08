@@ -5,37 +5,13 @@
        fxFlex.gt-xs="100"
        fxFlex="100">
 
-    <section class="image-uploader" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
-      <div class="upload-form">
-        <span class="x-file-input">
-          <input class="x-file--input"
-                 type="file"
-                 (change)="onFileChange($event)"
-                 [multiple]="uploaderConfig.multiple">
-          <label>
-            <span *ngIf="!uploaderResponse">Upload post image</span>
-            <mat-progress-bar
-              *ngIf="!uploaderConfig.multiple && uploaderResponse && !uploaderResponse[0].error && (uploaderResponse[0].percentageChanges | async) !== 100"
-              mode="determinate"
-              value="{{ uploaderResponse[0].percentageChanges | async}}">
-            </mat-progress-bar>
-            <span style="color: red"
-                  *ngIf="!uploaderConfig.multiple && uploaderResponse && uploaderResponse[0].error">
-              {{uploaderResponse[0].error.message}}
-            </span>
-          </label>
-        </span>
-        <!--<a class="image-uploader-unsplash">
-          <mat-icon>add_a_photo</mat-icon>
-        </a>-->
-      </div>
+    <media-upload-form
+      (notifyParentComponent)="notifyParentComponent.emit($event)"
+      [currentImageUrl]="currentImageUrl"
+      [uploaderOptions]=uploaderOptions
+      [uploaderConfig]="uploaderConfig">
+    </media-upload-form>
 
-      <a title="Delete" class="image-cancel">
-        <mat-icon>delete</mat-icon>
-      </a>
-
-    </section>
   </div>
 </div>
 
-<pre>{{image | json}}</pre>

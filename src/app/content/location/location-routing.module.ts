@@ -5,6 +5,7 @@ import { LocationResolver } from './location.resolver';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { LocationMapComponent } from './location-map/location-map.component';
 import { LocationEditComponent } from './location-edit/location-edit.component';
+import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'edit/:locationId',
+    canDeactivate: [PendingChangesGuard],
     component: LocationEditComponent,
     resolve: {
       location: LocationResolver

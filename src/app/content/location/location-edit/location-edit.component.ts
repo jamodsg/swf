@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService } from '../../../shared/services/location/location.service';
 import { CategoryTypeService } from '../../../shared/services/category-type/category-type.service';
@@ -11,15 +11,25 @@ import { ICategoryType } from '../../../shared/interfaces/category-type.interfac
 import { ILocationContact } from '../../../shared/interfaces/location-contact.interface';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
-import { IUploaderConfig, IUploderOptions } from '../../../shared/interfaces/media/uploader-config.interface';
+import { IUploaderConfig } from '../../../shared/interfaces/media/uploader-config.interface';
+import { IUploderOptions } from '../../../shared/interfaces/media/uploader-options.interface';
+import { Upload } from '../../../shared/services/media/upload.class';
+import { ComponentCanDeactivate } from '../../../shared/services/auth/pending-changes.guard';
 
 @Component({
   selector: 'location-edit',
   templateUrl: 'location-edit.component.html'
 })
 
-export class LocationEditComponent implements OnInit {
+export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    console.log(JSON.stringify(this.location).toLowerCase() === JSON.stringify(this.savedLocation).toLowerCase());
+    return JSON.stringify(this.location).toLowerCase() === JSON.stringify(this.savedLocation).toLowerCase();
+  }
+
+  public savedLocation: ILocation;
   public location: ILocation;
   public form: FormGroup;
   public categories$: Observable<ICategory[]>;
@@ -30,24 +40,23 @@ export class LocationEditComponent implements OnInit {
     showDropZone: true,
     showQueue: false,
     multiple: false,
-    autoUpload: true
+    autoUpload: false
   };
 
   public logoUploaderOptions: IUploderOptions = {
-    // maxFileSize: 1000000000,
+    maxFileSize: 100,
     // allowedMimeType: ['image/gif', 'image/tiff'],
     allowedFileType: ['image'],
-    path: 'locations',
-    queueLimit: 1
+    path: 'locations'
   };
 
   constructor(private router: Router,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    public categoryService: CategoryService,
-    public categoryTypeService: CategoryTypeService,
-    public locationService: LocationService,
-    private memberService: MemberService) {
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              public categoryService: CategoryService,
+              public categoryTypeService: CategoryTypeService,
+              public locationService: LocationService,
+              private memberService: MemberService) {
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
     this.members$ = memberService.members$;
@@ -56,6 +65,7 @@ export class LocationEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { location: ILocation }) => {
       this.location = data.location;
+      this.savedLocation = Object.freeze(Object.assign({}, this.location));
       this.logoUploaderOptions.id = this.location.id;
     });
 
@@ -76,6 +86,13 @@ export class LocationEditComponent implements OnInit {
       this.form.get('address').disable();
       this.form.get('creation').disable();
     }
+  }
+
+  logoUploadCompleted($event: Upload) {
+    $event.downloadUrl.subscribe((downloadUrl: string) => {
+      this.location.imageUrl = downloadUrl;
+      this.location.id ? this.locationService.updateLocation(this.location.id, this.location) : this.locationService.createLocation(this.location);
+    });
   }
 
   initAssignedContacts() {
@@ -147,7 +164,10 @@ export class LocationEditComponent implements OnInit {
       action = this.locationService.createLocation(this.form.getRawValue());
     }
     action.then(
-      () => this.navigateToList(),
+      () => {
+        this.savedLocation = this.location;
+        this.navigateToList();
+      },
       (error: any) => console.log(error)
     );
   }
@@ -157,6 +177,7 @@ export class LocationEditComponent implements OnInit {
   }
 
   cancel() {
+    this.savedLocation = this.location;
     this.navigateToList();
   }
 

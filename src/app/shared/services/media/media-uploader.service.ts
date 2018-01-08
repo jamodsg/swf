@@ -3,75 +3,87 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Injectable } from '@angular/core';
-import { IUploderOptions } from '../../interfaces/media/uploader-config.interface';
 import { FileType } from '../../interfaces/media/file-type.interface';
-import { AngularFireUploadTask } from 'angularfire2/storage/task';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { FileLikeObject } from 'ng2-file-upload';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { IUploderOptions } from '../../interfaces/media/uploader-options.interface';
+import { Upload } from './upload.class';
 
 export type FilterFunction = {
   name: string,
-  fn: (item?: FileLikeObject, options?: IUploderOptions) => boolean
+  fn: (item?: Upload, options?: IUploderOptions) => boolean
 };
 
 @Injectable()
 export class MediaUploaderService {
 
-  public uploadPercent: Observable<number>;
-  public downloadUrl: Observable<string>;
-  public uploadErrors: Observable<any>;
-
   public options: IUploderOptions = {
-    filters: []
+    filters: [],
+    queueLimit: 999
   };
 
-  private queueSize: number;
   private _failFilterIndex: number;
 
   constructor(private storage: AngularFireStorage, private afs: AngularFirestore) {
   }
 
-  public uploadFiles(files, options): Observable<any[]> {
+  public upload(upload: Upload, options): Promise<any> {
     const uploadPath = options.path + '/' + options.id + '/' + this.afs.createId();
 
     this.setOptions(options);
-
     const arrayOfFilters = this._getFilters(this.options.filters);
 
-    const list: File[] = [];
-    for (const file of files) {
-      list.push(file);
+    if (typeof upload.file.size !== 'number') {
+      upload.error = Observable.of({
+        message: 'The file specified is no longer valid',
+        file: upload.file.name
+      });
     }
-    this.queueSize = list.length;
 
-    return Observable.of(
-      list.map((some: File) => {
+    if (this._isValidFile(upload, arrayOfFilters, this.options)) {
+      const task = this.storage.upload(uploadPath, upload.file);
+      upload.id = this.afs.createId();
+      upload.percentageChanges = task.percentageChanges();
+      upload.downloadUrl = task.downloadURL();
+      upload.name = upload.file.name;
 
-        const temp = new FileLikeObject(some);
+      return this.saveFileData(upload);
+    } else {
+      const filter: any = arrayOfFilters[this._failFilterIndex];
+      console.log(filter.name);
+      upload.error = Observable.of({
+        message: filter.name,
+        file: upload.file.name
+      });
+    }
+  }
 
-        if (typeof some.size !== 'number') {
-          return Observable.throw({
-            message: 'The file specified is no longer valid',
-            file: some.name
-          });
-        }
+  private saveFileData(upload: Upload): Promise<any> {
+    const file = {
+      id: upload.id,
+      // downloadUrl: upload.downloadUrl,
+      name: upload.file.name,
+      lastModifiedDate: upload.file.lastModifiedDate,
+      type: upload.file.type,
+      size: upload.file.size
+    };
+    return this.afs.doc('media/' + upload.id).set(file);
+  }
 
-        if (this._isValidFile(temp, arrayOfFilters, this.options)) {
-          const task = this.storage.upload(uploadPath, some);
-          return {
-            percentageChanges: task.percentageChanges(),
-            downloadUrl: task.downloadURL()
-          };
-        } else {
-          const filter: any = arrayOfFilters[this._failFilterIndex];
-          return Observable.throw({
-            message: filter.name,
-            file: some.name
-          });
-        }
-      })
-    );
+  private deleteFileData(key: string) {
+    console.log(key);
+    return Promise.resolve();
+  }
+
+  deleteFile(upload: Upload) {
+    this.deleteFileData(upload.id).then(() => {
+      this.deleteFileStorage(upload.name);
+    }).catch((error) => console.log(error));
+  }
+
+  private deleteFileStorage(name: string) {
+    return true;
+    // const storageRef = fireba.storage().ref();
+    // storageRef.child(`${this.basePath}/${name}`).delete()
   }
 
   private setOptions(options: IUploderOptions) {
@@ -120,22 +132,22 @@ export class MediaUploaderService {
   }
 
   private _queueLimitFilter(): boolean {
-    return this.options.queueLimit === undefined || this.queueSize <= this.options.queueLimit;
+    return this.options.queueLimit === undefined || this.options.queueSize <= this.options.queueLimit;
   }
 
-  private _fileSizeFilter(item: FileLikeObject): boolean {
+  private _fileSizeFilter(item: Upload): boolean {
     return !(this.options.maxFileSize && item.size > this.options.maxFileSize);
   }
 
-  private _mimeTypeFilter(item: FileLikeObject): boolean {
-    return !(this.options.allowedMimeType && this.options.allowedMimeType.indexOf(item.type) === -1);
+  private _mimeTypeFilter(item: Upload): boolean {
+    return !(this.options.allowedMimeType && this.options.allowedMimeType.indexOf(item.file.type) === -1);
   }
 
-  private _fileTypeFilter(item: FileLikeObject): boolean {
-    return !(this.options.allowedFileType && this.options.allowedFileType.indexOf(FileType.getMimeClass(item)) === -1);
+  private _fileTypeFilter(item: Upload): boolean {
+    return !(this.options.allowedFileType && this.options.allowedFileType.indexOf(FileType.getMimeClass(item.file)) === -1);
   }
 
-  private _isValidFile(file: FileLikeObject, filters: FilterFunction[], options: IUploderOptions): boolean {
+  private _isValidFile(file: Upload, filters: FilterFunction[], options: IUploderOptions): boolean {
     this._failFilterIndex = -1;
     return !filters.length ? true : filters.every((filter: FilterFunction) => {
       this._failFilterIndex++;

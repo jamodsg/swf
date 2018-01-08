@@ -83,6 +83,8 @@
                          fxFlex="100">
                       <label>{{'general.locations.edit.photoTitle' | translate}}</label><br/>
                       <media-uploader
+                        (notifyParentComponent)="logoUploadCompleted($event)"
+                        [currentImageUrl]="location ? location.imageUrl : ''"
                         [uploaderOptions]="logoUploaderOptions"
                         [uploaderConfig]="logoUploaderConfig">
                       </media-uploader>
@@ -152,8 +154,8 @@
 
           <mat-card-actions>
             <div class="button-row">
-              <!-- [disabled]="!form.valid || isLoading" -->
               <button mat-raised-button
+                      [disabled]="location === savedLocation"
                       color="primary"
                       type="submit">
                 {{ location.id

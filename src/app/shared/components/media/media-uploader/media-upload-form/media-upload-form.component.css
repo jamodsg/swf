@@ -20,11 +20,6 @@
   text-align: center;
 }
 
-.file-over {
-  background-color: #00e466;
-  opacity: 0.7;
-}
-
 .image-uploader .upload-form {
   border: 1px solid #ababab;
   width: 99%;
@@ -50,7 +45,7 @@
   z-index: -1; */
 }
 
-.image-uploader .x-file-input label {
+.image-uploader label {
   -webkit-box-align: center;
   -webkit-box-pack: center;
   align-items: center;
@@ -58,7 +53,7 @@
   outline: 0;
 }
 
-.image-uploader .upload-form, .image-uploader .x-file-input, .image-uploader .x-file-input label {
+.image-uploader .upload-form, .image-uploader label {
   -webkit-box-flex: 1;
   display: -webkit-box;
   display: flex;

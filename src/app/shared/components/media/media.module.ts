@@ -12,6 +12,7 @@ import { MediaGalleryItemComponent } from './media-gallery-item/media-gallery-it
 import { MediaGalleryListComponent } from './media-gallery-list/media-gallery-list.component';
 import { MediaUploaderService } from '../../services/media/media-uploader.service';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { MediaUploadFormComponent } from './media-uploader/media-upload-form/media-upload-form.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     MediaGalleryItemComponent,
     MediaGalleryListComponent,
     MediaUploaderComponent,
+    MediaUploadFormComponent,
     /*
     FileSelectDirective,
     FilterByGalleryPipe,

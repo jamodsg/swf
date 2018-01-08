@@ -29,6 +29,7 @@ import { LocationEditAddressComponent } from './location-edit/location-edit-addr
 import { LocationEditContactComponent } from './location-edit/location-edit-contact/location-edit-contact.component';
 import { LocationContactFormComponent } from './location-edit/location-contact-form/location-contact-form.component';
 import { MediaModule } from '../../shared/components/media/media.module';
+import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { MediaModule } from '../../shared/components/media/media.module';
     LocationResolver,
     LocationService,
     MapsService,
-    MemberService
+    MemberService,
+    PendingChangesGuard
   ]
 })
 export class LocationModule {
