@@ -7,6 +7,7 @@ import { FileType } from '../../interfaces/media/file-type.interface';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { IUploderOptions } from '../../interfaces/media/uploader-options.interface';
 import { Upload } from './upload.class';
+import * as firebase from 'firebase';
 
 export type FilterFunction = {
   name: string,
@@ -80,10 +81,9 @@ export class MediaUploaderService {
     }).catch((error) => console.log(error));
   }
 
-  private deleteFileStorage(name: string) {
-    return true;
-    // const storageRef = fireba.storage().ref();
-    // storageRef.child(`${this.basePath}/${name}`).delete()
+  public deleteFileStorage(name: string) {
+    console.log(name);
+    // return this.storage.storage.ref().delete(name);
   }
 
   private setOptions(options: IUploderOptions) {

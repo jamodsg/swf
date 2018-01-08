@@ -36,7 +36,7 @@ export class MediaUploadFormComponent implements OnInit {
   }
 
   deleteMedia(currentImageUrl: string) {
-    console.log(currentImageUrl);
+    this.mediaUploaderService.deleteFile(currentImageUrl);
   }
 
   uploadFile() {
