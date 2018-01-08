@@ -24,7 +24,7 @@
     </a>
   </div>
 
-  <a title="Delete" class="image-cancel">
+  <a title="Delete" class="image-cancel" *ngIf="currentImageUrl" (click)="deleteMedia(currentImageUrl)">
     <mat-icon>delete</mat-icon>
   </a>
 </div>

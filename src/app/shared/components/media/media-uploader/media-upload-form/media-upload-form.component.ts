@@ -35,6 +35,10 @@ export class MediaUploadFormComponent implements OnInit {
     }
   }
 
+  deleteMedia(currentImageUrl: string) {
+    console.log(currentImageUrl);
+  }
+
   uploadFile() {
     const fileArray = Array.from(this.selectedFiles);
     this.uploaderOptions.queueSize = fileArray.length;
