@@ -8,7 +8,7 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { LocationService } from '../../shared/services/location/location.service';
 import {
-  MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatOptionModule, MatSelectModule, MatTableModule,
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatOptionModule, MatSelectModule, MatTableModule,
   MatTabsModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -38,6 +38,7 @@ import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.
     HttpClientModule,
     locationRoutingModule,
     MatButtonModule,
+    MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,

@@ -3,15 +3,15 @@ import { ICreation } from '../creation.interface';
 export interface IMediaItem {
 
   id: string;
+  name: string;
+  assignedObjectId: string;
+  assignedObjectType: string;
+  downloadUrl: string;
+  size: number;
+  type: string;
 
-  title: string;
-  url: string;
-  description: string;
-  assignedItem: string;
-  assignedItemType: string;
-  fileSize: number;
-  fileType: string;
-  fileCredits: string;
+  description?: string;
+  fileCredits?: string;
 
   isExternal: boolean;
 

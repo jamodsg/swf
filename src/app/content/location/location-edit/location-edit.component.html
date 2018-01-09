@@ -82,6 +82,9 @@
                          fxFlex.gt-xs="100"
                          fxFlex="100">
                       <label>{{'general.locations.edit.photoTitle' | translate}}</label><br/>
+
+                      <img [src]="location.imageUrl" class="md-card-image imagen" *ngIf="location.imageUrl"/>
+
                       <media-uploader
                         (uploadCompleted)="logoUploadCompleted($event)"
                         (removedMedia)="removedMedia($event)"
@@ -179,39 +182,3 @@
 <ng-template #loadingTemplate>
   Lade ...
 </ng-template>
-
-<!--
-    <div class="col-xl-4">
-      <div class="m-portlet">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">{{'general.locations.edit.photoTitle' | translate}}</h3>
-            </div>
-          </div>
-        </div>
-        <div class="m-portlet__body">
-
-          <img [src]="location.imageUrl" class="img-fluid img-thumbnail"
-               *ngIf="location.imageUrl; else noLogoTemplate"/>
-
-          <!--<media-uploader
-            *ngIf="showUploader"
-            [objectId]="location.id"
-            [objectType]="objectType"
-            [uploaderOptions]="uploaderOptions"
-            (uploadCompleted)="uploadCompleted($event)">
-          </media-uploader>
-
-          <div class="text-center m--margin-top-15">
-            <button class="btn btn-primary" (click)="toggleUploader()" *ngIf="!showUploader">
-              {{'general.locations.edit.uploadImage' | translate}}
-            </button>
-        </div>
-
-      </div>
-    </div>
-
-<ng-template #noLogoTemplate>
-  {{'general.locations.edit.noLogo' | translate}}
-</ng-template> -->

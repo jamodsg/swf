@@ -7,6 +7,8 @@ import { FileType } from '../../interfaces/media/file-type.interface';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { IUploderOptions } from '../../interfaces/media/uploader-options.interface';
 import { Upload } from './upload.class';
+import { IMediaItem } from '../../interfaces/media/media-item.interface';
+import { AuthService } from '../auth/auth.service';
 
 export type FilterFunction = {
   name: string,
@@ -24,10 +26,12 @@ export class MediaUploaderService {
   private _failFilterIndex: number;
   private uploadId: string;
 
-  constructor(private storage: AngularFireStorage, private afs: AngularFirestore) {
+  constructor(private authService: AuthService,
+              private storage: AngularFireStorage,
+              private afs: AngularFirestore) {
   }
 
-  public upload(upload: Upload, options): Promise<any> {
+  public upload(upload: Upload, options): Observable<any> {
     this.uploadId = this.afs.createId();
 
     const uploadPath = options.path + '/' + options.id + '/' + this.uploadId;
@@ -49,6 +53,8 @@ export class MediaUploaderService {
         }
       });
       upload.id = this.uploadId;
+      upload.assignedObjectId = options.id;
+      upload.assignedObjectType = options.path;
       upload.percentageChanges = task.percentageChanges();
       upload.downloadUrl = task.downloadURL();
       upload.name = upload.file.name;
@@ -64,16 +70,22 @@ export class MediaUploaderService {
     }
   }
 
-  private saveFileData(upload: Upload): Promise<any> {
-    const file = {
-      id: upload.id,
-      // downloadUrl: upload.downloadUrl,
-      name: upload.file.name,
-      lastModifiedDate: upload.file.lastModifiedDate,
-      type: upload.file.type,
-      size: upload.file.size
-    };
-    return this.afs.doc('media/' + upload.id).set(file);
+  private saveFileData(upload: Upload): Observable<IMediaItem> {
+    return upload.downloadUrl.map((downloadUrl: string) => {
+      const data: IMediaItem = {
+        id: upload.id,
+        assignedObjectId: upload.assignedObjectId,
+        assignedObjectType: upload.assignedObjectType,
+        downloadUrl: downloadUrl,
+        name: upload.name,
+        size: upload.file.size,
+        type: upload.file.type,
+        isExternal: false,
+        creation: this.authService.getCreation()
+      };
+      this.afs.doc('media/' + upload.id).set(data);
+      return data;
+    });
   }
 
   private deleteFileData(key: string) {

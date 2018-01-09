@@ -4,6 +4,7 @@ import { MediaUploaderService } from '../../../../services/media/media-uploader.
 import { IUploderOptions } from '../../../../interfaces/media/uploader-options.interface';
 import { Upload } from '../../../../services/media/upload.class';
 import { FormGroup } from '@angular/forms';
+import { IMediaItem } from '../../../../interfaces/media/media-item.interface';
 
 @Component({
   selector: 'media-upload-form',
@@ -49,10 +50,11 @@ export class MediaUploadFormComponent implements OnInit {
     fileArray.forEach((file) => {
       const fileUpload = new Upload(file);
       this.currentUploads.push(fileUpload);
-      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).then(
-        () => {
+      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).subscribe(
+        (mediaItem: IMediaItem) => {
+          console.log(mediaItem);
           this.currentUploads.splice(this.currentUploads.indexOf(fileUpload), 1);
-          this.uploadCompleted.emit(fileUpload);
+          this.uploadCompleted.emit(mediaItem);
         },
         (error: any) => console.log('Error ' + error)
       );

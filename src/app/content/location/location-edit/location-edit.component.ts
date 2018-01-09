@@ -15,6 +15,7 @@ import { IUploaderConfig } from '../../../shared/interfaces/media/uploader-confi
 import { IUploderOptions } from '../../../shared/interfaces/media/uploader-options.interface';
 import { Upload } from '../../../shared/services/media/upload.class';
 import { ComponentCanDeactivate } from '../../../shared/services/auth/pending-changes.guard';
+import { IMediaItem } from '../../../shared/interfaces/media/media-item.interface';
 
 @Component({
   selector: 'location-edit',
@@ -89,12 +90,9 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     }
   }
 
-  logoUploadCompleted(upload: Upload) {
-    upload.downloadUrl.subscribe((downloadUrl: string) => {
-      this.location.imageUrl = downloadUrl;
-      this.saveLocation(false);
-      console.log(this.location);
-    });
+  logoUploadCompleted(mediaItem: IMediaItem) {
+    this.location.imageUrl = mediaItem.downloadUrl;
+    this.saveLocation(false);
   }
 
   removedMedia(event){
