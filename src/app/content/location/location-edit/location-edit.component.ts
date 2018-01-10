@@ -90,7 +90,8 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
   }
 
   logoUploadCompleted(mediaItem: IMediaItem) {
-    this.location.imageUrl = mediaItem.downloadUrl;
+    console.log('ToDo');
+    // this.location.imageUrl = mediaItem.downloadUrl;
     this.saveLocation(false);
   }
 

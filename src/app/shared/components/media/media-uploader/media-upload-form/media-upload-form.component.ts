@@ -25,11 +25,20 @@ export class MediaUploadFormComponent implements OnInit {
 
   public selectedFiles: FileList | null;
   public currentUploads: Upload[] = [];
+  public isHovering: boolean;
 
   constructor(public mediaUploaderService: MediaUploaderService) {
   }
 
   ngOnInit() {
+  }
+
+  toggleHover(event: boolean) {
+    this.isHovering = event;
+  }
+
+  onFileDropped($event){
+    console.log($event);
   }
 
   onFileChange($event: any) {
@@ -71,15 +80,16 @@ export class MediaUploadFormComponent implements OnInit {
 
   uploadFiles() {
     this.currentUploads.forEach((fileUpload) => {
-      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).subscribe((mediaItem: IMediaItem) => {
-          fileUpload.isCompleted = true;
+      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).then();
+      /* .then(
+        (mediaItem: IMediaItem) => {
+          /* fileUpload.isCompleted = true;
           if (this.uploaderConfig.removeAfterUpload) {
             this.currentUploads.splice(this.currentUploads.indexOf(fileUpload), 1);
           }
-          this.uploadCompleted.emit(mediaItem);
-        },
-        (error: any) => console.log(error)
-      );
+          this.uploadCompleted.emit(mediaItem); */
+        // (error: any) => console.log(error)
+
     });
   }
 

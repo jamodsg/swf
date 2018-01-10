@@ -2,25 +2,31 @@
   margin: 0 24px 24px;
 }
 
-.image-uploader {
-  -ms-flex-align: center;
-  -ms-flex-direction: column;
-  -webkit-box-align: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 4px;
-  color: #4b5b62;
-  display: -webkit-box;
-  display: -ms-flexbox;
+.dropZone {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  min-height: 130px;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
+  font-weight: 200;
+  height: 300px;
+  border: 2px dashed #f16624;
+  border-radius: 5px;
+  background: white;
+  margin: 10px 0;
+}
+.dropZone.hovering {
+  border: 2px solid #f16624;
+  color: #dadada !important;
+}
+.dropZone .file-label {
+  font-size: 1.2em;
 }
 
-.image-uploader .upload-form {
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+.dropZone .upload-form {
   border: 1px solid #ababab;
   width: 99%;
 }
@@ -37,23 +43,14 @@
   width: 36px;
 }
 
-
-.image-uploader label, .singleUploadProgress {
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  align-items: center;
-  justify-content: center;
-  outline: 0;
-}
-
-.image-uploader .upload-form, .image-uploader label, .singleUploadProgress {
+.dropZone .upload-form, .image-uploader label, .singleUploadProgress {
   -webkit-box-flex: 1;
   display: -webkit-box;
   display: flex;
   flex-grow: 1;
 }
 
-.image-uploader .image-cancel {
+.idropZone .image-cancel {
   -webkit-box-align: center;
   align-items: center;
   border-radius: 4px;
@@ -69,13 +66,13 @@
   z-index: 300;
 }
 
-.image-uploader .image-cancel:hover {
+.dropZone .image-cancel:hover {
   background: #f05230;
   color: #fff;
   cursor: pointer;
 }
 
-.image-uploader img {
+.dropZone img {
   display: block;
   line-height: 0;
   margin: 0 auto;

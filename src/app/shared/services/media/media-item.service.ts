@@ -18,9 +18,12 @@ export class MediaItemService {
     this.mediaItems$ = this.collectionRef.valueChanges();
   }
 
-  createMediaItem(mediaItem: IMediaItem): Promise<void> {
+  createMediaItem(mediaItem: IMediaItem): Promise<IMediaItem> {
     mediaItem.id = this.afs.createId();
-    return this.afs.collection(this.path).doc(mediaItem.id).set(mediaItem);
+    return this.afs.collection(this.path).doc(mediaItem.id).set(mediaItem).then(
+      () => {
+        return mediaItem
+      });
   }
 
   removeMediaItem(mediaItem: IMediaItem): Promise<any> {
@@ -35,11 +38,11 @@ export class MediaItemService {
     return this.afs.doc<IMediaItem>(this.path + '/' + mediaItemId).valueChanges();
   }
 
-  setNewMediaItem(upload: Upload, downloadUrl: string): IMediaItem {
+  setNewMediaItem(upload: Upload): IMediaItem {
     return {
       id: upload.id,
       assignedObjects: upload.assignedObjects,
-      downloadUrl: downloadUrl,
+      downloadUrl: upload.downloadUrl,
       name: upload.name,
       size: upload.file.size,
       type: upload.file.type,

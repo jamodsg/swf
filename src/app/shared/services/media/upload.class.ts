@@ -15,7 +15,7 @@ export class Upload {
     type: string;
   }[];
 
-  downloadUrl: Observable<string>;
+  downloadUrl: Observable<string> | string;
   percentageChanges: Observable<number>;
   error?: Observable<any>;
 

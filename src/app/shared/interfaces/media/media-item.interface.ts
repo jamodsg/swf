@@ -1,4 +1,5 @@
 import { ICreation } from '../creation.interface';
+import { Observable } from 'rxjs/Observable';
 
 export interface IMediaItem {
 
@@ -10,7 +11,7 @@ export interface IMediaItem {
     type: string;
   }[];
 
-  downloadUrl: string;
+  downloadUrl: Observable<string> | string;
   size: number;
   type: string;
 

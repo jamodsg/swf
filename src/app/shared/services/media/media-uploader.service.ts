@@ -10,6 +10,7 @@ import { Upload } from './upload.class';
 import { IMediaItem } from '../../interfaces/media/media-item.interface';
 import { AuthService } from '../auth/auth.service';
 import { MediaItemService } from './media-item.service';
+import 'rxjs/add/observable/fromPromise';
 
 export type FilterFunction = {
   name: string,
@@ -27,13 +28,21 @@ export class MediaUploaderService {
   private _failFilterIndex: number;
   private uploadId: string;
 
+  public task: AngularFireUploadTask;
+  public mediaItem$: Observable<IMediaItem>;
+  public percent$: Observable<number>;
+  public url$: Observable<string>;
+
+  public state$: Observable<string>;
+  public bytes$: Observable<number[]>;
+
   constructor(private authService: AuthService,
               private storage: AngularFireStorage,
               private mediaItemService: MediaItemService,
               private afs: AngularFirestore) {
   }
 
-  public upload(upload: Upload, options): Observable<any> {
+  public upload(upload: Upload, options): AngularFireUploadTask {
     this.uploadId = this.afs.createId();
 
     const uploadPath = options.path + '/' + options.id + '/' + this.uploadId;
@@ -49,7 +58,7 @@ export class MediaUploaderService {
     }
 
     if (this._isValidFile(upload, arrayOfFilters, this.options)) {
-      const task: AngularFireUploadTask = this.storage.upload(uploadPath, upload.file, {
+      this.task = this.storage.upload(uploadPath, upload.file, {
         customMetadata: {
           id: this.uploadId,
         }
@@ -59,11 +68,18 @@ export class MediaUploaderService {
         id: options.id,
         type: options.path
       }];
-      upload.percentageChanges = task.percentageChanges();
-      upload.downloadUrl = task.downloadURL();
-      upload.name = upload.file.name;
-      upload.task = task;
-      return this.saveFileData(upload);
+      this.percent$ = this.task.percentageChanges();
+      this.url$ = this.task.downloadURL();
+      this.state$ = this.task.snapshotChanges().map(task => task.bytesTransferred === task.totalBytes ? 'success' : task.state);
+
+      this.bytes$ = this.task.snapshotChanges().map(task => [task.bytesTransferred, task.totalBytes]);
+
+      this.task.snapshotChanges().map((task) => {
+        if (task.bytesTransferred === task.totalBytes)
+          this.mediaItem$ = Observable.fromPromise(this.saveFileData(upload));
+      });
+      return this.task;
+
     } else {
       const filter: any = arrayOfFilters[this._failFilterIndex];
       console.log(filter.name);
@@ -74,12 +90,9 @@ export class MediaUploaderService {
     }
   }
 
-  private saveFileData(upload: Upload): Observable<IMediaItem> {
-    return upload.downloadUrl.map((downloadUrl: string) => {
-      const mediaItem = this.mediaItemService.setNewMediaItem(upload, downloadUrl);
-      this.mediaItemService.createMediaItem(mediaItem).then();
-      return mediaItem;
-    });
+  private saveFileData(upload: Upload): Promise<IMediaItem> {
+    const mediaItem = this.mediaItemService.setNewMediaItem(upload);
+    return this.mediaItemService.createMediaItem(mediaItem);
   }
 
   private deleteFileData(key: string) {
