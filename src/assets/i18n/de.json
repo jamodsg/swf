@@ -465,16 +465,19 @@
       }
     },
     "media": {
-      "allFiles": "Alle Dateien",
-      "assignedMedia": "Verknüpfte Dateien",
-      "inQueue": "in der Warteschlange",
-      "items": "Dateien",
-      "newGalleryPlaceholder": "Neue Galerie?",
-      "noItemsFound": "Es wurden noch keine Dateien hochgeladen",
-      "saveGallery": "Galerie speichern",
-      "galleries": "Vorhandene Galerien",
-      "linkPlaceholder": "Link zur Datei angeben",
-      "saveLink": "Speichern"
+      "cancelUpload": "Abbrechen",
+      "centerTitle": "Mediencenter",
+      "chooseFile": "Datei wählen",
+      "chooseFiles": "Dateien wählen",
+      "createGalleryTitle": "Neue Sammlung",
+      "galleryTitle": "Sammlungen",
+      "clearQueue": "Warteschlange löschen",
+      "listTitle": "Hochgeladene Dateien",
+      "pauseUpload": "Pausieren",
+      "resumeUpload": "Fortsetzen",
+      "upload": "Hochladen",
+      "uploadAll": "Alle Dateien hochladen",
+      "uploaderTitle": "Uploader"
     },
     "members": {
       "details": {

@@ -12,8 +12,7 @@ import { ILocationContact } from '../../../shared/interfaces/location-contact.in
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { IUploaderConfig } from '../../../shared/interfaces/media/uploader-config.interface';
-import { IUploderOptions } from '../../../shared/interfaces/media/uploader-options.interface';
-import { Upload } from '../../../shared/services/media/upload.class';
+import { IUploaderOptions } from '../../../shared/interfaces/media/uploader-options.interface';
 import { ComponentCanDeactivate } from '../../../shared/services/auth/pending-changes.guard';
 import { IMediaItem } from '../../../shared/interfaces/media/media-item.interface';
 
@@ -44,7 +43,7 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     autoUpload: false
   };
 
-  public logoUploaderOptions: IUploderOptions = {
+  public logoUploaderOptions: IUploaderOptions = {
     maxFileSize: 100,
     // allowedMimeType: ['image/gif', 'image/tiff'],
     allowedFileType: ['image'],

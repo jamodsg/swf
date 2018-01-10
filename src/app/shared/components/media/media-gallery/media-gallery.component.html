@@ -6,14 +6,25 @@
        (updateMediaItem)="updateMediaItem($event)"
        (removeMediaItem)="removeMediaItem($event)">
   </media-gallery-item>
-</div>-->
+</div>
 
 <ng-template #noMediaItemsTemplate>
-  <!--<div class="row">
+  <div class="row">
     <div class="col-md-12">
       <div class="alert alert-warning">
         <strong>{{ 'general.info' | translate }}</strong> {{ 'general.media.noItemsFound' | translate }}
       </div>
     </div>
-  </div>-->
-</ng-template>
+  </div>
+</ng-template>-->
+
+<mat-grid-list cols="4" rowHeight="2:1">
+  <mat-grid-tile>1</mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+  <mat-grid-tile>1</mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+</mat-grid-list>

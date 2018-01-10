@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUploaderConfig } from '../../../interfaces/media/uploader-config.interface';
-import { IUploderOptions } from '../../../interfaces/media/uploader-options.interface';
+import { IUploaderOptions } from '../../../interfaces/media/uploader-options.interface';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class MediaUploaderComponent implements OnInit {
 
-  @Input() uploaderOptions: IUploderOptions;
+  @Input() uploaderOptions: IUploaderOptions;
   @Input() uploaderConfig: IUploaderConfig;
   @Input() form: FormGroup;
 

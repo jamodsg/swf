@@ -1,5 +1,6 @@
 import { ICreation } from '../../interfaces/creation.interface';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireUploadTask } from 'angularfire2/storage';
 
 export class Upload {
 
@@ -9,14 +10,21 @@ export class Upload {
   size: number;
   type: string;
 
-  assignedObjectId: string;
-  assignedObjectType: string;
+  assignedObjects: {
+    id: string;
+    type: string;
+  }[];
 
   downloadUrl: Observable<string>;
   percentageChanges: Observable<number>;
   error?: Observable<any>;
 
   creation: ICreation;
+
+  isPaused: boolean;
+  isCompleted: boolean;
+
+  task: AngularFireUploadTask;
 
   constructor(file: File) {
     this.file = file;

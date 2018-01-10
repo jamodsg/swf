@@ -1,6 +1,6 @@
 import { FilterFunction } from '../../services/media/media-uploader.service';
 
-export interface IUploderOptions {
+export interface IUploaderOptions {
   allowedMimeType?: Array<string>;
   allowedFileType?: Array<string>;
   filters?: Array<FilterFunction>;

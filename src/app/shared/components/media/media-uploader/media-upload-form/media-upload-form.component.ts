@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUploaderConfig } from '../../../../interfaces/media/uploader-config.interface';
 import { MediaUploaderService } from '../../../../services/media/media-uploader.service';
-import { IUploderOptions } from '../../../../interfaces/media/uploader-options.interface';
+import { IUploaderOptions } from '../../../../interfaces/media/uploader-options.interface';
 import { Upload } from '../../../../services/media/upload.class';
 import { FormGroup } from '@angular/forms';
 import { IMediaItem } from '../../../../interfaces/media/media-item.interface';
@@ -15,7 +15,7 @@ import { IMediaItem } from '../../../../interfaces/media/media-item.interface';
 })
 export class MediaUploadFormComponent implements OnInit {
 
-  @Input() uploaderOptions: IUploderOptions;
+  @Input() uploaderOptions: IUploaderOptions;
   @Input() uploaderConfig: IUploaderConfig;
   @Input() currentImageUrl: string;
   @Input() form: FormGroup;
@@ -34,9 +34,22 @@ export class MediaUploadFormComponent implements OnInit {
 
   onFileChange($event: any) {
     this.selectedFiles = ($event.target as HTMLInputElement).files;
+
+    const fileArray = Array.from(this.selectedFiles);
+    this.uploaderOptions.queueSize = fileArray.length;
+    fileArray.forEach((file) => {
+      const fileUpload = new Upload(file);
+      this.currentUploads.push(fileUpload);
+    });
+
     if (this.uploaderConfig.autoUpload) {
-      this.uploadFile();
+      this.uploadFiles();
     }
+  }
+
+  clearQueue(): void {
+    this.form.controls['imageUrl'].reset();
+    this.currentUploads = [];
   }
 
   deleteMedia(currentImageUrl: string) {
@@ -44,19 +57,28 @@ export class MediaUploadFormComponent implements OnInit {
     // this.mediaUploaderService.deleteFileStorage(currentImageUrl);
   }
 
-  uploadFile() {
-    const fileArray = Array.from(this.selectedFiles);
-    this.uploaderOptions.queueSize = fileArray.length;
-    fileArray.forEach((file) => {
-      const fileUpload = new Upload(file);
-      this.currentUploads.push(fileUpload);
-      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).subscribe(
-        (mediaItem: IMediaItem) => {
-          console.log(mediaItem);
-          this.currentUploads.splice(this.currentUploads.indexOf(fileUpload), 1);
+  deleteFromQueue(upload: Upload) {
+    this.currentUploads.splice(this.currentUploads.indexOf(upload), 1);
+  }
+
+  pauseUpload(upload: Upload) {
+    upload.task.pause();
+  }
+
+  resumeUpload(upload: Upload) {
+    upload.task.resume();
+  }
+
+  uploadFiles() {
+    this.currentUploads.forEach((fileUpload) => {
+      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).subscribe((mediaItem: IMediaItem) => {
+          fileUpload.isCompleted = true;
+          if (this.uploaderConfig.removeAfterUpload) {
+            this.currentUploads.splice(this.currentUploads.indexOf(fileUpload), 1);
+          }
           this.uploadCompleted.emit(mediaItem);
         },
-        (error: any) => console.log('Error ' + error)
+        (error: any) => console.log(error)
       );
     });
   }

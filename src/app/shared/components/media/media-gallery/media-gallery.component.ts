@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IMediaItem } from '../../../interfaces/media/media-item.interface';
+import { MediaItemService } from '../../../services/media/media-item.service';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'media-gallery',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -6,13 +9,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 })
 export class MediaGalleryComponent implements OnInit {
 
-  // @Input() items: IMediaItem[];
-  @Input() assignedItem: any;
+  @Input() id: string;
+  @Input() path: string;
 
-  @Output() setMediaGallery = new EventEmitter(false);
+  public mediaItems: Observable<IMediaItem[]>;
 
-  constructor(/* public mediaGalleryService: MediaGalleryService,
-    public mediaItemService: MediaItemService */) {
+  constructor(private mediaItemService: MediaItemService) {
+    this.mediaItems = mediaItemService.mediaItems$;
   }
 
   ngOnInit() {

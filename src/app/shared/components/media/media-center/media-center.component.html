@@ -1,112 +1,93 @@
-<!--<ng-sidebar-container>
-  <ng-sidebar
-    [sidebarClass]="'media-center-sidebar'"
-    [(opened)]="_opened"
-    [mode]="_MODES[_modeNum]"
-    [keyClose]="_keyClose"
-    [position]="'right'"
-    [dock]="_dock"
-    [dockedSize]="'50px'"
-    [autoCollapseHeight]="_autoCollapseHeight"
-    [autoCollapseWidth]="_autoCollapseWidth"
-    [closeOnClickOutside]="_closeOnClickOutside"
-    [closeOnClickBackdrop]="_closeOnClickBackdrop"
-    [showBackdrop]="_showBackdrop"
-    [animate]="_animate"
-    [trapFocus]="_trapFocus"
-    [autoFocus]="_autoFocus"
-    [ariaLabel]="'My sidebar'"
-    (onOpenStart)="_onOpenStart()"
-    (onOpened)="_onOpened()"
-    (onCloseStart)="_onCloseStart()"
-    (onClosed)="_onClosed()">
-    <media-uploader-unsplash (_toggleOpened)="_toggleOpened()"></media-uploader-unsplash>
-  </ng-sidebar>-->
+<div fxLayout="row"
+     fxLayoutWrap="wrap"
+     [formGroup]="form">
 
-  <div><!-- ng-sidebar-content -->
-    <div class="row">
-      <div class="col-xl-9">
-        <div class="m-portlet">
-          <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-              <div class="m-portlet__head-title">
-                <h3 class="m-portlet__head-text">{{'general.media.assignedMedia' | translate}}</h3>
-              </div>
-            </div>
-            <div class="m-portlet__head-tools">
-              <ul class="m-portlet__nav">
-                <li class="m-portlet__nav-item">
-                  <a (click)="_toggleOpened()"
-                     class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
-                    <i class="fa fa-image"></i>
-                  </a>
-                  <a (click)="toggleUploader()"
-                     class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
-                    <i [ngClass]="showUploader ? 'fa fa-list' : 'fa fa-upload'"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+  <div fxFlex.gt-sm="100"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
+
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>file_upload</mat-icon>
+        {{ 'general.media.centerTitle' | translate }}
+      </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex.gt-xs="100" fxFlex.gt-sm="64" fxFlex="100">
+            <mat-tab-group [dynamicHeight]="true">
+              <mat-tab label="{{'general.media.listTitle' | translate}}">
+
+                <media-gallery
+                  [path]="uploaderOptions.path"
+                  [id]="uploaderOptions.id">
+                </media-gallery>
+
+              </mat-tab>
+              <mat-tab label="{{'general.media.uploaderTitle' | translate}}">
+                <media-uploader
+                  (uploadCompleted)="uploadCompleted.emit($event)"
+                  (removedMedia)="removedMedia.emit($event)"
+                  [form]="form"
+                  [uploaderOptions]="uploaderOptions"
+                  [uploaderConfig]="uploaderConfig">
+                </media-uploader>
+              </mat-tab>
+            </mat-tab-group>
           </div>
-          <div class="m-portlet__body">
-            <!--<media-uploader
-              *ngIf="showUploader; else showGalleryTemplate"
-              [objectId]="objectId"
-              [objectType]="objectType"
-              [uploaderOptions]="uploaderOptions"
-              (uploadCompleted)="uploadCompleted($event)">
-            </media-uploader>-->
+          <div fxFlexOffset="2" fxFlex.gt-xs="100" fxFlex.gt-sm="34" fxFlex="100">
+
+            <mat-tab-group [dynamicHeight]="true">
+              <mat-tab label="{{'general.media.galleryTitle' | translate}}">
+                <pre>{{uploaderConfig | json}}</pre>
+                <pre>{{uploaderOptions | json}}</pre>
+              </mat-tab>
+              <mat-tab label="{{'general.media.createGalleryTitle' | translate}}">
+                Galerie erstellen
+              </mat-tab>
+              <mat-tab label="ToDo">
+                <ul>
+                  <li>
+                    Liste
+                    <ul>
+                      <li>Übersicht über alle bisherigen Uploads (Liste mit Videos, Bildern, Dokumenten etc.)</li>
+                      <li>bei Bildern/Videos mit einem Bild zur Vorschau, ansonsten einfach ne CSS-Box mit der
+                        Datei-Extension im Mittelpunkt
+                      </li>
+                      <li>Sammlungen erstellen / editieren und Dateien per Drag and Drop verschieben</li>
+                      <li>Dateien löschen</li>
+                      <li>Datei fürs Frontend sperren</li>
+                      <li>Dateiinfos editieren (Titel, Author, Beschreibung)</li>
+                      <li>Sterne-Bewertung und Kommentare anzeigen</li>
+                      <li>zum Einbinden in andere Module Möglichkeit zum Filtern via Attribut (bspw. Sponsor mit der ID 5)</li>
+                      <li>Upload der Datei mit Fortschrittsanzeige, mit Pausieren, Fortsetzen und Abbrechen Buttons -
+                        anschließend Anzeige eines Löschen-Buttons
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Upload
+                    <ul>
+                      <li>Fortschrittsanzeige bei nur einem Bild in der Mitte der Dropbox</li>
+                      <li>Ist bereits ein Bild für das Objekt vorhanden, soll dieses als Hintergrund der Dropbox angezeigt
+                        werden - mit Löschen Link, OHNE Upload Formular und Unsplash-Icon
+                      </li>
+                      <li>Definition maximale Dateigröße, erlaubte Dateitypen, maximale Anzahl der Dateien</li>
+                      <li>Videos, Bilder, Audiodateien und Dokumente hochladen</li>
+                      <li>zum Einbinden in andere Module Möglichkeit zum Filtern via Attribut (bspw. Sponsor mit der ID 5)</li>
+                      <li>Wenn ein Objekt, für das ich gerade eine Datei hochlade, noch nicht vorhanden ist, soll die Datei
+                        beim Speichern des Hauptobjektes trotzdem verknüpft werden
+                      </li>
+                      <li>Upload von Bildern von unsplash.com</li>
+                    </ul>
+                  </li>
+                </ul>
+              </mat-tab>
+            </mat-tab-group>
           </div>
         </div>
-      </div>
-
-      <div class="col-xl-3">
-        <div class="m-portlet">
-          <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-              <div class="m-portlet__head-title">
-                <h3 class="m-portlet__head-text">{{'general.media.galleries' | translate}}</h3>
-              </div>
-            </div>
-            <div class="m-portlet__head-tools">
-              <ul class="m-portlet__nav">
-                <li class="m-portlet__nav-item">
-                  <a (click)="toggleGalleryForm()"
-                     class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
-                    <i [ngClass]="showGalleryForm ? 'fa fa-list' : 'fa fa-plus'"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="m-portlet__body">
-            <!--<media-gallery-list
-              *ngIf="!showGalleryForm; else galleryFormTemplate"
-              [assignedGalleries]="mediaGalleryService.mediaGalleries$ | async | filterBy: ['assignedItem'] : objectId">
-            </media-gallery-list>-->
-          </div>
-        </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
-<!--/ng-sidebar-container>-->
-
-<ng-template #galleryFormTemplate>
-  <!--<media-gallery-form
-    (toggleGalleryForm)="toggleGalleryForm()"
-    (setMediaGallery)="setMediaGallery($event)"
-    [assignedItem]="objectId"
-    [assignedItemType]="objectType"></media-gallery-form>-->
-</ng-template>
-
-
-<ng-template #showGalleryTemplate>
- <!-- <media-gallery
-    [assignedItem]="objectId"
-    [items]="mediaItemService.mediaItems$
-          | async
-          | filterBy: ['assignedItem'] : objectId
-          | filterBy: ['assignedItemType'] : objectType"
-  ></media-gallery>-->
-</ng-template>
+</div>

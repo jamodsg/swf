@@ -3,7 +3,7 @@ import { MediaUploaderComponent } from './media-uploader/media-uploader.componen
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule, MatProgressBarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MediaCenterComponent } from './media-center/media-center.component';
 import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
@@ -13,14 +13,24 @@ import { MediaGalleryListComponent } from './media-gallery-list/media-gallery-li
 import { MediaUploaderService } from '../../services/media/media-uploader.service';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { MediaUploadFormComponent } from './media-uploader/media-upload-form/media-upload-form.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgPipesModule } from 'ngx-pipes';
+import { MediaItemService } from '../../services/media/media-item.service';
 
 @NgModule({
   imports: [
     AngularFireStorageModule,
     CommonModule,
     FileUploadModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatGridListModule,
     MatIconModule,
     MatProgressBarModule,
+    MatTabsModule,
+    NgPipesModule,
     ReactiveFormsModule,
     TranslateModule
   ],
@@ -31,36 +41,14 @@ import { MediaUploadFormComponent } from './media-uploader/media-upload-form/med
     MediaGalleryItemComponent,
     MediaGalleryListComponent,
     MediaUploaderComponent,
-    MediaUploadFormComponent,
-    /*
-    FileSelectDirective,
-    FilterByGalleryPipe,
-    ImagePreviewDirective,
-    InlineEditComponent,
-    MediaCenterComponent,
-    MediaGalleryComponent,
-    MediaGalleryFormComponent,
-    MediaGalleryListComponent,
-    MediaGalleryItemComponent,
-    MediaLinkUploaderComponent,
-    MediaThumbnailComponent,
-    MediaUploaderUnsplashComponent */
+    MediaUploadFormComponent
   ],
   exports: [
     MediaCenterComponent,
     MediaUploaderComponent
-    /*
-    FileSelectDirective,
-    InlineEditComponent,
-    FilterByGalleryPipe,
-    ImagePreviewDirective,
-    MediaGalleryComponent,
-    MediaGalleryItemComponent,
-    MediaGalleryListComponent,
-    MediaCenterComponent,
-    MediaThumbnailComponent */
   ],
   providers: [
+    MediaItemService,
     MediaUploaderService
   ]
 })

@@ -1,24 +1,25 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Injectable } from '@angular/core';
 import { FileType } from '../../interfaces/media/file-type.interface';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { IUploderOptions } from '../../interfaces/media/uploader-options.interface';
+import { IUploaderOptions } from '../../interfaces/media/uploader-options.interface';
 import { Upload } from './upload.class';
 import { IMediaItem } from '../../interfaces/media/media-item.interface';
 import { AuthService } from '../auth/auth.service';
+import { MediaItemService } from './media-item.service';
 
 export type FilterFunction = {
   name: string,
-  fn: (item?: Upload, options?: IUploderOptions) => boolean
+  fn: (item?: Upload, options?: IUploaderOptions) => boolean
 };
 
 @Injectable()
 export class MediaUploaderService {
 
-  public options: IUploderOptions = {
+  public options: IUploaderOptions = {
     filters: [],
     queueLimit: 999
   };
@@ -28,6 +29,7 @@ export class MediaUploaderService {
 
   constructor(private authService: AuthService,
               private storage: AngularFireStorage,
+              private mediaItemService: MediaItemService,
               private afs: AngularFirestore) {
   }
 
@@ -47,18 +49,20 @@ export class MediaUploaderService {
     }
 
     if (this._isValidFile(upload, arrayOfFilters, this.options)) {
-      const task = this.storage.upload(uploadPath, upload.file, {
+      const task: AngularFireUploadTask = this.storage.upload(uploadPath, upload.file, {
         customMetadata: {
           id: this.uploadId,
         }
       });
       upload.id = this.uploadId;
-      upload.assignedObjectId = options.id;
-      upload.assignedObjectType = options.path;
+      upload.assignedObjects = [{
+        id: options.id,
+        type: options.path
+      }];
       upload.percentageChanges = task.percentageChanges();
       upload.downloadUrl = task.downloadURL();
       upload.name = upload.file.name;
-
+      upload.task = task;
       return this.saveFileData(upload);
     } else {
       const filter: any = arrayOfFilters[this._failFilterIndex];
@@ -72,19 +76,9 @@ export class MediaUploaderService {
 
   private saveFileData(upload: Upload): Observable<IMediaItem> {
     return upload.downloadUrl.map((downloadUrl: string) => {
-      const data: IMediaItem = {
-        id: upload.id,
-        assignedObjectId: upload.assignedObjectId,
-        assignedObjectType: upload.assignedObjectType,
-        downloadUrl: downloadUrl,
-        name: upload.name,
-        size: upload.file.size,
-        type: upload.file.type,
-        isExternal: false,
-        creation: this.authService.getCreation()
-      };
-      this.afs.doc('media/' + upload.id).set(data);
-      return data;
+      const mediaItem = this.mediaItemService.setNewMediaItem(upload, downloadUrl);
+      this.mediaItemService.createMediaItem(mediaItem).then();
+      return mediaItem;
     });
   }
 
@@ -104,7 +98,7 @@ export class MediaUploaderService {
     // return this.storage.storage.ref().delete(name);
   }
 
-  private setOptions(options: IUploderOptions) {
+  private setOptions(options: IUploaderOptions) {
     this.options = (<any>Object).assign(this.options, options);
 
     this.options.filters.unshift({
@@ -165,7 +159,7 @@ export class MediaUploaderService {
     return !(this.options.allowedFileType && this.options.allowedFileType.indexOf(FileType.getMimeClass(item.file)) === -1);
   }
 
-  private _isValidFile(file: Upload, filters: FilterFunction[], options: IUploderOptions): boolean {
+  private _isValidFile(file: Upload, filters: FilterFunction[], options: IUploaderOptions): boolean {
     this._failFilterIndex = -1;
     return !filters.length ? true : filters.every((filter: FilterFunction) => {
       this._failFilterIndex++;

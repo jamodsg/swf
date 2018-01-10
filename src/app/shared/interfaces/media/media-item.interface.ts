@@ -4,8 +4,12 @@ export interface IMediaItem {
 
   id: string;
   name: string;
-  assignedObjectId: string;
-  assignedObjectType: string;
+
+  assignedObjects: {
+    id: string;
+    type: string;
+  }[];
+
   downloadUrl: string;
   size: number;
   type: string;
