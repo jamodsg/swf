@@ -339,6 +339,7 @@
           "ahHonoraries": "Ehrenmitglieder"
         },
         "createClub": "Neuen Verein erstellen",
+        "createClub": "Neuen Verein erstellen",
         "filterTitle": "Vereine filtern nach ...",
         "loadingClubs": "Vereine werden geladen",
         "loadingManagements": "Die Positionen im Verein werden geladen",
@@ -467,15 +468,13 @@
     "media": {
       "cancelUpload": "Abbrechen",
       "centerTitle": "Mediencenter",
-      "chooseFile": "Datei wählen",
-      "chooseFiles": "Dateien wählen",
       "createGalleryTitle": "Neue Sammlung",
       "galleryTitle": "Sammlungen",
       "clearQueue": "Warteschlange löschen",
       "listTitle": "Hochgeladene Dateien",
       "pauseUpload": "Pausieren",
       "resumeUpload": "Fortsetzen",
-      "upload": "Hochladen",
+      "uploadFile": "Hochladen",
       "uploadAll": "Alle Dateien hochladen",
       "uploaderTitle": "Uploader"
     },

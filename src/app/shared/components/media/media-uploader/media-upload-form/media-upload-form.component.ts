@@ -17,7 +17,7 @@ export class MediaUploadFormComponent implements OnInit {
 
   @Input() uploaderOptions: IUploaderOptions;
   @Input() uploaderConfig: IUploaderConfig;
-  @Input() currentImageUrl: string;
+  // @Input() currentImageUrl: string;
   @Input() form: FormGroup;
 
   @Output() uploadCompleted = new EventEmitter(false);
@@ -25,7 +25,7 @@ export class MediaUploadFormComponent implements OnInit {
 
   public selectedFiles: FileList | null;
   public currentUploads: Upload[] = [];
-  public isHovering: boolean;
+  public dropZoneActive: boolean = false;
 
   constructor(public mediaUploaderService: MediaUploaderService) {
   }
@@ -33,12 +33,12 @@ export class MediaUploadFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleHover(event: boolean) {
-    this.isHovering = event;
+  dropZoneState($event: boolean) {
+    this.dropZoneActive = $event;
   }
 
-  onFileDropped($event){
-    console.log($event);
+  handleDrop(fileList: FileList) {
+    console.log(fileList);
   }
 
   onFileChange($event: any) {
@@ -80,17 +80,17 @@ export class MediaUploadFormComponent implements OnInit {
 
   uploadFiles() {
     this.currentUploads.forEach((fileUpload) => {
-      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).then();
-      /* .then(
+
+      this.mediaUploaderService.upload(fileUpload, this.uploaderOptions).then(
         (mediaItem: IMediaItem) => {
           /* fileUpload.isCompleted = true;
           if (this.uploaderConfig.removeAfterUpload) {
             this.currentUploads.splice(this.currentUploads.indexOf(fileUpload), 1);
-          }
-          this.uploadCompleted.emit(mediaItem); */
-        // (error: any) => console.log(error)
-
+          } */
+          this.uploadCompleted.emit(mediaItem);
+        },
+        (error: any) => console.log(error)
+      );
     });
   }
-
 }

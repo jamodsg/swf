@@ -9,7 +9,7 @@ import { Upload } from './upload.class';
 export class MediaItemService {
 
   private collectionRef: AngularFirestoreCollection<IMediaItem>;
-  private path = `mediaItems`;
+  private path = `media-items`;
   mediaItems$: Observable<IMediaItem[]>;
 
   constructor(private afs: AngularFirestore,
@@ -19,7 +19,9 @@ export class MediaItemService {
   }
 
   createMediaItem(mediaItem: IMediaItem): Promise<IMediaItem> {
-    mediaItem.id = this.afs.createId();
+    if(!mediaItem.id){
+      mediaItem.id = this.afs.createId();
+    }
     return this.afs.collection(this.path).doc(mediaItem.id).set(mediaItem).then(
       () => {
         return mediaItem

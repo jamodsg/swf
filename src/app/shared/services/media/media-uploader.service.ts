@@ -11,6 +11,8 @@ import { IMediaItem } from '../../interfaces/media/media-item.interface';
 import { AuthService } from '../auth/auth.service';
 import { MediaItemService } from './media-item.service';
 import 'rxjs/add/observable/fromPromise';
+import * as firebase from 'firebase';
+import UploadTaskSnapshot = firebase.storage.UploadTaskSnapshot;
 
 export type FilterFunction = {
   name: string,
@@ -26,15 +28,15 @@ export class MediaUploaderService {
   };
 
   private _failFilterIndex: number;
-  private uploadId: string;
 
   public task: AngularFireUploadTask;
-  public mediaItem$: Observable<IMediaItem>;
+
   public percent$: Observable<number>;
   public url$: Observable<string>;
-
   public state$: Observable<string>;
   public bytes$: Observable<number[]>;
+  public mediaItem$: Promise<IMediaItem>;
+
 
   constructor(private authService: AuthService,
               private storage: AngularFireStorage,
@@ -42,10 +44,10 @@ export class MediaUploaderService {
               private afs: AngularFirestore) {
   }
 
-  public upload(upload: Upload, options): AngularFireUploadTask {
-    this.uploadId = this.afs.createId();
+  public upload(upload: Upload, options): Promise<IMediaItem> {
 
-    const uploadPath = options.path + '/' + options.id + '/' + this.uploadId;
+    upload.id = this.afs.createId();
+    const uploadPath = options.path + '/' + options.id + '/' + upload.id;
 
     this.setOptions(options);
     const arrayOfFilters = this._getFilters(this.options.filters);
@@ -58,28 +60,42 @@ export class MediaUploaderService {
     }
 
     if (this._isValidFile(upload, arrayOfFilters, this.options)) {
-      this.task = this.storage.upload(uploadPath, upload.file, {
-        customMetadata: {
-          id: this.uploadId,
-        }
-      });
-      upload.id = this.uploadId;
-      upload.assignedObjects = [{
-        id: options.id,
-        type: options.path
-      }];
+      let storageRef = firebase.storage().ref();
+      let uploadTask = storageRef.child(uploadPath).put(upload.file);
+
       this.percent$ = this.task.percentageChanges();
-      this.url$ = this.task.downloadURL();
-      this.state$ = this.task.snapshotChanges().map(task => task.bytesTransferred === task.totalBytes ? 'success' : task.state);
-
-      this.bytes$ = this.task.snapshotChanges().map(task => [task.bytesTransferred, task.totalBytes]);
-
-      this.task.snapshotChanges().map((task) => {
-        if (task.bytesTransferred === task.totalBytes)
-          this.mediaItem$ = Observable.fromPromise(this.saveFileData(upload));
+      this.state$ = this.task.snapshotChanges().map(task => {
+        return task.bytesTransferred === task.totalBytes ? 'success' : task.state;
       });
-      return this.task;
+      this.bytes$ = this.task.snapshotChanges().map(task => [task.bytesTransferred, task.totalBytes]);
+      this.url$ = this.task.downloadURL();
 
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot: UploadTaskSnapshot) => {
+          console.log(snapshot);
+        },
+        (error: any) => {
+          upload.error = Observable.of({
+            message: error.message,
+            file: upload.file.name
+          });
+          console.log(error);
+        },
+        () => {
+          upload.downloadUrl = uploadTask.snapshot.downloadURL;
+          upload.name = upload.file.name;
+          upload.assignedObjects = [{
+            id: options.id,
+            type: options.path
+          }];
+          const mediaItem = this.mediaItemService.setNewMediaItem(upload);
+          this.mediaItem$ = this.mediaItemService.createMediaItem(mediaItem);
+        });
+
+      if (this.mediaItem$) {
+        console.log(this.mediaItem$);
+        return Promise.resolve(this.mediaItem$);
+      }
     } else {
       const filter: any = arrayOfFilters[this._failFilterIndex];
       console.log(filter.name);
@@ -90,11 +106,7 @@ export class MediaUploaderService {
     }
   }
 
-  private saveFileData(upload: Upload): Promise<IMediaItem> {
-    const mediaItem = this.mediaItemService.setNewMediaItem(upload);
-    return this.mediaItemService.createMediaItem(mediaItem);
-  }
-
+  /*
   private deleteFileData(key: string) {
     console.log(key);
     return Promise.resolve();
@@ -109,7 +121,7 @@ export class MediaUploaderService {
   public deleteFileStorage(name: string) {
     console.log(name);
     // return this.storage.storage.ref().delete(name);
-  }
+  } */
 
   private setOptions(options: IUploaderOptions) {
     this.options = (<any>Object).assign(this.options, options);

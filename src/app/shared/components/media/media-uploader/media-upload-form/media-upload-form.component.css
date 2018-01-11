@@ -22,10 +22,6 @@
   font-size: 1.2em;
 }
 
-progress::-webkit-progress-value {
-  transition: width 0.1s ease;
-}
-
 .dropZone .upload-form {
   border: 1px solid #ababab;
   width: 99%;
@@ -33,12 +29,8 @@ progress::-webkit-progress-value {
 
 .image-uploader-unsplash {
   -webkit-transition: opacity 0.5s ease;
-  bottom: 0;
   height: 36px;
-  left: 0;
   opacity: 0.37;
-  padding: 10px 10px 0 10px;
-  position: absolute;
   transition: opacity 0.5s ease;
   width: 36px;
 }
