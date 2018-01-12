@@ -9,12 +9,19 @@ import { RouterModule } from '@angular/router';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { SponsorService } from '../../shared/services/sponsor/sponsor.service';
-import { MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatTabsModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
 import { QuillModule } from 'ngx-quill';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MediaModule } from '../../shared/components/media/media.module';
 
 @NgModule({
   imports: [
     RouterModule.forChild(sponsorRoutes),
+    FlexLayoutModule,
+    MatButtonModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
@@ -23,6 +30,7 @@ import { QuillModule } from 'ngx-quill';
     MatSliderModule,
     MatTabsModule,
     MatToolbarModule,
+    MediaModule,
     QuillModule,
     SharedModule
   ],

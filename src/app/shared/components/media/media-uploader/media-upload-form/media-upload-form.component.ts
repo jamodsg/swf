@@ -4,7 +4,6 @@ import { MediaUploaderService } from '../../../../services/media/media-uploader.
 import { IUploaderOptions } from '../../../../interfaces/media/uploader-options.interface';
 import { Upload } from '../../../../services/media/upload.class';
 import { FormGroup } from '@angular/forms';
-import { IMediaItem } from '../../../../interfaces/media/media-item.interface';
 
 @Component({
   selector: 'media-upload-form',
@@ -26,6 +25,8 @@ export class MediaUploadFormComponent implements OnInit {
   public selectedFiles: FileList | null;
   public currentUploads: Upload[] = [];
   public dropZoneActive: boolean = false;
+
+  public optionsForm: FormGroup;
 
   constructor(public mediaUploaderService: MediaUploaderService) {
   }

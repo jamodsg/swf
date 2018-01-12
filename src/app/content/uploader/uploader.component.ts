@@ -29,7 +29,7 @@ export class UploaderComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      options: this.initOptions(),
+      // options: this.initOptions(),
       imageUrl: ''
     });
 
@@ -40,15 +40,6 @@ export class UploaderComponent implements OnInit {
       });
   }
 
-  initOptions() {
-    return this.fb.group({
-      autoUpload: this.uploaderConfig.autoUpload,
-      showDropZone: this.uploaderConfig.showDropZone,
-      multiple: this.uploaderConfig.multiple,
-      removeAfterUpload: this.uploaderConfig.removeAfterUpload,
-      showQueue: this.uploaderConfig.showQueue
-    });
-  }
 
   uploadCompleted(mediaItem: IMediaItem){
     console.log(mediaItem);

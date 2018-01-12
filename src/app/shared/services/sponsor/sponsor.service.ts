@@ -1,21 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ISponsor } from '../../interfaces/sponsor.interface';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AuthService } from '../auth/auth.service';
+import { ISponsor } from '../../interfaces/sponsor.interface';
 
 @Injectable()
 export class SponsorService {
 
   private collectionRef: AngularFirestoreCollection<ISponsor>;
   private path = `sponsors`;
-
   sponsors$: Observable<ISponsor[]>;
 
-  constructor(private afs: AngularFirestore, private authService: AuthService) {
+  constructor(private afs: AngularFirestore,
+              private authService: AuthService) {
     this.collectionRef = this.afs.collection<ISponsor>(this.path);
     this.sponsors$ = this.collectionRef.valueChanges();
   }
@@ -25,7 +22,7 @@ export class SponsorService {
     return this.afs.collection(this.path).doc(sponsor.id).set(sponsor);
   }
 
-  removeSponsor(sponsor: ISponsor): Promise<void> {
+  removeSponsor(sponsor: ISponsor): Promise<any> {
     return this.afs.collection(this.path).doc(sponsor.id).delete();
   }
 
@@ -35,6 +32,16 @@ export class SponsorService {
 
   getSponsorById(sponsorId: string): Observable<ISponsor> {
     return this.afs.doc<ISponsor>(this.path + '/' + sponsorId).valueChanges();
+  }
+
+  setNewSponsor(): Observable<ISponsor> {
+    return Observable.of({
+      title: '',
+      internalInfo: '',
+      description: '',
+      assignedCategories: [],
+      creation: this.authService.getCreation()
+    });
   }
 
   /*
@@ -48,14 +55,5 @@ export class SponsorService {
     }).valueChanges();
   } */
 
-  setNewSponsor(): Observable<ISponsor> {
-    return Observable.of({
-      title: '',
-      internalInfo: ' ',
-      description: ' ',
-      assignedCategories: [],
-      creation: this.authService.getCreation()
-    });
-  }
 
 }

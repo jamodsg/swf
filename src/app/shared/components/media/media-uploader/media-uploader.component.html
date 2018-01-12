@@ -1,12 +1,16 @@
 <div fxLayout="row"
-     fxLayoutWrap="wrap" style="margin-top: 25px;" [formGroup]="form">
+     fxLayoutWrap="wrap"
+     [formGroup]="form">
 
-  <div fxFlex="20"
+  <!--<div fxFlex="20"
        style="margin-bottom: 25px;"
-       formGroupName="options"
-       *ngFor="let option of uploaderConfig | keys">
-    <mat-checkbox [formControlName]="option">{{option}}</mat-checkbox>
-  </div>
+       *ngIf="showOptions"
+       [formGroup]="optionsForm">
+    <mat-checkbox *ngFor="let option of uploaderConfig | keys"
+                  [formControlName]="option">
+      {{option}}
+    </mat-checkbox>
+  </div>-->
 
   <div fxFlex.gt-sm="100"
        fxFlex.gt-xs="100"
@@ -18,7 +22,6 @@
       [uploaderOptions]=uploaderOptions
       [uploaderConfig]="uploaderConfig">
     </media-upload-form>
-
   </div>
 </div>
 

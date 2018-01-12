@@ -4,6 +4,14 @@ import { ISponsor } from '../../../shared/interfaces/sponsor.interface';
 import { SponsorService } from '../../../shared/services/sponsor/sponsor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
+import { CategoryService } from '../../../shared/services/category/category.service';
+import { Observable } from 'rxjs/Observable';
+import { ICategory } from '../../../shared/interfaces/category.interface';
+import { IUploaderConfig } from '../../../shared/interfaces/media/uploader-config.interface';
+import { CategoryTypeService } from '../../../shared/services/category-type/category-type.service';
+import { ICategoryType } from '../../../shared/interfaces/category-type.interface';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'sponsor-edit',
@@ -13,23 +21,27 @@ export class SponsorEditComponent implements OnInit {
 
   public sponsor: ISponsor;
   public form: FormGroup;
+  public categories$: Observable<ICategory[]>;
 
   @ViewChild('description') description: QuillEditorComponent;
 
-  private updateMediaItemAfterSave: boolean = false; // set to true if an mediaItem was uploaded to a sponsor with no id
+  public isSubmitting: boolean = false;
+  public titleMaxLength: number = 50;
 
-  public isCanceled: boolean = false; // Check if cancel button was clicked
-  public isSubmitting: boolean = false; // set to true when the save-Button is pressed
-
-  // private mediaItem: IMediaItem;
+  public uploaderConfig: IUploaderConfig = {
+    autoUpload: true,
+    showDropZone: true,
+    multiple: false,
+    removeAfterUpload: true,
+    showQueue: false
+  };
 
   constructor(private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router,
-    // private mediaItemService: MediaItemService,
-    private sponsorService: SponsorService,
-              // public categoryTypeService: CategoryTypeService,
-              /*public categoryService: CategoryService*/) {
+              private fb: FormBuilder,
+              private router: Router,
+              private sponsorService: SponsorService,
+              public categoryService: CategoryService) {
+    this.categories$ = categoryService.getCategoriesByCategoryType('sponsor');
   }
 
   ngOnInit() {
@@ -42,7 +54,8 @@ export class SponsorEditComponent implements OnInit {
       assignedCategories: [this.sponsor.assignedCategories, [Validators.required]],
       startDate: this.sponsor.startDate,
       endDate: this.sponsor.endDate,
-      internalInfo: this.sponsor.internalInfo
+      internalInfo: this.sponsor.internalInfo,
+      imageUrl: this.sponsor.imageUrl
     });
 
     /*
@@ -59,28 +72,24 @@ export class SponsorEditComponent implements OnInit {
   }
 
   saveSponsor() {
-    /* let action;
+    let action;
     this.isSubmitting = true;
     if (this.sponsor.id) {
-      action = this.sponsorService.updateSponsor(this.sponsor.id, this.sponsor).then(() => {
-        return this.sponsor.id;
-      });
+      action = this.sponsorService.updateSponsor(this.sponsor.id, this.form.getRawValue());
     } else {
-      action = this.sponsorService.createSponsor(this.sponsor).then((sponsorId: string) => {
-        return sponsorId;
-      });
+      action = this.sponsorService.createSponsor(this.form.getRawValue());
     }
-    action.then((sponsorId) => {
+    action.then(() => {
 
-      if (this.mediaItem) {
+      /* if (this.mediaItem) {
         this.mediaItem.assignedItem = sponsorId;
         return this.mediaItemService.updateMediaItem(this.mediaItem.id, this.mediaItem);
-      }
+      } */
 
       this.form.reset();
       this.isSubmitting = false;
       this.redirectToList();
-    }); */
+    });
   }
 
   cancel() {
@@ -115,47 +124,5 @@ export class SponsorEditComponent implements OnInit {
   redirectToList() {
     // this.router.navigate(['/sponsors']).then();
   }
-
-  /*
-   /* @Input() categoryTypes: ICategoryType[];
-  @Input() categories: ICategory[];
-  @Input() form: FormGroup;
-  @Input() sponsor: ISponsor;
-
-  @Output() setLogo: EventEmitter<any> = new EventEmitter(false);
-  @Output() cancel: EventEmitter<any> = new EventEmitter(false);
-
-  public objectType: string = 'sponsors';
-  public showUploader: boolean = false;
-
-  public uploaderOptions: FileUploaderOptions = {
-    removeAfterUpload: true,
-    uploadFolder: this.objectType,
-    autoUpload: true,
-    multipleUpload: false,
-    showQueue: false,
-    showDropZone: false
-  };
-
-  constructor(private router: Router) {
-  }
-
-  ngOnInit() {
-    if (this.sponsor.id) {
-      this.uploaderOptions.uploadFolder = this.uploaderOptions.uploadFolder + '/' + this.sponsor.id;
-    }
-  }
-
-  toggleUploader() {
-    this.showUploader = !this.showUploader;
-  }
-
-
-  uploadCompleted(mediaResponse: any) {
-    // this.setLogo.emit(mediaResponse);
-    // this.toggleUploader();
-  }
-
-   */
 
 }

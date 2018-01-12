@@ -50,7 +50,7 @@ export class LocationService {
       isImported: false,
       assignedCategory: '',
       title: '',
-      text: ' ',
+      text: '',
       address: {},
       assignedImages: [],
       assignedMediaGalleries: [],

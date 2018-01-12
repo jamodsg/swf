@@ -29,7 +29,7 @@
   </mat-toolbar>
 
   <div fxLayout="row" fxLayoutWrap="wrap">
-    <div fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let sponsor of sponsors$">
+    <div fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let sponsor of sponsors$ | async">
       <mat-card>
         <div class="media-grid">
           <figure>
