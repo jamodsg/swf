@@ -11,8 +11,6 @@ import { IMediaItem } from '../../interfaces/media/media-item.interface';
 import { AuthService } from '../auth/auth.service';
 import { MediaItemService } from './media-item.service';
 import 'rxjs/add/observable/fromPromise';
-import * as firebase from 'firebase';
-import UploadTaskSnapshot = firebase.storage.UploadTaskSnapshot;
 
 export type FilterFunction = {
   name: string,
@@ -35,8 +33,6 @@ export class MediaUploaderService {
   public url$: Observable<string>;
   public state$: Observable<string>;
   public bytes$: Observable<number[]>;
-  public mediaItem$: Promise<IMediaItem>;
-
 
   constructor(private authService: AuthService,
               private storage: AngularFireStorage,
@@ -44,7 +40,7 @@ export class MediaUploaderService {
               private afs: AngularFirestore) {
   }
 
-  public upload(upload: Upload, options): Promise<IMediaItem> {
+  public upload(upload: Upload, options): Observable<Promise<IMediaItem>> {
 
     upload.id = this.afs.createId();
     const uploadPath = options.path + '/' + options.id + '/' + upload.id;
@@ -60,8 +56,12 @@ export class MediaUploaderService {
     }
 
     if (this._isValidFile(upload, arrayOfFilters, this.options)) {
-      let storageRef = firebase.storage().ref();
-      let uploadTask = storageRef.child(uploadPath).put(upload.file);
+
+      this.task = this.storage.upload(uploadPath, upload.file, {
+        customMetadata: {
+          id: upload.id
+        }
+      });
 
       this.percent$ = this.task.percentageChanges();
       this.state$ = this.task.snapshotChanges().map(task => {
@@ -70,32 +70,30 @@ export class MediaUploaderService {
       this.bytes$ = this.task.snapshotChanges().map(task => [task.bytesTransferred, task.totalBytes]);
       this.url$ = this.task.downloadURL();
 
-      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot: UploadTaskSnapshot) => {
-          console.log(snapshot);
-        },
-        (error: any) => {
-          upload.error = Observable.of({
-            message: error.message,
-            file: upload.file.name
+      return this.task.snapshotChanges().map((task) => {
+        if (task.bytesTransferred === task.totalBytes) {
+          const mediaItem = this.mediaItemService.setNewMediaItem(upload);
+          return this.mediaItemService.createMediaItem(mediaItem).then(() => {
+            return mediaItem
           });
-          console.log(error);
-        },
-        () => {
+        }
+      });
+
+      /*
           upload.downloadUrl = uploadTask.snapshot.downloadURL;
           upload.name = upload.file.name;
           upload.assignedObjects = [{
             id: options.id,
             type: options.path
           }];
-          const mediaItem = this.mediaItemService.setNewMediaItem(upload);
-          this.mediaItem$ = this.mediaItemService.createMediaItem(mediaItem);
+
         });
 
       if (this.mediaItem$) {
         console.log(this.mediaItem$);
         return Promise.resolve(this.mediaItem$);
-      }
+      }*/
+
     } else {
       const filter: any = arrayOfFilters[this._failFilterIndex];
       console.log(filter.name);

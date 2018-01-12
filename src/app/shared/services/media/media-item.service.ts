@@ -18,14 +18,11 @@ export class MediaItemService {
     this.mediaItems$ = this.collectionRef.valueChanges();
   }
 
-  createMediaItem(mediaItem: IMediaItem): Promise<IMediaItem> {
-    if(!mediaItem.id){
+  createMediaItem(mediaItem: IMediaItem): Promise<void> {
+    if (!mediaItem.id) {
       mediaItem.id = this.afs.createId();
     }
-    return this.afs.collection(this.path).doc(mediaItem.id).set(mediaItem).then(
-      () => {
-        return mediaItem
-      });
+    return this.afs.collection(this.path).doc(mediaItem.id).set(mediaItem);
   }
 
   removeMediaItem(mediaItem: IMediaItem): Promise<any> {
