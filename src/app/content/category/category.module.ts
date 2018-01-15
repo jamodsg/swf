@@ -15,10 +15,12 @@ import { CategoryAssignedObjectsComponent } from './category-detail/category-ass
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { QuillModule } from 'ngx-quill';
 import { UserService } from '../../shared/services/user/user.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     ChartsModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

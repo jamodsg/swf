@@ -14,39 +14,41 @@
 
             <mat-tab-group class="demo-tab-group" [dynamicHeight]="true">
               <mat-tab label="{{'general.categories.edit.mainTitle' | translate}}">
-                <div fxLayout="row" fxLayoutWrap="wrap" class="form-container">
-                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
-                    <div class="example-container">
-                      <mat-form-field hintLabel="Max {{titleMaxLength}} characters">
-                        <input matInput maxlength="{{titleMaxLength}}"
-                               placeholder="{{'general.categories.list.colTitles.name' | translate}}"
-                               formControlName="title">
-                        <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
-                    <div class="example-container">
-                      <mat-form-field>
-                        <mat-select placeholder="{{'general.categories.list.colTitles.type' | translate}}"
-                                    formControlName="assignedCategoryType">
-                          <mat-option *ngFor="let categoryType of categoryTypes$ | async | orderBy: 'link'"
-                                      [value]="categoryType.id">
-                            {{ 'general.menu.' + categoryType.link + '.main' | translate}}
-                          </mat-option>
-                        </mat-select>
-                        <mat-hint align="end">
-                          {{'general.categories.edit.categoryDefaultPlaceholder' | translate }}
-                        </mat-hint>
-                      </mat-form-field>
-                    </div>
-                  </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <mat-form-field fxFlex.gt-sm="50"
+                                  fxFlex.gt-xs="100"
+                                  fxFlex="50"
+                                  hintLabel="Max {{titleMaxLength}} characters">
+                    <input matInput maxlength="{{titleMaxLength}}"
+                           placeholder="{{'general.categories.list.colTitles.name' | translate}}"
+                           formControlName="title">
+                    <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlexOffset="1"
+                                  fxFlex.gt-sm="49"
+                                  fxFlex.gt-xs="100"
+                                  fxFlex="49">
+                    <mat-select placeholder="{{'general.categories.list.colTitles.type' | translate}}"
+                                formControlName="assignedCategoryType">
+                      <mat-option *ngFor="let categoryType of categoryTypes$ | async | orderBy: 'link'"
+                                  [value]="categoryType.id">
+                        {{ 'general.menu.' + categoryType.link + '.main' | translate}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-hint align="end">
+                      {{'general.categories.edit.categoryDefaultPlaceholder' | translate }}
+                    </mat-hint>
+                  </mat-form-field>
+
+
                   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
                     <label>{{'general.categories.edit.descriptionPlaceHolder' | translate}}</label>
-                      <quill-editor [style]="{height: '250px'}"
-                                    formControlName="description"
-                                    placeholder="{{'general.categories.edit.descriptionPlaceHolder' | translate}}">
-                      </quill-editor>
+                    <quill-editor [style]="{height: '250px'}"
+                                  formControlName="description"
+                                  placeholder="{{'general.categories.edit.descriptionPlaceHolder' | translate}}">
+                    </quill-editor>
                   </div>
                 </div>
               </mat-tab>

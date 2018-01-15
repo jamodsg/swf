@@ -26,7 +26,7 @@ export class CategoryEditComponent implements OnInit {
 
   @ViewChild('description') description: QuillEditorComponent;
 
-  public titleMaxLength: number = 30;
+  public titleMaxLength: number = 50;
 
   constructor(private categoryService: CategoryService,
     private categoryTypeService: CategoryTypeService,
