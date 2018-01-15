@@ -8,8 +8,6 @@ import { CategoryService } from '../../../shared/services/category/category.serv
 import { Observable } from 'rxjs/Observable';
 import { ICategory } from '../../../shared/interfaces/category.interface';
 import { IUploaderConfig } from '../../../shared/interfaces/media/uploader-config.interface';
-import { CategoryTypeService } from '../../../shared/services/category-type/category-type.service';
-import { ICategoryType } from '../../../shared/interfaces/category-type.interface';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/mergeMap';
 
@@ -125,7 +123,7 @@ export class SponsorEditComponent implements OnInit {
   }
 
   redirectToList() {
-    // this.router.navigate(['/sponsors']).then();
+    this.router.navigate(['/sponsors']).then();
   }
 
 }

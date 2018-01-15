@@ -11,8 +11,7 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { SponsorService } from '../../shared/services/sponsor/sponsor.service';
 import {
   MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSelectModule, MatSidenavModule, MatSliderModule,
-  MatTabsModule,
-  MatToolbarModule
+  MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -33,6 +32,7 @@ import { MediaModule } from '../../shared/components/media/media.module';
     MatSliderModule,
     MatTabsModule,
     MatToolbarModule,
+    MatTooltipModule,
     MediaModule,
     QuillModule,
     SharedModule

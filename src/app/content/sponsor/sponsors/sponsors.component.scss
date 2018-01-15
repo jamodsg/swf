@@ -5,13 +5,23 @@
   display: block;
 }
 :host {
-  md-sidenav {
+  .sideNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 200px;
+    background: rgba(255, 0, 0, 0.5);
+  }
+  figure {
+    background-color: transparent;
+  }
+  .sideNav {
+    width: 25%;
   }
   .mat-drawer-container {
     overflow: visible;
-    .mat-sidenav {
-      overflow: visible;
+    .sideNav {
+      overflow: auto;
     }
   }
   .mat-drawer-content {
@@ -26,5 +36,11 @@
   .mat-slider-horizontal {
     width: 100%;
     min-width: 1px;
+  }
+
+  .sponsor-badge h3 {
+    color: red;
+    font-weight: bolder;
+    padding-top: 7px;
   }
 }
