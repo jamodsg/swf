@@ -36,6 +36,9 @@ export class SponsorEditComponent implements OnInit {
     showQueue: false
   };
 
+  public startDate = new Date();
+  public endDate = new Date();
+
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router,

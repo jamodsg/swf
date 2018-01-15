@@ -69,9 +69,9 @@
                   <mat-form-field fxFlex.gt-sm="30"
                                   fxFlex.gt-xs="100"
                                   fxFlex="30">
-                    <input matInput
-                           placeholder="{{'general.sponsors.edit.startDate' | translate}}"
-                           formControlName="startDate">
+                    <input matInput [matDatepicker]="startPicker" placeholder="{{'general.sponsors.edit.startDate' | translate}}">
+                    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startPicker startView="day" [startAt]="startDate"></mat-datepicker>
                   </mat-form-field>
 
 
@@ -79,9 +79,9 @@
                                   fxFlex.gt-sm="30"
                                   fxFlex.gt-xs="100"
                                   fxFlex="30">
-                    <input matInput
-                           placeholder="{{'general.sponsors.edit.endDate' | translate}}"
-                           formControlName="endDate">
+                    <input matInput [matDatepicker]="endPicker" placeholder="{{'general.sponsors.edit.endDate' | translate}}">
+                    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endPicker startView="day" [startAt]="endDate"></mat-datepicker>
                   </mat-form-field>
 
 
