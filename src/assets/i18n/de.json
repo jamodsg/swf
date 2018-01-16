@@ -910,15 +910,17 @@
       "list": {
         "allSponsorTypes": "Alle Sponsoren anzeigen",
         "createSponsor": "Sponsor hinzufügen",
-        "deleteButton": "Löschen",
-        "editButton": "Editieren",
+        "delete": "Löschen",
+        "edit": "Editieren",
         "editSponsorTitle": "Sponsor editieren",
+        "filter": "filtern",
         "filterTitle": "Sponsoren filtern",
         "mainTitle": "Sponsoren",
         "newSponsorTitle": "Neuer Sponsor",
         "noRandomSponsorFound": "Es wurden noch keine Sponsoren erstellt.",
         "noResult": "Es wurden keine Sponsoren gefunden.",
-        "randomSponsorTitle": "Zufälliger Sponsor"
+        "randomSponsorTitle": "Zufälliger Sponsor",
+        "view": "Details ansehen"
       }
     },
     "tables": {
