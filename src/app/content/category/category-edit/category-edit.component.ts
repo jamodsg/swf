@@ -46,10 +46,8 @@ export class CategoryEditComponent implements OnInit {
       title: [this.category.title, [Validators.required, Validators.minLength(5), Validators.maxLength(this.titleMaxLength)]],
       assignedCategoryType: [this.category.assignedCategoryType, [Validators.required]],
       description: this.category.description,
-      creation: this.initCreation(),
-      // assignedItems: ''
+      creation: this.initCreation()
     });
-
 
     if (this.category.isImported) {
       this.form.get('title').disable();
