@@ -19,13 +19,13 @@ export class SponsorResolver implements Resolve<ISponsor> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISponsor> {
-    if (!route.params['sponsorsId']) {
+    if (!route.params['sponsorId']) {
       return this.sponsorService.setNewSponsor();
     }
 
-    return this.sponsorService.getSponsorById(route.params['sponsorsId']).take(1).map((sponsors: ISponsor) => {
-      if (sponsors && sponsors.id) {
-        return sponsors;
+    return this.sponsorService.getSponsorById(route.params['sponsorId']).take(1).map((sponsor: ISponsor) => {
+      if (sponsor && sponsor.id) {
+        return sponsor;
       } else {
         this.router.navigate(['/sponsors']).then();
       }
