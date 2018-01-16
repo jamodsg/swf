@@ -20,6 +20,7 @@ import { SponsorItemComponent } from './sponsors/sponsor-item/sponsor-item.compo
 import { SponsorFilterComponent } from './sponsors/sponsor-filter/sponsor-filter.component';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
+import { SponsorDetailComponent } from './sponsor-detail/sponsor-detail.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
     SponsorEditComponent,
     SponsorsComponent,
     SponsorItemComponent,
-    SponsorFilterComponent
+    SponsorFilterComponent,
+    SponsorDetailComponent
   ],
   providers: [
     CategoryService,

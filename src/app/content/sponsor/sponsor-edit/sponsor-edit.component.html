@@ -55,9 +55,9 @@
                        fxFlex.gt-xs="100"
                        fxFlex="29">
                     <label>{{'general.sponsors.edit.imageUrl' | translate}}</label>
-                    <media-uploader [form]="form"
+                    <!--<media-uploader [form]="form"
                                     [uploaderConfig]="uploaderConfig">
-                    </media-uploader>
+                    </media-uploader>-->
                   </div>
 
                 </div>
@@ -123,7 +123,7 @@
               <a mat-raised-button color="warn"
                  (click)="removeSponsor()"
                  *ngIf="sponsor.id">
-                {{'general.sponsors.list.removeCategory' | translate}}
+                {{'general.sponsors.edit.removeSponsor' | translate}}
               </a>
             </div>
           </mat-card-actions>

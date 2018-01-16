@@ -5,11 +5,10 @@
       <div class="sponsor-badge">
         <h3>{{ sponsor.title }}</h3>
       </div>
-      <img
-        src="http://www.wiwo.de/images/coca-cola-marke-flasche-leer-imago-mst/20830094/3-format2101.png">
+      <img [src]="sponsor.imageUrl" *ngIf="sponsor.imageUrl">
       <figcaption>
         <p>
-          <a [routerLink]="['/sponsors/view', sponsor.id]"
+          <a [routerLink]="['/sponsors/details', sponsor.id]"
              matTooltip="{{'general.sponsors.list.view' | translate}}"
              matTooltipPosition="left">
             <mat-icon>pageview</mat-icon>
