@@ -1,0 +1,37 @@
+<mat-card *ngIf="sponsor">
+  <div class="media-grid">
+    <figure>
+      <!-- *ngIf="sponsor.status === 'sale'" -->
+      <div class="sponsor-badge">
+        <h3>{{ sponsor.title }}</h3>
+      </div>
+      <img
+        src="http://www.wiwo.de/images/coca-cola-marke-flasche-leer-imago-mst/20830094/3-format2101.png">
+      <figcaption>
+        <p>
+          <a [routerLink]="['/sponsors/view', sponsor.id]"
+             matTooltip="{{'general.sponsors.list.view' | translate}}"
+             matTooltipPosition="left">
+            <mat-icon>pageview</mat-icon>
+          </a>
+          <a [routerLink]="['/sponsors/edit', sponsor.id]"
+             matTooltip="{{'general.sponsors.list.edit' | translate}}"
+             matTooltipPosition="left">
+            <mat-icon>build</mat-icon>
+          </a>
+          <a (click)="removeSponsor(sponsor)"
+             matTooltip="{{'general.sponsors.list.delete' | translate}}"
+             matTooltipPosition="left">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </p>
+      </figcaption>
+    </figure>
+  </div>
+  <mat-card-content>
+    <div>
+      <span [innerHtml]="sponsor.description"></span>
+      <span class="mat-text-muted text-sm" [innerHtml]="sponsor.internalInfo">}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -16,6 +16,10 @@ import {
 import { QuillModule } from 'ngx-quill';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MediaModule } from '../../shared/components/media/media.module';
+import { SponsorItemComponent } from './sponsors/sponsor-item/sponsor-item.component';
+import { SponsorFilterComponent } from './sponsors/sponsor-filter/sponsor-filter.component';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
 
 @NgModule({
   imports: [
@@ -38,13 +42,17 @@ import { MediaModule } from '../../shared/components/media/media.module';
     SharedModule
   ],
   declarations: [
+    CategoryFilterPipe,
     RandomSponsorComponent,
     SponsorEditComponent,
-    SponsorsComponent
+    SponsorsComponent,
+    SponsorItemComponent,
+    SponsorFilterComponent
   ],
   providers: [
     CategoryService,
     CategoryTypeService,
+    MediaMatcher,
     SponsorResolver,
     SponsorService
   ]

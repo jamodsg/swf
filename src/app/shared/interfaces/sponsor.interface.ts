@@ -16,7 +16,7 @@ export interface ISponsor {
   startDate?: Date;
   endDate?: Date;
 
-  assignedCategories: ICategory[];
+  assignedCategories: string[] ;
   creation?: ICreation;
   // publication?: IPublication;
 }

@@ -1,93 +1,39 @@
 <div fxLayout="row" fxLayoutWrap="wrap">
-  <div fxFlex.gt-xs="100" fxFlex.gt-sm="100" fxFlex="100">
-    <mat-card>
-      <mat-card-title>
-        <mat-icon>euro_symbol</mat-icon>
-        {{'general.menu.sponsor.main' | translate}}
-      </mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-      <mat-card-content>
+  <div fxFlex="100" [class.is-mobile]="mobileQuery.matches">
 
-        <mat-sidenav-container>
-          <mat-sidenav #sidenav
-                       mode="side"
-                       opened="true"
-                       class="sideNav"
-                       [fixedInViewport]="false"
-                       [fixedTopGap]="0"
-                       [fixedBottomGap]="0">
+    <mat-toolbar class="toolbar">
+      <button type="button"
+              mat-raised-button
+              color="warn"
+              (click)="sideNav.toggle()">
+        <mat-icon>menu</mat-icon>
+        {{'general.sponsors.list.filterTitle' | translate}}
+      </button>
+    </mat-toolbar>
 
-            <div fxLayout="row" fxLayoutWrap="wrap">
+    <mat-sidenav-container class="sideNav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav #sideNav
+                   class="sideNav"
+                   [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches"
+                   fixedTopGap="56">
+        <sponsor-filter
+          (setFilters)="setFilters($event); sideNav.toggle();"
+          [categories]="categories$ | async">
+        </sponsor-filter>
+      </mat-sidenav>
 
-              <div fxFlex.gt-sm="100"
-                   fxFlex.gt-xs="100"
-                   fxFlex="100">
-                <!--<h3>{{'general.sponsors.list.filterPaymentTitle'}}</h3>
-                <mat-slider value="43"></mat-slider>
-
-                <hr>-->
-
-                <h3>{{'general.sponsors.list.filterCategoryTitle'}}</h3>
-                <div class="pb-1" *ngFor="let category of categories$ | async">
-                  <mat-checkbox>{{category.title}}</mat-checkbox>
-                </div>
-
-                <!--<hr>
-
-               <div class="pa-1">
-                 <button mat-raised-button color="primary">Filter</button>
-               </div>-->
-              </div>
-            </div>
-
-          </mat-sidenav>
-
-          <mat-sidenav-content>
-            <div fxLayout="row" fxLayoutWrap="wrap">
-              <div fxFlex.gt-sm="33.3333" fxFlex.gt-xs="100" fxFlex="100" *ngFor="let sponsor of sponsors$ | async">
-                <mat-card>
-                  <div class="media-grid">
-                    <figure>
-                      <!-- *ngIf="sponsor.status === 'sale'" -->
-                      <div class="sponsor-badge">
-                        <h3>{{ sponsor.title }}</h3>
-                      </div>
-                      <img
-                        src="http://www.wiwo.de/images/coca-cola-marke-flasche-leer-imago-mst/20830094/3-format2101.png">
-                      <figcaption>
-                        <p>
-                          <a [routerLink]="['/sponsors/view', sponsor.id]"
-                             matTooltip="{{'general.sponsors.list.view' | translat}}"
-                             matTooltipPosition="left">
-                            <mat-icon>pageview</mat-icon>
-                          </a>
-                          <a [routerLink]="['/sponsors/edit', sponsor.id]"
-                             matTooltip="{{'general.sponsors.list.edit' | translate}}"
-                             matTooltipPosition="left">
-                            <mat-icon>build</mat-icon>
-                          </a>
-                          <a (click)="removeSponsor(sponsor)"
-                             matTooltip="{{'general.sponsors.list.delete' | translat}}"
-                             matTooltipPosition="left">
-                            <mat-icon>delete</mat-icon>
-                          </a>
-                        </p>
-                      </figcaption>
-                    </figure>
-                  </div>
-                  <mat-card-content>
-                    <div>
-                      <span [innerHtml]="sponsor.description"></span>
-                      <span class="mat-text-muted text-sm" [innerHtml]="sponsor.internalInfo">}</span>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
-              </div>
-            </div>
-          </mat-sidenav-content>
-        </mat-sidenav-container>
-
-      </mat-card-content>
-    </mat-card>
+      <mat-sidenav-content class="mat-sideNav-content">
+        <div *ngFor="let sponsor of sponsors$ | async | categoryFilter: currentFilter"
+             fxFlex.gt-sm="33.3333"
+             fxFlex.gt-xs="100%"
+             fxFlex="100">
+          <sponsor-item
+            [sponsor]="sponsor">
+          </sponsor-item>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
 </div>

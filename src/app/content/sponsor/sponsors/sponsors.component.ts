@@ -1,47 +1,48 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ISponsor } from '../../../shared/interfaces/sponsor.interface';
 import { CategoryService } from '../../../shared/services/category/category.service';
 import { SponsorService } from '../../../shared/services/sponsor/sponsor.service';
 import { ICategory } from '../../../shared/interfaces/category.interface';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'sponsors',
   templateUrl: './sponsors.component.html',
   styleUrls: ['sponsors.component.scss']
 })
-export class SponsorsComponent {
+export class SponsorsComponent implements OnDestroy{
 
   public sponsors$: Observable<ISponsor[]>;
   public categories$: Observable<ICategory[]>;
+  public currentFilter: string[];
 
-  constructor(public categoryService: CategoryService,
-              public sponsorService: SponsorService) {
+  public mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+
+
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private media: MediaMatcher,
+              private categoryService: CategoryService,
+              private sponsorService: SponsorService) {
     this.categories$ = categoryService.getCategoriesByCategoryType('sponsor');
     this.sponsors$ = sponsorService.sponsors$;
+
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   removeSponsor(sponsor: ISponsor) {
     this.sponsorService.removeSponsor(sponsor).then();
   }
 
-  /* updateSponsor(sponsor: ISponsor) {
-    this.sponsorService.updateSponsor(sponsor.id, sponsor).then(
-      () => console.log('ok'),
-      (error: any) => console.log(error)
-    );
-  } */
-
-  isOver(): boolean {
-    return window.matchMedia(`(max-width: 960px)`).matches;
-  }
-
-  isMac(): boolean {
-    let bool = false;
-    if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
-      bool = true;
-    }
-    return bool;
+  setFilters(categoryIds: string[]){
+    this.currentFilter = categoryIds;
   }
 
 }
