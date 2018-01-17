@@ -6,8 +6,15 @@
               mat-raised-button
               color="warn"
               (click)="sideNav.toggle()">
-        <mat-icon>menu</mat-icon>
+        <mat-icon>filter_list</mat-icon>
         {{'general.sponsors.list.filterTitle' | translate}}
+      </button>
+      <button type="button"
+              mat-raised-button
+              color="accent"
+              [routerLink]="['/sponsors/create']">
+        <mat-icon>note_add</mat-icon>
+        {{'general.sponsors.list.createSponsor' | translate}}
       </button>
     </mat-toolbar>
 
@@ -25,11 +32,15 @@
       </mat-sidenav>
 
       <mat-sidenav-content class="mat-sideNav-content">
+        <p *ngIf="(sponsors$ | async)?.length === 0">
+          {{'general.sponsors.list.noSponsorsFound' | translate}}
+        </p>
         <div *ngFor="let sponsor of sponsors$ | async | categoryFilter: currentFilter"
              fxFlex.gt-sm="33.3333"
              fxFlex.gt-xs="100%"
              fxFlex="100">
           <sponsor-item
+            (removeSponsor)="removeSponsor($event)"
             [sponsor]="sponsor">
           </sponsor-item>
         </div>

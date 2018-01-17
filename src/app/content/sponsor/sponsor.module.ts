@@ -10,7 +10,8 @@ import { CategoryTypeService } from '../../shared/services/category-type/categor
 import { CategoryService } from '../../shared/services/category/category.service';
 import { SponsorService } from '../../shared/services/sponsor/sponsor.service';
 import {
-  MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSelectModule, MatSidenavModule, MatSliderModule,
+  MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatListModule, MatNativeDateModule, MatSelectModule, MatSidenavModule,
+  MatSliderModule,
   MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
@@ -21,6 +22,7 @@ import { SponsorFilterComponent } from './sponsors/sponsor-filter/sponsor-filter
 import { MediaMatcher } from '@angular/cdk/layout';
 import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
 import { SponsorDetailComponent } from './sponsor-detail/sponsor-detail.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 @NgModule({
   imports: [
@@ -31,6 +33,7 @@ import { SponsorDetailComponent } from './sponsor-detail/sponsor-detail.componen
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
     MatNativeDateModule,
     MatSelectModule,
     MatSidenavModule,
@@ -39,6 +42,7 @@ import { SponsorDetailComponent } from './sponsor-detail/sponsor-detail.componen
     MatToolbarModule,
     MatTooltipModule,
     MediaModule,
+    PerfectScrollbarModule,
     QuillModule,
     SharedModule
   ],

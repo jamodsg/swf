@@ -58,23 +58,12 @@ export class SponsorEditComponent implements OnInit {
       internalInfo: this.sponsor.internalInfo,
       imageUrl: this.sponsor.imageUrl
     });
-
-    /*
-    this.form.valueChanges.subscribe((changes: ISponsor) => {
-      this.sponsor.title = changes.title;
-      this.sponsor.description = changes.description;
-      this.sponsor.externalLink = changes.externalLink;
-      this.sponsor.internalInfo = changes.internalInfo;
-      this.sponsor.startDate = changes.startDate;
-      this.sponsor.endDate = changes.endDate;
-      this.sponsor.assignedCategories = changes.assignedCategories;
-      this.sponsor.imageUrl = this.mediaItem ? this.mediaItem.url : '';
-    }); */
   }
 
   saveSponsor() {
     let action;
     this.isSubmitting = true;
+
     if (this.sponsor.id) {
       action = this.sponsorService.updateSponsor(this.sponsor.id, this.form.getRawValue());
     } else {
@@ -103,9 +92,9 @@ export class SponsorEditComponent implements OnInit {
           this.isCanceled = false;
           this.redirectToList();
         });
-    } else {
+    } else {*/
       this.redirectToList();
-    } */
+    // }
   }
 
   setLogo(/* mediaResponse: IMediaResponse */) {

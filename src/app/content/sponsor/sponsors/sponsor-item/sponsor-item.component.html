@@ -18,7 +18,7 @@
              matTooltipPosition="left">
             <mat-icon>build</mat-icon>
           </a>
-          <a (click)="removeSponsor(sponsor)"
+          <a (click)="removeSponsor.emit(sponsor)"
              matTooltip="{{'general.sponsors.list.delete' | translate}}"
              matTooltipPosition="left">
             <mat-icon>delete</mat-icon>
@@ -27,7 +27,7 @@
       </figcaption>
     </figure>
   </div>
-  <mat-card-content>
+  <mat-card-content [perfectScrollbar]="config" [disabled]="mediaMatcher.matches" style="max-height: 250px">
     <div>
       <span [innerHtml]="sponsor.description"></span>
       <span class="mat-text-muted text-sm" [innerHtml]="sponsor.internalInfo">}</span>

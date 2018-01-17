@@ -31,9 +31,37 @@
             </div>
           </mat-tab>
           <mat-tab label="{{'general.sponsors.edit.moreTitle' | translate}}">
+            <h1>{{'general.sponsors.edit.title' | translate}}: {{sponsor.title}}</h1>
             <div fxLayout="row" fxLayoutWrap="wrap">
-              <div fxFlex="100">
-                ToDo
+              <div fxFlex.gt-sm="34" fxFlex.gt-xs="100" fxFlex="100">
+                {{'general.sponsors.edit.link' | translate}}:
+                <a style="color: red" href="{{sponsor.externalLink}}">{{'general.sponsors.edit.linkTitle' | translate}}</a>
+                <br />
+                <hr style="margin: 25px" />
+                <div [innerHtml]="sponsor.internalInfo"></div>
+              </div>
+              <div fxFlexOffset="3" fxFlex.gt-sm="30" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-list>
+                  <mat-list-item>
+                    <span>{{'general.sponsors.edit.startDate' | translate}}: </span>
+                    {{sponsor.startDate ? (sponsor.startDate | date: 'shortDate') : ('general.sponsors.edit.noStartDate' | translate)}}
+                  </mat-list-item>
+                  <mat-list-item>
+                    <span>{{'general.sponsors.edit.endDate' | translate}}: </span>
+                    {{sponsor.endDate ? (sponsor.endDate | date: 'shortDate' ) : ('general.sponsors.edit.noEndDate' | translate)}}
+                  </mat-list-item>
+                </mat-list>
+              </div>
+              <div fxFlexOffset="3" fxFlex.gt-sm="30" fxFlex.gt-xs="100" fxFlex="100">
+                <h4>{{'general.sponsors.edit.category' | translate}}</h4>
+                <mat-list>
+                  <mat-list-item *ngFor="let categoryId of sponsor.assignedCategories">
+                    <a [routerLink]="['/categories/details', categoryId]"
+                       *ngFor="let category of categories$ | async | filterBy: ['id']: categoryId">
+                      {{category.title}}
+                    </a>
+                  </mat-list-item>
+                </mat-list>
               </div>
             </div>
           </mat-tab>
