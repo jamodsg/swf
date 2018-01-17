@@ -339,7 +339,6 @@
           "ahHonoraries": "Ehrenmitglieder"
         },
         "createClub": "Neuen Verein erstellen",
-        "createClub": "Neuen Verein erstellen",
         "filterTitle": "Vereine filtern nach ...",
         "loadingClubs": "Vereine werden geladen",
         "loadingManagements": "Die Positionen im Verein werden geladen",
@@ -900,7 +899,9 @@
         "linkTitle": "Hier entlang ...",
         "mainTitle": "Wichtigste Daten",
         "moreTitle": "Interne Informationen",
+        "noEndDate": "Es wurde kein Ende des Sponsorings eingetragen",
         "noImage": "Es wurde noch kein Logo des Sponsors hochgeladen",
+        "noStartDate": "Es wurde kein Beginn des Sponsorings eingetragen",
         "removeSponsor": "Sponsor löschen",
         "saveFirst": "Der Sponsor muss zuerst gespeichert werden um ein Logo hochzuladen.",
         "saveSponsor": "Speichern",
@@ -919,7 +920,7 @@
         "filterTitle": "Sponsoren filtern",
         "mainTitle": "Sponsoren",
         "newSponsorTitle": "Neuer Sponsor",
-        "noRandomSponsorFound": "Es wurden noch keine Sponsoren erstellt.",
+        "noSponsorsFound": "Es wurden noch keine Sponsoren erstellt.",
         "noResult": "Es wurden keine Sponsoren gefunden.",
         "randomSponsorTitle": "Zufälliger Sponsor",
         "view": "Details ansehen"
@@ -1240,6 +1241,7 @@
     "assignedMedia": "Verknüpfte Dateien",
     "birthdays": "Geburtstage",
     "create": "Erstellen",
+    "darkMode": "Nachtmodus",
     "delete": "Löschen",
     "detail": "Details",
     "displaying": "Zeige",
@@ -1247,13 +1249,29 @@
     "filteredRecords": "gefilterten Einträgen",
     "from": "von",
     "items": "Einträge",
+    "languages": {
+      "de": "Deutsch",
+      "en": "Englisch",
+      "fr": "Französisch"
+    },
+    "layout": {
+      "boxed": "Kompakte Seitenbreite"
+    },
     "list": "Übersicht",
+    "logout": "Ausloggen",
+    "myProfile": "Mein Profil",
     "no": "Nein",
     "noTitle": "Unbenannt",
     "oClock": "Uhr",
     "only": "nur",
+    "options": "Optionen",
     "pleaseWait": "Bitte warten ...",
     "records": "Einträgen",
+    "settings": "Einstellungen",
+    "sidebar": {
+      "compactSidebar": "Kompaktes Menü",
+      "withIcons": "Nur Icons anzeigen"
+    },
     "typeToFilter": "Suchen ...",
     "yes": "Ja"
   }
