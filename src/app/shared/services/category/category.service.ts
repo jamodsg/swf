@@ -8,6 +8,8 @@ import {
 import { AuthService } from '../auth/auth.service';
 import { ICategoryType } from '../../interfaces/category-type.interface';
 import { CategoryTypeService } from '../category-type/category-type.service';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CategoryService {

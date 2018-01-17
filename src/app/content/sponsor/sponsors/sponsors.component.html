@@ -32,6 +32,7 @@
       </mat-sidenav>
 
       <mat-sidenav-content class="mat-sideNav-content">
+        <div *ngIf="!(sponsors$ | async)">Lade ...</div>
         <p *ngIf="(sponsors$ | async)?.length === 0">
           {{'general.sponsors.list.noSponsorsFound' | translate}}
         </p>

@@ -452,6 +452,7 @@
           "name": "Titel",
           "type": "Kategorie"
         },
+        "locationsByCategory": "Spielstätten pro Kategorie",
         "noMatchingResult": "Es wurden keine Treffpunkte mit den eingegebenen Suchkriterien gefunden",
         "noResult": "Es wurden keine Treffpunkte gefunden"
       },

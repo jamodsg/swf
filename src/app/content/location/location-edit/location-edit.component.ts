@@ -25,7 +25,6 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
 
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
-    console.log(JSON.stringify(this.location).toLowerCase() === JSON.stringify(this.savedLocation).toLowerCase());
     return JSON.stringify(this.location).toLowerCase() === JSON.stringify(this.savedLocation).toLowerCase();
   }
 

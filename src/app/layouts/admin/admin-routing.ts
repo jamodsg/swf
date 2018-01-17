@@ -74,6 +74,10 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/uploader/uploader.module#UploaderModule'
       },
       {
+        path: 'settings',
+        loadChildren: '../../content/setting/setting.module#SettingModule'
+      },
+      {
         path: 'sponsors',
         loadChildren: '../../content/sponsor/sponsor.module#SponsorModule'
       },

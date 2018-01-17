@@ -30,10 +30,13 @@ import { LocationEditContactComponent } from './location-edit/location-edit-cont
 import { LocationContactFormComponent } from './location-edit/location-contact-form/location-contact-form.component';
 import { MediaModule } from '../../shared/components/media/media.module';
 import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
+import { LocationsByCategoryComponent } from './locations/locations-by-category/locations-by-category.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     AgmCoreModule,
+    ChartsModule,
     FlexLayoutModule,
     HttpClientModule,
     locationRoutingModule,
@@ -63,7 +66,8 @@ import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.
     LocationListComponent,
     LocationMapComponent,
     LocationsComponent,
-    LocationDetailMainComponent
+    LocationDetailMainComponent,
+    LocationsByCategoryComponent
   ],
   providers: [
     ArticleService,

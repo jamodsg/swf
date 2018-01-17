@@ -1,0 +1,46 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xl-12">
+    <div class="m-form__section" formArrayName="social">
+
+      <div *ngFor="let provider of form.controls['social']['controls']; let i=index">
+        <div class="row" [formGroupName]="i">
+
+          <div class="col-xl-4">
+            <div class="form-group">
+              <label>{{'general.applications.social.chooseProvider' | translate}}</label>
+              <select class="form-control" formControlName="title">
+                <option value="" disabled>{{'general.applications.social.chooseProvider' | translate}}</option>
+                <option *ngFor="let provider of socialProviderList | orderBy: ['title']"
+                        [value]="provider.title | lowercase">
+                  {{provider.title}}
+                </option>
+              </select>
+              <small
+                *ngIf="!form.controls['social']['controls'][i]['controls'].title.valid
+                && form.controls['social']['controls'][i]['controls'].title.touched" class="text-danger">
+                {{'general.applications.social.isRequiredProvider' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-xl-8">
+            <label>{{'general.applications.social.setLink' | translate}}</label>
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName="link"
+                     placeholder="{{'general.applications.social.setLink' | translate}}" aria-describedby="delete-link">
+              <button class="btn btn-brand" (click)="removeSocialProvider.emit(i)" id="delete-link" type="button">
+                <i class="fa fa-remove pull-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row margin-20">
+        <div class="col-xl-12 text-right">
+          <a (click)="addSocialProvider.emit(true)">{{'general.applications.social.addProvider' | translate}} +</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

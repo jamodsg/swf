@@ -85,13 +85,13 @@
 
                       <img [src]="location.imageUrl" class="md-card-image imagen" *ngIf="location.imageUrl"/>
 
-                      <media-uploader
+                      <!--<media-uploader
                         (uploadCompleted)="logoUploadCompleted($event)"
                         (removedMedia)="removedMedia($event)"
                         [form]="form"
                         [uploaderOptions]="logoUploaderOptions"
                         [uploaderConfig]="logoUploaderConfig">
-                      </media-uploader>
+                      </media-uploader>-->
                     </div>
 
                   </div>
@@ -131,7 +131,7 @@
               </mat-tab>
 
               <mat-tab label="{{ 'general.locations.edit.mediaTitle' | translate }}">
-                <media-center></media-center>
+                <!--<media-center></media-center>-->
               </mat-tab>
 
               <mat-tab
