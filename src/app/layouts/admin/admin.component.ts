@@ -45,7 +45,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     translate.setDefaultLang('de');
 
     const browserLang: string = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'de');
+    this.currentLang = browserLang.match(/en|fr/) ? browserLang : 'de';
+    translate.use(this.currentLang);
 
     this.mediaMatcher.addListener(mql => zone.run(() => {
       this.mediaMatcher = mql;
@@ -63,6 +64,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._router.unsubscribe();
+  }
+
+  changeTranslation(currentLang: string){
+    this.currentLang = currentLang;
+    this.translate.use(currentLang);
   }
 
   runOnRouteChange(): void {
