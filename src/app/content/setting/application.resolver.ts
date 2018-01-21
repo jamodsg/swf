@@ -9,16 +9,18 @@ import { ApplicationService } from '../../shared/services/application/applicatio
 @Injectable()
 export class ApplicationResolver implements Resolve<IApplication> {
 
-  constructor(private applicationService: ApplicationService/**/) {
+  constructor(private applicationService: ApplicationService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IApplication> {
 
     return this.applicationService.applications$.take(1).map((applications: IApplication[]) => {
       if (!applications || applications.length === 0) {
-        return this.applicationService.setNewApplication();
+        const app = this.applicationService.setNewApplication();
+        this.applicationService.createApplication(app).then();
+        return app;
       } else {
-        console.log(applications);
+        return applications[0];
       }
     });
   }

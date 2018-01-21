@@ -841,7 +841,7 @@
         "isActive": "Wartungsmodus aktiv",
         "message": "Nachricht an die Benutzer",
         "messageDescription": "Eine kurze Information, warum die Seite offline ist und wann sie wahrscheinlich wieder verfügbar ist.",
-        "title": "Wartungsmodus aktivieren"
+        "title": "Wartungsmodus"
       },
       "mainTitle": "Einstellungen",
       "staticPagesTitle": "Statische Seiten",
@@ -851,8 +851,10 @@
         "emailDescription": "Hauptadresse der Seite. Anfragen und Berichte werden hierhin gesendet-",
         "emailTitle": "E-Mail Adresse",
         "settings": "Globale Einstellungen",
-        "title": "Seitentitel",
-        "titleDescription": "Der Name der Seite (wird in der Titelleiste des Browsers verwendet."
+        "name": "Name der Seite",
+        "nameDescription": "Der Name der Seite (wird in der Titelleiste des Browsers verwendet)",
+        "title": "Titel",
+        "titleDescription": "Titel der Seite"
       },
       "registration": {
         "isEnabled": "Anmeldungen erlauben",
@@ -876,12 +878,14 @@
         "createStaticPage": "Neue Seite erstellen",
         "isEnabled": "Öffentlich sichtbar?",
         "noStaticPagesFound": "Es wurden noch keine Seiten erstellt.",
+        "noTitle": "Unbenannt",
         "saveStaticPage": "Seite speichern",
         "sectionTitle": "Kategorie",
         "text": "Seiteninhalt",
         "title": "Titel der Seite"
       },
       "updateApplication": "Einstellungen speichern",
+      "updateMessage": "Die neuen Einstellungen wurden gespeichert!",
       "urlShortening": "Kurze Links erstellen?",
       "urlShorteningService": "Anbieter",
       "urlShorteningTitle": "Links"

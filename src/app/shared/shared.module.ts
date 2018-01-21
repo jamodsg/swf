@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
 import { CreationModule } from './components/creation/creation.module';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,10 @@ import { CreationModule } from './components/creation/creation.module';
     AccordionLinkDirective,
     AccordionDirective,
     ToggleFullscreenDirective,
+    SnackbarComponent,
+  ],
+  entryComponents: [
+    SnackbarComponent
   ],
   exports: [
     AccordionAnchorDirective,

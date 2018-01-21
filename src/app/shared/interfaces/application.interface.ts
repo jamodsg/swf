@@ -7,7 +7,8 @@ export interface IApplication {
 
   page: {
     isEnabled: boolean;
-    title: string;
+    name: string;
+    title?: string;
     description?: string;
     email?: string;
   };

@@ -6,11 +6,17 @@ import { SettingsSocialDataComponent } from './settings/settings-social-data/set
 import { StaticPagesComponent } from './settings/static-pages/static-pages.component';
 import { StaticPageComponent } from './settings/static-pages/static-page/static-page.component';
 import { SharedModule } from '../../shared/shared.module';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridList, MatGridListModule, MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSelectModule, MatSnackBarModule, MatTabsModule
+} from '@angular/material';
 import { ApplicationService } from '../../shared/services/application/application.service';
 import { ApplicationResolver } from './application.resolver';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
+import { StaticPageFormComponent } from './settings/static-pages/static-page-form/static-page-form.component';
 
 @NgModule({
   imports: [
@@ -20,8 +26,11 @@ import { QuillModule } from 'ngx-quill';
     MatCheckboxModule,
     MatIconModule,
     MatFormFieldModule,
+    MatGridListModule,
     MatInputModule,
+    MatListModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatTabsModule,
     QuillModule,
     settingsRoutingModule,
@@ -32,7 +41,8 @@ import { QuillModule } from 'ngx-quill';
     SettingsMainDataComponent,
     SettingsSocialDataComponent,
     StaticPagesComponent,
-    StaticPageComponent
+    StaticPageComponent,
+    StaticPageFormComponent
   ],
   providers: [
     ApplicationResolver,

@@ -1,13 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { IApplication } from '../../../../shared/interfaces/application.interface';
 
 @Component({
   selector: 'static-pages',
@@ -16,14 +10,16 @@ import { FormGroup } from '@angular/forms';
 export class StaticPagesComponent implements OnInit {
 
   @Input() form: FormGroup;
-  @Input() currentStaticPage: number;
+  @Input() application: IApplication;
+  @Input() selectedStaticPage: number;
 
-  @Output() addStaticPage: EventEmitter<boolean> = new EventEmitter(false);
   @Output() removeStaticPage: EventEmitter<number> = new EventEmitter(false);
+  @Output() addStaticPage: EventEmitter<boolean> = new EventEmitter(false);
+  @Output() setSelectedStaticPage: EventEmitter<number> = new EventEmitter(false);
 
   public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
   }
 
   ngOnInit() {

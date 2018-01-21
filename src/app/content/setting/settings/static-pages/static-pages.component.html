@@ -1,89 +1,34 @@
-<div class="row" [formGroup]="form">
-  <div class="col-xl-4 m-demo__preview">
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="25"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
     <h3>{{'general.applications.static.currentStaticPages' | translate}}</h3>
-    <div><!-- perfect-scrollbar style="max-height: 400px;" [config]="config" -->
+    <p *ngIf="!application.staticPages || application.staticPages.length === 0">
+      {{'general.applications.static.noStaticPagesFound' | translate}}
+    </p>
 
-      <div class="alert alert-info" *ngIf="form.get('staticPages')['controls'].length === 0">
-        {{'general.applications.static.noStaticPagesFound' | translate}}
-      </div>
+    <mat-list>
+      <mat-list-item *ngFor="let staticPage of application.staticPages; let i = index">
+        <a (click)="setSelectedStaticPage.emit(i)">{{staticPage.title}}</a>
+      </mat-list-item>
+    </mat-list>
 
-      <ul>
-        <li *ngFor="let item of form.get('staticPages')['controls']; let i = index;">
-          {{form.get('staticPages').controls[i].value.title | json}}
-        </li>
-      </ul>
-
-      <a (click)="addStaticPage.emit(true)">{{'general.applications.static.addStaticPage' | translate}} +</a>
-
-      <!--<div formArrayName="staticPages">
-        <div class="row" [formGroupName]="i">
-
-          <!--{{form.controls.staticPages.controls[i].controls.title.value}}
-          <!--<div class="col-xl-4">
-            <div class="form-group">
-              <label>{{'general.applications.social.chooseProvider' | translate}}</label>
-              <select class="form-control" formControlName="title">
-                <option value="" disabled>{{'general.applications.social.chooseProvider' | translate}}</option>
-                <option *ngFor="let provider of socialProviderList | orderBy: ['title']"
-                        [value]="provider.title | lowercase">
-                  {{provider.title}}
-                </option>
-              </select>
-              <small
-                *ngIf="!form.controls.social.controls[i].controls.title.valid
-                && form.controls.social.controls[i].controls.title.touched" class="text-danger">
-                {{'general.applications.social.isRequiredProvider' | translate}}
-              </small>
-            </div>
-          </div>
-          <div class="col-xl-8">
-            <label>{{'general.applications.social.setLink' | translate}}</label>
-            <div class="input-group">
-              <input type="text" class="form-control" formControlName="link"
-                     placeholder="{{'general.applications.social.setLink' | translate}}" aria-describedby="delete-link">
-              <button class="btn btn-brand" (click)="removeSocialProvider.emit(i)" id="delete-link" type="button">
-                <i class="fa fa-remove pull-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--
-      <ul class="m-nav"
-          *ngFor="let section of applicationService.getStaticPages(application) | async | groupBy: ['sectionTitle'] | keys; let first = first">
-        <li class="m-nav__section" [ngClass]="first ? 'm-nav__section--first' : ''">
-          <span class="m-nav__section-text">{{section}}</span>
-        </li>
-        <li *ngFor="let staticPage of application.staticPages | filterBy: ['sectionTitle'] : section"
-            class="m-nav__item">
-          <a class="m-nav__link"
-             [routerLink]="['/settings/pages/' + staticPage.id + '/edit/application', application.id]">
-            <i class="m-nav__link-icon fa fa-hand-o-right"
-               [ngClass]="selectedStaticPage === staticPage ? 'text-warning' : ''"></i>
-            <span class="m-nav__item-text">{{staticPage.title}}</span>
-          </a>
-        </li>
-      </ul>
-      <a [routerLink]="['/settings/pages/create']"
-         class="btn btn-brand pull-right m--margin-top-25">
-        {{'general.settings.staticPages.createStaticPage' | translate}}
-      </a>-->
-    </div>
+    <button mat-raised-button
+            *ngIf="!selectedStaticPage"
+            type="button"
+            color="primary"
+            (click)="addStaticPage.emit(true)">
+      {{ 'general.applications.static.addStaticPage' | translate}}
+    </button>
   </div>
 
-  <div class="col-xl-8">
-    <static-page *ngIf="!currentStaticPage; else noPageSelectedTemplate"
-                 [currentStaticPage]="currentStaticPage"
-                 [form]="form">
+  <div fxFlex.gt-sm="75"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
+    <!-- *ngIf="selectedStaticPage" -->
+    <static-page
+                 [form]="form"
+                 (removeStaticPage)="removeStaticPage.emit($event)">
     </static-page>
   </div>
-
 </div>
-
-
-<ng-template #noPageSelectedTemplate>
-  <div class="alert alert-info">
-    <p>{{'general.applications.static.chooseStaticPage' | translate}}</p>
-  </div>
-</ng-template>

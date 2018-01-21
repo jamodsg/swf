@@ -1,34 +1,14 @@
-<form class="form-horizontal" novalidate (ngSubmit)="saveStaticPage()" [formGroup]="form">
-  <!--<div class="m-portlet" *ngFor="let page of form.controls.staticPages.controls[i].controls; let i=index">
-    <div class="m-portlet__body" [formGroupName]="i">
-      <div class="row">
-        <div class="col-xl-4">
-          <label>{{'general.applications.static.title' | translate}}</label>
-          <input class="form-control" formControlName="title"/>
-        </div>
-        <div class="col-xl-4">
-          <label>{{'general.applications.static.sectionTitle' | translate}}</label>
-          <select class="form-control" formControlName="sectionTitle">
-            <option value="Hauptseite">Hauptseite</option>
-            <option value="Dorfturnier">Dorfturnier</option>
-          </select>
-        </div>
-        <div class="col-xl-4">
-          <label>{{'general.applications.static.isEnabled' | translate}}</label>
-          <input class="form-control" type="checkbox" formControlName="isEnabled"/>
-        </div>
+<div fxLayout="column"
+     [formGroup]="form">
+  <div formArrayName="staticPages"
+       fxFlex="100">
 
-        <div class="col-xl-12">
-          <label>{{'general.applications.static.text' | translate}}</label>
-          <ckeditor class="form-control" formControlName="text"></ckeditor>
-        </div>
+    <div *ngFor="let staticPage of form.controls['staticPages']['controls']; let i=index">
+      <div [formGroupName]="i">
+        <static-page-form
+          [form]="form.controls['staticPages']['controls'][i]">
+        </static-page-form>
       </div>
     </div>
-    <div class="m-portlet__foot text-right">
-      <button type="submit" [disabled]="!form.valid" class="btn btn-success">
-        {{'general.applications.static.saveStaticPage' | translate}}
-      </button>
-      <button class="btn btn-danger" (click)="cancel()">{{'general.cancel' | translate}}</button>
-    </div>
-  </div>-->
-</form>
+  </div>
+</div>

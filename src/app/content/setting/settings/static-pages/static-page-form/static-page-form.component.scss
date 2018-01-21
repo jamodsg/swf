@@ -1,0 +1,20 @@
+:host {
+  border: 1px solid red;
+  height: 70vh;
+  // display: flex;
+  min-height: 70vh;
+}
+
+.mat-grid-tile {
+}
+
+/* mat-card {
+  border: 1px solid seagreen;
+  width: calc(100% - 70px);
+  height: calc(100% - 70px);
+}*/
+
+quill-editor, .ql-editor {
+  border: 1px solid rebeccapurple;
+  color: red;
+}
