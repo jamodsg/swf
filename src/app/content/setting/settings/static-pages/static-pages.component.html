@@ -8,7 +8,7 @@
     </p>
 
     <mat-list>
-      <mat-list-item *ngFor="let staticPage of application.staticPages | orderBy: ['title']; let i = index">
+      <mat-list-item *ngFor="let staticPage of application.staticPages; let i = index">
         <a (click)="setSelectedStaticPage.emit(i)" mat-line>{{staticPage.title}}</a>
 
         <button mat-icon-button (click)="removeStaticPage.emit(i)">

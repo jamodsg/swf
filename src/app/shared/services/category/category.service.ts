@@ -60,16 +60,16 @@ export class CategoryService {
       });
     });
 
-    if(!categoryTypes$) {
-      return Observable.throw('No categories found');
-    }
-
     return categoryTypes$.mergeMap((categoryTypes: ICategoryType[]) => {
+      if(categoryTypes.length === 0){
+        return [];
+      }
       return this.categories$.map((categories: ICategory[]) => {
         return categories.filter((category: ICategory) => {
           return category.assignedCategoryType === categoryTypes[0].id;
         });
       });
     });
+
   }
 }

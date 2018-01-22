@@ -115,11 +115,16 @@ export class SettingsComponent implements OnInit {
   addStaticPage(): void {
     this.getNewStaticPageTitle().subscribe((staticPageTitle:string) => {
       const control = <FormArray>this.form.controls['staticPages'];
+
+      const pageTitle = this.form.controls['staticPages']['controls'].length === 0
+        ? staticPageTitle
+        : staticPageTitle + ' (' + this.form.controls['staticPages']['controls'].length + ')';
+
       const staticPage: IStaticPage = {
         isEnabled: true,
         assignedCategories: [],
         text: '',
-        title: staticPageTitle
+        title: pageTitle
       };
       const addCtrl = this.initStaticPage(staticPage);
       control.push(addCtrl);

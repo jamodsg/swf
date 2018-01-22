@@ -9,13 +9,25 @@ export const MENUITEMS = [
     state: 'uploader',
     name: 'uploader',
     type: 'link',
-    icon: 'file_upload'
+    icon: 'file_upload',
+    badge: [
+      {
+        type: 'yellow',
+        value: '?'
+      }
+    ],
   },
   {
     state: 'articles',
     name: 'article',
     type: 'sub',
     icon: 'text_format',
+    badge: [
+      {
+        type: 'red',
+        value: '!'
+      }
+    ],
     children: [
       {
         state: '',
@@ -39,18 +51,36 @@ export const MENUITEMS = [
     name: 'category',
     type: 'link',
     icon: 'list',
+    badge: [
+      {
+        type: 'green',
+        value: 'OK'
+      }
+    ]
   },
   {
     state: 'clubs',
     name: 'club',
     type: 'link',
     icon: 'business',
+    badge: [
+      {
+        type: 'yellow',
+        value: '?'
+      }
+    ]
   },
   {
     state: 'locations',
     name: 'location',
     type: 'sub',
     icon: 'location_on',
+    badge: [
+      {
+        type: 'yellow',
+        value: '?'
+      }
+    ],
     children: [
       {
         state: '',
@@ -74,6 +104,12 @@ export const MENUITEMS = [
     name: 'member',
     type: 'sub',
     icon: 'nature_people',
+    badge: [
+      {
+        type: 'red',
+        value: '!'
+      }
+    ],
     children: [
       {
         state: '',
@@ -92,12 +128,24 @@ export const MENUITEMS = [
     name: 'setting',
     type: 'link',
     icon: 'settings',
+    badge: [
+      {
+        type: 'yellow',
+        value: '?'
+      }
+    ]
   },
   {
     state: 'sponsors',
     name: 'sponsor',
     type: 'sub',
     icon: 'euro_symbol',
+    badge: [
+      {
+        type: 'yellow',
+        value: '?'
+      }
+    ],
     children: [
       {
         state: '',
@@ -116,6 +164,12 @@ export const MENUITEMS = [
     name: 'team',
     type: 'sub',
     icon: 'people_outline',
+    badge: [
+      {
+        type: 'red',
+        value: '!'
+      }
+    ],
     children: [
       {
         state: '',
@@ -139,6 +193,12 @@ export const MENUITEMS = [
     name: 'user',
     type: 'sub',
     icon: 'people',
+    badge: [
+      {
+        type: 'yellow',
+        value: '?'
+      }
+    ],
     children: [
       {
         state: '',
@@ -162,6 +222,12 @@ export const MENUITEMS = [
     name: 'task',
     type: 'sub',
     icon: 'bug_report',
+    badge: [
+      {
+        type: 'red',
+        value: '!'
+      }
+    ],
     children: [
       {
         state: '',

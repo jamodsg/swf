@@ -665,6 +665,45 @@
         "updateApplication": "Änderungen speichern",
         "main": "Einstellungen"
       },
+      "APPS": {
+        "main": "Anwendungen"
+      },
+      "WIDGETS": {
+        "main": "Widgets"
+      },
+      "MATERIAL": {
+        "main": "Material"
+      },
+      "FORMS": {
+        "main": "Formulare"
+      },
+      "DATATABLE": {
+        "main": "Tabellen"
+      },
+      "TASKBOARD": {
+        "main": "Aufgaben"
+      },
+      "CHARTS": {
+        "main": "Charts"
+      },
+      "MAPS": {
+        "main": "Karten"
+      },
+      "ECOMMERCE": {
+        "main": "ECommerce"
+      },
+      "DND": {
+        "main": "DNS"
+      },
+      "PAGES": {
+        "main": "Seiten"
+      },
+      "SESSION": {
+        "main": "Session"
+      },
+      "DOCS": {
+        "main": "Dokumentation"
+      },
       "article": {
         "createArticle": "Artikel erstellen",
         "main": "Artikel",
