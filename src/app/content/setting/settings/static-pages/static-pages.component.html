@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutWrap="wrap">
-  <div fxFlex.gt-sm="25"
+  <div fxFlex.gt-sm="20"
        fxFlex.gt-xs="100"
        fxFlex="100">
     <h3>{{'general.applications.static.currentStaticPages' | translate}}</h3>
@@ -8,13 +8,16 @@
     </p>
 
     <mat-list>
-      <mat-list-item *ngFor="let staticPage of application.staticPages; let i = index">
-        <a (click)="setSelectedStaticPage.emit(i)">{{staticPage.title}}</a>
+      <mat-list-item *ngFor="let staticPage of application.staticPages | orderBy: ['title']; let i = index">
+        <a (click)="setSelectedStaticPage.emit(i)" mat-line>{{staticPage.title}}</a>
+
+        <button mat-icon-button (click)="removeStaticPage.emit(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-list-item>
     </mat-list>
 
     <button mat-raised-button
-            *ngIf="!selectedStaticPage"
             type="button"
             color="primary"
             (click)="addStaticPage.emit(true)">
@@ -22,12 +25,15 @@
     </button>
   </div>
 
-  <div fxFlex.gt-sm="75"
+  <div fxFlexOffset="2"
+       fxFlex.gt-sm="78"
        fxFlex.gt-xs="100"
        fxFlex="100">
-    <!-- *ngIf="selectedStaticPage" -->
-    <static-page
-                 [form]="form"
+    <static-page [form]="form"
+                 *ngIf="selectedStaticPage !== -1"
+                 [selectedStaticPage]="selectedStaticPage"
+                 (setSelectedStaticPage)="setSelectedStaticPage.emit($event)"
+                 [categories]="categories$ | async"
                  (removeStaticPage)="removeStaticPage.emit($event)">
     </static-page>
   </div>

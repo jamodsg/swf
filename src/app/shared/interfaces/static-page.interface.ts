@@ -1,5 +1,5 @@
 export interface IStaticPage {
-  sectionTitle: string;
+  assignedCategories: string[];
   title: string;
   text: string;
   isEnabled: boolean;

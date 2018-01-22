@@ -1,20 +1,22 @@
 :host {
-  border: 1px solid red;
   height: 70vh;
-  // display: flex;
   min-height: 70vh;
 }
 
 .mat-grid-tile {
+  margin: 10px 0;
+  padding: 10px 0;
 }
-
-/* mat-card {
-  border: 1px solid seagreen;
-  width: calc(100% - 70px);
-  height: calc(100% - 70px);
-}*/
 
 quill-editor, .ql-editor {
-  border: 1px solid rebeccapurple;
-  color: red;
+  height: 85%;
+  padding: 25px 0;
 }
+
+/*
+.mat-action-row {
+  align-items: left;
+  justify-content: flex-start !important;
+  text-align: left;
+}
+*/

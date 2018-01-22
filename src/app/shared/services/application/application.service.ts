@@ -22,23 +22,9 @@ export class ApplicationService {
     return this.afs.collection(this.path).doc(application.id).set(application);
   }
 
-  /**
-   * unused
-   *
-   removeApplication(application: IApplication): Promise<any> {
-    return this.afs.collection(this.path).doc(application.id).delete();
-  } */
-
   updateApplication(applicationId: string, application: IApplication): Promise<any> {
     return this.afs.collection(this.path).doc(applicationId).update(application);
   }
-
-  /**
-   * unused
-   *
-   getApplicationById(applicationId: string): Observable<IApplication> {
-    return this.afs.doc<IApplication>(this.path + '/' + applicationId).valueChanges();
-  } */
 
   setNewApplication(): IApplication {
     return {

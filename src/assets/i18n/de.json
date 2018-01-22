@@ -725,6 +725,9 @@
         "create": "Sponsor erstellen",
         "list": "Alle Sponsoren"
       },
+      "static": {
+        "main": "Statische Seiten"
+      },
       "task": {
         "closed": "Erledigte",
         "my": "Meine Aufgaben",
@@ -874,6 +877,7 @@
       "static": {
         "addStaticPage": "Neue Seite erstellen",
         "currentStaticPages": "Vorhandene Seiten",
+        "chooseSectionTitle": "Wähle eine Kategorie",
         "chooseStaticPage": "Du musst erst eine Seite aus der Liste wählen oder eine neue erstellen",
         "createStaticPage": "Neue Seite erstellen",
         "isEnabled": "Öffentlich sichtbar?",

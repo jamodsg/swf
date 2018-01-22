@@ -1,50 +1,49 @@
-<mat-grid-list cols="3" rowHeight="fit" fxFlex [formGroup]="form">
-  <mat-grid-tile>
-    <mat-form-field fxFlex="95">
-      <input matInput
-             placeholder="{{'general.applications.static.title' | translate}}"
-             formControlName="title"/>
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-form-field fxFlex="95">
-      <mat-select placeholder="{{'general.applications.static.sectionTitle' | translate}}"
-                  formControlName="sectionTitle">
-        <mat-option>{{'general.applications.static.sectionTitle' | translate}}</mat-option>
-        <!--<mat-option *ngFor="let categoryType of categoryTypes$ | async | orderBy: 'link'"
-                    [value]="categoryType.id">
-          {{ 'general.menu.' + categoryType.link + '.main' | translate}}
-        </mat-option>-->
-      </mat-select>
-      <mat-hint align="end">
-        {{'general.applications.static.sectionTitle' | translate }}
-      </mat-hint>
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-checkbox formControlName="isEnabled" fxFlex="95"> {{'general.applications.static.isEnabled' | translate}}
-    </mat-checkbox>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="3" [rowspan]="8">
-    <label style="margin-top: 15px;">{{'general.applications.static.text' | translate}}</label>
-    <br/>
-    <quill-editor formControlName="text" fxFlex></quill-editor>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <button mat-raised-button
-            type="button"
-            color="accent"
-            (click)="setSelectedStaticPage.emit()">
-      {{ 'general.save' | translate}}
-    </button>
+<div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
 
-    <button mat-raised-button
-            type="button"
-            color="warn"
-            (click)="removeStaticPage.emit(i)">
-      {{ 'general.delete' | translate}}
-    </button>
-  </mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-</mat-grid-list>
+  <mat-form-field fxFlex.gt-sm="40"
+                  fxFlex.gt-xs="100"
+                  fxFlex="100"
+                  hintLabel="Max {{titleMaxLength}} characters">
+    <input matInput
+           placeholder="{{'general.applications.static.title' | translate}}"
+           formControlName="title"/>
+  </mat-form-field>
+
+  <mat-form-field fxFlexOffset="1"
+                  fxFlex.gt-sm="35"
+                  fxFlex.gt-xs="100"
+                  fxFlex="100">
+    <mat-select placeholder="{{'general.applications.static.sectionTitle' | translate}}"
+                formControlName="assignedCategories" multiple>
+      <mat-option [value]="">{{'general.applications.static.chooseSectionTitle' | translate}}</mat-option>
+      <mat-option *ngFor="let category of categories | orderBy: 'title'"
+                  [value]="category.id">
+        {{category.title}}
+      </mat-option>
+    </mat-select>
+    <mat-hint align="end">
+      {{'general.applications.static.sectionTitle' | translate }}
+    </mat-hint>
+  </mat-form-field>
+
+  <div fxFlexOffset="1"
+       fxFlex.gt-sm="23"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
+    <mat-checkbox formControlName="isEnabled" fxFlex="95">
+      {{'general.applications.static.isEnabled' | translate}}
+    </mat-checkbox>
+  </div>
+
+
+  <div fxFlex.gt-sm="100"
+       fxFlex.gt-xs="100"
+       fxFlex="100" style="height: 60vh">
+    <quill-editor
+      formControlName="text"
+      [minLength]="10"
+      [required]="true"
+      fxFlex>
+    </quill-editor>
+  </div>
+</div>

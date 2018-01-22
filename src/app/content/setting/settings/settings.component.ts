@@ -25,7 +25,7 @@ export class SettingsComponent implements OnInit {
 
   public application: IApplication;
   public form: FormGroup;
-  public selectedStaticPage: number;
+  public selectedStaticPage: number = -1;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -106,7 +106,7 @@ export class SettingsComponent implements OnInit {
   initStaticPage(staticPage: IStaticPage): FormGroup {
     return this.fb.group({
       isEnabled: [staticPage ? staticPage.isEnabled : false],
-      sectionTitle: [staticPage ? staticPage.sectionTitle : '', [Validators.required]],
+      assignedCategories: [staticPage ? staticPage.assignedCategories : '', [Validators.required]],
       text: [staticPage ? staticPage.text : '', [Validators.required]],
       title: [staticPage ? staticPage.title : '', [Validators.required]]
     });
@@ -117,19 +117,20 @@ export class SettingsComponent implements OnInit {
       const control = <FormArray>this.form.controls['staticPages'];
       const staticPage: IStaticPage = {
         isEnabled: true,
-        sectionTitle: '',
+        assignedCategories: [],
         text: '',
         title: staticPageTitle
       };
       const addCtrl = this.initStaticPage(staticPage);
       control.push(addCtrl);
-      this.selectedStaticPage = this.form.controls['staticPages']['controls'].length;
+      this.setSelectedStaticPage(this.form.controls['staticPages']['controls'].length -1);
     });
   }
 
   removeStaticPage(i: number): void {
     const control = <FormArray>this.form.controls['staticPages'];
     control.removeAt(i);
+    this.setSelectedStaticPage(-1);
   }
 
   setSelectedStaticPage(staticPage: number): void {

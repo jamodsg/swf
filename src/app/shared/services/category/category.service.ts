@@ -57,8 +57,12 @@ export class CategoryService {
     const categoryTypes$ = this.categoryTypeService.categoryTypes$.map((categoryTypes: ICategoryType[]) => {
       return categoryTypes.filter((categoryType: ICategoryType) => {
         return categoryType.link === linkType;
-      })
+      });
     });
+
+    if(!categoryTypes$) {
+      return Observable.throw('No categories found');
+    }
 
     return categoryTypes$.mergeMap((categoryTypes: ICategoryType[]) => {
       return this.categories$.map((categories: ICategory[]) => {
