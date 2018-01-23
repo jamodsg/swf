@@ -216,7 +216,7 @@ export const MENUITEMS = [
         icon: 'trending_up'
       }
     ]
-  },
+  }/*,
   {
     state: 'tasks',
     name: 'task',
@@ -577,5 +577,5 @@ export const MENUITEMS = [
     name: 'DOCS',
     type: 'extTabLink',
     icon: 'local_library'
-  }
+  }*/
 ];
