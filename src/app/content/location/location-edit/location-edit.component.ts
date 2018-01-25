@@ -100,7 +100,7 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     this.saveLocation(false);
   }
 
-  initAssignedContacts() {
+  initAssignedContacts(): FormArray {
     const formArray = [];
     if (this.location.assignedContacts) {
       for (let i = 0; i < this.location.assignedContacts.length; i++) {
@@ -124,11 +124,7 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
 
   addLocationContact(): void {
     const control = <FormArray>this.form.controls['assignedContacts'];
-    const contact: ILocationContact = {
-      isMember: false,
-      description: '',
-    };
-    const addCtrl = this.initLocationContact(contact);
+    const addCtrl = this.initLocationContact(null);
     control.push(addCtrl);
   }
 

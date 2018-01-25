@@ -12,23 +12,13 @@ import { ICategoryType } from '../../../shared/interfaces/category-type.interfac
 
 export class CategoriesComponent {
 
-  // articles$: Observable<IArticle[]>;
   categories$: Observable<ICategory[]>;
   categoryTypes$: Observable<ICategoryType[]>;
-  // locations$: Observable<ILocation[]>;
-  // teams$: Observable<ITeam[]>; */
 
-  constructor(// private articleService: ArticleService,
-    private categoryService: CategoryService,
-    private categoryTypeService: CategoryTypeService,
-              /* private locationService: LocationService,
-              private sponsorService: SponsorService,
-              private teamService: TeamService */) {
-    // this.articles$ = articleService.articles$;
+  constructor(private categoryService: CategoryService,
+              private categoryTypeService: CategoryTypeService) {
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
-    /* this.locations$ = locationService.locations$;
-    this.teams$ = teamService.teams$; */
   }
 
   removeCategory($event) {
