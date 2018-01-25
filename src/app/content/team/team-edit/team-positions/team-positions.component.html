@@ -1,0 +1,53 @@
+<div fxLayout="column" [formGroup]="form">
+
+  <div>
+    <mat-form-field fxFlex.gt-sm="40"
+                    fxFlex.gt-xs="100">
+      <mat-select placeholder="{{'general.teams.edit.position.players' | translate}}"
+                  formControlName="assignedPlayers" multiple>
+        <mat-option
+          *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
+          [value]="member.id">
+          {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div fxFlexOffset="1"
+         fxFlex.gt-sm="59"
+         fxFlex.gt-xs="100">
+
+      <p>{{'general.teams.edit.position.description' | translate}}</p>
+
+      <p *ngIf="form.controls['assignedPositions'].length === 0">{{'general.teams.edit.position.noPosition' |
+        translate}}</p>
+
+      <div formArrayName="assignedPositions">
+        <div *ngFor="let position of form.controls['assignedPositions']['controls']; let i=index">
+          <div [formGroupName]="i"
+               fxFlex="100">
+            <team-position-form
+              [categoryTypes]="categoryTypes$ | async"
+              (removePosition)="removePosition.emit($event)"
+              [members]="members"
+              [form]="form.controls['assignedPositions']['controls'][i]">
+            </team-position-form>
+          </div>
+        </div>
+      </div>
+
+      <pre>{{categoryTypes$ | async | json}}</pre>
+
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        (click)="addPosition.emit(true)">
+        {{ 'general.teams.edit.position.add' | translate}}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

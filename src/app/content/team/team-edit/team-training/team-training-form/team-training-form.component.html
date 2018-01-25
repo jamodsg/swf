@@ -1,0 +1,80 @@
+<div fxLayout="column" fxLayoutWrap="wrap" [formGroup]="form">
+
+  <div fxFlex="100">
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+
+      <mat-form-field fxFlex.gt-sm="10"
+                      fxFlex.gt-xs="100"
+                      fxFlex="100">
+        <mat-select placeholder="{{'general.teams.edit.training.day' | translate}}"
+                    formControlName="day">
+          <mat-option *ngFor="let weekday of weekdays"
+            [value]="weekday">
+            {{'general.datetime.weekdays.' + weekday | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlexOffset="1"
+                      fxFlex.gt-sm="9"
+                      fxFlex.gt-xs="100"
+                      fxFlex="100">
+        <input matInput
+               formControlName="startTime"
+               placeholder="{{'general.teams.edit.training.startTime' | translate}}">
+      </mat-form-field>
+
+
+      <mat-form-field fxFlexOffset="1"
+                      fxFlex.gt-sm="9"
+                      fxFlex.gt-xs="100"
+                      fxFlex="100">
+        <input matInput
+               formControlName="endTime"
+               placeholder="{{'general.teams.edit.training.endTime' | translate}}">
+      </mat-form-field>
+
+      <mat-form-field fxFlexOffset="1"
+                      fxFlex.gt-sm="19"
+                      fxFlex.gt-xs="100"
+                      fxFlex="100">
+        <mat-select placeholder="{{'general.teams.edit.training.location' | translate}}"
+                    formControlName="assignedLocation">
+          <mat-option *ngFor="let location of locations | orderBy: ['title']"
+                      [value]="location.id">
+            {{location.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <div fxFlexOffset="1"
+           fxFlex.gt-sm="39"
+           fxFlex.gt-xs="100"
+           fxFlex="100">
+        <quill-editor [style]="{height: '100px'}"
+                      formControlName="comment">
+        </quill-editor>
+        <label>{{'general.teams.edit.training.comment' | translate}}</label><br/>
+      </div>
+
+      <div fxFlexOffset="1"
+           fxFlex.gt-sm="5"
+           fxFlex.gt-xs="100"
+           fxFlex="100">
+        <button
+          mat-raised-button
+          type="button"
+          color="warn"
+          (click)="removeTraining.emit(i)">
+          {{ 'general.teams.edit.training.delete' | translate}}
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <hr fxFlex="100" style="margin: 25px 0; color: #cecece"/>
+</div>
