@@ -1,75 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ICategory } from '../../interfaces/category.interface';
+import { ITeam } from '../../interfaces/team.interface';
 import {
   AngularFirestore,
   AngularFirestoreCollection
 } from 'angularfire2/firestore';
 import { AuthService } from '../auth/auth.service';
-import { ICategoryType } from '../../interfaces/category-type.interface';
-import { CategoryTypeService } from '../category-type/category-type.service';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class CategoryService {
+export class TeamService {
 
-  private collectionRef: AngularFirestoreCollection<ICategory>;
-  private path = `categories`;
+  private collectionRef: AngularFirestoreCollection<ITeam>;
+  private path = `teams`;
 
-  categories$: Observable<ICategory[]>;
+  teams$: Observable<ITeam[]>;
 
   constructor(private afs: AngularFirestore,
-              private authService: AuthService,
-              private categoryTypeService: CategoryTypeService) {
-    this.collectionRef = this.afs.collection<ICategory>(this.path);
-    this.categories$ = this.collectionRef.valueChanges();
+              private authService: AuthService) {
+    this.collectionRef = this.afs.collection<ITeam>(this.path);
+    this.teams$ = this.collectionRef.valueChanges();
   }
 
-  createCategory(category: ICategory): Promise<void> {
-    category.id = this.afs.createId();
-    return this.afs.collection(this.path).doc(category.id).set(category);
+  createTeam(team: ITeam): Promise<void> {
+    team.id = this.afs.createId();
+    return this.afs.collection(this.path).doc(team.id).set(team);
   }
 
-  removeCategory(category: ICategory): Promise<void> {
-    return this.afs.collection(this.path).doc(category.id).delete();
+  removeTeam(team: ITeam): Promise<void> {
+    return this.afs.collection(this.path).doc(team.id).delete();
   }
 
-  updateCategory(categoryId: string, category: ICategory): Promise<any> {
-    return this.afs.collection(this.path).doc(categoryId).update(category);
+  updateTeam(teamId: string, team: ITeam): Promise<any> {
+    return this.afs.collection(this.path).doc(teamId).update(team);
   }
 
-  getCategoryById(categoryId: string): Observable<ICategory> {
-    return this.afs.doc<ICategory>(this.path + '/' + categoryId).valueChanges();
+  getTeamById(teamId: string): Observable<ITeam> {
+    return this.afs.doc<ITeam>(this.path + '/' + teamId).valueChanges();
   }
 
-  setNewCategory(): ICategory {
+  setNewTeam(): ITeam {
     return {
-      isImported: false,
       title: '',
-      description: ' ',
-      assignedCategoryType: '',
-      creation: this.authService.getCreation()
+      shortTitle: '',
+      isOfficialTeam: true,
+      greetingWord: '',
+      creation: this.authService.getCreation(),
+      assignedCategories: [],
+      assignedClub: '',
+      assignedPlayers: [],
+      assignedPositions: [],
+      assignedTrainings: []
     };
-  }
-
-  getCategoriesByCategoryType(linkType: string): Observable<ICategory[]>{
-    const categoryTypes$ = this.categoryTypeService.categoryTypes$.map((categoryTypes: ICategoryType[]) => {
-      return categoryTypes.filter((categoryType: ICategoryType) => {
-        return categoryType.link === linkType;
-      });
-    });
-
-    return categoryTypes$.mergeMap((categoryTypes: ICategoryType[]) => {
-      if(categoryTypes.length === 0){
-        return [];
-      }
-      return this.categories$.map((categories: ICategory[]) => {
-        return categories.filter((category: ICategory) => {
-          return category.assignedCategoryType === categoryTypes[0].id;
-        });
-      });
-    });
-
   }
 }

@@ -783,6 +783,9 @@
         "team-statistics": "Statistiken",
         "teamOfTheMonth": "Team des Monats"
       },
+      "team-position": {
+        "main": "Positionen einer Mannschaft"
+      },
       "uploader": {
         "main": "Media-Uploader"
       },
@@ -1033,76 +1036,69 @@
         "noTeamLogo": "Es wurde noch kein Foto für diese Mannschaft hochgeladen."
       },
       "edit": {
-        "assignedArticleCategories": "Verknüpfte Artikelkategorien",
+        "assignedCategories": "Verknüpfte Kategorien",
         "assignedClub": "Verein",
-        "assignedTeamCategories": "Verknüpfte Mannschaftsarten",
-        "chooseArticleCategories": "Bitte die Artikelkategorien wählen",
+        "assignedSeason": "Saison",
+        "chooseCategories": "Bitte die Kategorien wählen",
         "chooseClub": "Bitte wähle den Verein aus",
-        "chooseTeamCategories": "Bitte die Mannschaftsarten wählen",
-        "competitionsTitle": "Verknüpfte Wettbewerbe",
-        "externalLink": "Mannschaftsseite auf fussball.de",
-        "greetingsTitle": "Grußwort des Trainers",
-        "infoText": "Grußwort des Trainers / Infotext",
-        "lastMatchTitle": "Das letzte Spiel",
-        "mainCompetitionTitle": "Tabellen",
+        "competitions": {
+          "title": "Verknüpfte Wettbewerbe"
+        },
+        "externalLink": "Externer Link",
+        "isOfficialTeam": "Ist die Mannschaft eine offiziell gemeldete Mannschaft?",
+        "logo": {
+          "noLogo": "Es wurde noch kein Mannschaftslogo hochgeladen",
+          "title": "Wappen"
+        },
         "mainTitle": "Wichtigste Daten",
-        "managementTitle": "Aufgaben in der Betreuung",
-        "membersTitle": "Spieler der Mannschaft",
-        "noClub": "Mannschaft gehört nicht zu einem Verein",
-        "noLogo": "Es wurde noch kein Mannschaftslogo hochgeladen",
-        "noManagement": "Es wurden noch keine Trainer oder Betreuer festgelegt.",
-        "noPlayers": "Zu dieser Mannschaft wurden noch keine Spieler hinzugefügt.",
-        "photoTitle": "Mannschaftslogo",
-        "photoDescriptionText": "Wer ist wo zu sehen auf dem Foto?",
+        "management": {
+         "title": "Aufgaben / Positionen"
+        },
+        "photo": {
+          "description": "Bildbeschreibung",
+          "noClub": "Mannschaft gehört nicht zu einem Verein",
+          "descriptionText": "Wer ist wo zu sehen auf dem Foto?",
+          "title": "Mannschaftsfoto"
+        },
         "players": {
-          "addPlayers": "Spieler hinzufügen",
-          "formDescription": "Markiere mit gedrückter STRG-Taste die Spieler, die zur Mannschaft gehören.",
-          "noAssignedPlayers": "Dieser Mannschaft wurden noch keine Spieler hinzugefügt",
-          "playersInTeam": "Spieler in dieser Mannschaft",
-          "possiblePlayers": "Vorhandene Spieler",
-          "removePlayer": "Spieler entfernen"
+          "title": "Spieler"
         },
-        "playersTitle": "Aufgaben innerhalb der Mannschaft",
-        "positions": {
-          "choosePerson": "Mitglied wählen",
-          "deletePosition": "Aufgabe löschen",
-          "savePosition": "Aufgabe speichern",
-          "currentPositions": "Bisherige Aufgaben",
-          "newPosition": "Neue Aufgabe erstellen",
-          "noManagementPositions": "Es wurden noch keine Aufgaben in der Mannschaftsbetreuung (Trainer, Betreuer, Physio etc.) vergeben.",
-          "noPlayerPositions": "Es wurden noch keine Aufgaben in der Mannschaft vergeben (Kapitän, Mannschaftsrat etc.)",
-          "position": "Aufgabe",
-          "positionDescription": "Was ist seine / ihre Aufgabe?",
-          "successMessage": "Die neue Aufgabe wurde gespeichert"
+        "position": {
+          "add": "Neue Aufgabe",
+          "assignedMember": "Verknüpftes Mitglied",
+          "delete": "Aufgabe löschen",
+          "description": "Hier können die Aufgaben in der Mannschaft aufgelistet werden, z.B. wer ist Trainer, wer ist Spielführer.",
+          "noPosition": "Es wurden noch keine Aufgaben festgelegt. Füge doch einfach einige hinzu.",
+          "players": "Spieler der Mannschaft",
+          "title": "Titel der Aufgabe",
+          "type": "Aufgabentyp"
         },
-        "season": "Verknüpfte Spielzeit",
-        "shortTitle": "Kurzname (meist SF Winterbach)",
+        "removeTeam": "Mannschaft löschen",
         "saveTeam": "Mannschaft speichern",
-        "statisticsTitle": "Statistiken zur Mannschaft",
-        "teamImageTitle": "Mannschaftsfoto",
-        "teamTitle": "Name der Mannschaft",
-        "timeLineTitle": "Ereignisse",
-        "training": {
-          "comments": "Bemerkungen",
-          "commentsExample": "Findet das Training zum Beispiel nur im Winter statt?",
-          "createTitle": "Neue Trainingseinheit erstellen",
-          "end": "Ende des Trainings",
-          "listTitle": "Bisherige Trainingseinheiten",
-          "location": "Trainingsort wählen",
-          "saveTraining": "Trainingseinheit speichern",
-          "start": "Beginn der Einheit",
-          "successMessage": "Die neue Trainingseinheit wurde gespeichert.",
-          "weekday": "An welchem Wochentag findet das Training statt?"
+        "shortTitle": "Kurzname (meist SF Winterbach)",
+        "timeLine": {
+          "title": "Erfolge / Ereignisse"
         },
-        "trainingTitle": "Trainingszeiten und -orte",
-        "upcomingMatchTitle": "Nächstes Spiel",
-        "updateTeam": "Änderungen speichern",
-        "visitExternalLink": "Mannschaftsseite aufrufen"
+        "title": "Name",
+        "trainerIntro": "Grußwort des Trainers",
+        "training": {
+          "add": "Hinzufügen",
+          "comment": "Bemerkungen, z.B. findet das Training nur im Winter statt",
+          "day": "Wochentag",
+          "delete": "Einheit löschen",
+          "description": "Aufgelistet werden alle bisher erstellten Trainingseinheiten der Mannschaft. Über den \"Hinzufügen\"-Button können neue Trainingseinheiten erstellt werden.",
+          "endTime": "Ende",
+          "lesson": "Einheit",
+          "location": "Trainingsort",
+          "noTraining": "Es wurden bisher noch keine Trainingseinheiten für diese Mannschaft erstellt.",
+          "startTime": "Beginn",
+          "title": "Trainingszeiten und -Orte"
+        }
       },
       "list": {
         "allTeams": "Alle Mannschaften anzeigen",
         "colTitles": {
-          "articleCategories": "Artikelkategorien",
+          "articleCategories": "Kategorien",
           "assignedPlayers": "Spieler",
           "club": "Verein",
           "externalLink": "Externer Link",
@@ -1112,7 +1108,6 @@
           "name": "Name",
           "playersTitle": "Spielerliste",
           "season": "Saison",
-          "teamCategories": "Mannschaftsarten",
           "teamImage": "Mannschaftsfoto"
         },
         "createTeam": "Mannschaft hinzufügen",

@@ -58,6 +58,10 @@ export const adminRoutes: Routes = [
       // added Modules
       ///////////////////
       {
+        path: 'articles',
+        loadChildren: '../../content/article/article.module#ArticleModule'
+      },
+      {
         path: 'categories',
         loadChildren: '../../content/category/category.module#CategoryModule'
       },
@@ -84,6 +88,10 @@ export const adminRoutes: Routes = [
       {
         path: 'tasks',
         loadChildren: '../../content/todo/todo.module#TodoModule'
+      },
+      {
+        path: 'teams',
+        loadChildren: '../../content/team/team.module#TeamModule'
       },
       {
         path: 'users',

@@ -1,58 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ITeam } from '../../interfaces/team.interface';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from 'angularfire2/firestore';
-import { AuthService } from '../auth/auth.service';
+import { ISeason } from '../../interfaces/season.interface';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TeamService {
+export class SeasonService {
 
-  private collectionRef: AngularFirestoreCollection<ITeam>;
-  private path = `teams`;
+  private collectionRef: AngularFirestoreCollection<ISeason>;
+  private path = `seasons`;
 
-  teams$: Observable<ITeam[]>;
+  seasons$: Observable<ISeason[]>;
 
-  constructor(private afs: AngularFirestore,
-              private authService: AuthService) {
-    this.collectionRef = this.afs.collection<ITeam>(this.path);
-    this.teams$ = this.collectionRef.valueChanges();
+  constructor(private afs: AngularFirestore) {
+    this.collectionRef = this.afs.collection<ISeason>(this.path);
+    this.seasons$ = this.collectionRef.valueChanges();
   }
 
-  createTeam(team: ITeam): Promise<void> {
-    team.id = this.afs.createId();
-    return this.afs.collection(this.path).doc(team.id).set(team);
+  createSeason(season: ISeason): Promise<void> {
+    season.id = this.afs.createId();
+    return this.afs.collection(this.path).doc(season.id).set(season);
   }
 
-  removeTeam(team: ITeam): Promise<void> {
-    return this.afs.collection(this.path).doc(team.id).delete();
+  removeSeason(season: ISeason): Promise<void> {
+    return this.afs.collection(this.path).doc(season.id).delete();
   }
 
-  updateTeam(teamId: string, team: ITeam): Promise<any> {
-    return this.afs.collection(this.path).doc(teamId).update(team);
+  updateSeason(seasonId: string, season: ISeason): Promise<any> {
+    return this.afs.collection(this.path).doc(seasonId).update(season);
   }
 
-  getTeamById(teamId: string): Observable<ITeam> {
-    return this.afs.doc<ITeam>(this.path + '/' + teamId).valueChanges();
+  getSeasonById(seasonId: string): Observable<ISeason> {
+    return this.afs.doc<ISeason>(this.path + '/' + seasonId).valueChanges();
   }
 
-  setNewTeam(): ITeam {
+  setNewSeason(): ISeason {
     return {
       title: '',
-      shortTitle: '',
-      isOfficialTeam: true,
-      greetingWord: '',
-      creation: this.authService.getCreation(),
-      assignedCategories: [],
-      assignedClub: '',
-      assignedPlayers: [],
-      assignedPositions: [],
-      assignedTeamManagement: [],
-      assignedTrainings: []
     };
   }
 }
