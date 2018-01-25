@@ -1,0 +1,27 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-xs="100" fxFlex.gt-sm="60" fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>list</mat-icon>
+        {{'general.menu.article.main' | translate}}
+      </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+      <mat-card-content>
+        <article-list
+          [categories]="categories$ | async"
+          [articles]="articles$ | async"
+          (remove)="removeArticle($event)"
+          (update)="updateArticle($event)">
+        </article-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-xs="100" fxFlex.gt-sm="40" fxFlex="100">
+    <ul class="list-group">
+      <li class="list-group-item">Liste der Spiele ohne Ergebnis</li>
+      <li class="list-group-item">Artikel: Letzte Artikel</li>
+      <li class="list-group-item">Neue Fotos</li>
+      <li class="list-group-item">Gerade angemeldete Benutzer</li>
+    </ul>
+  </div>
+</div>

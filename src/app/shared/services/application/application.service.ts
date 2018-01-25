@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { IApplication } from '../../interfaces/application.interface';
+import { weekdays } from 'moment';
 
 @Injectable()
 export class ApplicationService {
@@ -51,6 +52,14 @@ export class ApplicationService {
       staticPages: [],
       social: []
     };
+  }
+
+  getWeekdays(): number[] {
+    let weekdays = [];
+    for(let i = 0; i < 7;i++){
+      weekdays.push(i);
+    }
+    return weekdays;
   }
 
 }
