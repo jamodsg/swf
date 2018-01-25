@@ -18,7 +18,7 @@ export class CategoryFilterPipe implements PipeTransform {
     return sponsors.filter((sponsor: ISponsor) => {
 
       return sponsor.assignedCategories.some((v) => {
-        return categoryIds.some((cat) =>  {
+        return categoryIds.some((cat) => {
           return v === cat;
         });
       });

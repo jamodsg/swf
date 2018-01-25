@@ -8,9 +8,9 @@ describe('MediaUploadFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MediaUploadFormComponent ]
+      declarations: [MediaUploadFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

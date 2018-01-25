@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutWrap="wrap" [formGroup]="form">
 
-  <div fxFlex="100" *ngIf="categoryTypes; else loadingTemplate">
+  <div fxFlex="100" *ngIf="categories; else loadingTemplate">
 
     <div fxLayout="row" fxLayoutWrap="wrap">
 
@@ -24,9 +24,9 @@
         <mat-select placeholder="{{'general.teams.edit.position.type' | translate}}"
                     formControlName="type">
           <mat-option
-            *ngFor="let categoryType of categoryTypes | orderBy: ['title']"
-            [value]="categoryType.id">
-            {{categoryType.title}}
+            *ngFor="let category of categories | orderBy: ['title']"
+            [value]="category.id">
+            {{category.title}}
           </mat-option>
         </mat-select>
       </mat-form-field>

@@ -13,7 +13,7 @@ export class StaticPageFormComponent {
   @Input() selectedStaticPage: number;
   @Input() categories: ICategory[];
 
-  public titleMaxLength: number= 100;
+  public titleMaxLength: number = 100;
 
   constructor() {
   }

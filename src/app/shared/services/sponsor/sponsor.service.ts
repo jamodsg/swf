@@ -12,7 +12,7 @@ export class SponsorService {
   sponsors$: Observable<ISponsor[]>;
 
   constructor(private afs: AngularFirestore,
-              private authService: AuthService) {
+    private authService: AuthService) {
     this.collectionRef = this.afs.collection<ISponsor>(this.path);
     this.sponsors$ = this.collectionRef.valueChanges();
   }

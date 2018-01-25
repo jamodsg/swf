@@ -41,11 +41,11 @@ export class UploaderComponent implements OnInit {
   }
 
 
-  uploadCompleted(mediaItem: IMediaItem){
+  uploadCompleted(mediaItem: IMediaItem) {
     console.log(mediaItem);
   }
 
-  removedMedia($event){
+  removedMedia($event) {
     console.log($event);
   }
 

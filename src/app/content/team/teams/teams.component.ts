@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ITeam } from '../../../shared/interfaces/team.interface';
+import { ITeam } from '../../../shared/interfaces/team/team.interface';
 import { TeamService } from '../../../shared/services/team/team.service';
 
 @Component({

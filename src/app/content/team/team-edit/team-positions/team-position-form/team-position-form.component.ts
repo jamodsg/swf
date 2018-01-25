@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IMember } from '../../../../../shared/interfaces/member/member.interface';
-import { ICategoryType } from '../../../../../shared/interfaces/category-type.interface';
+import { ICategory } from '../../../../../shared/interfaces/category.interface';
 
 @Component({
   selector: 'team-position-form',
@@ -11,7 +11,7 @@ export class TeamPositionFormComponent implements OnInit {
 
   @Input() form: FormGroup;
   @Input() members: IMember[];
-  @Input() categoryTypes: ICategoryType[];
+  @Input() categories: ICategory[];
 
   @Output() removePosition: EventEmitter<number> = new EventEmitter<number>(false);
 

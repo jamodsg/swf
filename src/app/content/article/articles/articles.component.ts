@@ -18,8 +18,8 @@ export class ArticlesComponent {
   public categories$: Observable<ICategory[]>;
 
   constructor(private articleService: ArticleService,
-              private categoryService: CategoryService,
-              public snackBar: MatSnackBar,) {
+    private categoryService: CategoryService,
+    public snackBar: MatSnackBar, ) {
     this.articles$ = articleService.articles$;
     this.categories$ = categoryService.categories$;
   }

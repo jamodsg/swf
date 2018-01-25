@@ -1,6 +1,6 @@
 import { IMatch } from './match.interface';
 import { ILocation } from './location.interface';
-import { ITeam } from './team.interface';
+import { ITeam } from './team/team.interface';
 import { ICategory } from './category.interface';
 import { ITag } from './tag.interface';
 import { ISeason } from './season.interface';

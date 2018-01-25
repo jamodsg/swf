@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { ITeam } from '../../../shared/interfaces/team.interface';
+import { ITeam } from '../../../shared/interfaces/team/team.interface';
 import { TeamService } from '../../../shared/services/team/team.service';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import { UserService } from '../../../shared/services/user/user.service';
@@ -18,11 +18,9 @@ import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { ISeason } from '../../../shared/interfaces/season.interface';
 import { SeasonService } from '../../../shared/services/season/season.service';
 import { ITraining } from '../../../shared/interfaces/training.interface';
-import { ILocationContact } from '../../../shared/interfaces/location-contact.interface';
 import { LocationService } from '../../../shared/services/location/location.service';
 import { ILocation } from '../../../shared/interfaces/location.interface';
-import { ITeamManagement } from '../../../shared/interfaces/team-management.interface';
-import { IClubManagement } from '../../../shared/interfaces/club/club-management.interface';
+import { ITeamManagement } from '../../../shared/interfaces/team/team-management.interface';
 
 @Component({
   selector: 'team-edit',
@@ -49,16 +47,16 @@ export class TeamEditComponent implements OnInit {
   public shortTitleMaxLength: number = 25;
 
   constructor(private teamService: TeamService,
-    private categoryTypeService: CategoryTypeService,
-    private memberService: MemberService,
-    private seasonService: SeasonService,
-    private clubService: ClubService,
-    private categoryService: CategoryService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private locationService: LocationService,
-    private userService: UserService) {
+              private categoryTypeService: CategoryTypeService,
+              private memberService: MemberService,
+              private seasonService: SeasonService,
+              private clubService: ClubService,
+              private categoryService: CategoryService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,
+              private locationService: LocationService,
+              private userService: UserService) {
     this.users$ = userService.users$;
     this.members$ = memberService.members$;
     this.clubs$ = clubService.clubs$;
@@ -111,11 +109,11 @@ export class TeamEditComponent implements OnInit {
 
   initTraining(training: ITraining): FormGroup {
     return this.fb.group({
-      day: [ training ? training.day : new Date().getDay(), [Validators.required]],
+      day: [training ? training.day : new Date().getDay(), [Validators.required]],
       startTime: [training ? training.startTime : '', [Validators.required]],
-      endTime: [ training ? training.endTime : '', [Validators.required]],
+      endTime: [training ? training.endTime : '', [Validators.required]],
       comment: training ? training.comment : '',
-      assignedLocation: [ training ? training.assignedLocation : '', [Validators.required]],
+      assignedLocation: [training ? training.assignedLocation : '', [Validators.required]],
     });
   }
 
@@ -150,7 +148,7 @@ export class TeamEditComponent implements OnInit {
     return this.fb.group({
       type: [position ? position.type : '', [Validators.required]],
       position: [position ? position.position : '', [Validators.required]],
-      assignedMember: [ position ? position.assignedMember : '', [Validators.required]],
+      assignedMember: [position ? position.assignedMember : '', [Validators.required]],
     });
   }
 
@@ -158,7 +156,6 @@ export class TeamEditComponent implements OnInit {
     const control = <FormArray>this.form.controls['assignedPositions'];
     control.removeAt(i);
   }
-
 
 
   saveTeam() {

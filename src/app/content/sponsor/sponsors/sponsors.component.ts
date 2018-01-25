@@ -11,7 +11,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
   templateUrl: './sponsors.component.html',
   styleUrls: ['sponsors.component.scss']
 })
-export class SponsorsComponent implements OnDestroy{
+export class SponsorsComponent implements OnDestroy {
 
   public sponsors$: Observable<ISponsor[]>;
   public categories$: Observable<ICategory[]>;
@@ -22,9 +22,9 @@ export class SponsorsComponent implements OnDestroy{
 
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
-              private media: MediaMatcher,
-              private categoryService: CategoryService,
-              private sponsorService: SponsorService) {
+    private media: MediaMatcher,
+    private categoryService: CategoryService,
+    private sponsorService: SponsorService) {
     this.categories$ = categoryService.getCategoriesByCategoryType('sponsor');
     this.sponsors$ = sponsorService.sponsors$;
 
@@ -41,7 +41,7 @@ export class SponsorsComponent implements OnDestroy{
     this.sponsorService.removeSponsor(sponsor).then();
   }
 
-  setFilters(categoryIds: string[]){
+  setFilters(categoryIds: string[]) {
     this.currentFilter = categoryIds;
   }
 

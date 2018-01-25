@@ -11,7 +11,7 @@ import 'rxjs/operator/take';
 export class ArticleResolver implements Resolve<IArticle> {
 
   constructor(private articleService: ArticleService,
-              private router: Router) {
+    private router: Router) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IArticle> {

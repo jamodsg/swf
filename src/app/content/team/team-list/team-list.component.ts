@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITeam } from '../../../shared/interfaces/team.interface';
+import { ITeam } from '../../../shared/interfaces/team/team.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({

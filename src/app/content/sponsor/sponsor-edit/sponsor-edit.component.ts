@@ -38,10 +38,10 @@ export class SponsorEditComponent implements OnInit {
   public endDate = new Date();
 
   constructor(private route: ActivatedRoute,
-              private fb: FormBuilder,
-              private router: Router,
-              private sponsorService: SponsorService,
-              public categoryService: CategoryService) {
+    private fb: FormBuilder,
+    private router: Router,
+    private sponsorService: SponsorService,
+    public categoryService: CategoryService) {
     this.categories$ = categoryService.getCategoriesByCategoryType('sponsor');
   }
 
@@ -93,7 +93,7 @@ export class SponsorEditComponent implements OnInit {
           this.redirectToList();
         });
     } else {*/
-      this.redirectToList();
+    this.redirectToList();
     // }
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { ITeam } from '../../shared/interfaces/team.interface';
+import { ITeam } from '../../shared/interfaces/team/team.interface';
 import { TeamService } from '../../shared/services/team/team.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/operator/first';
@@ -11,7 +11,7 @@ import 'rxjs/operator/take';
 export class TeamResolver implements Resolve<ITeam> {
 
   constructor(private teamService: TeamService,
-              private router: Router) {
+    private router: Router) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ITeam> {

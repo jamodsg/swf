@@ -38,7 +38,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { application: IApplication }) => this.application = data.application);
 
-    if(this.application) {
+    if (this.application) {
       this.form = this.fb.group({
         page: this.initPage(),
         urlShortening: this.initUrlShortening(),
@@ -113,7 +113,7 @@ export class SettingsComponent implements OnInit {
   }
 
   addStaticPage(): void {
-    this.getNewStaticPageTitle().subscribe((staticPageTitle:string) => {
+    this.getNewStaticPageTitle().subscribe((staticPageTitle: string) => {
       const control = <FormArray>this.form.controls['staticPages'];
 
       const pageTitle = this.form.controls['staticPages']['controls'].length === 0
@@ -128,7 +128,7 @@ export class SettingsComponent implements OnInit {
       };
       const addCtrl = this.initStaticPage(staticPage);
       control.push(addCtrl);
-      this.setSelectedStaticPage(this.form.controls['staticPages']['controls'].length -1);
+      this.setSelectedStaticPage(this.form.controls['staticPages']['controls'].length - 1);
     });
   }
 
@@ -142,7 +142,7 @@ export class SettingsComponent implements OnInit {
     this.selectedStaticPage = staticPage;
   }
 
-  getNewStaticPageTitle(): Observable<string>{
+  getNewStaticPageTitle(): Observable<string> {
     return this.translateService.get('general.applications.static.noTitle');
   }
 
@@ -206,7 +206,7 @@ export class SettingsComponent implements OnInit {
   }
 
 
-  cancel(){
+  cancel() {
     this.form.reset();
   }
 }

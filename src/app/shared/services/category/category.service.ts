@@ -20,8 +20,8 @@ export class CategoryService {
   categories$: Observable<ICategory[]>;
 
   constructor(private afs: AngularFirestore,
-              private authService: AuthService,
-              private categoryTypeService: CategoryTypeService) {
+    private authService: AuthService,
+    private categoryTypeService: CategoryTypeService) {
     this.collectionRef = this.afs.collection<ICategory>(this.path);
     this.categories$ = this.collectionRef.valueChanges();
   }
@@ -53,7 +53,7 @@ export class CategoryService {
     };
   }
 
-  getCategoriesByCategoryType(linkType: string): Observable<ICategory[]>{
+  getCategoriesByCategoryType(linkType: string): Observable<ICategory[]> {
     const categoryTypes$ = this.categoryTypeService.categoryTypes$.map((categoryTypes: ICategoryType[]) => {
       return categoryTypes.filter((categoryType: ICategoryType) => {
         return categoryType.link === linkType;
@@ -61,7 +61,7 @@ export class CategoryService {
     });
 
     return categoryTypes$.mergeMap((categoryTypes: ICategoryType[]) => {
-      if(categoryTypes.length === 0){
+      if (categoryTypes.length === 0) {
         return [];
       }
       return this.categories$.map((categories: ICategory[]) => {

@@ -11,11 +11,11 @@ export class SnackbarComponent implements OnInit {
 
   public message: string = '';
 
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: {
-                message: string,
-                status: string
-              },
-              private translateService: TranslateService) {
+  constructor( @Inject(MAT_SNACK_BAR_DATA) public data: {
+    message: string,
+    status: string
+  },
+    private translateService: TranslateService) {
   }
 
   ngOnInit() {

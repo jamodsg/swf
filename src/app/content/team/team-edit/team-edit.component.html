@@ -39,7 +39,7 @@
                                       hintLabel="Max {{shortTitleMaxLength}} characters">
                         <input matInput maxlength="{{shortTitleMaxLength}}"
                                placeholder="{{'general.teams.edit.shortTitle' | translate}}"
-                               formControlName="title">
+                               formControlName="shortTitle">
                         <mat-hint align="end">{{form.get('shortTitle').value.length || 0}}/{{shortTitleMaxLength}}</mat-hint>
                       </mat-form-field>
 
@@ -145,6 +145,8 @@
 
               <mat-tab label="{{'general.teams.edit.management.title' | translate}}">
                 <team-positions [form]="form"
+                                [categories]="categories$ | async"
+                                [categoryTypes]="categoryTypes$ | async"
                                 [members]="members$ | async"
                                 (addPosition)="addPosition($event)"
                                 (removePosition)="removePosition($event)">

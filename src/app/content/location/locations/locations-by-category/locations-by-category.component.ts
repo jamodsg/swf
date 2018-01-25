@@ -44,7 +44,7 @@ export class LocationsByCategoryComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-     if (this.categories && this.locations) {
+    if (this.categories && this.locations) {
       for (let i = 0; i < this.categories.length; i++) {
 
         let locationCounter: number = 0;

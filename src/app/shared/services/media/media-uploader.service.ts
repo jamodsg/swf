@@ -35,9 +35,9 @@ export class MediaUploaderService {
   public bytes$: Observable<number[]>;
 
   constructor(private authService: AuthService,
-              private storage: AngularFireStorage,
-              private mediaItemService: MediaItemService,
-              private afs: AngularFirestore) {
+    private storage: AngularFireStorage,
+    private mediaItemService: MediaItemService,
+    private afs: AngularFirestore) {
   }
 
   public upload(upload: Upload, options): Observable<Promise<IMediaItem>> {

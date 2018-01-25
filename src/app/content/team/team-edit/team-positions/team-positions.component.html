@@ -1,6 +1,6 @@
 <div fxLayout="column" [formGroup]="form">
 
-  <div>
+  <div *ngIf="categories && categoryTypes; else loadingTemplate">
     <mat-form-field fxFlex.gt-sm="40"
                     fxFlex.gt-xs="100">
       <mat-select placeholder="{{'general.teams.edit.position.players' | translate}}"
@@ -28,16 +28,14 @@
           <div [formGroupName]="i"
                fxFlex="100">
             <team-position-form
-              [categoryTypes]="categoryTypes$ | async"
               (removePosition)="removePosition.emit($event)"
+              [categories]="teamPositions"
               [members]="members"
               [form]="form.controls['assignedPositions']['controls'][i]">
             </team-position-form>
           </div>
         </div>
       </div>
-
-      <pre>{{categoryTypes$ | async | json}}</pre>
 
       <button
         mat-raised-button
@@ -52,3 +50,7 @@
   </div>
 
 </div>
+
+<ng-template #loadingTemplate>
+  LADEN ...
+</ng-template>

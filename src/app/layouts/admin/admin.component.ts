@@ -66,7 +66,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this._router.unsubscribe();
   }
 
-  changeTranslation(currentLang: string){
+  changeTranslation(currentLang: string) {
     this.currentLang = currentLang;
     this.translate.use(currentLang);
   }

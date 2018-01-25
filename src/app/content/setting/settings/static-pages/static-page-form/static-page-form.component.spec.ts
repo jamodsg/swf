@@ -8,9 +8,9 @@ describe('StaticPageFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaticPageFormComponent ]
+      declarations: [StaticPageFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
