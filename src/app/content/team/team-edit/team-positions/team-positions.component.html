@@ -19,8 +19,9 @@
 
       <p>{{'general.teams.edit.position.description' | translate}}</p>
 
-      <p *ngIf="form.controls['assignedPositions'].length === 0">{{'general.teams.edit.position.noPosition' |
-        translate}}</p>
+      <p *ngIf="!form.controls['assignedPositions']">
+        {{'general.teams.edit.position.noPosition' | translate}}
+      </p>
 
       <div formArrayName="assignedPositions">
         <div *ngFor="let position of form.controls['assignedPositions']['controls']; let i=index">

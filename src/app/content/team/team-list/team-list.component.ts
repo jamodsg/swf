@@ -15,6 +15,7 @@ export class TeamListComponent {
   @Output() update = new EventEmitter(false);
 
   public form: FormGroup;
+  public itemsPerPageOptions = [5, 10, 25, 50, 100];
 
   constructor(private fb: FormBuilder) {
   }

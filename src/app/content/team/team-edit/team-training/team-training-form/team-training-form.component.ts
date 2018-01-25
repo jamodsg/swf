@@ -12,7 +12,7 @@ export class TeamTrainingFormComponent implements OnInit {
   @Input() locations: ILocation[];
   @Input() weekdays: number[];
 
-  @Output() removeTraining: EventEmitter<number> = new EventEmitter<number>(false);
+  @Output() removeTraining: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor() { }
 

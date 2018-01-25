@@ -3,7 +3,7 @@
   <div fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex.gt-md="30" fxFlex="100">
     <mat-form-field style="width: 95%">
       <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
-        <mat-option [value]="categories.length" *ngIf="categories">
+        <mat-option [value]="articles.length" *ngIf="articles">
           {{ 'general.pagination.allItems' | translate}}
         </mat-option>
         <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
@@ -51,7 +51,7 @@
           <div class="button-row">
             <detail-link [objectId]="row.id"></detail-link>
             <edit-link [objectId]="row.id"></edit-link>
-            <a mat-icon-button color="warn" (click)="removeCategory(row)">
+            <a mat-icon-button color="warn" (click)="removeArticle(row)">
               <mat-icon>delete</mat-icon>
             </a>
           </div>

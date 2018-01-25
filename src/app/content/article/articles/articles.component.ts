@@ -5,6 +5,7 @@ import { IArticle } from '../../../shared/interfaces/article.interface';
 import { Observable } from 'rxjs/Observable';
 import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
+import { ICategory } from '../../../shared/interfaces/category.interface';
 
 @Component({
   selector: 'articles',
@@ -14,11 +15,13 @@ import { MatSnackBar } from '@angular/material';
 export class ArticlesComponent {
 
   public articles$: Observable<IArticle[]>;
+  public categories$: Observable<ICategory[]>;
 
   constructor(private articleService: ArticleService,
               private categoryService: CategoryService,
               public snackBar: MatSnackBar,) {
     this.articles$ = articleService.articles$;
+    this.categories$ = categoryService.categories$;
   }
 
   removeArticle($event) {
