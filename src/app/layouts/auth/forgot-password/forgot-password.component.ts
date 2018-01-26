@@ -1,7 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth/auth.service';
 import { AlertService } from '../../../shared/services/alert/alert.service';
+import { AlertComponent } from '../../../shared/directives/alert/alert.component';
 
 @Component({
   selector: 'forgot-password',
@@ -11,11 +15,17 @@ import { AlertService } from '../../../shared/services/alert/alert.service';
 export class ForgotPasswordComponent implements OnInit {
 
   public form: FormGroup;
+  public isLoading: boolean = false;
 
-  @Input() loading: boolean;
   @Output() toggleFormVisibility: EventEmitter<any> = new EventEmitter(false);
+  @ViewChild('forgotPasswordAlertContainer', {
+    read: ViewContainerRef
+  }) forgotPasswordAlertContainer: ViewContainerRef;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private alertService: AlertService) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private cfr: ComponentFactoryResolver,
+              private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -45,18 +55,28 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   forgotPassword() {
-    this.loading = true;
+    this.isLoading = true;
     this.authService.sendPasswordResetEmail(this.form.value.email)
       .then(() => {
+        console.log('ok');
+        this.showAlert('forgotPasswordAlertContainer');
         this.alertService.success('Cool! Password recovery instruction has been sent to your email.', true);
-        this.loading = false;
-        this.toggleSignInForm();
+        this.isLoading = false;
+        // this.toggleSignInForm();
         this.form.reset();
       }).catch(
       (error: any) => {
+        this.showAlert('forgotPasswordAlertContainer');
         this.alertService.error(error);
-        this.loading = false;
+        this.isLoading = false;
       });
+  }
+
+  showAlert(target) {
+    this[target].clear();
+    const factory = this.cfr.resolveComponentFactory(AlertComponent);
+    const ref = this[target].createComponent(factory);
+    ref.changeDetectorRef.detectChanges();
   }
 
 }

@@ -14,7 +14,6 @@ export class SignInComponent implements OnInit {
 
   @Input() passwordMinLength: number;
   @Input() passwordMaxLength: number;
-  @Input() loading: boolean;
   @Input() signUpStatus;
   @Input() showVerification: boolean;
   @Input() showDemoLoginMessage: boolean;
@@ -71,7 +70,6 @@ export class SignInComponent implements OnInit {
         this.showDemoLoginMessage = false;
         this.showAlert('signInAlertContainer');
         this.alertService.error(error.code);
-        this.loading = false;
       });
   }
 

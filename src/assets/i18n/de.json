@@ -1,5 +1,6 @@
 {
   "siteTitle": "Sportfreunde Winterbach e.V.",
+  "Cool! Password recovery instruction has been sent to your email.": "Eine Email zur Erstellung eines neuen Passwortes wurde gesendet.",
   "auth/argument-error": "Es ist ein Systemfehler aufgetreten. Bitte versuche es zu einem späteren Zeitpunkt erneut.",
   "auth/invalid-email": "Du hast keine gültige E-Mail Adresse eingegeben.",
   "auth/user-disabled": "Dein Benutzeraccount wurde von einem Administrator deaktiviert.",
@@ -18,7 +19,7 @@
         "description": "Administrations- und Verwaltungsoberfläche für die Seite www.sfwinterbach.com"
       },
       "newUserQuestion": "Du hast noch keinen Account?",
-      "CreateNewAccount": "Neuen Account erstellen!",
+      "CreateNewAccount": "Neu Registrieren",
       "Email": "E-Mail",
       "reqEmail": "Gib Deine E-Mail Adresse zum Zurücksetzen Deines Passwortes an",
       "forgotPasswordButton": "Passwort vergessen",
@@ -46,6 +47,7 @@
     "Register": {
       "alreadyRegisteredQuestion": "Du hast schon einen Account?",
       "LoginInfoText": "Hier geht´s zum Login",
+      "Email": "E-Mail",
       "FirstName": "Vorname",
       "LastName": "Nachname",
       "RepeatPassword": "Passwort erneut eingeben",

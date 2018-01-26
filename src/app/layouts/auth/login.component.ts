@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { zoomIn, zoomOut } from 'ng-animate';
 import { state, style, transition, trigger, useAnimation } from '@angular/animations';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-layout',
@@ -37,8 +38,15 @@ export class LoginComponent {
   public showPasswordForm: boolean = false;
 
   public signUpStatus;
+  public currentLang = 'en';
 
-  constructor(public sanitizer: DomSanitizer) {
+  constructor(public sanitizer: DomSanitizer, private translate: TranslateService) {
+    translate.addLangs(['de', 'en', 'fr']);
+    translate.setDefaultLang('de');
+
+    const browserLang: string = translate.getBrowserLang();
+    this.currentLang = browserLang.match(/en|fr/) ? browserLang : 'de';
+    translate.use(this.currentLang);
   }
 
   toggleFormVisibility($event: any[]) {

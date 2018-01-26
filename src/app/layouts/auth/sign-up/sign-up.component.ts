@@ -12,7 +12,6 @@ import { AlertComponent } from '../../../shared/directives/alert/alert.component
 })
 export class SignUpComponent implements OnInit {
 
-  @Input() loading: boolean;
   @Input() nameMinLength: number;
   @Input() passwordMinLength: number;
   @Input() passwordMaxLength: number;
@@ -20,6 +19,7 @@ export class SignUpComponent implements OnInit {
   @Output() toggleFormVisibility: EventEmitter<any> = new EventEmitter(false);
 
   public form: FormGroup;
+  public isLoading: boolean = false;
 
   @ViewChild('signUpAlertContainer', {
     read: ViewContainerRef
@@ -53,7 +53,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true;
+    this.isLoading = true;
     const user: IUser = {
       firstName: this.form.value.firstName,
       lastName: this.form.value.lastName,
@@ -61,13 +61,13 @@ export class SignUpComponent implements OnInit {
       password: this.form.value.passwords.password
     };
     this.authService.register(user).then(() => {
-      this.loading = false;
+      this.isLoading = false;
       this.form.reset();
       this.toggleSignUpForm();
     }).catch((error: any) => {
       this.showAlert('signUpAlertContainer');
       this.alertService.error(error);
-      this.loading = false;
+      this.isLoading = false;
     });
   }
 

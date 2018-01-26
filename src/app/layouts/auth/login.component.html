@@ -6,8 +6,8 @@
 
           <div class="text-xs-center pb-1">
             <img src="/assets/sfw/sfw.png" alt="{{ 'siteTitle' | translate }}"/>
-            <p class="mat-text-muted"
-               [innerHtml]="sanitizer.bypassSecurityTrustHtml('Global.Login.defaultLoginMessage' | translate)"></p>
+            <!--<p class="mat-text-muted"
+               [innerHtml]="sanitizer.bypassSecurityTrustHtml('Global.Login.defaultLoginMessage' | translate)"></p>-->
           </div>
 
           <sign-in
@@ -17,8 +17,7 @@
             [passwordMaxLength]="passwordMaxLength"
             [signUpStatus]="signUpStatus"
             [showVerification]="showVerification"
-            (toggleFormVisibility)="toggleFormVisibility($event)"
-            [loading]="loading">
+            (toggleFormVisibility)="toggleFormVisibility($event)">
           </sign-in>
 
           <sign-up
