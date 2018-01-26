@@ -26,6 +26,12 @@ import { adminRoutes } from './admin-routing';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { googleMapsConfig } from '../../shared/config/google-maps.config';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { NotificationComponent } from './notification/notification.component';
+import { OptionsComponent } from './options/options.component';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { MenuComponent } from './menu/menu.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -36,7 +42,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,
+    HeaderComponent,
+    SidebarComponent,
+    NotificationComponent,
+    OptionsComponent,
+    MenuComponent
   ],
   imports: [
     AgmCoreModule.forRoot({ apiKey: googleMapsConfig.apiKey }),
@@ -45,6 +56,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    LoadingBarRouterModule,
     MatSidenavModule,
     MatCardModule,
     MatMenuModule,

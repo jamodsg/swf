@@ -23,6 +23,8 @@ import { LocationService } from '../../shared/services/location/location.service
 import { ApplicationService } from '../../shared/services/application/application.service';
 import { TeamPositionsComponent } from './team-edit/team-positions/team-positions.component';
 import { TeamPositionFormComponent } from './team-edit/team-positions/team-position-form/team-position-form.component';
+import { TeamOfTheMonthComponent } from './team-of-the-month/team-of-the-month.component';
+import { TeamMediaComponent } from './team-media/team-media.component';
 
 @NgModule({
   imports: [
@@ -45,7 +47,9 @@ import { TeamPositionFormComponent } from './team-edit/team-positions/team-posit
     TeamTrainingComponent,
     TeamTrainingFormComponent,
     TeamPositionsComponent,
-    TeamPositionFormComponent
+    TeamPositionFormComponent,
+    TeamOfTheMonthComponent,
+    TeamMediaComponent
   ],
   providers: [
     ApplicationService,
