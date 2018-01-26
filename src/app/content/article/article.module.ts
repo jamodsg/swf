@@ -7,9 +7,17 @@ import { ArticleService } from '../../shared/services/article/article.service';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
+import { MatButtonModule, MatSnackBarModule } from '@angular/material';
+import { ArticleDashboardComponent } from './article-dashboard/article-dashboard.component';
+import { ArticleEditComponent } from './article-edit/article-edit.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { ArticleMatchesComponent } from './article-matches/article-matches.component';
 
 @NgModule({
   imports: [
+    MatButtonModule,
+    MatSnackBarModule,
     RouterModule.forChild(articleRoutes),
     SharedModule
     // MarkdownModule,
@@ -18,13 +26,16 @@ import { ArticleListComponent } from './article-list/article-list.component';
   ],
   declarations: [
     ArticleListComponent,
-    ArticlesComponent
+    ArticlesComponent,
+    ArticleDashboardComponent,
+    ArticleEditComponent,
+    ArticleDetailComponent,
+    ArticleMatchesComponent
     /* ArticleActionsComponent,
     ArticleDashboardComponent,
     ArticleDetailComponent,
     ArticleEditComponent,
     ArticleFormComponent,
-    ArticlesComponent,
     ArticleSidebarComponent,
     ArticleTextComponent,
     EmptyFilterPipe,
@@ -37,10 +48,10 @@ import { ArticleListComponent } from './article-list/article-list.component';
   providers: [
     ArticleResolver,
     ArticleService,
-    CategoryService
+    CategoryService,
+    CategoryTypeService
     /*Ng2BootstrapModule,
     UserService,
-    CategoryService,
     LocationService,
     MatchService,
     TeamService,
