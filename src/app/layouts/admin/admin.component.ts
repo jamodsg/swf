@@ -20,15 +20,27 @@ export class AdminComponent implements OnInit, OnDestroy {
   mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
   today: number = Date.now();
   url: string;
+  sidePanelOpened;
+  options = {
+    collapsed: false,
+    compact: false,
+    boxed: false,
+    dark: false,
+    dir: 'ltr'
+  };
+
+  currentLang = 'en';
+
+  /*
+  url: string;
   showSettings = false;
   dark: boolean;
   boxed: boolean;
   collapseSidebar: boolean;
   compactSidebar: boolean;
-  currentLang = 'en';
   dir = 'ltr';
   sidePanelOpened;
-  user;
+  user; */
 
   @ViewChild('sidemenu') sidemenu;
   @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
@@ -36,7 +48,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   public config: PerfectScrollbarConfigInterface = {};
 
   constructor(private router: Router,
-    public menuItems: MenuItemsService,
     public translate: TranslateService,
     public authService: AuthService,
     private zone: NgZone) {
@@ -55,6 +66,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.url = this.router.url;
+
     this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
       document.querySelector('.app-inner > .mat-drawer-content > div').scrollTop = 0;
       this.url = event.url;
@@ -66,17 +78,22 @@ export class AdminComponent implements OnInit, OnDestroy {
     this._router.unsubscribe();
   }
 
-  changeTranslation(currentLang: string) {
-    this.currentLang = currentLang;
-    this.translate.use(currentLang);
-  }
-
   runOnRouteChange(): void {
     if (this.isOver()) {
       this.sidemenu.close();
     }
 
     this.updatePS();
+  }
+
+  receiveOptions($event): void {
+    this.options = $event;
+  }
+
+  changeTranslation(currentLang: string) {
+    console.log(currentLang);
+    this.currentLang = currentLang;
+    this.translate.use(currentLang);
   }
 
   isOver(): boolean {
@@ -92,19 +109,19 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   menuMouseOver(): void {
-    if (this.mediaMatcher.matches && this.collapseSidebar) {
+    if (this.mediaMatcher.matches && this.options.collapsed) {
       this.sidemenu.mode = 'over';
     }
   }
 
   menuMouseOut(): void {
-    if (this.mediaMatcher.matches && this.collapseSidebar) {
+    if (this.mediaMatcher.matches && this.options.collapsed) {
       this.sidemenu.mode = 'side';
     }
   }
 
-  updatePS(): void {
-    if (!this.mediaMatcher.matches && !this.compactSidebar) {
+  updatePS(): void  {
+    if (!this.mediaMatcher.matches && !this.options.compact) {
       setTimeout(() => {
         this.directiveScroll.update();
       }, 350);
