@@ -1,0 +1,40 @@
+<div fxLayout="row"
+     fxLayoutWrap="wrap" [formGroup]="form">
+
+  <div fxFlex.gt-sm="55"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
+    <h3>{{'general.clubs.edit.history' | translate}}</h3>
+    <quill-editor [style]="{height: '600px'}"
+                  formControlName="history">
+    </quill-editor>
+  </div>
+
+  <div fxFlexOffset="5"
+       fxFlex.gt-sm="40"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
+    <h3>{{'general.clubs.edit.timeLineTitle' | translate}}</h3>
+
+    <button mat-raised-button
+            style="margin-bottom: 25px;"
+            type="button"
+            color="accent"
+            (click)="add.emit(true)"
+            *ngIf="selectedTimeLineEvent === -1">
+      {{'general.timeLine.addEvent' | translate}}
+    </button>
+
+    <time-line-form *ngIf="selectedTimeLineEvent !== -1"
+                    [selectedTimeLineEvent]="selectedTimeLineEvent"
+                    (cancel)="cancel.emit($event)"
+                    (save)="save.emit($event)"
+                    [form]="form">
+    </time-line-form>
+
+    <time-line-list *ngIf="selectedTimeLineEvent === -1"
+                    [events]="form.controls['timeLine']['controls']">
+    </time-line-list>
+
+  </div>
+</div>

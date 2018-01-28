@@ -20,6 +20,7 @@ export interface IClub {
 
   assignedFiles: any; // IMediaItem[];
   assignedLocation: string;
+
   timeLine: ITimeLineEvent[];
 
   info: {

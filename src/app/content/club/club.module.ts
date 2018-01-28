@@ -15,6 +15,9 @@ import { LocationService } from '../../shared/services/location/location.service
 import { MemberService } from '../../shared/services/member/member.service';
 import { MediaModule } from '../../shared/components/media/media.module';
 import { TimeLineModule } from '../../shared/components/time-line/time-line.module';
+import { ClubEditMainComponent } from './club-edit/club-edit-main/club-edit-main.component';
+import { ClubHistoryComponent } from './club-edit/club-history/club-history.component';
+import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 
 @NgModule({
   imports: [
@@ -36,6 +39,8 @@ import { TimeLineModule } from '../../shared/components/time-line/time-line.modu
     // ClubManagementFotoComponent,
     // ClubMediaComponent,
     ClubsComponent,
+    ClubEditMainComponent,
+    ClubHistoryComponent,
     /* ClubStadiumComponent,
     ClubMangementTimelineComponent,
     ClubManagementTimelineFormComponent,
@@ -46,7 +51,8 @@ import { TimeLineModule } from '../../shared/components/time-line/time-line.modu
     ClubResolver,
     ClubService,
     LocationService,
-    MemberService
+    MemberService,
+    PendingChangesGuard
   ]
 })
 

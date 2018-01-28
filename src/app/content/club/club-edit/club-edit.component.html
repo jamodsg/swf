@@ -20,196 +20,25 @@
 
             <mat-tab-group [dynamicHeight]="true">
               <mat-tab label="{{'general.clubs.edit.mainTitle' | translate}}">
-
-                <div fxLayout="row"
-                     fxLayoutWrap="wrap">
-                  <div fxFlex.gt-sm="80"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100">
-                    <!-- main-data -->
-                    <div fxLayout="row"
-                         fxLayoutWrap="wrap">
-
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <input matInput
-                                 placeholder="{{'general.clubs.edit.title' | translate}}"
-                                 formControlName="title" />
-                        </mat-form-field>
-                      </div>
-
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <mat-select placeholder="{{'general.clubs.edit.location' | translate}}"
-                                      formControlName="assignedLocation">
-                            <mat-option *ngFor="let location of locations$ | async | orderBy: ['title']"
-                                        [value]="location.id">{{location.title}}
-                            </mat-option>
-                          </mat-select>
-                          <mat-hint align="end" *ngIf="!form.controls['assignedLocation']">
-                            {{'general.clubs.edit.chooseLocation' | translate}}
-                          </mat-hint>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <!-- infos -->
-                    <div fxLayout="row"
-                         fxLayoutWrap="wrap"
-                         formGroupName="info">
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <input matInput
-                                 placeholder="{{'general.clubs.edit.foundedIn' | translate}}"
-                                 formControlName="founding" />
-                        </mat-form-field>
-                      </div>
-
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <input matInput
-                                 placeholder="{{'general.clubs.edit.clubColours' | translate}}"
-                                 formControlName="clubColours" />
-                        </mat-form-field>
-                      </div>
-
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <input matInput
-                                 placeholder="{{'general.clubs.edit.homepage' | translate}}"
-                                 formControlName="website" />
-                          <!--<mat-hint align="end" *ngIf="isUrl(form.controls['website'].value)">
-                            <a [href[="form.controls['website'].value">
-                              {{'general.clubs.edit.visitHomepage' | translate}}
-                            </a>
-                          </mat-hint>-->
-                        </mat-form-field>
-                      </div>
-
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <mat-select placeholder="{{'general.clubs.edit.contact' | translate}}"
-                                      formControlName="assignedContact">
-                            <mat-option *ngFor="let member of members$ | async | orderBy: ['lastName', 'firstName']"
-                                        [value]="member.id">
-                              {{member.lastName}} {{member.firstName}}
-                            </mat-option>
-                          </mat-select>
-                          <mat-hint align="end">{{'general.clubs.edit.contact' | translate}}</mat-hint>
-                        </mat-form-field>
-                      </div>
-
-                    </div>
-                    <!-- fussball.de -->
-                    <div fxLayout="row"
-                         fxLayoutWrap="wrap"
-                         formGroupName="fussballde">
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <input matInput
-                                 placeholder="{{'general.clubs.edit.fussballDeId' | translate}}"
-                                 formControlName="clubId" />
-                        </mat-form-field>
-                      </div>
-
-                      <div fxFlex.gt-sm="25"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100">
-                        <mat-form-field>
-                          <input matInput
-                                 placeholder="{{'general.clubs.edit.fussballDeUrl' | translate}}"
-                                 formControlName="clubUrl" />
-                        </mat-form-field>
-                      </div>
-                    </div>
-
-                  </div>
-                  <div fxFlex.gt-sm="20"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100">
-                    <!--<media-uploader [uploaderOptions]="{}"></media-uploader>-->
-                  </div>
-                </div>
-
-
-                <div fxLayout="row"
-                     fxLayoutWrap="wrap">
-                  <div fxFlex.gt-sm="100"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100"
-                       style="margin-top: 25px;">
-                    <label>{{'general.clubs.edit.description' | translate}}</label>
-                    <quill-editor [style]="{height: '150px'}"
-                                  formControlName="description">
-                    </quill-editor>
-                  </div>
-                </div>
-
+                <club-edit-main [locations]="locations$ | async"
+                                [members]="members$ | async"
+                                [form]="form"></club-edit-main>
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.historyTitle' | translate }}">
-                <label>{{'general.clubs.edit.history' | translate}}</label>
-                <div fxLayout="row"
-                     fxLayoutWrap="wrap">
-
-                  <div fxFlex.gt-sm="60"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100">
-                    <quill-editor [style]="{height: '400px'}"
-                                  formControlName="history">
-                    </quill-editor>
-
-                    <pre>{{form.value | json}}</pre>
-                  </div>
-
-                  <div fxFlex.gt-sm="40"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100"
-                       style="padding: 0 20px;">
-
-                    <button type="button"
-                            mat-raised-button
-                            color="brand"
-                            (click)="addTimeLineEvent('timeLine')"
-                            [disabled]="showForm">
-                      {{'general.timeLine.addEvent' | translate}}
-                    </button>
-
-                    <time-line-form *ngIf="showForm"
-                                    [form]="form"
-                                    [groupName]="'timeLine'"
-                                    [textMinLength]="textMinLength"
-                                    [titleMinLength]="titleMinLength"
-                                    (cancelAddingEvent)="cancelAddingEvent($event)"
-                                    (saveTimeLineEvent)="saveTimeLineEvent($event)"
-                                    (showForm)="showForm = false">
-                    </time-line-form>
-
-                    <time-line-list *ngIf="!showForm"
-                                    [events]="club.timeLine">
-                    </time-line-list>
-
-                  </div>
-                </div>
+                <club-history (add)="addTimeLineEvent($event)"
+                              (cancel)="removeTimeLineEvent($event)"
+                              (save)="saveTimeLineEvent($event)"
+                              [selectedTimeLineEvent]="selectedClubTimeLineEvent"
+                              [events]="club.timeLine"
+                              [form]="form">
+                </club-history>
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}"
                        formGroupName="management">
                 <img *ngIf="club.management && club.management.photoUrl"
-                     [src]="club.management.photoUrl" />
+                     [src]="club.management.photoUrl"/>
                 <!--<media-uploader
                   [objectId]="club.id"
                   [objectType]="'clubManagement'"
@@ -232,7 +61,8 @@
                 Dateien
               </mat-tab>
 
-              <mat-tab label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
+              <mat-tab
+                label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
                 <div fxLayout="row"
                      fxLayoutWrap="wrap">
                   <div fxFlex.gt-sm="20"
@@ -259,9 +89,9 @@
 
           <mat-card-actions>
             <div class="button-row">
-              <!-- [disabled]="!form.valid || isLoading" -->
               <button mat-raised-button
                       color="primary"
+                      [disabled]="!form.valid"
                       type="submit">
                 {{ club.id ? ('general.clubs.edit.editClub' | translate) : 'general.clubs.edit.saveClub' | translate}}
               </button>

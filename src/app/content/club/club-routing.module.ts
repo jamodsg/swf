@@ -3,6 +3,7 @@ import { ClubsComponent } from './clubs/clubs.component';
 import { ClubResolver } from './club.resolver';
 import { ClubEditComponent } from './club-edit/club-edit.component';
 import { ClubDetailComponent } from './club-detail/club-detail.component';
+import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 
 export const clubRoutes: Routes = [
   {
@@ -15,7 +16,8 @@ export const clubRoutes: Routes = [
     component: ClubEditComponent,
     resolve: {
       club: ClubResolver
-    }
+    },
+    canDeactivate: [PendingChangesGuard],
   },
   {
     path: 'detail/:clubId',

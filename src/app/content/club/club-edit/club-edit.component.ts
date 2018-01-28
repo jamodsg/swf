@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import { Observable } from 'rxjs/Observable';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
 import { ILocation } from '../../../shared/interfaces/location.interface';
@@ -10,6 +9,7 @@ import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.inter
 import { ClubService } from '../../../shared/services/club/club.service';
 import { LocationService } from '../../../shared/services/location/location.service';
 import { MemberService } from '../../../shared/services/member/member.service';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'club-edit',
@@ -17,32 +17,53 @@ import { MemberService } from '../../../shared/services/member/member.service';
 })
 export class ClubEditComponent implements OnInit {
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    return JSON.stringify(this.club).toLowerCase() === JSON.stringify(this.savedClub).toLowerCase();
+  }
+
   public club: IClub;
+  private savedClub: IClub;
   public form: FormGroup;
   public locations$: Observable<ILocation[]>;
   public members$: Observable<IMember[]>;
   public showForm: boolean;
 
-  public titleMinLength: number = 4;
-  public textMinLength: number = 5;
+  public selectedClubTimeLineEvent: number = -1;
 
-  @ViewChild('description') description: QuillEditorComponent;
+  /* public uploaderOptions: IUploaderOptions = {
+    allowedMimeType: ['image/gif', 'image/jpeg', 'image/png'],
+    allowedFileType: ['jpg', 'jpeg', 'png', 'gif'],
+    path: 'clubs',
+    queueLimit: 1
+  };
 
-  constructor(
-    public clubService: ClubService,
-    private locationService: LocationService,
-    private memberService: MemberService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
+  public uploaderConfig: IUploaderConfig = {
+    showOptions: false,
+    autoUpload: true,
+    showDropZone: true,
+    multiple: false,
+    removeAfterUpload: true,
+    showQueue: false
+  }; */
+
+  constructor(public clubService: ClubService,
+              private locationService: LocationService,
+              private memberService: MemberService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,) {
     this.locations$ = locationService.locations$;
     this.members$ = memberService.members$;
     this.showForm = false;
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { club: IClub }) => this.club = data.club);
+    this.route.data.subscribe((data: { club: IClub }) => {
+      this.club = data.club;
+      this.savedClub = Object.freeze(Object.assign({}, this.club));
+      //  this.uploaderOptions.id = data.club.id
+    });
 
     this.form = this.fb.group({
       title: [this.club.title, [Validators.required, Validators.minLength(10)]],
@@ -53,45 +74,62 @@ export class ClubEditComponent implements OnInit {
       history: this.club.history,
       info: this.initInfo(),
       fussballde: this.initFussballDe(),
-      timeLine: this.initTimeLine('timeLine', this.club.timeLine)
+      timeLine: this.initClubTimeLine(),
+      // uploaderConfig: this.initUploaderConfig()
+    });
+
+    this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe(
+      (changes: IClub) => this.club = changes
+    );
+  }
+
+  initClubTimeLine(): FormArray {
+    const formArray = [];
+    if (this.club.timeLine) {
+      for (let i = 0; i < this.club.timeLine.length; i++) {
+        formArray.push(this.initTimeLineEvent(this.club.timeLine[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initTimeLineEvent(event: ITimeLineEvent): FormGroup {
+    return this.fb.group({
+      title: [event ? event.title : '', [Validators.required, Validators.maxLength(100)]],
+      subTitle: [event ? event.subTitle : ''],
+      text: [event ? event.text : ''],
+      icon: [event ? event.icon : ''],
+      color: [event ? event.color : ''],
+      assignedMediaItem: [event ? event.assignedMediaItem : ''],
+      assignedArticle: [event ? event.assignedArticle : ''],
+      startDate: [event ? event.startDate :  new Date()],
+      endDate: [event ? event.endDate :  new Date()]
     });
   }
 
-  addTimeLineEvent(formControl: string, event: ITimeLineEvent): void {
-    this.form.controls[formControl]['controls'].push(this.fb.group({
-      title: [event ? event.title : '', [Validators.required, Validators.minLength(this.titleMinLength)]],
-      subTitle: event ? event.subTitle : '',
-      startDate: event ? event.startDate : '',
-      endDate: event ? event.endDate : '',
-      icon: event ? event.icon : '',
-      assignedArticle: event ? event.assignedArticle : '',
-      color: event ? event.color : '',
-      text: [event ? event.text : '', [Validators.required, Validators.minLength(this.textMinLength)]]
-    }));
-    this.showForm = true;
+  addTimeLineEvent(): void {
+    const control = <FormArray>this.form.controls['timeLine'];
+    const event: ITimeLineEvent = {
+      title: '',
+      startDate: ''
+    };
+    const addCtrl = this.initTimeLineEvent(event);
+    control.push(addCtrl);
+    this.setSelectedClubTimeLineEvent(this.form.controls['timeLine']['controls'].length - 1);
   }
 
-  saveTimeLineEvent(event: ITimeLineEvent) {
-    console.log(this.form.getRawValue());
-    this.showForm = false;
+  setSelectedClubTimeLineEvent(event: number): void {
+    this.selectedClubTimeLineEvent = event;
   }
 
-  // remove last element of formControl
-  cancelAddingEvent(event): void {
-    const control = <FormArray>this.form.controls[event.formControl];
-    control.removeAt(event.index);
-    this.showForm = false;
+  saveTimeLineEvent($event: boolean):void {
+    this.selectedClubTimeLineEvent = -1;
   }
 
-  initTimeLine(formControl: string, events: ITimeLineEvent[]): FormArray {
-    const timeLine = [];
-    if (!events || events.length === 0) {
-      // timeLine.push(this.addTimeLineEvent(formControl, null));
-    }
-    /* for (let i = 0; i < events.length; i++) {
-      timeLine.push(this.addTimeLineEvent(formControl, events[i]));
-    } */
-    return this.fb.array(timeLine);
+  removeTimeLineEvent($event: boolean): void {
+    const control = <FormArray>this.form.controls['timeLine'];
+    control.removeAt(this.selectedClubTimeLineEvent);
+    this.selectedClubTimeLineEvent = -1;
   }
 
   initInfo(): FormGroup {
@@ -138,10 +176,6 @@ export class ClubEditComponent implements OnInit {
     );
   }
 
-  /* logoUploadCompleted(fileItem: FileItem) {
-    this.club.logoUrl = fileItem.url;
-    // this.clubService.updateClub(this.club.id, this.club).then();
-  } */
 
   cancel() {
     this.redirectToList();
@@ -151,9 +185,13 @@ export class ClubEditComponent implements OnInit {
     this.router.navigate(['/clubs']).then();
   }
 
-  isUrl(url: string) {
-    console.log(url);
-    return true;
+  /* logoUploadCompleted(fileItem: FileItem) {
+    this.club.logoUrl = fileItem.url;
+    // this.clubService.updateClub(this.club.id, this.club).then();
   }
+
+  initUploaderConfig() {
+    return this.fb.group(this.uploaderConfig);
+  } */
 
 }
