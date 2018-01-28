@@ -120,7 +120,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  updatePS(): void  {
+  updatePS(): void {
     if (!this.mediaMatcher.matches && !this.options.compact) {
       setTimeout(() => {
         this.directiveScroll.update();

@@ -11,8 +11,8 @@ import { AuthService } from '../../../shared/services/auth/auth.service';
 export class MenuComponent {
 
   constructor(public menuService: MenuItemsService,
-              public authService: AuthService,
-              public translate: TranslateService) {
+    public authService: AuthService,
+    public translate: TranslateService) {
   }
 
 }
