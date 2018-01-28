@@ -12,14 +12,16 @@ export class UploaderComponent implements OnInit {
 
   public form: FormGroup;
   public uploaderConfig: IUploaderConfig = {
+    showOptions: false,
     autoUpload: false,
     showDropZone: true,
-    multiple: true,
+    multiple: false,
     removeAfterUpload: true,
-    showQueue: true
+    showQueue: false
   };
 
   public uploaderOptions: IUploaderOptions = {
+    queueLimit: 1,
     path: '',
     id: ''
   };
@@ -29,23 +31,25 @@ export class UploaderComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      // options: this.initOptions(),
-      imageUrl: ''
+      imageUrl: '',
+      uploaderConfig: this.initUploaderConfig()
     });
 
-    this.form.valueChanges.subscribe(
-      (changes: any) => {
-        delete changes.imageUrl;
-        this.uploaderConfig = changes.options
-      });
+    this.form.valueChanges.subscribe((changes: any) => {
+      delete changes.imageUrl;
+      this.uploaderConfig = changes.options;
+    });
   }
 
+  initUploaderConfig() {
+    return this.fb.group(this.uploaderConfig);
+  }
 
-  uploadCompleted(mediaItem: IMediaItem) {
+  uploadCompleted(mediaItem: IMediaItem): void {
     console.log(mediaItem);
   }
 
-  removedMedia($event) {
+  removedMedia($event): void {
     console.log($event);
   }
 
