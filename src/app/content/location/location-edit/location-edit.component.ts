@@ -101,13 +101,13 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
   }
 
   initAssignedContacts(): FormArray {
-    const formArray = [];
+    const formArray: FormArray = this.fb.array([]);
     if (this.location.assignedContacts) {
       for (let i = 0; i < this.location.assignedContacts.length; i++) {
         formArray.push(this.initLocationContact(this.location.assignedContacts[i]));
       }
     }
-    return this.fb.array(formArray);
+    return formArray;
   }
 
   initLocationContact(contact: ILocationContact): FormGroup {
