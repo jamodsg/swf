@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutWrap="wrap">
+<div fxLayout="row" fxLayoutWrap="wrap" style="margin-bottom: 90px;">
   <div fxFlex.gt-xs="100" fxFlex.gt-sm="60" fxFlex="100">
     <mat-card>
       <mat-card-title>
@@ -16,7 +16,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div fxFlex.gt-xs="100" fxFlex.gt-sm="40" fxFlex="100">
+  <div fxFlex.gt-sm="40" fxFlex="100" fxHide.xs>
     <categories-by-category-type
       [categories]="categories$ | async"
       [categoryTypes]="categoryTypes$ | async">
