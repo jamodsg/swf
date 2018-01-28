@@ -23,9 +23,9 @@ export class ForgotPasswordComponent implements OnInit {
   }) forgotPasswordAlertContainer: ViewContainerRef;
 
   constructor(private fb: FormBuilder,
-              private authService: AuthService,
-              private cfr: ComponentFactoryResolver,
-              private alertService: AlertService) {
+    private authService: AuthService,
+    private cfr: ComponentFactoryResolver,
+    private alertService: AlertService) {
   }
 
   ngOnInit() {
