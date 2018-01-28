@@ -12,9 +12,9 @@ import { FormGroup } from '@angular/forms';
     'media-upload-form.component.css'
   ]
 })
-export class MediaUploadFormComponent implements OnInit {
+export class MediaUploadFormComponent {
 
-  @Input() uploaderOptions: IUploaderOptions;
+  /*@Input() uploaderOptions: IUploaderOptions;
   @Input() uploaderConfig: IUploaderConfig;
   // @Input() currentImageUrl: string;
   @Input() form: FormGroup;
@@ -77,7 +77,7 @@ export class MediaUploadFormComponent implements OnInit {
 
   resumeUpload(upload: Upload) {
     upload.task.resume();
-  } */
+  }
 
   uploadFiles() {
     this.currentUploads.forEach((fileUpload) => {
@@ -91,7 +91,7 @@ export class MediaUploadFormComponent implements OnInit {
           this.uploadCompleted.emit(mediaItem);
         },
         (error: any) => console.log(error)
-      );*/
+      );
     });
-  }
+  }*/
 }

@@ -1,6 +1,6 @@
 <div fxLayout="row"
      fxLayoutWrap="wrap"
-     *ngFor="let control of form.get('timeLine').controls; let i = index"
+     *ngFor="let control of form.controls['timeLine']['controls']; let i = index"
      [formGroup]="form">
 
 
