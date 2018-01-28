@@ -4,16 +4,10 @@ import { IMediaItem } from './media/media-item.interface';
 
 export interface ITimeLineEvent {
 
-  id?: string;
-
   title: string;
   subTitle?: string;
   text?: string;
 
-  assignedItem: any;        // z.B. Verein
-  assignedItemType: string; // z.B. Präsident
-
-  // styling
   icon?: string;
   color?: string;
 
