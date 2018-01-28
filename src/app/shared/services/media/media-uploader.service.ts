@@ -7,10 +7,9 @@ import { FileType } from '../../interfaces/media/file-type.interface';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { IUploaderOptions } from '../../interfaces/media/uploader-options.interface';
 import { Upload } from './upload.class';
-import { IMediaItem } from '../../interfaces/media/media-item.interface';
 import { AuthService } from '../auth/auth.service';
 import { MediaItemService } from './media-item.service';
-import 'rxjs/add/observable/fromPromise';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 export type FilterFunction = {
   name: string,
@@ -20,19 +19,11 @@ export type FilterFunction = {
 @Injectable()
 export class MediaUploaderService {
 
-  public options: IUploaderOptions = {
-    filters: [],
-    queueLimit: 999
-  };
-
   private _failFilterIndex: number;
 
-  public task: AngularFireUploadTask;
-
-  public percent$: Observable<number>;
-  public url$: Observable<string>;
-  public state$: Observable<string>;
-  public bytes$: Observable<number[]>;
+  public options: IUploaderOptions = {
+    filters: []
+  };
 
   constructor(private authService: AuthService,
     private storage: AngularFireStorage,
@@ -40,94 +31,46 @@ export class MediaUploaderService {
     private afs: AngularFirestore) {
   }
 
-  public upload(upload: Upload, options): Observable<Promise<IMediaItem>> {
+  public upload(upload: Upload, options): AngularFireUploadTask {
 
     upload.id = this.afs.createId();
-    const uploadPath = options.path + '/' + options.id + '/' + upload.id;
+    upload.path = options.path + '/' + options.id + '/' + upload.id;
 
-    this.setOptions(options);
-    const arrayOfFilters = this._getFilters(this.options.filters);
+    this.initOptions(options);
+    const arrayOfFilters = this._getFilters(this.options.filters ? this.options.filters : []);
 
     if (typeof upload.file.size !== 'number') {
-      upload.error = Observable.of({
+      upload.error = Observable.throw({
         message: 'The file specified is no longer valid',
         file: upload.file.name
       });
     }
 
     if (this._isValidFile(upload, arrayOfFilters, this.options)) {
-
-      this.task = this.storage.upload(uploadPath, upload.file, {
+      return this.storage.upload(upload.path, upload.file, {
         customMetadata: {
           id: upload.id
         }
       });
 
-      this.percent$ = this.task.percentageChanges();
-      this.state$ = this.task.snapshotChanges().map(task => {
-        return task.bytesTransferred === task.totalBytes ? 'success' : task.state;
-      });
-      this.bytes$ = this.task.snapshotChanges().map(task => [task.bytesTransferred, task.totalBytes]);
-      this.url$ = this.task.downloadURL();
-
-      return this.task.snapshotChanges().map((task) => {
-        if (task.bytesTransferred === task.totalBytes) {
-          const mediaItem = this.mediaItemService.setNewMediaItem(upload);
-          return this.mediaItemService.createMediaItem(mediaItem).then(() => {
-            return mediaItem
-          });
-        }
-      });
-
-      /*
-          upload.downloadUrl = uploadTask.snapshot.downloadURL;
-          upload.name = upload.file.name;
-          upload.assignedObjects = [{
-            id: options.id,
-            type: options.path
-          }];
-
-        });
-
-      if (this.mediaItem$) {
-        console.log(this.mediaItem$);
-        return Promise.resolve(this.mediaItem$);
-      }*/
-
     } else {
       const filter: any = arrayOfFilters[this._failFilterIndex];
-      console.log(filter.name);
-      upload.error = Observable.of({
+      upload.error = Observable.throw({
         message: filter.name,
         file: upload.file.name
       });
     }
   }
 
-  /*
-  private deleteFileData(key: string) {
-    console.log(key);
-    return Promise.resolve();
-  }
-
-  deleteFile(upload: Upload) {
-    this.deleteFileData(upload.id).then(() => {
-      this.deleteFileStorage(upload.name);
-    }).catch((error) => console.log(error));
-  }
-
-  public deleteFileStorage(name: string) {
-    console.log(name);
-    // return this.storage.storage.ref().delete(name);
-  } */
-
-  private setOptions(options: IUploaderOptions) {
+  private initOptions(options: IUploaderOptions) {
     this.options = (<any>Object).assign(this.options, options);
 
-    this.options.filters.unshift({
-      name: 'queueLimit',
-      fn: this._queueLimitFilter
-    });
+    if (this.options.queueLimit) {
+      this.options.filters.unshift({
+        name: 'queueLimit',
+        fn: this._queueLimitFilter
+      });
+    }
 
     if (this.options.maxFileSize) {
       this.options.filters.unshift({
@@ -153,7 +96,7 @@ export class MediaUploaderService {
 
   private _getFilters(filters: FilterFunction[] | string): FilterFunction[] {
     if (!filters) {
-      return this.options.filters;
+      return this.options.filters ? this.options.filters : [];
     }
     if (Array.isArray(filters)) {
       return filters;
@@ -171,7 +114,7 @@ export class MediaUploaderService {
   }
 
   private _fileSizeFilter(item: Upload): boolean {
-    return !(this.options.maxFileSize && item.size > this.options.maxFileSize);
+    return !(this.options.maxFileSize && item.file.size > this.options.maxFileSize);
   }
 
   private _mimeTypeFilter(item: Upload): boolean {

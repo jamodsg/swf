@@ -3,7 +3,10 @@ import { MediaUploaderComponent } from './media-uploader/media-uploader.componen
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatProgressBarModule,
+  MatSnackBarModule, MatTabsModule
+} from '@angular/material';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MediaCenterComponent } from './media-center/media-center.component';
 import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
@@ -32,6 +35,7 @@ import { FileSelectDirective } from '../../directives/media/file-select.directiv
     MatGridListModule,
     MatIconModule,
     MatProgressBarModule,
+    MatSnackBarModule,
     MatTabsModule,
     NgPipesModule,
     ReactiveFormsModule,

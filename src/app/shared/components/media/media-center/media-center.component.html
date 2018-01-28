@@ -15,74 +15,86 @@
 
       <mat-card-content>
         <div fxLayout="row" fxLayoutWrap="wrap">
-          <div fxFlex.gt-xs="100" fxFlex.gt-sm="64" fxFlex="100">
+          <div fxFlex="100">
             <mat-tab-group [dynamicHeight]="true">
-              <mat-tab label="{{'general.media.listTitle' | translate}}">
+              <mat-tab label="{{'general.media.list.title' | translate}}">
 
-                <media-gallery
-                  [path]="uploaderOptions.path"
-                  [id]="uploaderOptions.id">
-                </media-gallery>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex.gt-xs="100" fxFlex.gt-sm="64" fxFlex="100">
 
+                    <!--<media-gallery
+                      [path]="uploaderOptions.path"
+                      [id]="uploaderOptions.id">
+                    </media-gallery>-->
+
+                  </div>
+
+                  <div fxFlexOffset="2" fxFlex.gt-xs="100" fxFlex.gt-sm="34" fxFlex="100">
+
+                    <mat-tab-group [dynamicHeight]="true">
+                      <mat-tab label="ToDo">
+                        <ul class="text-md">
+                          <li>
+                            Liste
+                            <ul>
+                              <li>Übersicht über alle bisherigen Uploads (Liste mit Videos, Bildern, Dokumenten etc.)
+                              </li>
+                              <li>bei Bildern/Videos mit einem Bild zur Vorschau, ansonsten einfach ne CSS-Box mit der
+                                Datei-Extension im Mittelpunkt
+                              </li>
+                              <li>Sammlungen erstellen / editieren und Dateien per Drag and Drop verschieben</li>
+                              <li>Dateien löschen</li>
+                              <li>Datei fürs Frontend sperren</li>
+                              <li>Dateiinfos editieren (Titel, Author, Beschreibung)</li>
+                              <li>Sterne-Bewertung und Kommentare anzeigen</li>
+                              <li>zum Einbinden in andere Module Möglichkeit zum Filtern via Attribut (bspw. Sponsor mit
+                                der ID 5)
+                              </li>
+                              <li>Upload der Datei mit Fortschrittsanzeige, mit Pausieren, Fortsetzen und Abbrechen
+                                Buttons -
+                                anschließend Anzeige eines Löschen-Buttons
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            Upload
+                            <ul>
+                              <li style="text-decoration: line-through">Fortschrittsanzeige bei nur einem Bild in der Mitte der Dropbox</li>
+                              <li>Ist bereits ein Bild für das Objekt vorhanden, soll dieses als Hintergrund der Dropbox
+                                angezeigt
+                                werden - mit Löschen Link, OHNE Upload Formular und Unsplash-Icon
+                              </li>
+                              <li>Definition maximale Dateigröße, erlaubte Dateitypen, maximale Anzahl der Dateien</li>
+                              <li>Videos, Bilder, Audiodateien und Dokumente hochladen</li>
+                              <li>zum Einbinden in andere Module Möglichkeit zum Filtern via Attribut (bspw. Sponsor mit
+                                der ID 5)
+                              </li>
+                              <li>Wenn ein Objekt, für das ich gerade eine Datei hochlade, noch nicht vorhanden ist,
+                                soll die Datei
+                                beim Speichern des Hauptobjektes trotzdem verknüpft werden
+                              </li>
+                              <li>Upload von Bildern von unsplash.com</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </mat-tab>
+                      <mat-tab label="{{'general.media.gallery.title' | translate}}">
+
+                      </mat-tab>
+                      <mat-tab label="{{'general.media.gallery.create' | translate}}">
+                        Galerie erstellen
+                      </mat-tab>
+                    </mat-tab-group>
+                  </div>
+
+                </div>
               </mat-tab>
-              <mat-tab label="{{'general.media.uploaderTitle' | translate}}">
+              <mat-tab label="{{'general.media.uploader.title' | translate}}">
                 <media-uploader
                   (uploadCompleted)="uploadCompleted.emit($event)"
-                  (removedMedia)="removedMedia.emit($event)"
                   [form]="form"
-                  [uploaderOptions]="uploaderOptions"
-                  [uploaderConfig]="uploaderConfig">
+                  [uploaderOptions]="uploaderOptions">
                 </media-uploader>
-              </mat-tab>
-            </mat-tab-group>
-          </div>
-          <div fxFlexOffset="2" fxFlex.gt-xs="100" fxFlex.gt-sm="34" fxFlex="100">
-
-            <mat-tab-group [dynamicHeight]="true">
-              <mat-tab label="{{'general.media.galleryTitle' | translate}}">
-                <pre>{{uploaderConfig | json}}</pre>
-                <pre>{{uploaderOptions | json}}</pre>
-              </mat-tab>
-              <mat-tab label="{{'general.media.createGalleryTitle' | translate}}">
-                Galerie erstellen
-              </mat-tab>
-              <mat-tab label="ToDo">
-                <ul>
-                  <li>
-                    Liste
-                    <ul>
-                      <li>Übersicht über alle bisherigen Uploads (Liste mit Videos, Bildern, Dokumenten etc.)</li>
-                      <li>bei Bildern/Videos mit einem Bild zur Vorschau, ansonsten einfach ne CSS-Box mit der
-                        Datei-Extension im Mittelpunkt
-                      </li>
-                      <li>Sammlungen erstellen / editieren und Dateien per Drag and Drop verschieben</li>
-                      <li>Dateien löschen</li>
-                      <li>Datei fürs Frontend sperren</li>
-                      <li>Dateiinfos editieren (Titel, Author, Beschreibung)</li>
-                      <li>Sterne-Bewertung und Kommentare anzeigen</li>
-                      <li>zum Einbinden in andere Module Möglichkeit zum Filtern via Attribut (bspw. Sponsor mit der ID 5)</li>
-                      <li>Upload der Datei mit Fortschrittsanzeige, mit Pausieren, Fortsetzen und Abbrechen Buttons -
-                        anschließend Anzeige eines Löschen-Buttons
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    Upload
-                    <ul>
-                      <li>Fortschrittsanzeige bei nur einem Bild in der Mitte der Dropbox</li>
-                      <li>Ist bereits ein Bild für das Objekt vorhanden, soll dieses als Hintergrund der Dropbox angezeigt
-                        werden - mit Löschen Link, OHNE Upload Formular und Unsplash-Icon
-                      </li>
-                      <li>Definition maximale Dateigröße, erlaubte Dateitypen, maximale Anzahl der Dateien</li>
-                      <li>Videos, Bilder, Audiodateien und Dokumente hochladen</li>
-                      <li>zum Einbinden in andere Module Möglichkeit zum Filtern via Attribut (bspw. Sponsor mit der ID 5)</li>
-                      <li>Wenn ein Objekt, für das ich gerade eine Datei hochlade, noch nicht vorhanden ist, soll die Datei
-                        beim Speichern des Hauptobjektes trotzdem verknüpft werden
-                      </li>
-                      <li>Upload von Bildern von unsplash.com</li>
-                    </ul>
-                  </li>
-                </ul>
               </mat-tab>
             </mat-tab-group>
           </div>

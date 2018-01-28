@@ -71,13 +71,13 @@ export class MediaUploadFormComponent implements OnInit {
     this.currentUploads.splice(this.currentUploads.indexOf(upload), 1);
   }
 
-  pauseUpload(upload: Upload) {
+  /*pauseUpload(upload: Upload) {
     upload.task.pause();
   }
 
   resumeUpload(upload: Upload) {
     upload.task.resume();
-  }
+  } */
 
   uploadFiles() {
     this.currentUploads.forEach((fileUpload) => {

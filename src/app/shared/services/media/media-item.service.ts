@@ -42,7 +42,7 @@ export class MediaItemService {
       id: upload.id,
       assignedObjects: upload.assignedObjects,
       downloadUrl: upload.downloadUrl,
-      name: upload.name,
+      name: upload.file.name,
       size: upload.file.size,
       type: upload.file.type,
       isExternal: false,

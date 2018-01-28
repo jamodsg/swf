@@ -318,7 +318,8 @@
         "timeLineClub": "Die Präsidenten-Chronik",
         "timeLineTitle": "Wichtige Ereignisse im Verein",
         "title": "Vereinsname",
-        "updateClub": "Änderungen speichern"
+        "updateClub": "Änderungen speichern",
+        "visitHomepage": "Homepage besuchen"
       },
       "list": {
         "allClubs": "alle Vereine anzeigen",
@@ -468,17 +469,39 @@
       }
     },
     "media": {
-      "cancelUpload": "Abbrechen",
       "centerTitle": "Mediencenter",
-      "createGalleryTitle": "Neue Sammlung",
-      "galleryTitle": "Sammlungen",
-      "clearQueue": "Warteschlange löschen",
-      "listTitle": "Hochgeladene Dateien",
-      "pauseUpload": "Pausieren",
-      "resumeUpload": "Fortsetzen",
-      "uploadFile": "Hochladen",
-      "uploadAll": "Alle Dateien hochladen",
-      "uploaderTitle": "Uploader"
+      "filter": {
+        "queueLimit": "Du hast zu viele Dateien zum Upload ausgewählt."
+      },
+      "gallery": {
+        "create": "Neue Sammlung",
+        "title":  "Sammlungen"
+      },
+      "list": {
+        "title":  "Hochgeladene Dateien"
+      },
+      "upload": {
+        "actions": "Aktionen",
+        "name": "Dateiname",
+        "percentage": "%",
+        "preview": "Vorschau",
+        "progress": "Fortschrittsbalken",
+        "size": "Größe",
+        "status": "Status"
+      },
+      "uploader": {
+        "cancel": "Abbrechen",
+        "clearQueue": "Warteschlange löschen",
+        "config": "Optionen",
+        "delete": "Löschen",
+        "pause": "Pausieren",
+        "queue": "Warteschlange",
+        "resume": "Fortsetzen",
+        "start": "Hochladen",
+        "title": "Uploader",
+        "uploadFile": "Hochladen",
+        "uploadAll": "Alle Dateien hochladen"
+      }
     },
     "members": {
       "details": {
@@ -1129,12 +1152,12 @@
       "assignedArticle": "Mit Artikel verknüpfen",
       "color": "Farbe",
       "deleteEvent": "Ereignis löschen",
-      "endDate": "bis",
+      "endDate": "Enddatum",
       "icon": "Verknüpftes Icon",
       "listEvents": "Liste",
       "noEvents": "Es wurden noch keine Ereignisse gespeichert",
       "saveEvent": "Ereignis speichern",
-      "startDate": "Datum",
+      "startDate": "Startdatum",
       "subTitle": "Untertitel",
       "text": "Text",
       "title": "Titel"
