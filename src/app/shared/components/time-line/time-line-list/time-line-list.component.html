@@ -1,5 +1,33 @@
-<pre>{{events | json}}</pre>
+<mat-accordion class="example-headers-align"
+               *ngIf="events && events.length > 0; else noEventsTemplate">
 
+  <mat-expansion-panel
+    *ngFor="let event of events; let i = index; let first = first; let last = last"
+    [expanded]="step === i"
+    (opened)="setStep(i)"
+    hideToggle="true">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{event.get('title').value}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{event.get('startDate').value}} {{event.get('endDate').value ? '&ndash;' + event.get('endDate').value : ''}}
+        <mat-icon *ngIf="event.get('icon').value">{{event.get('icon').value}}</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div *ngIf="step === i" [innerHtml]="event.get('text').value"></div>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()" [disabled]="first">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()" [disabled]="last">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+<!--
 <div class="table-responsive" *ngIf="events && events.length > 0; else noEventsTemplate">
 
   <table class="table table-striped table-bordered table-hover table-sm" *ngIf="showTable">
@@ -12,7 +40,7 @@
     </thead>
     <tr *ngFor="let timeLineEvent of timeLineEvents">
       <td class="text-left">{{timeLineEvent.title}}</td>
-      <td class="text-left">{{timeLineEvent.date}}</td><!-- | date: 'dd.MM.yy' -->
+      <td class="text-left">{{timeLineEvent.date}}</td><!-- | date: 'dd.MM.yy'
       <td *ngIf="showActionLinks">
         <button type="button" class="btn btn-danger btn-sm" (click)="deleteTimeLineEvent.emit(timeLineEvent)"
                 title="{{ 'general.clubs.timeLine.deleteEvent' | translate}}">
@@ -26,7 +54,7 @@
     <time-line-graph-horizontal [timeLineEvents]="timeLineEvents"></time-line-graph-horizontal>
   </div>
 
-</div>
+</div>-->
 
 <ng-template #noEventsTemplate>
   <div class="alert alert-warning" role="alert">{{ 'general.clubs.timeLine.noEvents' | translate}}</div>
