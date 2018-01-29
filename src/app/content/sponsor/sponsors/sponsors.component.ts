@@ -25,7 +25,7 @@ export class SponsorsComponent implements OnDestroy {
     private media: MediaMatcher,
     private categoryService: CategoryService,
     private sponsorService: SponsorService) {
-    this.categories$ = categoryService.getCategoriesByCategoryType('sponsor');
+    this.categories$ = categoryService.getCategoriesByCategoryType('sponsor.types');
     this.sponsors$ = sponsorService.sponsors$;
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');

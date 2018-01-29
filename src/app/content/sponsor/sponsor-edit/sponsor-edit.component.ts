@@ -42,7 +42,7 @@ export class SponsorEditComponent implements OnInit {
     private router: Router,
     private sponsorService: SponsorService,
     public categoryService: CategoryService) {
-    this.categories$ = categoryService.getCategoriesByCategoryType('sponsor');
+    this.categories$ = categoryService.getCategoriesByCategoryType('sponsor.types');
   }
 
   ngOnInit() {
