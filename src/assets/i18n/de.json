@@ -196,8 +196,8 @@
         "categoriesByCategoryType": "Kategorien nach ihrem Typ",
         "categoriesPerPage": "Kategorien pro Seite",
         "colTitles": {
-          "name": "Titel",
-          "type": "Kategorie"
+          "title": "Titel",
+          "category": "Kategorie"
         },
         "createCategory": "Kategorie erstellen",
         "filterByAssignedCategoryType": "Aus der Kategorie",
@@ -269,33 +269,18 @@
         "logoUrl": "Das Wappen des Vereins",
         "mainTitle": "Wichtigste Daten",
         "management": {
-          "addPosition": "Vorstandsposition hinzufügen",
-          "addPositionText": "Es fehlt eine Position im Vorstand?",
-          "chooseClub": "Bitte den Verein auswähllen",
-          "choosePosition": "Wähle das Amt des Mitgliedes im Vorstand",
-          "colTitles": {
-            "description": "Liste der Aufgaben",
-            "assignedClub": "Zu welchem Verein gehört das Amt?",
-            "memberName": "Mitglied",
-            "position": "Titel der Vorstandsaufgabe",
-            "since": "seit",
-            "till": "bis"
+          "current": {
+            "description": "Auf dem Bild sind zu sehen:",
+            "title": "Der aktuelle Vorstand"
           },
-          "createManagement": "Neues Vorstandsmitglied",
-          "deleteManagement": "Vorstandsmitglied löschen",
-          "editManagement": "Mitglied bearbeiten",
-          "member": "Mitglied aus der Liste wählen",
-          "moveDown": "In der Anzeige nach unten",
-          "moveUp": "In der Anzeige nach oben",
-          "noManagement": "Es wurden noch keine Vorstandsmitglieder erstellt",
-          "noPhotoFound": "Kein Foto des Vorstandes gefunden. Lade doch eins hoch!",
-          "noResult": "Es wurden keine Vorstandspositionen gefunden.",
-          "noFilteredResult": "Es wurden keine Vorstandspositionen für diesen Verein gefunden.",
-          "photoDescription": "Wer ist auf dem Bild zu sehen?",
-          "position": "Position im Vorstand",
-          "positionDescription": "Aufgabenfelder dieses Amtes",
-          "positions": "Ämter im Vorstand",
-          "saveManagement": "Position speichern"
+          "list": {
+            "title": "Aktuelle und alte Vorstandsmitglieder erfassen"
+          },
+          "positions": {
+            "create": "Neue Position",
+            "description": "Tätigkeiten",
+            "title": "Vorstandspositionen"
+          }
         },
         "managementPhotoUrl": "Foto des Vorstandes",
         "managementTitle": "Vorstand",
@@ -475,10 +460,10 @@
       },
       "gallery": {
         "create": "Neue Sammlung",
-        "title":  "Sammlungen"
+        "title": "Sammlungen"
       },
       "list": {
-        "title":  "Hochgeladene Dateien"
+        "title": "Hochgeladene Dateien"
       },
       "upload": {
         "actions": "Aktionen",
@@ -690,45 +675,6 @@
         "updateApplication": "Änderungen speichern",
         "main": "Einstellungen"
       },
-      "APPS": {
-        "main": "Anwendungen"
-      },
-      "WIDGETS": {
-        "main": "Widgets"
-      },
-      "MATERIAL": {
-        "main": "Material"
-      },
-      "FORMS": {
-        "main": "Formulare"
-      },
-      "DATATABLE": {
-        "main": "Tabellen"
-      },
-      "TASKBOARD": {
-        "main": "Aufgaben"
-      },
-      "CHARTS": {
-        "main": "Charts"
-      },
-      "MAPS": {
-        "main": "Karten"
-      },
-      "ECOMMERCE": {
-        "main": "ECommerce"
-      },
-      "DND": {
-        "main": "DNS"
-      },
-      "PAGES": {
-        "main": "Seiten"
-      },
-      "SESSION": {
-        "main": "Session"
-      },
-      "DOCS": {
-        "main": "Dokumentation"
-      },
       "article": {
         "createArticle": "Artikel erstellen",
         "main": "Artikel",
@@ -736,7 +682,10 @@
         "detail": "Artikeldetails",
         "editArticle": "Artikel editieren",
         "list": "Alle Artikel",
-        "match": "Spielbegegnungen"
+        "match": "Spielbegegnungen",
+        "types": {
+          "main": "Artikelkategorien"
+        }
       },
       "category": {
         "main": "Kategorien",
@@ -749,13 +698,16 @@
         "detail": "Vereins-Details",
         "edit": "Verein editieren",
         "list": "Alle Vereine",
-        "positions": "Positionen im Vorstand"
+        "position": {
+          "types": {
+            "main": "Positionen im Vorstand"
+          }
+        }
       },
       "dashboard": {
         "main": "Startseite",
         "statistics": "Statistiken"
       },
-      "frontendLink": "Zum Frontend",
       "location": {
         "create": "Treffpunkt erstellen",
         "detail": "Treffpunktdetails",
@@ -763,7 +715,10 @@
         "list": "Alle Treffpunkte",
         "main": "Spielstätten",
         "map": "Kartenansicht",
-        "media": "Verknüpfte Inhalte"
+        "media": "Verknüpfte Inhalte",
+        "types": {
+          "main": "Platzarten"
+        }
       },
       "member": {
         "main": "Mitglieder",
@@ -787,10 +742,16 @@
         "detail": "Sponsor-Details",
         "edit": "Sponsor editieren",
         "create": "Sponsor erstellen",
-        "list": "Alle Sponsoren"
+        "list": "Alle Sponsoren",
+        "types": {
+          "main": "Sponsoring-Arten"
+        }
       },
       "static": {
-        "main": "Statische Seiten"
+        "main": "Statische Seiten",
+        "types": {
+          "main": "Statische-Seitenarten"
+        }
       },
       "task": {
         "closed": "Erledigte",
@@ -805,8 +766,16 @@
         "edit": "Mannschaft editieren",
         "list": "Alle Mannschaften",
         "media": "Neue Uploads",
+        "position": {
+          "types": {
+            "main": "Aufgaben (Mannschaft)"
+          }
+        },
         "team-statistics": "Statistiken",
-        "teamOfTheMonth": "Team des Monats"
+        "teamOfTheMonth": "Team des Monats",
+        "types": {
+          "main": "Mannschaftsarten"
+        }
       },
       "team-position": {
         "main": "Positionen einer Mannschaft"
@@ -1077,7 +1046,7 @@
         },
         "mainTitle": "Wichtigste Daten",
         "management": {
-         "title": "Aufgaben / Positionen"
+          "title": "Aufgaben / Positionen"
         },
         "photo": {
           "description": "Bildbeschreibung",

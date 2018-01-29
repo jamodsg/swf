@@ -38,7 +38,7 @@ export class LocationsByCategoryComponent implements OnChanges, OnDestroy {
   }, this.globalChartOptions);
 
   constructor(private categoryService: CategoryService) {
-    this.categorySubscription = categoryService.getCategoriesByCategoryType('location').subscribe(
+    this.categorySubscription = categoryService.getCategoriesByCategoryType('location.types').subscribe(
       (categories: ICategory[]) => this.categories = categories
     )
   }

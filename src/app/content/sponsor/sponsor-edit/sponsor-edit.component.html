@@ -155,7 +155,7 @@
 <!--<sponsor-edit-main
   [form]="form"
   [sponsor]="sponsor"
-  [categoryTypes]="categoryTypeService.getCategoryTypes() | async | filterBy: ['link']: 'sponsors'"
+  [categoryTypes]="categoryTypeService.getCategoryTypes() | async | filterBy: ['link']: 'sponsors.types'"
   [sponsors]="categoryService.getCategories() | async"
   (setLogo)="setLogo($event)">
 </sponsor-edit-main>

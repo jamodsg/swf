@@ -27,7 +27,7 @@ export class TeamPositionsComponent implements OnChanges {
     if (this.categories && this.categoryTypes) {
       this.teamPositions = this.categories.filter((category: ICategory) => {
         return category.assignedCategoryType === this.categoryTypes.filter((categoryType: ICategoryType) => {
-          return categoryType.link === 'team-position';
+          return categoryType.link === 'team.position.types';
         })[0].id;
       });
     }
