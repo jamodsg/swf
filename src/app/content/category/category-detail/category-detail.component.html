@@ -11,7 +11,7 @@
       <mat-card-content *ngIf="category; else loadingTemplate">
         <table>
           <tr>
-            <td>{{'general.categories.list.colTitles.name' | translate}}</td>
+            <td>{{'general.categories.list.colTitles.ntitle' | translate}}</td>
             <td>{{category.title}}</td>
           </tr>
           <tr>
@@ -19,7 +19,7 @@
             <td [innerHtml]="category.description"></td>
           </tr>
           <tr>
-            <td>{{'general.categories.list.colTitles.type' | translate}}</td>
+            <td>{{'general.categories.list.colTitles.category' | translate}}</td>
             <td>
               <span
                 *ngFor="let categoryType of categoryTypes$ | async | filterBy: ['id'] : category.assignedCategoryType">
