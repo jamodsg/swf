@@ -27,7 +27,7 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #user="matMenu" x-position="before">
-    <button mat-menu-item>
+    <!--<button mat-menu-item>
       <mat-icon>settings</mat-icon>
       Settings
     </button>
@@ -38,8 +38,8 @@
     <button mat-menu-item>
       <mat-icon>notifications_off</mat-icon>
       Disable notifications
-    </button>
-    <button mat-menu-item>
+    </button>-->
+    <button mat-menu-item (click)="logOut()">
       <mat-icon>exit_to_app</mat-icon>
       Sign Out
     </button>
