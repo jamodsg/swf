@@ -10,6 +10,8 @@ import { ClubService } from '../../../shared/services/club/club.service';
 import { LocationService } from '../../../shared/services/location/location.service';
 import { MemberService } from '../../../shared/services/member/member.service';
 import 'rxjs/add/operator/debounceTime';
+import { IClubManagement } from '../../../shared/interfaces/club/club-management.interface';
+import { ITeamManagement } from '../../../shared/interfaces/team/team-management.interface';
 
 @Component({
   selector: 'club-edit',
@@ -157,10 +159,34 @@ export class ClubEditComponent implements OnInit {
 
   initManagement(): FormGroup {
     return this.fb.group({
-      positions: this.club.management ? this.club.management.positions : [],
+      positions: this.initClubManagementPositions(),
       photoUrl: this.club.management ? this.club.management.photoUrl : '',
       photoDescription: this.club.management ? this.club.management.photoDescription : ''
     });
+  }
+
+  initClubManagementPositions(): FormArray {
+    const formArray = [];
+    if (this.club.management.positions) {
+      for (let i = 0; i < this.club.management.positions.length; i++) {
+        formArray.push(this.initClubManagementPosition(this.club.management.positions[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initClubManagementPosition(position: IClubManagement): FormGroup {
+    return this.fb.group({/*
+      title: [event ? event.title : '', [Validators.required, Validators.maxLength(100)]],
+      subTitle: [event ? event.subTitle : ''],
+      text: [event ? event.text : ''],
+      icon: [event ? event.icon : ''],
+      color: [event ? event.color : ''],
+      assignedMediaItem: [event ? event.assignedMediaItem : ''],
+      assignedArticle: [event ? event.assignedArticle : ''],
+      startDate: [event ? event.startDate :  new Date()],
+      endDate: [event ? event.endDate :  new Date()]
+    */});
   }
 
   saveClub(): void {

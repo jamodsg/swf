@@ -9,7 +9,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { ClubService } from '../../shared/services/club/club.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatInputModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule,
+  MatTabsModule
+} from '@angular/material';
 import { QuillModule } from 'ngx-quill';
 import { LocationService } from '../../shared/services/location/location.service';
 import { MemberService } from '../../shared/services/member/member.service';
@@ -18,12 +21,19 @@ import { TimeLineModule } from '../../shared/components/time-line/time-line.modu
 import { ClubEditMainComponent } from './club-edit/club-edit-main/club-edit-main.component';
 import { ClubHistoryComponent } from './club-edit/club-history/club-history.component';
 import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
+import { ClubManagementComponent } from './club-edit/club-management/club-management.component';
+import { ClubHonorariesComponent } from './club-edit/club-honoraries/club-honoraries.component';
+import { CategoryService } from '../../shared/services/category/category.service';
+import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 
 @NgModule({
   imports: [
     FlexLayoutModule,
     MatButtonModule,
+    MatExpansionModule,
+    MatIconModule,
     MatInputModule,
+    MatListModule,
     MatTabsModule,
     MediaModule,
     QuillModule,
@@ -34,20 +44,17 @@ import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.
   declarations: [
     ClubDetailComponent,
     ClubEditComponent,
-    /*ClubFilesComponent, */
     ClubListComponent,
-    // ClubManagementFotoComponent,
-    // ClubMediaComponent,
     ClubsComponent,
     ClubEditMainComponent,
     ClubHistoryComponent,
-    /* ClubStadiumComponent,
-    ClubMangementTimelineComponent,
-    ClubManagementTimelineFormComponent,
-    ClubManagementTimelineListComponent */
+    ClubManagementComponent,
+    ClubHonorariesComponent,
   ],
   exports: [],
   providers: [
+    CategoryService,
+    CategoryTypeService,
     ClubResolver,
     ClubService,
     LocationService,

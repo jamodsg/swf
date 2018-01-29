@@ -35,22 +35,8 @@
                 </club-history>
               </mat-tab>
 
-              <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}"
-                       formGroupName="management">
-                <img *ngIf="club.management && club.management.photoUrl"
-                     [src]="club.management.photoUrl"/>
-                <!--<media-uploader
-                  [objectId]="club.id"
-                  [objectType]="'clubManagement'"
-                  [uploaderOptions]="uploaderOptions"
-                  (uploadCompleted)="uploadCompleted($event)">
-                </media-uploader>
-                <br/>-->
-
-                <quill-editor [style]="{height: '400px'}"
-                              formControlName="photoDescription">
-                </quill-editor>
-
+              <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}">
+                <club-management [form]="form"></club-management>
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.stadiumTitle' | translate }}">
@@ -81,7 +67,7 @@
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.honorariesTitle' | translate}}">
-                Ehrenmitglieder
+                <club-honoraries [form]="form"></club-honoraries>
               </mat-tab>
 
             </mat-tab-group>
