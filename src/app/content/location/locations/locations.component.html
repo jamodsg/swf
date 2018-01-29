@@ -10,7 +10,7 @@
         <location-list
           [locations]="locations$ | async"
           [categories]="categories$ | async"
-          [categoryTypes]="categoryTypes$ | async | filterBy: ['link'] : 'location'">
+          [categoryTypes]="categoryTypes$ | async | filterBy: ['link'] : 'location.types'">
         </location-list>
       </mat-card-content>
     </mat-card>

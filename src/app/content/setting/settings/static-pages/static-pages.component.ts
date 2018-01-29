@@ -25,7 +25,7 @@ export class StaticPagesComponent implements OnInit {
   public categories$: Observable<ICategory[]>;
 
   constructor(private categoryService: CategoryService) {
-    this.categories$ = categoryService.getCategoriesByCategoryType('static');
+    this.categories$ = categoryService.getCategoriesByCategoryType('static.types');
   }
 
   ngOnInit() {

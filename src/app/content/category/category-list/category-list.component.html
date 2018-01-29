@@ -35,9 +35,13 @@
                    [rowHeight]="'auto'"
                    [limit]="form.controls['limit'].value"
                    [rows]="categories | orderBy: ['title'] | filterBy: ['title'] : form.controls['searchFor'].value">
-      <ngx-datatable-column name="Title"></ngx-datatable-column>
-      <ngx-datatable-column name="Category Type" fxHide.xs>
+      <ngx-datatable-column name="{{'general.categories.list.colTitles.title' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
+          {{row.title}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="{{'general.categories.list.colTitles.category' | translate}}" fxHide.xs>
+        <ng-template let-row="row" let-value="assignedCategoryType" ngx-datatable-cell-template>
           {{ 'general.menu.' + (categoryTypes | filterBy: ['id'] : row.assignedCategoryType)[0].link + '.main' |
           translate}}
         </ng-template>
