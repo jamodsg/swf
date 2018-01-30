@@ -1,13 +1,7 @@
 export interface IClubManagement {
-
-  title: string;
-  description: string;
   assignedMember?: string;
-  // position: IClubManagementPosition | '';
-
+  assignedPosition?: string;
   // ordering: number;
-
   startDate: Date;
   endDate?: Date | '';
-
 }

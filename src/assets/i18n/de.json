@@ -277,8 +277,10 @@
             "title": "Aktuelle und alte Vorstandsmitglieder erfassen"
           },
           "positions": {
+            "addMember": "Mitglied auswählen",
             "create": "Neue Position",
             "description": "Tätigkeiten",
+            "editToDos": "Aufgabentext editieren",
             "title": "Vorstandspositionen"
           }
         },
@@ -694,10 +696,11 @@
         "list": "Alle Kategorien"
       },
       "club": {
-        "main": "Vereine",
+        "create": "Verein erstellen",
         "detail": "Vereins-Details",
         "edit": "Verein editieren",
         "list": "Alle Vereine",
+        "main": "Vereine",
         "position": {
           "types": {
             "main": "Positionen im Vorstand"

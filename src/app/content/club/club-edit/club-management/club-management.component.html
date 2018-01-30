@@ -25,9 +25,6 @@
        fxFlex.gt-sm="34"
        fxFlex.gt-xs="100">
     <h3>{{'general.clubs.edit.management.positions.title' | translate}}</h3>
-    <ul>
-      <li>Position erstellen</li>
-    </ul>
 
     <mat-accordion class="example-headers-align">
       <mat-expansion-panel
@@ -40,13 +37,16 @@
           <mat-panel-title>
             {{category.title}}
           </mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>edit</mat-icon>
-          </mat-panel-description>
         </mat-expansion-panel-header>
 
         <div *ngIf="step === i">
           <p [innerHtml]="category.description"></p>
+          <div class="text-md-right" fxFlexAlign="right">
+            <button mat-raised-button color="warn">
+              {{'general.clubs.edit.management.positions.editToDos' | translate}}
+            </button>
+          </div>
+
           <h3>Chronologie dieser Aufgabe</h3>
           <mat-list>
             <mat-list-item>Volker Morsch 2016 &ndash; heute</mat-list-item>
@@ -62,13 +62,22 @@
        fxFlex.gt-sm="34"
        fxFlex.gt-xs="100">
     <h3>{{'general.clubs.edit.management.list.title' | translate}}</h3>
-    <ul>
-      <li style="text-decoration: line-through">Liste der Positionen</li>
-      <li>Mitglieder, die dieses Amt betreuen / betreut haben</li>
-      <li>Suche Mitglied / setze Name und Vorname</li>
-      <li>Vorstandsposition wählen (Liste)</li>
-      <li>Zeitraum wählen (von .. bis)</li>
-    </ul>
+
+    <button type="button"
+            mat-raised-button
+            color="primary"
+            (click)="add.emit(true)">
+      {{'general.clubs.edit.management.positions.addMember' | translate}}
+    </button>
+
+    <club-management-form *ngIf="selectedClubManagementPosition !== -1"
+                          [form]="form"
+                          [members]="members"
+                          [positions]="categories$ | async"
+                          [selectedClubManagementPosition]="selectedClubManagementPosition"
+                          (cancel)="cancel.emit($event)"
+                          (save)="save.emit($event)">
+    </club-management-form>
   </div>
 </div>
 

@@ -11,7 +11,6 @@ import { LocationService } from '../../../shared/services/location/location.serv
 import { MemberService } from '../../../shared/services/member/member.service';
 import 'rxjs/add/operator/debounceTime';
 import { IClubManagement } from '../../../shared/interfaces/club/club-management.interface';
-import { ITeamManagement } from '../../../shared/interfaces/team/team-management.interface';
 
 @Component({
   selector: 'club-edit',
@@ -32,22 +31,7 @@ export class ClubEditComponent implements OnInit {
   public showForm: boolean;
 
   public selectedClubTimeLineEvent: number = -1;
-
-  /* public uploaderOptions: IUploaderOptions = {
-    allowedMimeType: ['image/gif', 'image/jpeg', 'image/png'],
-    allowedFileType: ['jpg', 'jpeg', 'png', 'gif'],
-    path: 'clubs',
-    queueLimit: 1
-  };
-
-  public uploaderConfig: IUploaderConfig = {
-    showOptions: false,
-    autoUpload: true,
-    showDropZone: true,
-    multiple: false,
-    removeAfterUpload: true,
-    showQueue: false
-  }; */
+  public selectedClubManagementPosition: number = -1;
 
   constructor(public clubService: ClubService,
               private locationService: LocationService,
@@ -64,7 +48,6 @@ export class ClubEditComponent implements OnInit {
     this.route.data.subscribe((data: { club: IClub }) => {
       this.club = data.club;
       this.savedClub = Object.freeze(Object.assign({}, this.club));
-      //  this.uploaderOptions.id = data.club.id
     });
 
     this.form = this.fb.group({
@@ -77,7 +60,6 @@ export class ClubEditComponent implements OnInit {
       info: this.initInfo(),
       fussballde: this.initFussballDe(),
       timeLine: this.initClubTimeLine(),
-      // uploaderConfig: this.initUploaderConfig()
     });
 
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe(
@@ -104,8 +86,8 @@ export class ClubEditComponent implements OnInit {
       color: [event ? event.color : ''],
       assignedMediaItem: [event ? event.assignedMediaItem : ''],
       assignedArticle: [event ? event.assignedArticle : ''],
-      startDate: [event ? event.startDate :  new Date()],
-      endDate: [event ? event.endDate :  new Date()]
+      startDate: [event ? event.startDate : new Date()],
+      endDate: [event ? event.endDate : new Date()]
     });
   }
 
@@ -124,7 +106,7 @@ export class ClubEditComponent implements OnInit {
     this.selectedClubTimeLineEvent = event;
   }
 
-  saveTimeLineEvent($event: boolean):void {
+  saveTimeLineEvent($event: boolean): void {
     this.selectedClubTimeLineEvent = -1;
   }
 
@@ -176,17 +158,38 @@ export class ClubEditComponent implements OnInit {
   }
 
   initClubManagementPosition(position: IClubManagement): FormGroup {
-    return this.fb.group({/*
-      title: [event ? event.title : '', [Validators.required, Validators.maxLength(100)]],
-      subTitle: [event ? event.subTitle : ''],
-      text: [event ? event.text : ''],
-      icon: [event ? event.icon : ''],
-      color: [event ? event.color : ''],
-      assignedMediaItem: [event ? event.assignedMediaItem : ''],
-      assignedArticle: [event ? event.assignedArticle : ''],
-      startDate: [event ? event.startDate :  new Date()],
-      endDate: [event ? event.endDate :  new Date()]
-    */});
+    return this.fb.group({
+      assignedMember: [position ? position.assignedMember : null, [Validators.required]],
+      assignedPosition: [position ? position.assignedPosition : null, [Validators.required]],
+      startDate: [position ? position.startDate : new Date(), [Validators.required]],
+      endDate: [position ? position.endDate : '']
+    });
+  }
+
+  addClubManagementPosition(): void {
+    const control = <FormArray>this.form.controls['management']['controls']['positions'];
+    const position: IClubManagement = {
+      assignedMember: null,
+      assignedPosition: null,
+      startDate: new Date()
+    };
+    const addCtrl = this.initClubManagementPosition(position);
+    control.push(addCtrl);
+    this.setSelectedClubManagementPosition(this.form.controls['management']['controls']['positions']['controls'].length - 1);
+  }
+
+  setSelectedClubManagementPosition($event: number): void {
+    this.selectedClubManagementPosition = $event;
+  }
+
+  saveClubManagementPosition($event: boolean): void {
+    this.selectedClubManagementPosition = -1;
+  }
+
+  removeClubManagementPosition($event: boolean): void {
+    const control = <FormArray>this.form.controls['management']['controls']['positions'];
+    control.removeAt(this.selectedClubManagementPosition);
+    this.selectedClubManagementPosition = -1;
   }
 
   saveClub(): void {
@@ -210,14 +213,5 @@ export class ClubEditComponent implements OnInit {
   redirectToList() {
     this.router.navigate(['/clubs']).then();
   }
-
-  /* logoUploadCompleted(fileItem: FileItem) {
-    this.club.logoUrl = fileItem.url;
-    // this.clubService.updateClub(this.club.id, this.club).then();
-  }
-
-  initUploaderConfig() {
-    return this.fb.group(this.uploaderConfig);
-  } */
 
 }

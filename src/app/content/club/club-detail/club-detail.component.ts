@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClubService } from '../../../shared/services/club/club.service';
 
 @Component({
   selector: 'club-detail',
@@ -12,11 +13,8 @@ export class ClubDetailComponent {
   public club: IClub;
 
   constructor(public route: ActivatedRoute,
-              /*private clubService: ClubService,
-              private router: Router,
-              public memberService: MemberService,
-              public seasonService: SeasonService,
-              public teamService: TeamService*/) {
+              private clubService: ClubService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -24,10 +22,10 @@ export class ClubDetailComponent {
   }
 
   removeClub(club: IClub) {
-    /* this.clubService.removeClub(club).then(
+    this.clubService.removeClub(club).then(
       () => this.router.navigate(['/clubs']).then(),
       (error: any) => console.log(error)
-    ); */
+    );
   }
 
 }

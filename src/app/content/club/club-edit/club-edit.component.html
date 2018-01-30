@@ -36,7 +36,13 @@
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}">
-                <club-management [form]="form"></club-management>
+                <club-management (add)="addClubManagementPosition($event)"
+                                 (cancel)="removeClubManagementPosition($event)"
+                                 (save)="saveClubManagementPosition($event)"
+                                 [selectedClubManagementPosition]="selectedClubManagementPosition"
+                                 [members]="members$ | async"
+                                 [form]="form">
+                </club-management>
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.stadiumTitle' | translate }}">
@@ -70,6 +76,10 @@
                 <club-honoraries [form]="form"></club-honoraries>
               </mat-tab>
 
+              <mat-tab label="test">
+                <pre>{{club | json}}</pre>
+              </mat-tab>
+
             </mat-tab-group>
           </mat-card-content>
 
@@ -98,33 +108,3 @@
 <ng-template #loadingTemplate>
   Lade ...
 </ng-template>
-
-<!--
-
-<positions
-  [item]="club"
-  [itemType]="'club-management'"
-  [positions]="club.management.positions"
-  [showMembersFromList]="true"
-  [showPositionsFromList]="true"
-  (removePosition)="removeManagementPosition($event)">
-</positions>
-</div>
-<div class="col-xl-12">
-<time-line
-  [item]="club"
-  [itemType]="'club-management'"
-  [timeLineEvents]="club.management.assignedManagementEvents"
-  (removeTimeLineEvent)="removeManagementTimeLineEvent($event)"
-></time-line>
-</div>
-</div>
-</div>
-
-{{ 'general.clubs.edit.honorariesTitle' | translate }}
-<club-honoraries-list [club]="club"
-                  [members]="memberService.members$ | async
-                    | filterBy: ['clubData.assignedClub'] : club.id
-                    | filterBy: ['clubData.status'] : '2'">
-</club-honoraries-list>
--->

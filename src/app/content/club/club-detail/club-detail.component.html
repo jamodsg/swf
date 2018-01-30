@@ -1,310 +1,72 @@
-<div class="m-subheader">
-  <div class="d-flex align-items-center">
-    <div class="mr-auto">
-      <h3 class="m-subheader__title">{{ 'general.menu.club.detail' | translate}}</h3>
-      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-        <li class="m-nav__item m-nav__item--home">
-          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item">
-          <a class="m-nav__link" [routerLink]="['/clubs']">
-            <span class="m-nav__link-text">{{'general.menu.club.main' | translate}}</span>
-          </a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item" *ngIf="club">
-          <a class="m-nav__link" [routerLink]="['/clubs/edit', club.id]">
-            <span class="m-nav__link-text">{{'general.menu.club.edit' | translate}}</span>
-          </a>
-        </li>
-        <li class="m-nav__separator">-</li>
-        <li class="m-nav__item">{{ 'general.detail' | translate}}</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
 
-<div class="m-content" *ngIf="club">
-  <div class="row">
-    <div class="col-xl-9">
-      <div class="m-portlet">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">{{ 'general.menu.club.detail' | translate}}</h3>
-            </div>
+  <div fxFlex.gt-sm="100"
+       fxFlex.gt-xs="100"
+       fxFlex="100">
+    <div class="mat-card-top"
+         *ngIf="club; else loadingTemplate">
+
+      <mat-card>
+        <mat-card-title>
+          <mat-icon>mode_edit</mat-icon>
+          {{'general.menu.club.detail' | translate}}
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+
+        <mat-card-content>
+
+          <mat-tab-group [dynamicHeight]="true">
+            <mat-tab label="{{'general.clubs.edit.mainTitle' | translate}}">
+              <!--<club-edit-main [locations]="locations$ | async"
+                              [members]="members$ | async"
+                              [form]="form"></club-edit-main>-->
+            </mat-tab>
+
+            <mat-tab label="{{ 'general.clubs.edit.historyTitle' | translate }}">
+              <!--<club-history (add)="addTimeLineEvent($event)"
+                            (cancel)="removeTimeLineEvent($event)"
+                            (save)="saveTimeLineEvent($event)"
+                            [selectedTimeLineEvent]="selectedClubTimeLineEvent"
+                            [events]="club.timeLine"
+                            [form]="form">
+              </club-history>-->
+            </mat-tab>
+
+            <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}">
+              <!--<club-management [form]="form"></club-management>-->
+            </mat-tab>
+
+            <mat-tab label="{{ 'general.clubs.edit.stadiumTitle' | translate }}">
+              Heimspielstätte und Vereinsheim
+            </mat-tab>
+
+            <mat-tab label="{{ 'general.clubs.edit.mediaTitle' | translate }}">
+              Dateien
+            </mat-tab>
+
+            <mat-tab label="{{ 'general.clubs.edit.honorariesTitle' | translate}}">
+              <!--<club-honoraries></club-honoraries>-->
+            </mat-tab>
+
+          </mat-tab-group>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <div class="button-row">
+            <a mat-raised-button color="primary" [routerLink]="['/clubs']">
+              {{'general.menu.club.list' | translate}}
+            </a>
+            <a mat-raised-button color="accent" [routerLink]="['/clubs/edit', club.id]">
+              {{'general.edit' | translate }}
+            </a>
+            <a mat-raised-button color="warn" (click)="removeClub(club)">
+              {{'general.delete' | translate }}
+            </a>
           </div>
+        </mat-card-actions>
 
-          <div class="m-portlet__head-tools">
-            <ul class="m-portlet__nav">
-              <li
-                class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
-                data-dropdown-toggle="hover" aria-expanded="true">
-                <a
-                  class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
-                  <i class="la la-ellipsis-v"></i>
-                </a>
-                <div class="m-dropdown__wrapper">
-                  <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                  <div class="m-dropdown__inner">
-                    <div class="m-dropdown__body">
-                      <div class="m-dropdown__content">
-                        <ul class="m-nav">
-                          <li class="m-nav__section m-nav__section--first">
-                            <span
-                              class="m-nav__section-text">{{'general.tables.colTitles.quickActions' | translate}}</span>
-                          </li>
-                          <li class="m-nav__item" *ngIf="club">
-                            <a class="m-nav__link" [routerLink]="['/clubs/edit', club.id]">
-                              <i class="m-nav__link-icon fa fa-pencil"></i>
-                              <span class="m-nav__link-text">{{'general.edit' | translate }}</span>
-                            </a>
-                          </li>
-                          <li class="m-nav__item" *ngIf="club">
-                            <a class="m-nav__link" (click)="removeClub(club)">
-                              <i class="m-nav__link-icon fa fa-remove"></i>
-                              <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
-                            </a>
-                          </li>
-                          <li class="m-nav__separator m-nav__separator--fit"></li>
-                          <li class="m-nav__item">
-                            <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                               [routerLink]="['/clubs']">
-                              {{'general.menu.club.list' | translate}}
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!--
-        <div class="m-portlet__body">
-  <ul class="nav nav-pills" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#m_tabs_5_1">{{'general.clubs.edit.mainTitle' | translate}}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_2">{{'general.clubs.edit.seasonsTitle' | translate }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_3">{{'general.clubs.edit.honorariesTitle' | translate }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_4">{{'general.clubs.edit.historyTitle' | translate }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_5">{{'general.clubs.edit.managementTitle' | translate }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_6">{{'general.clubs.edit.mediaTitle' | translate }}</a>
-    </li>
-  </ul>
-  <div class="tab-content" *ngIf="club">
-    <div class="tab-pane active" id="m_tabs_5_1" role="tabpanel">
-      <div class="row">
-        <div class="col-xl-6">
-          <table class="table table-bordered table-striped table-responsive table-hover">
-            <tbody>
-            <tr>
-              <td>{{ 'general.clubs.edit.clubTitle' | translate }}</td>
-              <td>{{ club.title }}</td>
-            </tr>
-            <tr>
-              <td>{{ 'general.description' | translate }}</td>
-              <td>{{club.description}}</td>
-            </tr>
-            <tr>
-              <td>{{ 'general.tables.colTitles.creation' | translate }}</td>
-              <td>
-                <user-avatar *ngIf="club.creation.from && club.creation.from !== 'system'"
-                             [authorId]="club.creation.from"></user-avatar>
-                <span *ngIf="club.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
-                <creation-date *ngIf="club.creation.at" [creation]="club.creation.at"></creation-date>
-              </td>
-            </tr>
-            <tr>
-              <td>{{ 'general.clubs.edit.clubId' | translate }}</td>
-              <td>{{club.fussballde.clubId}}</td>
-            </tr>
-            <tr>
-              <td>{{ 'general.clubs.edit.clubUrl' | translate }}</td>
-              <td><a href="{{club.fussballde.clubUrl}}" target="_blank">{{club.fussballde.clubUrl}}</a></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="col-xl-6">
-          <table class="table table-bordered table-striped table-responsive table-hover">
-            <tr>
-              <td>{{'general.clubs.edit.stadiumTitle' | translate}}</td>
-              <td>
-                <a *ngIf="locations" href [routerLink]="['/locations/detail', club.assignedLocation]">
-                  {{ (locations | filterBy: ['id'] : club.assignedLocation)[0].title }}
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>{{ 'general.clubs.edit.contact' | translate }}</td>
-              <td>{{club.info.contact}}</td>
-            </tr>
-            <tr>
-              <td>{{ 'general.clubs.edit.foundedIn' | translate }}</td>
-              <td>{{club.info.founding}}</td>
-            </tr>
-            <tr>
-              <td>{{ 'general.clubs.edit.clubColours' | translate }}</td>
-              <td>{{club.info.clubColours}}</td>
-            </tr>
-            <tr *ngIf="club.info.website">
-              <td>{{ 'general.clubs.edit.homepage' | translate }}</td>
-              <td><a target="_blank" [href]="'http://' + club.info.website">{{club.info.website}}</a></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-pane" id="m_tabs_5_2" role="tabpanel">
-
-
-      <div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-bordered table-hover table-responsive"
-           *ngIf="seasons && club && teams; else loadingTemplate">
-      <thead>
-      <tr>
-        <th>{{'general.clubs.edit.assignedTeams.season' | translate }}</th>
-        <th>{{'general.clubs.edit.assignedTeams.teamCount' | translate}}</th>
-        <th>{{'general.clubs.edit.assignedTeams.teams' | translate}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let season of seasons | orderBy: 'title'">
-        <td>{{season.title}}</td>
-        <td>{{(teams | filterBy: ['assignedSeason'] : season.id).length}}
-        </td>
-        <td style="width: 70%;">
-          <ul>
-            <li *ngFor="let team of teams | filterBy: ['assignedSeason'] : season.id | orderBy: 'title'">
-              <a [routerLink]="['/teams/detail', team.id]">{{team.title}} {{team.subTitle}}</a>
-            </li>
-          </ul>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<ng-template #loadingTemplate>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>
-
-
-
-    </div>
-
-    <div class="tab-pane" id="m_tabs_5_3" role="tabpanel">
-      Ehrenmitglieder
-      <ul>
-        <li>Tabelle mit Name des Ehrenmitglieds</li>
-        <li>Verknüpfter Artikel zur Ehrung des Mitglieds</li>
-        <li>Datum der Ehrung</li>
-      </ul>
-      <router-outlet name="honorary"></router-outlet>
-    </div>
-
-    <div class="tab-pane" id="m_tabs_5_4" role="tabpanel">
-      <div class="row">
-        <div class="col-xl-6">
-          <h3>{{'general.clubs.edit.history' | translate }}</h3>
-          <p *ngIf="club.history !== ''" [innerHtml]="sanitizer.bypassSecurityTrustHtml(club.history)"></p>
-          <div class="alert alert-warning" *ngIf="club.history === ''">
-            <strong>{{ 'general.warning' | translate }}</strong> {{'general.clubs.edit.noHistory' | translate}}
-          </div>
-        </div>
-        <div class="col-xl-6">
-          <h3>{{'general.clubs.edit.timeLineTitle' | translate }} Timeline der Erfolge des Vereins</h3>
-          <!--<club-timeline-list [club]="club"></club-timeline-list>--
-      </div>
-    </div>
-
-  </div>
-
-  <div class="tab-pane" id="m_tabs_5_5" role="tabpanel">
-    <div class="row">
-      <div class="col-xl-6">
-        <img class="img img-fluid" [src]="club.management.photoUrl"
-             *ngIf="club.management.photoUrl; else noPhotoTemplate"/>
-        <p style="margin: 15px 0;" class="text-center" [innerHTML]="club.management.photoDescription"></p>
-      </div>
-      <div class="col-xl-6">
-        <p>
-          Liste aller bisherigen Vorstandsmitglieder:<br/>
-          Bsp:
-        </p>
-        <ul>
-          <li>1. Vorsitzender:
-            <ul>
-              <li>1920 - 1924 Werner Jung</li>
-              <li>1924 - 1946 Bernd Walter</li>
-              <li>....</li>
-              <li>2016 - heute Volker Morsch</li>
-            </ul>
-          </li>
-          <li>2. Vorsitzender
-            <ul>
-              <li>....</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <router-outlet name="management"></router-outlet>
-  </div>
-
-  <div class="tab-pane" id="m_tabs_5_6" role="tabpanel">
-    Media
-  </div>
-
-</div>
-</div>
-
-<ng-template #noPhotoTemplate>
-  <div class="alert alert-warning">
-    <strong>{{ 'general.warning' | translate }}</strong> {{'general.clubs.edit.management.noPhotoFound' | translate}}
-  </div>
-</ng-template>
-
--->
-      </div>
-    </div>
-
-    <div class="col-xl-3">
-      <div class="m-portlet">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">{{'general.clubs.list.colTitles.logo' | translate }}</h3>
-            </div>
-          </div>
-        </div>
-        <div class="m-portlet__body text-center m--padding-25">
-          <img class="img img-responsive" [src]="club.logoUrl" *ngIf="club.logoUrl" />
-
-          <div class="alert alert-warning" *ngIf="!club.logoUrl">
-            <strong>{{ 'general.info' | translate }}</strong> {{ 'general.clubs.edit.noLogo' | translate }}
-          </div>
-
-        </div>
-      </div>
+      </mat-card>
     </div>
   </div>
 </div>

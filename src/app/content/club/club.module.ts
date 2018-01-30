@@ -10,7 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ClubService } from '../../shared/services/club/club.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-  MatButtonModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule,
+  MatButtonModule, MatDatepickerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule,
   MatTabsModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
@@ -25,15 +25,18 @@ import { ClubManagementComponent } from './club-edit/club-management/club-manage
 import { ClubHonorariesComponent } from './club-edit/club-honoraries/club-honoraries.component';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
+import { ClubManagementFormComponent } from './club-edit/club-management/club-management-form/club-management-form.component';
 
 @NgModule({
   imports: [
     FlexLayoutModule,
     MatButtonModule,
+    MatDatepickerModule,
     MatExpansionModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatTabsModule,
     MediaModule,
     QuillModule,
@@ -50,6 +53,7 @@ import { CategoryTypeService } from '../../shared/services/category-type/categor
     ClubHistoryComponent,
     ClubManagementComponent,
     ClubHonorariesComponent,
+    ClubManagementFormComponent,
   ],
   exports: [],
   providers: [
