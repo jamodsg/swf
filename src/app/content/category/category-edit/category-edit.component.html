@@ -21,7 +21,7 @@
                                   fxFlex="50"
                                   hintLabel="Max {{titleMaxLength}} characters">
                     <input matInput maxlength="{{titleMaxLength}}"
-                           placeholder="{{'general.categories.list.colTitles.name' | translate}}"
+                           placeholder="{{'general.categories.list.colTitles.title' | translate}}"
                            formControlName="title">
                     <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
                   </mat-form-field>
@@ -30,7 +30,7 @@
                                   fxFlex.gt-sm="49"
                                   fxFlex.gt-xs="100"
                                   fxFlex="49">
-                    <mat-select placeholder="{{'general.categories.list.colTitles.type' | translate}}"
+                    <mat-select placeholder="{{'general.categories.list.colTitles.category' | translate}}"
                                 formControlName="assignedCategoryType">
                       <mat-option *ngFor="let categoryType of categoryTypes$ | async | orderBy: 'link'"
                                   [value]="categoryType.id">
