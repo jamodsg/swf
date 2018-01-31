@@ -4,6 +4,7 @@ import { CategoryService } from '../../../../shared/services/category/category.s
 import { Observable } from 'rxjs/Observable';
 import { ICategory } from '../../../../shared/interfaces/category.interface';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
+import { IClub } from '../../../../shared/interfaces/club/club.interface';
 
 @Component({
   selector: 'club-management',
@@ -15,19 +16,19 @@ export class ClubManagementComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() selectedClubManagementPosition: number;
   @Input() members: IMember[];
+  @Input() positions: ICategory[];
 
   @Output() add: EventEmitter<boolean> = new EventEmitter(false);
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
-  public categories$: Observable<ICategory[]>;
   public step = -1;
 
-  constructor(private categoryService: CategoryService) {
-    this.categories$ = categoryService.getCategoriesByCategoryType('club.position.types');
+  constructor() {
   }
 
   ngOnInit() {
+    console.log('ToDo: Save new Position and listing');
   }
 
   setStep(index: number) {

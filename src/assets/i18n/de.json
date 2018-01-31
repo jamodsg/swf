@@ -278,10 +278,17 @@
           },
           "positions": {
             "addMember": "Mitglied auswählen",
+            "assignedCategory": "Position",
+            "assignedMember": "Mitglied",
             "create": "Neue Position",
             "description": "Tätigkeiten",
             "editToDos": "Aufgabentext editieren",
-            "title": "Vorstandspositionen"
+            "endDate": "Ende",
+            "savePosition": "Amt speichern",
+            "startDate": "Datum der Ernennung",
+            "timeLineTitle": "Chronologie",
+            "title": "Vorstandspositionen",
+            "todoTitle": "Aufgabengebiet"
           }
         },
         "managementPhotoUrl": "Foto des Vorstandes",
