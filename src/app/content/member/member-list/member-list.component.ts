@@ -1,19 +1,16 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ILocation } from '../../../shared/interfaces/location.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ICategoryType } from '../../../shared/interfaces/category-type.interface';
-import { LocationService } from '../../../shared/services/location/location.service';
+import { MemberService } from '../../../shared/services/member/member.service';
+import { IMember } from '../../../shared/interfaces/member/member.interface';
 
 @Component({
-  selector: 'location-list',
-  templateUrl: './location-list.component.html',
+  selector: 'member-list',
+  templateUrl: './member-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LocationListComponent implements OnInit {
+export class MemberListComponent implements OnInit {
 
-  @Input() categories: ILocation[];
-  @Input() categoryTypes: ICategoryType[];
-  @Input() locations: ILocation[];
+  @Input() members: IMember[];
 
   @Output() remove = new EventEmitter(false);
   @Output() update = new EventEmitter(false);
@@ -21,7 +18,7 @@ export class LocationListComponent implements OnInit {
   public form: FormGroup;
   public itemsPerPageOptions = [5, 10, 25, 50, 100];
 
-  constructor(private fb: FormBuilder, private locationService: LocationService) {
+  constructor(private fb: FormBuilder, private memberService: MemberService) {
   }
 
   ngOnInit() {
@@ -31,8 +28,8 @@ export class LocationListComponent implements OnInit {
     });
   }
 
-  removeLocation(location: ILocation) {
-    this.locationService.removeLocation(location).then(
+  removeMember(member: IMember) {
+    this.memberService.removeMember(member).then(
       () => this.form.controls['searchFor'].reset()
     );
   }

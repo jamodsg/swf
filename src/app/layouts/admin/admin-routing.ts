@@ -27,6 +27,10 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/location/location.module#LocationModule'
       },
       {
+        path: 'members',
+        loadChildren: '../../content/member/member.module#MemberModule'
+      },
+      {
         path: 'uploader',
         loadChildren: '../../content/uploader/uploader.module#UploaderModule'
       },

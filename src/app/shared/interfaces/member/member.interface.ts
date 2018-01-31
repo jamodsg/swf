@@ -34,11 +34,11 @@ export interface IMember {
 }
 
 export interface IMemberMainData {
-  title?: string;
-  gender: string;
-  firstName?: string;
-  lastName?: string;
-  birthday: string;
+  title?: string;     //
+  gender: string;     //
+  firstName?: string; //
+  lastName?: string;  //
+  birthday: string;   //
 }
 
 export interface IMemberOtherData {

@@ -1,28 +1,18 @@
 import { Component } from '@angular/core';
-import { CategoryService } from '../../../shared/services/category/category.service';
-import { CategoryTypeService } from '../../../shared/services/category-type/category-type.service';
-import { LocationService } from '../../../shared/services/location/location.service';
-import { ILocation } from '../../../shared/interfaces/location.interface';
+import { MemberService } from '../../../shared/services/member/member.service';
+import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { Observable } from 'rxjs/Observable';
-import { ICategory } from '../../../shared/interfaces/category.interface';
-import { ICategoryType } from '../../../shared/interfaces/category-type.interface';
 
 @Component({
-  selector: 'locations',
-  templateUrl: './locations.component.html'
+  selector: 'members',
+  templateUrl: './members.component.html'
 })
-export class LocationsComponent {
+export class MembersComponent {
 
-  public categories$: Observable<ICategory[]>;
-  public categoryTypes$: Observable<ICategoryType[]>;
-  public locations$: Observable<ILocation[]>;
+  public members$: Observable<IMember[]>;
 
-  constructor(public categoryService: CategoryService,
-    public categoryTypeService: CategoryTypeService,
-    public locationService: LocationService) {
-    this.categories$ = categoryService.categories$;
-    this.categoryTypes$ = categoryTypeService.categoryTypes$;
-    this.locations$ = locationService.locations$;
+  constructor(public memberService: MemberService) {
+    this.members$ = memberService.members$;
   }
 
 }

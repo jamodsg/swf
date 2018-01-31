@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { AuthService } from '../auth/auth.service';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 import { IMember } from '../../interfaces/member/member.interface';
 
 @Injectable()
@@ -12,35 +13,36 @@ export class MemberService {
 
   members$: Observable<IMember[]>;
 
-  constructor(private afs: AngularFirestore, private authService: AuthService) {
+  constructor(private afs: AngularFirestore) {
     this.collectionRef = this.afs.collection<IMember>(this.path);
     this.members$ = this.collectionRef.valueChanges();
   }
 
-  createMember(club: IMember): Promise<void> {
-    club.id = this.afs.createId();
-    return this.afs.collection(this.path).doc(club.id).set(club);
+  createMember(member: IMember): Promise<void> {
+    member.id = this.afs.createId();
+    return this.afs.collection(this.path).doc(member.id).set(member);
   }
 
-  removeMember(club: IMember): Promise<void> {
-    return this.afs.collection(this.path).doc(club.id).delete();
+  removeMember(member: IMember): Promise<void> {
+    return this.afs.collection(this.path).doc(member.id).delete();
   }
 
-  updateMember(clubId: string, club: IMember): Promise<any> {
-    return this.afs.collection(this.path).doc(clubId).update(club);
+  updateMember(memberId: string, member: IMember): Promise<any> {
+    return this.afs.collection(this.path).doc(memberId).update(member);
   }
 
-  getMemberById(clubId: string): Observable<IMember> {
-    return this.afs.doc<IMember>(this.path + '/' + clubId).valueChanges();
+  getMemberById(memberId: string): Observable<IMember> {
+    return this.afs.doc<IMember>(this.path + '/' + memberId).valueChanges();
   }
 
-  getProfileImage(imageUrl, gender) {
+  /*getProfileImage(imageUrl, gender) {
     const path = './assets/sfw/placeholder/';
     return imageUrl ? imageUrl : (gender === 'male') ? path + 'avatar_male.jpg' : path + 'avatar_female.jpg';
-  }
+  } */
 
-  /*
-  setNewMember(): IMember {
+  setNewMember(): Observable<IMember> {
+    return Observable.of(null);
+    /*
     const mainData: IMemberMainData = {
       gender: 'male',
       birthday: moment().format('YYYY-MM-DD')
@@ -78,6 +80,6 @@ export class MemberService {
       profile: profile
     };
     return data;
+    */
   }
-  */
 }
