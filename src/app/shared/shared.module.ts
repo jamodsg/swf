@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
 import { CreationModule } from './components/creation/creation.module';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     AccordionLinkDirective,
     AccordionDirective,
     ToggleFullscreenDirective,
+    SanitizeHtmlPipe,
     SnackbarComponent,
   ],
   entryComponents: [
@@ -41,6 +43,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     NgPipesModule,
     NgxDatatableModule,
     ReactiveFormsModule,
+    SanitizeHtmlPipe,
     ToggleFullscreenDirective,
     TranslateModule
   ],

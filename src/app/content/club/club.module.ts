@@ -26,6 +26,7 @@ import { ClubHonorariesComponent } from './club-edit/club-honoraries/club-honora
 import { CategoryService } from '../../shared/services/category/category.service';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { ClubManagementFormComponent } from './club-edit/club-management/club-management-form/club-management-form.component';
+import { ClubHonoraryFormComponent } from './club-edit/club-honoraries/club-honorary-form/club-honorary-form.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { ClubManagementFormComponent } from './club-edit/club-management/club-ma
     ClubManagementComponent,
     ClubHonorariesComponent,
     ClubManagementFormComponent,
+    ClubHonoraryFormComponent
   ],
   exports: [],
   providers: [

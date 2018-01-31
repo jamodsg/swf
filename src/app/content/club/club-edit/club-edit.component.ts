@@ -11,6 +11,10 @@ import { LocationService } from '../../../shared/services/location/location.serv
 import { MemberService } from '../../../shared/services/member/member.service';
 import 'rxjs/add/operator/debounceTime';
 import { IClubManagement } from '../../../shared/interfaces/club/club-management.interface';
+import { CategoryFilterPipe } from '../../../shared/pipes/category-filter.pipe';
+import { CategoryService } from '../../../shared/services/category/category.service';
+import { ICategory } from '../../../shared/interfaces/category.interface';
+import { IClubHonorary } from '../../../shared/interfaces/club/club-honorary.interface';
 
 @Component({
   selector: 'club-edit',
@@ -28,19 +32,23 @@ export class ClubEditComponent implements OnInit {
   public form: FormGroup;
   public locations$: Observable<ILocation[]>;
   public members$: Observable<IMember[]>;
+  public positions$: Observable<ICategory[]>;
   public showForm: boolean;
 
   public selectedClubTimeLineEvent: number = -1;
   public selectedClubManagementPosition: number = -1;
+  public selectedHonorary: number = -1;
 
   constructor(public clubService: ClubService,
               private locationService: LocationService,
               private memberService: MemberService,
+              private categoryService: CategoryService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,) {
     this.locations$ = locationService.locations$;
     this.members$ = memberService.members$;
+    this.positions$ = categoryService.getCategoriesByCategoryType('club.position.types');
     this.showForm = false;
   }
 
@@ -60,6 +68,7 @@ export class ClubEditComponent implements OnInit {
       info: this.initInfo(),
       fussballde: this.initFussballDe(),
       timeLine: this.initClubTimeLine(),
+      honoraries: this.initHonoraries()
     });
 
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe(
@@ -67,6 +76,52 @@ export class ClubEditComponent implements OnInit {
     );
   }
 
+  // Honoraries
+  initHonoraries(): FormArray {
+    const formArray = [];
+    if (this.club.honoraries) {
+      for (let i = 0; i < this.club.honoraries.length; i++) {
+        formArray.push(this.initHonorary(this.club.honoraries[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initHonorary(honorary: IClubHonorary): FormGroup {
+    return this.fb.group({
+      assignedArticle: [honorary ? honorary.assignedArticle : null, [Validators.required]],
+      assignedMember: [honorary ? honorary.assignedMember : null, [Validators.required]],
+      startDate: [honorary ? honorary.startDate : new Date()],
+    });
+  }
+
+  addHonorary(): void {
+    const control = <FormArray>this.form.controls['honoraries'];
+    const honorary: IClubHonorary = {
+      assignedArticle: null,
+      assignedMember: null,
+      startDate: ''
+    };
+    const addCtrl = this.initHonorary(honorary);
+    control.push(addCtrl);
+    this.setSelectedHonorary(this.form.controls['honoraries']['controls'].length - 1);
+  }
+
+  setSelectedHonorary(honorary: number): void {
+    this.selectedHonorary = honorary;
+  }
+
+  saveHonorary(): void {
+    this.selectedHonorary = -1;
+  }
+
+  removeHonorary(): void {
+    const control = <FormArray>this.form.controls['honoraries'];
+    control.removeAt(this.selectedHonorary);
+    this.selectedHonorary = -1;
+  }
+
+  // TimeLine
   initClubTimeLine(): FormArray {
     const formArray = [];
     if (this.club.timeLine) {
@@ -147,6 +202,7 @@ export class ClubEditComponent implements OnInit {
     });
   }
 
+  // Club-Management
   initClubManagementPositions(): FormArray {
     const formArray = [];
     if (this.club.management.positions) {
@@ -204,7 +260,6 @@ export class ClubEditComponent implements OnInit {
       (error: any) => console.log(error)
     );
   }
-
 
   cancel() {
     this.redirectToList();

@@ -41,6 +41,7 @@
                                  (save)="saveClubManagementPosition($event)"
                                  [selectedClubManagementPosition]="selectedClubManagementPosition"
                                  [members]="members$ | async"
+                                 [positions]="positions$ | async"
                                  [form]="form">
                 </club-management>
               </mat-tab>
@@ -72,8 +73,14 @@
                 </div>
               </mat-tab>
 
-              <mat-tab label="{{ 'general.clubs.edit.honorariesTitle' | translate}}">
-                <club-honoraries [form]="form"></club-honoraries>
+              <mat-tab label="{{ 'general.clubs.edit.honoraries.title' | translate}}">
+                <club-honoraries (add)="addHonorary()"
+                                 (cancel)="removeHonorary()"
+                                 (save)="saveHonorary()"
+                                 [selectedHonorary]="selectedHonorary"
+                                 [members]="members$ | async"
+                                 [form]="form">
+                </club-honoraries>
               </mat-tab>
 
               <mat-tab label="test">

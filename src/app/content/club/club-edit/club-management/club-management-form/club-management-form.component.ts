@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IMember } from '../../../../../shared/interfaces/member/member.interface';
 import { ICategory } from '../../../../../shared/interfaces/category.interface';
@@ -7,7 +7,7 @@ import { ICategory } from '../../../../../shared/interfaces/category.interface';
   selector: 'club-management-form',
   templateUrl: './club-management-form.component.html'
 })
-export class ClubManagementFormComponent implements OnInit, OnChanges {
+export class ClubManagementFormComponent implements OnInit {
 
   @Input() form: FormGroup;
   @Input() selectedClubManagementPosition: number;
@@ -21,9 +21,6 @@ export class ClubManagementFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-  }
-
-  ngOnChanges() {
   }
 
 }

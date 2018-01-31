@@ -1,27 +1,27 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IMember } from '../../../../../shared/interfaces/member/member.interface';
 import { FormGroup } from '@angular/forms';
-import { IMember } from '../../../../shared/interfaces/member/member.interface';
+import { IArticle } from '../../../../../shared/interfaces/article.interface';
 
 @Component({
-  selector: 'club-honoraries',
-  templateUrl: './club-honoraries.component.html'
+  selector: 'club-honorary-form',
+  templateUrl: './club-honorary-form.component.html',
+  styleUrls: ['./club-honorary-form.component.scss']
 })
-export class ClubHonorariesComponent implements OnInit {
+export class ClubHonoraryFormComponent implements OnInit {
 
   @Input() form: FormGroup;
   @Input() selectedHonorary: number;
   @Input() members: IMember[];
+  @Input() articles: IArticle[];
 
   @Output() add: EventEmitter<boolean> = new EventEmitter(false);
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
-  public step = -1;
-
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
-    console.log('ToDo: get articles and members => save Honorary; show List of current Honoraries');
   }
+
 }

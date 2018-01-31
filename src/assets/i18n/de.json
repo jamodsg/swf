@@ -245,23 +245,14 @@
         "historyTitle": "Vereinschronik",
         "homepage": "Homepage (ohne http://)",
         "honoraries": {
-          "assignedMediaGallery": "Bildergalerie der Ehrung",
-          "colTitles": {
-            "description": "Infotext",
-            "memberName": "Mitglied",
-            "since": "seit"
-          },
-          "createHonorary": "Ehrenmitglied erstellen",
-          "member": "Mitglied aus der Liste wählen",
-          "membersWithHonoraryStatus": "Nachfolgend sind alle Mitglieder, die als Ehrenmitglied gespeichert sind - aber noch kein Datum hinterlegt haben:",
-          "noGallery": "Mit keiner Galerie verküpfen",
-          "date": "Ernennung am",
-          "deleteHonoraryHonorary": "Ehrenmitglied löschen",
-          "infoText": "Leistungen des Mitglieds",
-          "saveHonorary": "Ehrenmitglied speichern",
-          "noHonoraries": "Es wurden bisher noch keine Ehrenmitglieder erstellt."
+          "add": "Ehrenmitglied hinzufügen",
+          "assignedArticle": "Verknüpfter Artikel",
+          "assignedMember": "Verknüpftes Mitglied",
+          "newHonoraryTitle": "Neues Ehrenmitglied",
+          "save": "Speichern",
+          "startDate": "Datum der Ernennung",
+          "title": "Ehrenmitglieder"
         },
-        "honorariesTitle": "Ehrenmitglieder",
         "isMainClub": "Ist es der Hauptverein?",
         "location": "Heimspielstätte",
         "locationTitle": "Vereinsheim und Heimspielstätte",
