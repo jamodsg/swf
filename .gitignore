@@ -38,7 +38,9 @@ src/app/config
 package-lock.json
 functions/package-lock.json
 functions/node_modules
-functions/index.js
+functions/*.js
+functions/**/*.js
+functions/**/*.js.map
 
 # e2e
 /e2e/*.js
