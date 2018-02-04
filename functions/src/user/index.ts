@@ -1,3 +1,7 @@
+'use strict';
+
+import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 const SENDGRID_API_KEY = functions.config().sendgrid.key;
 
@@ -6,14 +10,14 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 
 export const newUserCreated = functions.firestore.document('/users/{userId}').onCreate((event: any) => {
 
-  /* const userId = event.params.userId;
+  const userId = event.params.userId;
   const db = admin.firestore();
 
   return db.collection('users').doc(userId)
     .get()
     .then((doc: any) => {
 
-      const user: IUser = doc.data();
+      const user = doc.data();
 
       const msg = {
         to: 'Thomas.handle@gmail.com',
@@ -31,6 +35,6 @@ export const newUserCreated = functions.firestore.document('/users/{userId}').on
     })
     .then(() => console.log('email sent!'))
     .catch((error: any) => console.log(error));
-  */
+
 });
 

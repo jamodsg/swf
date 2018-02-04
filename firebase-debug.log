@@ -24,3 +24,29 @@
 [debug] [2018-01-11T19:21:29.169Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/sfw-dev/tokens  
   
  Thu Jan 11 2018 20:21:29 GMT+0100 (Mitteleuropäische Zeit)
+[debug] [2018-02-03T09:39:39.719Z] ----------------------------------------------------------------------
+[debug] [2018-02-03T09:39:39.720Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Thomas Handle\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy --only functions
+[debug] [2018-02-03T09:39:39.721Z] CLI Version:   3.16.0
+[debug] [2018-02-03T09:39:39.721Z] Platform:      win32
+[debug] [2018-02-03T09:39:39.721Z] Node Version:  v7.3.0
+[debug] [2018-02-03T09:39:39.721Z] Time:          Sat Feb 03 2018 10:39:39 GMT+0100 (Mitteleuropäische Zeit)
+[debug] [2018-02-03T09:39:39.721Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-03T09:39:39.734Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-03T09:39:39.735Z] > authorizing via signed-in user
+[debug] [2018-02-03T09:39:39.736Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-02-03T09:39:39.736Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/ZGdsIGV2OHJMp5x5NYrmN2eZmrcZ_30MGL26OcBONyo',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sat Feb 03 2018 10:39:39 GMT+0100 (Mitteleuropäische Zeit)
+[debug] [2018-02-03T09:39:39.928Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-03T09:39:39.935Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/sfw-dev  
+  
+ Sat Feb 03 2018 10:39:39 GMT+0100 (Mitteleuropäische Zeit)
+[debug] [2018-02-03T09:39:40.679Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-03T09:39:40.679Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/sfw-dev/tokens  
+  
+ Sat Feb 03 2018 10:39:40 GMT+0100 (Mitteleuropäische Zeit)

@@ -25,12 +25,12 @@ export interface IMember {
   creation: ICreation;
 
   interview?: IInterview[];
+  comment?: string;
 
-  teamCategory?: ICategory;
-  fullSearch?: string;
+  // teamCategory?: ICategory;
+  // fullSearch?: string;
   // status?: boolean;
   // assignedImages?: string[];
-  // publication?: IPublication;
 }
 
 export interface IMemberMainData {
