@@ -12,7 +12,6 @@ export const updateDriveMember = functions.database.ref('/drivemembers/{userId}'
 
   const dmy = data.birthday.split('.');
   const birthDate = dmy[2] + '-' + (dmy[1] - 1) +'-' + dmy[0];
-  console.log(birthDate);
 
   return db.collection(memberPath)
     .where('mainData.firstName', '==', data.firstName)
@@ -74,8 +73,6 @@ export const updateDriveMember = functions.database.ref('/drivemembers/{userId}'
         },
         comment: data.comment
       };
-
-      console.log(doc);
 
       if (!doc.exists) {
         console.log('creating new User');
