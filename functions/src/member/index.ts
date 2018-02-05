@@ -4,14 +4,21 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 
-export const updateDriveMember = functions.database.ref('/drivemembers/{userId}').onUpdate(event => {
+export const updateDriveMember = functions.database.ref('/drivemembers/{userId}').onUpdate((event: any) => {
   const data = event.data.val();
 
   const db = admin.firestore();
   const memberPath = 'members';
 
+  if(!data.firstName || data.lastName || !data.birthday || data.birthday === '')
+    return false;
+
   const dmy = data.birthday.split('.');
-  const birthDate = dmy[2] + '-' + (dmy[1] - 1) +'-' + dmy[0];
+  const birthDate = dmy[2] + '-' + dmy[1] + '-' + dmy[0];
+
+  console.log(data.firstName);
+  console.log(data.lastName);
+  console.log(birthDate);
 
   return db.collection(memberPath)
     .where('mainData.firstName', '==', data.firstName)
@@ -80,7 +87,7 @@ export const updateDriveMember = functions.database.ref('/drivemembers/{userId}'
       }
       else {
         console.log('updating User' + doc.id());
-        console.log(doc.id());
+        // console.log(doc.id());
         return doc.set(memberData, { merge: true });
       }
     })

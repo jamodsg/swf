@@ -2,12 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
-exports.updateDriveMember = functions.database.ref('/drivemembers/{userId}').onUpdate(event => {
+exports.updateDriveMember = functions.database.ref('/drivemembers/{userId}').onUpdate((event) => {
     const data = event.data.val();
     const db = admin.firestore();
     const memberPath = 'members';
+    if (!data.firstName || data.lastName || !data.birthday || data.birthday === '')
+        return false;
     const dmy = data.birthday.split('.');
-    const birthDate = dmy[2] + '-' + (dmy[1] - 1) + '-' + dmy[0];
+    const birthDate = dmy[2] + '-' + dmy[1] + '-' + dmy[0];
+    console.log(data.firstName);
+    console.log(data.lastName);
     console.log(birthDate);
     return db.collection(memberPath)
         .where('mainData.firstName', '==', data.firstName)
@@ -64,14 +68,13 @@ exports.updateDriveMember = functions.database.ref('/drivemembers/{userId}').onU
             },
             comment: data.comment
         };
-        console.log(doc);
         if (!doc.exists) {
             console.log('creating new User');
             return db.collection(memberPath).add(memberData);
         }
         else {
             console.log('updating User' + doc.id());
-            console.log(doc.id());
+            // console.log(doc.id());
             return doc.set(memberData, { merge: true });
         }
     })
