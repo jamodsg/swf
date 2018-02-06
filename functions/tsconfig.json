@@ -6,9 +6,8 @@
     ], */
     "module": "commonjs",
     "noImplicitAny": true,
-    "strictNullChecks": false,
-
-    "outDir": "./",
+    "strictNullChecks": true,
+    "outDir": "build",
     "sourceMap": true,
     "target": "es6"
   },
