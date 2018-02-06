@@ -15,6 +15,7 @@ import { EditorGuard } from '../../shared/services/auth/editor.guard';
 import { UnAuthGuard } from '../../shared/services/auth/unauth.guard';
 import { SharedModule } from '../../shared/shared.module';
 import { mainRoutes } from './main.routing';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -22,6 +23,7 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
     CommonModule,
     HttpClientModule,

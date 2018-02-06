@@ -4,13 +4,11 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import { throttleTime } from 'rxjs/operators/throttleTime';
-import { timer } from 'rxjs/observable/timer';
 import { ISubscription } from 'rxjs/Subscription';
 
 import { ICreation } from '../../interfaces/creation.interface';
 import { IUser } from '../../interfaces/user.interface';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 // Presence System
 // https://www.youtube.com/watch?v=2ZDeT5hLIBQ&feature=push-u&attr_tag=EDwjeHaWKNSWOoZT-6
@@ -25,15 +23,14 @@ export class AuthService implements OnDestroy {
   private timer: ISubscription;
   private authSubscription: ISubscription;
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-  ) {
+  constructor(private afAuth: AngularFireAuth,
+              private db: AngularFireDatabase,
+              private afs: AngularFirestore,) {
     this.user$ = this.afAuth.authState
       .switchMap(user => {
         if (user) {
           this.updateOnConnect();
-          this.updateOnIdle();
+          // this.updateOnIdle();
           return this.afs.doc<IUser>(`users/${user.uid}`).valueChanges();
         } else {
           return Observable.of(null);
@@ -54,14 +51,14 @@ export class AuthService implements OnDestroy {
   signIn(credentials) {
     return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(
-      (authUser: firebase.User) => {
-        if (authUser.emailVerified) {
-          return this.updateUser({
-            emailVerified: authUser.emailVerified,
-            email: authUser.email
-          });
+        (authUser: firebase.User) => {
+          if (authUser.emailVerified) {
+            return this.updateUser({
+              emailVerified: authUser.emailVerified,
+              email: authUser.email
+            });
+          }
         }
-      }
       );
   }
 
@@ -94,24 +91,37 @@ export class AuthService implements OnDestroy {
   }
 
   signOut(): Promise<any> {
-    return this.updateUser({
-      onlineStatus: 'offline'
-    }
-    ).then(() => {
-      this.mouseEvents.unsubscribe();
-      this.timer.unsubscribe();
+    return this.updateUser({onlineStatus: 'offline'}).then(() => {
+      // this.mouseEvents.unsubscribe();
+      // this.timer.unsubscribe();
       return this.afAuth.auth.signOut();
-    }
-      );
+    });
   }
+
 
   private updateOnConnect() {
-    /* return this.afs.doc('.info/connected').valueChanges().subscribe(connected => {
+    console.log('test');
+    return this.db.object('.info/connected').valueChanges().do(connected => {
+      console.log(connected);
+      /*
+        let status = connected.$value ? 'online' : 'offline'
+        return this.setUser({
+          onlineStatus: status
+        });
+      })
+      .subscribe();
+    /*const userStatusDatabaseRef = firebase.database().ref(`/status/${this.id}`);
+
+    return this.afs.doc('.info').valueChanges().subscribe((connected: any) => {
+      console.log(connected);
       const status = connected.$value ? 'online' : 'offline';
-      this.updateStatus(status);
-    }); */
+      return this.setUser({
+        onlineStatus: status
+      }); */
+    });
   }
 
+  /*
   private updateOnIdle() {
     this.mouseEvents = fromEvent(document, 'mousemove')
       .pipe(throttleTime(30000))
@@ -134,7 +144,7 @@ export class AuthService implements OnDestroy {
         // () => this.router.navigate(['/locked']).then()
         );
     });
-  }
+  }*/
 
   private setUser(data: any): Promise<void> {
     return this.afs.doc('users/' + this.id).set(data);
