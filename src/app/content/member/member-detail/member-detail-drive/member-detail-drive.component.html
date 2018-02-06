@@ -1,0 +1,75 @@
+<div fxLayout="row"
+     fxLayoutWrap="wrap"
+     *ngIf="member">
+
+  <div fxFlex.gt-sm="32"
+       fxFlex.gt-xs="100">
+    <h3>{{'general.members.detail.drive.club' | translate}}</h3>
+    <mat-list dense *ngIf="member.clubData; else noClubTemplate">
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.clubData.status' | translate}}</span>
+        {{ (memberStateService.getMemberStates() | filterBy: ['value'] : member.clubData.status)[0].title | translate }}
+      </mat-list-item>
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.clubData.joined' | translate}}</span>
+        {{ member.clubData.joined ? (member.clubData.joined | date: 'dd.MM.yy') : '' }}
+      </mat-list-item>
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.clubData.left' | translate}}</span>
+        {{ member.clubData.left ? (member.clubData.left | date: 'dd.MM.yy') : '' }}
+      </mat-list-item>
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.clubData.payment' | translate}}</span>
+        {{ member.clubData.payment }}
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div fxFlexOffset="2"
+       fxFlex.gt-sm="32"
+       fxFlex.gt-xs="100">
+    <h3>{{'general.members.detail.drive.ah' | translate}}</h3>
+    <mat-list dense *ngIf="member.ahData; else noAHTemplate">
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.ahData.status' | translate}}</span>
+        {{ (memberStateService.getAHStates() | filterBy: ['value'] : member.ahData.status)[0].title | translate }}
+      </mat-list-item>
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.ahData.joined' | translate}}</span>
+        {{ member.ahData.joined ? (member.ahData.joined | date: 'dd.MM.yy') : '' }}
+      </mat-list-item>
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.ahData.left' | translate}}</span>
+        {{ member.ahData.left ? (member.ahData.left | date: 'dd.MM.yy') : '' }}
+      </mat-list-item>
+      <mat-list-item>
+        <span>{{'general.members.detail.drive.ahData.payment' | translate}}</span>
+        {{ member.ahData.payment }}
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div fxFlexOffset="2"
+       fxFlex.gt-sm="32"
+       fxFlex.gt-xs="100">
+    <h3>{{'general.members.detail.drive.dfb' | translate}}</h3>
+    <mat-list dense *ngIf="member.dfbData !== {}; else noDFBTemplate">
+      <mat-list-item>
+        <span>{{'general.members.detail.main.gender' | translate}}</span>
+        {{ member.dfbData | json}}
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+
+<ng-template #noDFBTemplate>
+  <p>{{'general.members.detail.drive.noDFBData' | translate}}</p>
+</ng-template>
+
+<ng-template #noClubTemplate>
+  <p>{{'general.members.detail.drive.noClubData' | translate}}</p>
+</ng-template>
+
+<ng-template #noAHTemplate>
+  <p>{{'general.members.detail.drive.noAHData' | translate}}</p>
+</ng-template>

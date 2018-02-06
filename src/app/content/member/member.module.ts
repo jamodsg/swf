@@ -6,7 +6,13 @@ import { MemberResolver } from './member.resolver';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '../../shared/shared.module';
 import { MemberService } from '../../shared/services/member/member.service';
-import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatListModule, MatTabsModule } from '@angular/material';
+import { MemberDetailComponent } from './member-detail/member-detail.component';
+import { MemberEditComponent } from './member-edit/member-edit.component';
+import { MemberStatisticsComponent } from './member-statistics/member-statistics.component';
+import { MemberDetailMainComponent } from './member-detail/member-detail-main/member-detail-main.component';
+import { MemberDetailDriveComponent } from './member-detail/member-detail-drive/member-detail-drive.component';
+import { MemberStateService } from '../../shared/services/member/member-state.service';
 
 @NgModule({
   imports: [
@@ -14,16 +20,24 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/ma
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
+    MatTabsModule,
     memberRoutingModule,
     SharedModule
   ],
   declarations: [
     MemberListComponent,
-    MembersComponent
+    MembersComponent,
+    MemberDetailComponent,
+    MemberEditComponent,
+    MemberStatisticsComponent,
+    MemberDetailMainComponent,
+    MemberDetailDriveComponent
   ],
   providers: [
     MemberResolver,
-    MemberService
+    MemberService,
+    MemberStateService
   ]
 })
 

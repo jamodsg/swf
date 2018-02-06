@@ -1,0 +1,58 @@
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="75"
+       fxFlex.gt-xs="100">
+    <div class="mat-card-top"
+         *ngIf="member; else loadingTemplate">
+
+      <mat-card>
+        <mat-card-title>
+          <mat-icon>mode_edit</mat-icon>
+          {{'general.menu.member.detail' | translate}}
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+
+        <mat-card-content>
+
+          <mat-tab-group [dynamicHeight]="true">
+            <mat-tab label="{{'general.members.tabs.main' | translate}}">
+              <member-detail-main [member]="member"></member-detail-main>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.driveAndDFB' | translate}}">
+              <member-detail-drive [member]="member"></member-detail-drive>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.interview' | translate}}"></mat-tab>
+            <mat-tab label="{{'general.members.tabs.media' | translate}}"></mat-tab>
+            <mat-tab label="{{'general.members.tabs.teams' | translate}}"></mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <div class="button-row">
+            <a mat-raised-button color="primary" [routerLink]="['/members']">
+              {{'general.menu.member.list' | translate}}
+            </a>
+            <a mat-raised-button color="accent" [routerLink]="['/members/edit', member.id]">
+              {{'general.edit' | translate }}
+            </a>
+            <a mat-raised-button color="warn" (click)="removeMember(member)">
+              {{'general.delete' | translate }}
+            </a>
+          </div>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+  </div>
+
+  <div fxFlex.gt-sm="25"
+       fxFlex.gt-xs="100">
+    <pre *ngIf="member">{{member | json}}</pre>
+  </div>
+</div>
+
+
+<ng-template #loadingTemplate>
+  Lade ...
+</ng-template>

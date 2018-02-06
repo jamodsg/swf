@@ -1,7 +1,7 @@
 import { IMemberState } from './member-state.interface';
 
 export interface IClubData {
-  status: number | string | IMemberState;   //
+  status?: number | string | IMemberState;   //
   payment?: number;                         //
   joined?: string;                          //
   left?: string;                            //
