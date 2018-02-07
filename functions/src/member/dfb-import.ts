@@ -2,23 +2,28 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { IMember } from '../../../src/app/shared/interfaces/member/member.interface';
 
+export const deleteDFBMember = functions.database.ref('/dfb-members/{clubTitle}/{userId}').onDelete((event: any) => {
+  console.log(event.params.userId + ' deleted');
+  return true;
+});
+
+
 export const createOrUpdateDFBMember = functions.database.ref('/dfb-members/{clubTitle}/{userId}').onWrite((event: any) => {
 
   const data = event.data.val();
   const clubTitle = event.params.clubTitle;
-
-  console.log(clubTitle);
-  console.log(data);
 
   const oldValue: IMember = event.data.previous.val();
 
   const db = admin.firestore();
   const memberPath = 'members';
 
+  let assignedClub: string = '';
   db.collection('clubs').where('title', '==', clubTitle.replace('-',' ')).get().then(
     (values: FirebaseFirestore.QuerySnapshot) => {
       if (!values.empty) {
-        console.log(values.docs[0]);
+        console.log(values.docs[0].id);
+        assignedClub = values.docs[0].id;
       }
     }
   );
@@ -74,12 +79,6 @@ export const createOrUpdateDFBMember = functions.database.ref('/dfb-members/{clu
           birthday: birthDate,
           gender: data.ageGroup.indexOf('innen') !== -1 ? 'female' : 'male'
         },
-        address: {},
-        contact: {},
-        clubData: {
-          assignedClub: ''
-        },
-        ahData: {},
         dfbData: {
           passNumber: data.passNumber ? data.passNumber : '',
           ageGroup: data.ageGroup ? data.ageGroup : '',
@@ -95,29 +94,26 @@ export const createOrUpdateDFBMember = functions.database.ref('/dfb-members/{clu
           passPrint: passPrint,
           allowedToPlay: data.allowedToPlay
         },
-        otherData: {},
-        interview: [],
-        creation: {
-          from: 'system',
-          at: new Date()
-        },
-        comment: ''
+        assignedDFBId: event.params.userId
       };
 
       if (value.empty) {
         console.info('Creating User ...');
         memberData.id = db.collection(memberPath).doc().id;
+        memberData.creation = {
+          from: 'system',
+            at: new Date()
+        };
+        console.info(memberData);
         return db.collection(memberPath).doc(memberData.id).set(memberData);
       }
       else {
         console.info('Updating User ...');
+        console.info(value.docs[0]);
         const doc = value.docs[0];
         memberData.creation = oldValue.creation;
         return doc.ref.set(memberData, {merge: true});
       }
-    })
-    .then(() => {
-      console.log('Member imported');
     })
     .catch((error: any) => console.log(error));
 

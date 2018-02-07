@@ -12,20 +12,23 @@ export interface IMember {
   id?: string;
   isImported: boolean;
   mainData: IMemberMainData;
-  address: IAddress;
-  contact: IContact;
-  clubData: IClubData;
-  ahData: IClubAHData;
-  dfbData: IClubDFBData;
+  address?: IAddress;
+  contact?: IContact;
+  clubData?: IClubData;
+  ahData?: IClubAHData;
+  dfbData?: IClubDFBData;
   profile?: IProfile;
-  otherData: IMemberOtherData;
+  otherData?: IMemberOtherData;
 
   profileImageUrl?: string;
 
-  creation: ICreation;
+  creation?: ICreation;
 
   interview?: IInterview[];
   comment?: string;
+
+  assignedDriveId?: number;
+  assignedDFBId?: number;
 
   // teamCategory?: ICategory;
   // fullSearch?: string;

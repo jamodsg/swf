@@ -3,15 +3,12 @@ import * as admin from 'firebase-admin';
 import { IMember } from '../../../src/app/shared/interfaces/member/member.interface';
 
 export const deleteDriveMember = functions.database.ref('/drive-members/{userId}').onDelete( (event: any) => {
-  console.log(event);
-  console.log(event.data);
-  console.log('deleted');
+  console.log(event.params.userId + ' deleted');
+  return true;
 });
 
 export const createOrUpdateDriveMember = functions.database.ref('/drive-members/{userId}').onWrite((event: any) => {
   const data = event.data.val();
-
-  console.log(data);
 
   const oldValue: IMember = event.data.previous.val();
 
@@ -87,13 +84,11 @@ export const createOrUpdateDriveMember = functions.database.ref('/drive-members/
           left: ahLeft,
           payment: data.ahPayment ? data.ahPayment : ''
         },
-        dfbData: {},
-        otherData: {},
-        interview: [],
         creation: {
           from: 'system',
           at: new Date()
         },
+        assignedDriveId: event.params.userId,
         comment: data.comment ? data.comment : ''
       };
 
