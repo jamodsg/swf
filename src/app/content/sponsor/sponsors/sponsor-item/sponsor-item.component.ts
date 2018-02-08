@@ -17,7 +17,8 @@ export class SponsorItemComponent implements OnInit {
   @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
   public mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
-  public config: PerfectScrollbarConfigInterface = {};
+  public config: PerfectScrollbarConfigInterface = {
+  };
 
   constructor() { }
 

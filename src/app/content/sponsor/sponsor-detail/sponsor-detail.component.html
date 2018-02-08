@@ -17,7 +17,9 @@
               <div fxFlex.gt-sm="62" fxFlex.gt-xs="100" fxFlex="100">
                 <h1>{{'general.sponsors.edit.title' | translate}}: {{sponsor.title}}</h1>
                 {{'general.sponsors.edit.link' | translate}}:
-                <a style="color: red" href="{{sponsor.externalLink}}">{{'general.sponsors.edit.linkTitle' | translate}}</a>
+                <a target="_blank" style="color: red" href="{{sponsor.externalLink}}">
+                  {{'general.sponsors.edit.linkTitle' | translate}}
+                </a>
                 <br />
                 <hr style="margin: 25px" />
                 <div [innerHtml]="sponsor.description"></div>
@@ -35,12 +37,17 @@
             <div fxLayout="row" fxLayoutWrap="wrap">
               <div fxFlex.gt-sm="34" fxFlex.gt-xs="100" fxFlex="100">
                 {{'general.sponsors.edit.link' | translate}}:
-                <a style="color: red" href="{{sponsor.externalLink}}">{{'general.sponsors.edit.linkTitle' | translate}}</a>
+                <a target="_blank" style="color: red" href="{{sponsor.externalLink}}">
+                  {{'general.sponsors.edit.linkTitle' | translate}}
+                </a>
                 <br />
                 <hr style="margin: 25px" />
                 <div [innerHtml]="sponsor.internalInfo"></div>
               </div>
-              <div fxFlexOffset="3" fxFlex.gt-sm="30" fxFlex.gt-xs="100" fxFlex="100">
+              <div fxFlexOffset="3"
+                   fxFlex.gt-sm="35"
+                   fxFlex.gt-xs="100">
+                <h4>{{'general.sponsors.edit.timeTitle' | translate}}</h4>
                 <mat-list>
                   <mat-list-item>
                     <span>{{'general.sponsors.edit.startDate' | translate}}: </span>
@@ -52,7 +59,9 @@
                   </mat-list-item>
                 </mat-list>
               </div>
-              <div fxFlexOffset="3" fxFlex.gt-sm="30" fxFlex.gt-xs="100" fxFlex="100">
+              <div fxFlexOffset="3"
+                   fxFlex.gt-sm="25"
+                   fxFlex.gt-xs="100">
                 <h4>{{'general.sponsors.edit.category' | translate}}</h4>
                 <mat-list>
                   <mat-list-item *ngFor="let categoryId of sponsor.assignedCategories">

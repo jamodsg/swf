@@ -3,7 +3,7 @@ import { AccordionAnchorDirective, AccordionDirective, AccordionLinkDirective } 
 import { ToggleFullscreenDirective } from './directives/fullscreen/toggle-fullscreen.directive';
 import { MenuItemsService } from './services/menu/menu-items.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatCardModule, MatFormFieldModule, MatIconModule, MatOptionModule, MatSelectModule, MatTableModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatIconModule, MatOptionModule, MatProgressSpinnerModule, MatSelectModule, MatTableModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CommonModule } from '@angular/common';
 import { LinkModule } from './components/links/link.module';
@@ -13,6 +13,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { CreationModule } from './components/creation/creation.module';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
     ToggleFullscreenDirective,
     SanitizeHtmlPipe,
     SnackbarComponent,
+    LoadingIndicatorComponent
   ],
   entryComponents: [
     SnackbarComponent
@@ -34,6 +36,7 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
     CreationModule,
     FlexLayoutModule,
     LinkModule,
+    LoadingIndicatorComponent,
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
@@ -46,6 +49,9 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
     SanitizeHtmlPipe,
     ToggleFullscreenDirective,
     TranslateModule
+  ],
+  imports: [
+    MatProgressSpinnerModule
   ],
   providers: [
     MenuItemsService

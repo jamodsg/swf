@@ -836,6 +836,7 @@
         "saveFirst": "Der Sponsor muss zuerst gespeichert werden um ein Logo hochzuladen.",
         "saveSponsor": "Speichern",
         "startDate": "Beginn des Sponsorings",
+        "timeTitle": "Zeitraum des Sponsorings",
         "title": "Name des Sponsors",
         "updateSponsor": "Änderungen speichern",
         "uploadLogo": "Logo hochladen"

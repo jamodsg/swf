@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutWrap="wrap">
-  <div fxFlex="100" [class.is-mobile]="mobileQuery.matches">
 
+  <div fxFlex="100">
     <mat-toolbar class="toolbar">
       <button type="button"
               mat-raised-button
@@ -17,7 +17,10 @@
         {{'general.sponsors.list.createSponsor' | translate}}
       </button>
     </mat-toolbar>
+  </div>
 
+
+  <div fxFlex="100" [class.is-mobile]="mobileQuery.matches">
     <mat-sidenav-container class="sideNav-container"
                            [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
       <mat-sidenav #sideNav
@@ -32,7 +35,9 @@
       </mat-sidenav>
 
       <mat-sidenav-content class="mat-sideNav-content">
-        <div *ngIf="!(sponsors$ | async)">Lade ...</div>
+        <div *ngIf="!(sponsors$ | async)">
+          <loading-indicator></loading-indicator>
+        </div>
         <p *ngIf="(sponsors$ | async)?.length === 0">
           {{'general.sponsors.list.noSponsorsFound' | translate}}
         </p>
