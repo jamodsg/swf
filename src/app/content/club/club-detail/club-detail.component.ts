@@ -13,8 +13,8 @@ export class ClubDetailComponent {
   public club: IClub;
 
   constructor(public route: ActivatedRoute,
-              private clubService: ClubService,
-              private router: Router) {
+    private clubService: ClubService,
+    private router: Router) {
   }
 
   ngOnInit() {

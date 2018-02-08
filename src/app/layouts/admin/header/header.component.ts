@@ -22,7 +22,7 @@ export class HeaderComponent {
     }
   }
 
-  logOut(){
+  logOut() {
     this.authService.signOut().then(
       () => this.router.navigate([''])
     );

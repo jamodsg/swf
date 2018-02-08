@@ -8,9 +8,9 @@ describe('MemberDetailDriveComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemberDetailDriveComponent ]
+      declarations: [MemberDetailDriveComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

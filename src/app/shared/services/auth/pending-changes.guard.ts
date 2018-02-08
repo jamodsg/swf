@@ -8,8 +8,8 @@ export interface ComponentCanDeactivate {
 export class PendingChangesGuard implements CanDeactivate<ComponentCanDeactivate> {
 
   canDeactivate(component: ComponentCanDeactivate,
-                route: ActivatedRouteSnapshot,
-                state: RouterStateSnapshot): boolean {
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): boolean {
     // if there are no pending changes, just allow deactivation; else confirm first
     return component.canDeactivate() ?
       true :

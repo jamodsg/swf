@@ -10,7 +10,7 @@ import { IMember } from '../../shared/interfaces/member/member.interface';
 export class MemberResolver implements Resolve<IMember> {
 
   constructor(private memberService: MemberService,
-              private router: Router) {
+    private router: Router) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMember> {

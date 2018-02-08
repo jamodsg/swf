@@ -13,8 +13,8 @@ export class MemberDetailComponent implements OnInit {
   public member: IMember;
 
   constructor(public route: ActivatedRoute,
-              private memberService: MemberService,
-              private router: Router) {
+    private memberService: MemberService,
+    private router: Router) {
   }
 
   ngOnInit() {

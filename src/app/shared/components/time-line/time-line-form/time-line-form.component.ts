@@ -22,7 +22,7 @@ export class TimeLineFormComponent implements OnInit {
   public articles$: Observable<IArticle[]>;
   public colors = ['primary', 'warning', 'danger', 'success', 'info', 'none'];
 
-  constructor( public articleService: ArticleService) {
+  constructor(public articleService: ArticleService) {
     this.articles$ = articleService.articles$;
   }
 
