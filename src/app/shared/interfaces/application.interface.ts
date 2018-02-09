@@ -15,7 +15,10 @@ export interface IApplication {
 
   urlShortening: {
     isEnabled?: boolean;
-    provider?: string;
+    provider?: {
+      title: string,
+      key: string
+    } | number;
   };
 
   registration: {

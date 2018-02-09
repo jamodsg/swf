@@ -38,9 +38,8 @@ export class ApplicationService {
       },
       urlShortening: {
         isEnabled: false,
-        provider: ''
+        provider: 0
       },
-
       registration: {
         isAllowed: false,
         defaultRole: ''

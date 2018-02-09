@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SettingsComponent } from './settings/settings.component';
 import { settingsRoutingModule } from './setting-routing.module';
-import { SettingsMainDataComponent } from './settings/settings-main-data/settings-main-data.component';
 import { SettingsSocialDataComponent } from './settings/settings-social-data/settings-social-data.component';
 import { StaticPagesComponent } from './settings/static-pages/static-pages.component';
 import { StaticPageComponent } from './settings/static-pages/static-page/static-page.component';
@@ -45,7 +44,6 @@ import { CategoryTypeService } from '../../shared/services/category-type/categor
   ],
   declarations: [
     SettingsComponent,
-    SettingsMainDataComponent,
     SettingsSocialDataComponent,
     StaticPagesComponent,
     StaticPageComponent,

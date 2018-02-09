@@ -35,20 +35,6 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
   public categoryTypes$: Observable<ICategoryType[]>;
   public members$: Observable<IMember[]>;
 
-  public logoUploaderConfig: IUploaderConfig = {
-    showDropZone: true,
-    showQueue: false,
-    multiple: false,
-    autoUpload: false
-  };
-
-  public logoUploaderOptions: IUploaderOptions = {
-    maxFileSize: 100,
-    // allowedMimeType: ['image/gif', 'image/tiff'],
-    allowedFileType: ['image'],
-    path: 'locations'
-  };
-
   constructor(private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -65,7 +51,6 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     this.route.data.subscribe((data: { location: ILocation }) => {
       this.location = data.location;
       this.savedLocation = Object.freeze(Object.assign({}, this.location));
-      this.logoUploaderOptions.id = this.location.id;
     });
 
     this.form = this.fb.group({
@@ -86,18 +71,6 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
       this.form.get('address').disable();
       this.form.get('creation').disable();
     }
-  }
-
-  logoUploadCompleted(mediaItem: IMediaItem) {
-    console.log('ToDo');
-    // this.location.imageUrl = mediaItem.downloadUrl;
-    this.saveLocation(false);
-  }
-
-  removedMedia(event) {
-    console.log(event);
-    this.location.imageUrl = '';
-    this.saveLocation(false);
   }
 
   initAssignedContacts(): FormArray {

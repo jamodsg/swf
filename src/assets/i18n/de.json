@@ -768,6 +768,7 @@
         "title": "Wartungsmodus"
       },
       "mainTitle": "Einstellungen",
+      "noUrlShorteningService": "Keine kürzeren Links verwenden.",
       "staticPagesTitle": "Statische Seiten",
       "page": {
         "descriptionDescription": "Die Beschreibung hilft Suchmaschinen, passende Seiten zu filtern.",
@@ -786,12 +787,13 @@
         "statusLabel": "Registrieren neuer Benutzer",
         "title": "Benutzeranmeldung"
       },
+      "resetForm": "Die ursprünglichen Einstellungen wurden geladen.",
       "social": {
         "addProvider": "Seite hinzufügen",
-        "chooseProvider": "Wähle das Netzwerk aus der Liste",
-        "isRequiredLink": "Es muss ein Link angegeben werden!",
-        "isRequiredProvider": "Es muss ein Anbieter ausgewählt werden!",
-        "setLink": "Link zur Detailseite"
+        "chooseProvider": "Gib den Namen des sozialen Netzwerkes an",
+        "deleteProvider": "Eintrag löschen",
+        "setLink": "Link zur Detailseite bei dem Netzwerk",
+        "visitLink": "Seite besuchen"
       },
       "socialTitle": "Soziale Netzwerke",
       "staticTitle": "Statische Seiten",
@@ -809,6 +811,7 @@
         "text": "Seiteninhalt",
         "title": "Titel der Seite"
       },
+      "undoChanges": "Änderungen verwerfen",
       "updateApplication": "Einstellungen speichern",
       "updateMessage": "Die neuen Einstellungen wurden gespeichert!",
       "urlShortening": "Kurze Links erstellen?",

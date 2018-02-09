@@ -68,6 +68,7 @@
     "firebase": "^4.9.1",
     "firebase-admin": "^5.8.2",
     "firestore-backup": "^1.2.1",
+    "goorl": "^3.0.0",
     "hammerjs": "^2.0.8",
     "intl": "^1.2.5",
     "leaflet": "^1.3.1",

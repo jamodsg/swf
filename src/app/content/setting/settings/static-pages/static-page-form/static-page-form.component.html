@@ -15,15 +15,12 @@
                   fxFlex="100">
     <mat-select placeholder="{{'general.applications.static.sectionTitle' | translate}}"
                 formControlName="assignedCategories" multiple>
-      <mat-option [value]="">{{'general.applications.static.chooseSectionTitle' | translate}}</mat-option>
       <mat-option *ngFor="let category of categories | orderBy: 'title'"
                   [value]="category.id">
         {{category.title}}
       </mat-option>
     </mat-select>
-    <mat-hint align="end">
-      {{'general.applications.static.sectionTitle' | translate }}
-    </mat-hint>
+    <mat-hint align="end">{{'general.applications.static.chooseSectionTitle' | translate}}</mat-hint>
   </mat-form-field>
 
   <div fxFlexOffset="1"
@@ -36,9 +33,7 @@
   </div>
 
 
-  <div fxFlex.gt-sm="100"
-       fxFlex.gt-xs="100"
-       fxFlex="100" style="height: 60vh">
+  <div fxFlex="100" style="height: 60vh">
     <quill-editor
       formControlName="text"
       [minLength]="10"

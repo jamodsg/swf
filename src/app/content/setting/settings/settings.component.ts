@@ -1,14 +1,6 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { IApplication } from '../../../shared/interfaces/application.interface';
 import { ApplicationService } from '../../../shared/services/application/application.service';
@@ -17,26 +9,42 @@ import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.
 import { IStaticPage } from '../../../shared/interfaces/static-page.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
+import { urlShortener } from '../../../shared/config/url-shortener.config';
+import { ISocialNetwork } from '../../../shared/interfaces/social-network.interface';
 
 @Component({
   templateUrl: './settings.component.html'
 })
 export class SettingsComponent implements OnInit {
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    return JSON.stringify(this.application).toLowerCase() === JSON.stringify(this.savedApplication).toLowerCase();
+  }
+
   public application: IApplication;
   public form: FormGroup;
   public selectedStaticPage: number = -1;
+  public shorteningProviders: {
+    title: string,
+    key: string
+  }[] = [];
+  public link: string = 'http://www.google.de';
+  public savedApplication: IApplication;
 
   constructor(private fb: FormBuilder,
-    private route: ActivatedRoute,
-    public snackBar: MatSnackBar,
-    private title: Title,
-    private translateService: TranslateService,
-    private applicationService: ApplicationService) {
+              private route: ActivatedRoute,
+              public snackBar: MatSnackBar,
+              private title: Title,
+              private translateService: TranslateService,
+              private applicationService: ApplicationService) {
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { application: IApplication }) => this.application = data.application);
+    this.route.data.subscribe((data: { application: IApplication }) => {
+      this.application = data.application;
+      this.savedApplication = Object.freeze(Object.assign({}, this.application));
+    });
 
     if (this.application) {
       this.form = this.fb.group({
@@ -45,7 +53,7 @@ export class SettingsComponent implements OnInit {
         registration: this.initRegistration(),
         downtime: this.initDowntime(),
         staticPages: this.initStaticPages(),
-        // social: this.initSocialProviders()
+        social: this.initSocialProviders()
       });
 
       /* if (!this.application.downtime.isEnabled) {
@@ -57,8 +65,15 @@ export class SettingsComponent implements OnInit {
         this.application.urlShortening = changes.urlShortening;
         this.application.registration = changes.registration;
         this.application.downtime = changes.downtime;
-        // this.application.social = changes.social;
+        this.application.social = changes.social;
         this.application.staticPages = changes.staticPages;
+      });
+    }
+
+    for (let i = 0; i < urlShortener.length; i++) {
+      this.shorteningProviders.push({
+        title: urlShortener[i]['title'],
+        key: urlShortener[i]['key']
       });
     }
   }
@@ -146,41 +161,40 @@ export class SettingsComponent implements OnInit {
     return this.translateService.get('general.applications.static.noTitle');
   }
 
-  /*
-  initSocialProvider(social?: ISocial) {
+  initSocialProviders(): FormArray {
+    const formArray = [];
+    if (this.application.social) {
+      for (let i = 0; i < this.application.social.length; i++) {
+        formArray.push(this.initSocialProvider(this.application.social[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initSocialProvider(provider: ISocialNetwork): FormGroup {
     return this.fb.group({
-      link: [social ? social.link : '', [Validators.required]],
-      title: [social ? social.title : '', [Validators.required]]
+      link: [provider ? provider.link : '', [Validators.required]],
+      title: [provider ? provider.title : '', [Validators.required]]
     });
   }
 
-  initSocialProviders() {
-    if (!this.application.social || this.application.social.length === 0) {
-      return this.fb.array([this.initSocialProvider(null)]);
-    }
-    const groups = [];
-    for (let i = 0; i < this.application.social.length; i++) {
-      const fbGroup = this.initSocialProvider(this.application.social[i]);
-      groups.push(fbGroup);
-    }
-    return this.fb.array(groups);
-  }
-
-  addSocialProvider() {
+  addSocialProvider(): void {
     const control = <FormArray>this.form.controls['social'];
-    control.push(this.initSocialProvider());
+    const provider: ISocialNetwork = {
+      link: '',
+      title: ''
+    };
+    const addCtrl = this.initSocialProvider(provider);
+    control.push(addCtrl);
   }
 
-  removeSocialProvider(i: number) {
+  removeSocialProvider(i: number): void {
     const control = <FormArray>this.form.controls['social'];
     control.removeAt(i);
-  } */
+  }
 
   saveSettings() {
-
-    this.applicationService.updateApplication(this.application.id, this.application).then(
-      () => {
-
+    this.applicationService.updateApplication(this.application.id, this.application).then(() => {
         // set Page Title
         if (this.title.getTitle() !== this.application.page.title) {
           this.title.setTitle(this.application.page.title);
@@ -205,8 +219,15 @@ export class SettingsComponent implements OnInit {
       });
   }
 
-
   cancel() {
-    this.form.reset();
+    // this.application = this.savedApplication;
+    this.selectedStaticPage = -1;
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      data: {
+        status: 'success',
+        message: 'general.applications.resetForm'
+      },
+      duration: 2500
+    });
   }
 }

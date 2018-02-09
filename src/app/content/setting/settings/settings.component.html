@@ -16,13 +16,10 @@
 
               <div fxLayout="row" fxLayoutWrap="wrap">
                 <div fxFlex.gt-sm="46"
-                     fxFlex.gt-xs="100"
-                     fxFlex="100">
+                     fxFlex.gt-xs="100">
                   <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="page">
 
-                    <mat-form-field fxFlex.gt-sm="100"
-                                    fxFlex.gt-xs="100"
-                                    fxFlex="100">
+                    <mat-form-field fxFlex="100">
                       <input matInput
                              placeholder="{{'general.applications.page.name' | translate}}"
                              formControlName="name"/>
@@ -30,8 +27,7 @@
                     </mat-form-field>
 
                     <mat-form-field fxFlex.gt-sm="49"
-                                    fxFlex.gt-xs="100"
-                                    fxFlex="100">
+                                    fxFlex.gt-xs="100">
                       <input matInput
                              placeholder="{{'general.applications.page.emailTitle' | translate}}"
                              formControlName="email"/>
@@ -40,8 +36,7 @@
 
                     <mat-form-field fxFlexOffset="1"
                                     fxFlex.gt-sm="50"
-                                    fxFlex.gt-xs="100"
-                                    fxFlex="100">
+                                    fxFlex.gt-xs="100">
                       <input matInput
                              placeholder="{{'general.applications.page.title' | translate}}"
                              formControlName="title"/>
@@ -74,11 +69,12 @@
                     <mat-form-field fxflex="100" style="margin-top: 25px;">
                       <mat-select placeholder="{{'general.applications.urlShorteningService' | translate}}"
                                   formControlName="provider">
-                        <mat-option>ToDo</mat-option>
-                        <!--<mat-option *ngFor="let shorteningProvider of applicationService.getShorteningProviders() | orderBy: ['title']"
-                                [value]="shorteningProvider.value">
+                        <mat-option [value]="0">{{'general.applications.noUrlShorteningService' | translate}}
+                        </mat-option>
+                        <mat-option *ngFor="let shorteningProvider of shorteningProviders | orderBy: ['title']"
+                                    [value]="shorteningProvider">
                           {{shorteningProvider.title}}
-                        </mat-option>-->
+                        </mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -140,10 +136,10 @@
               </div>
             </mat-tab>
             <mat-tab label="{{'general.applications.socialTitle' | translate}}">
-              <!--<settings-social-data [form]="form"
+              <settings-social-data [form]="form"
                                     (removeSocialProvider)="removeSocialProvider($event)"
                                     (addSocialProvider)="addSocialProvider()">
-              </settings-social-data>-->
+              </settings-social-data>
             </mat-tab>
             <mat-tab label="{{'general.applications.staticTitle' | translate}}">
               <static-pages
@@ -156,7 +152,23 @@
               </static-pages>
             </mat-tab>
             <mat-tab label="test">
-              <pre>{{application | json}}</pre>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="50">
+                  {{application | json}}
+                </div>
+                <div fxFlex="50">
+                  <ul>
+                    <li>Test-Tab zur JSON-Ausgabe entfernen</li>
+                    <li>Soziale Netzwerke hinzufügen (Youtube, FB, Twitter, Instagram)</li>
+                    <li>Standard-Rolle festlegen</li>
+                    <li>Nach dem Klicken in die Textarea (Statische Seiten) und dem anschließenden Wechseln z.B. auf
+                      eine andere Seite (Fehler: There is no FormControl instance attached to form control element with
+                      name: 'text')
+                    </li>
+                    <li>Speichern Button deaktivieren, wenn eine neue Seite noch nicht gespeichert wurde</li>
+                  </ul>
+                </div>
+              </div>
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>
@@ -164,14 +176,16 @@
           <div class="button-row">
             <button mat-raised-button
                     color="primary"
+                    [disabled]="!form.valid"
                     type="submit">
               {{'general.applications.updateApplication' | translate}}
             </button>
-            <!--<a mat-raised-button
+            <a mat-raised-button
                color="accent"
+               [disabled]="application === savedApplication"
                (click)="cancel()">
-              {{'general.cancel' | translate}}
-            </a>-->
+              {{'general.applications.undoChanges' | translate}}
+            </a>
           </div>
         </mat-card-actions>
       </mat-card>
@@ -181,5 +195,5 @@
 </div>
 
 <ng-template #loadingTemplate>
-  Lade ...
+  <loading-indicator></loading-indicator>
 </ng-template>
