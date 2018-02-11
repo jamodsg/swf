@@ -22,12 +22,14 @@ import { CreationModule } from './components/creation/creation.module';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
+import { CategoryFilterPipe } from './pipes/category-filter.pipe';
 
 @NgModule({
   declarations: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
+    CategoryFilterPipe,
     ToggleFullscreenDirective,
     SanitizeHtmlPipe,
     SnackbarComponent,

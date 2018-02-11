@@ -10,9 +10,19 @@ import { CategoryTypeService } from '../../shared/services/category-type/categor
 import { CategoryService } from '../../shared/services/category/category.service';
 import { SponsorService } from '../../shared/services/sponsor/sponsor.service';
 import {
-  MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatListModule, MatNativeDateModule, MatSelectModule, MatSidenavModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatSidenavModule,
   MatSliderModule,
-  MatTabsModule, MatToolbarModule, MatTooltipModule
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -20,7 +30,6 @@ import { MediaModule } from '../../shared/components/media/media.module';
 import { SponsorItemComponent } from './sponsors/sponsor-item/sponsor-item.component';
 import { SponsorFilterComponent } from './sponsors/sponsor-filter/sponsor-filter.component';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
 import { SponsorDetailComponent } from './sponsor-detail/sponsor-detail.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
@@ -47,7 +56,6 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     SharedModule
   ],
   declarations: [
-    CategoryFilterPipe,
     RandomSponsorComponent,
     SponsorEditComponent,
     SponsorsComponent,

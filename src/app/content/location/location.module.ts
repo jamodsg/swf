@@ -42,7 +42,6 @@ import { LocationsByCategoryComponent } from './locations/locations-by-category/
 import { ChartsModule } from 'ng2-charts';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
 
 @NgModule({
   imports: [
@@ -68,7 +67,6 @@ import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
     SharedModule,
   ],
   declarations: [
-    CategoryFilterPipe,
     LocationContactFormComponent,
     LocationDetailComponent,
     LocationDetailContactComponent,
