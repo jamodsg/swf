@@ -26,14 +26,6 @@ export class SponsorEditComponent implements OnInit {
   public isSubmitting: boolean = false;
   public titleMaxLength: number = 50;
 
-  public uploaderConfig: IUploaderConfig = {
-    autoUpload: true,
-    showDropZone: true,
-    multiple: false,
-    removeAfterUpload: true,
-    showQueue: false
-  };
-
   public startDate = new Date();
   public endDate = new Date();
 
@@ -70,12 +62,6 @@ export class SponsorEditComponent implements OnInit {
       action = this.sponsorService.createSponsor(this.form.getRawValue());
     }
     action.then(() => {
-
-      /* if (this.mediaItem) {
-        this.mediaItem.assignedItem = sponsorId;
-        return this.mediaItemService.updateMediaItem(this.mediaItem.id, this.mediaItem);
-      } */
-
       this.form.reset();
       this.isSubmitting = false;
       this.redirectToList();
@@ -83,32 +69,7 @@ export class SponsorEditComponent implements OnInit {
   }
 
   cancel() {
-    /* hochgeladenes Bild löschen, falls eins hochgeladen wurde
-    if (this.mediaItem) {
-      this.isCanceled = true;
-      // delete the saved MediaItem before
-      this.mediaItemService.removeMediaItem(this.mediaItem).then(
-        () => {
-          this.isCanceled = false;
-          this.redirectToList();
-        });
-    } else {*/
     this.redirectToList();
-    // }
-  }
-
-  setLogo(/* mediaResponse: IMediaResponse */) {
-    /* // evtl. vorhandenes, altes Bild löschen
-    if (this.sponsor.imageUrl) {
-      this.sponsorService.removeSponsor(this.sponsor, false).then();
-    }
-
-    this.mediaItem = mediaResponse.mediaItem;
-    if (!this.sponsor.id) {
-      this.updateMediaItemAfterSave = true;
-    }
-    this.sponsor.assignedMediaItem = mediaResponse.mediaItem.id;
-    this.sponsor.imageUrl = mediaResponse.mediaItem.url; */
   }
 
   redirectToList() {

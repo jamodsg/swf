@@ -6,21 +6,18 @@ import { ISponsor } from '../interfaces/sponsor.interface';
 })
 export class CategoryFilterPipe implements PipeTransform {
 
-  transform(sponsors: ISponsor[], categoryIds: string[]): ISponsor[] {
-    if (!sponsors) {
+  transform(items: any[], searchField: string, categoryIds: string[]): ISponsor[] {
+    if (!items) {
       return;
     }
 
     if (!categoryIds || categoryIds.length === 0) {
-      return sponsors;
+      return items;
     }
 
-    return sponsors.filter((sponsor: ISponsor) => {
-
-      return sponsor.assignedCategories.some((v) => {
-        return categoryIds.some((cat) => {
-          return v === cat;
-        });
+    return items.filter((item: any) => {
+      return categoryIds.some((cat) => {
+        return item[searchField] === cat;
       });
     });
   }

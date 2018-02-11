@@ -445,6 +445,9 @@
         "noResult": "Es wurden keine Treffpunkte gefunden"
       },
       "map": {
+        "filterByTitle": "Name des Treffpunktes",
+        "filterByType": "Treffpunkte nach Platzart filtern",
+        "resetFilters": "Filter löschen",
         "resetMarkers": "Karte zurücksetzen"
       },
       "media": {

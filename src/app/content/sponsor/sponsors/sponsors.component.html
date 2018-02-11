@@ -41,7 +41,7 @@
         <p *ngIf="(sponsors$ | async)?.length === 0">
           {{'general.sponsors.list.noSponsorsFound' | translate}}
         </p>
-        <div *ngFor="let sponsor of sponsors$ | async | categoryFilter: currentFilter"
+        <div *ngFor="let sponsor of sponsors$ | async | categoryFilter: 'assignedCategories' : currentFilter"
              fxFlex.gt-sm="33.3333"
              fxFlex.gt-xs="100%"
              fxFlex="100">

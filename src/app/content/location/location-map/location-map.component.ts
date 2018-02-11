@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapsService } from '../../../shared/services/maps/maps.service';
 import { Observable } from 'rxjs/Observable';
 import { IMarker } from '../../../shared/interfaces/marker.interface';
 import { ILocation } from '../../../shared/interfaces/location.interface';
 import { CategoryService } from '../../../shared/services/category/category.service';
 import { LocationService } from '../../../shared/services/location/location.service';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 import { ICategory } from '../../../shared/interfaces/category.interface';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+const SMALL_WIDTH_BREAKPOINT = 960;
 
 @Component({
   selector: 'location-map',
@@ -16,42 +21,55 @@ import { ICategory } from '../../../shared/interfaces/category.interface';
 })
 export class LocationMapComponent implements OnInit {
 
+  public form: FormGroup;
   public locations$: Observable<ILocation[]>;
+  public categories$: Observable<ICategory[]>;
 
   public response: any;
   public errorMessage: any;
 
   public zoom: number = 10;
-
-  public selectedLocations: string[] = [];
+  public markers: IMarker[] = [];
 
   // initial center position for the map
   public lat: number = 49.480584;
   public lng: number = 7.097050;
 
-  public markers: IMarker[] = [];
+  public config: PerfectScrollbarConfigInterface = {};
 
-  public filterType: string = '';
-  public filterTitle: string = '';
-  public filterKey: string = '';
-
+  @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
+  public mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
   constructor(public categoryService: CategoryService,
-    public locationService: LocationService,
-    private mapsService: MapsService) {
+              private locationService: LocationService,
+              private mapsService: MapsService,
+              private route: ActivatedRoute,
+              private fb: FormBuilder) {
+    this.categories$ = categoryService.getCategoriesByCategoryType('location');
     this.locations$ = locationService.locations$;
   }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      selectedOptions: [],
+      categoryFilter: [],
+      title: []
+    });
+
+    this.form.valueChanges.subscribe((changes: {
+      selectedOptions: ILocation[],
+      categoryFilter: string[]
+    }) => {
+      this.toggleLocationsMarker(changes.selectedOptions);
+    });
   }
 
-  toggleLocationMarker(location: ILocation) {
-    if (this.selectedLocations.indexOf(location.id) > -1) {
-      this.selectedLocations.splice(this.selectedLocations.indexOf(location.id), 1);
-      this.removeMarker(location);
-    } else {
-      this.selectedLocations.push(location.id);
-      this.getLatLng(location);
+  toggleLocationsMarker(locations: ILocation[]) {
+    this.resetMarkers();
+    if (locations) {
+      locations.forEach((location: ILocation) => {
+        this.getLatLng(location);
+      });
     }
   }
 
@@ -79,28 +97,15 @@ export class LocationMapComponent implements OnInit {
     }
   }
 
-  removeMarker(location: ILocation) {
-    for (let i = 0; i < this.markers.length; i++) {
-      if (this.markers[i].label === location.title) {
-        this.markers.splice(<any>this.markers[i], 1);
-      }
-    }
-  }
-
-  resetMarkers() {
+  resetMarkers(resetList?: boolean) {
     this.markers = [];
-    this.selectedLocations = [];
+    if (resetList) {
+      this.resetFilters();
+    }
   }
 
-  public setFilter(type: string, category: ICategory) {
-    this.filterType = type;
-    if (category) {
-      this.filterKey = category.id;
-      this.filterTitle = category.title;
-    } else {
-      this.filterKey = '';
-      this.filterTitle = '';
-    }
+  resetFilters() {
+    this.form.reset();
   }
 
 }

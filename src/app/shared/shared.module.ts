@@ -3,7 +3,15 @@ import { AccordionAnchorDirective, AccordionDirective, AccordionLinkDirective } 
 import { ToggleFullscreenDirective } from './directives/fullscreen/toggle-fullscreen.directive';
 import { MenuItemsService } from './services/menu/menu-items.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatCardModule, MatFormFieldModule, MatIconModule, MatOptionModule, MatProgressSpinnerModule, MatSelectModule, MatTableModule } from '@angular/material';
+import {
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatOptionModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatTableModule
+} from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CommonModule } from '@angular/common';
 import { LinkModule } from './components/links/link.module';

@@ -8,7 +8,7 @@
       </mat-card-title>
       <mat-card-subtitle></mat-card-subtitle>
 
-      <mat-card-content>
+      <mat-card-content class="map-wrapper">
         <agm-map
           [latitude]="lat"
           [longitude]="lng"
@@ -28,54 +28,78 @@
   </div>
 
   <div fxFlex.gt-sm="25" fxFlex="100">
+    <mat-card [formGroup]="form">
+      <mat-card-title>
 
-    <button mat-raised-button
-            color="brand"
-            *ngIf="markers.length > 0"
-            (click)="resetMarkers()">
-      {{'general.locations.map.resetMarkers' | translate}}
-    </button>
+        <div fxLayout="row" fxLayoutWrap="wrap">
 
-    <ul>
-      <li (click)="toggleLocationMarker(location)" style="cursor: hand"
-          *ngFor="let location of locations$ | async | filterBy: ['assignedCategory'] : filterKey| orderBy: ['title']">
-        {{location.title}}
-        <span class="pull-right">
-          <mat-icon *ngIf="selectedLocations.indexOf(location.id) > -1">check</mat-icon>
-        </span>
-      </li>
-    </ul>
+          <mat-form-field *ngIf="categories$"
+                          fxFlex="100">
+            <mat-select formControlName="categoryFilter"
+                        multiple
+                        placeholder="{{'general.locations.map.filterByType' | translate}}">
+              <mat-option *ngFor="let category of categories$ | async | orderBy: ['title']"
+                          [value]="category.id">
+                {{category.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
+          <mat-form-field fxFlex="100">
+            <input matInput
+                   placeholder="{{'general.locations.map.filterByTitle' | translate}}"
+                   formControlName="title">
+          </mat-form-field>
+
+          <div fxFlex.gt-sm="50"
+               fxFlex="100" >
+            <button mat-raised-button
+
+                    type="button"
+                    [disabled]="!form.controls['categoryFilter'].value  && !form.controls['title'].value"
+                    color="primary"
+                    type="button"
+                    (click)="resetFilters()">
+              {{'general.locations.map.resetFilters' | translate}}
+            </button>
+          </div>
+
+          <div fxFlex.gt-sm="50"
+               fxFlex="100"
+               class="text-md-right">
+            <button mat-raised-button
+                    color="warn"
+                    type="button"
+                    [disabled]="markers.length === 0"
+                    (click)="resetMarkers(true)">
+              {{'general.locations.map.resetMarkers' | translate}}
+            </button>
+          </div>
+
+        </div>
+      </mat-card-title>
+
+      <mat-card-content [perfectScrollbar]="config"
+                        [disabled]="mediaMatcher.matches"
+                        style="max-height: calc(100vh - 353px)">
+        <mat-selection-list dense
+                            *ngIf="locations$; else loadingTemplate"
+                            formControlName="selectedOptions">
+          <mat-list-option
+            *ngFor="let location of locations$ | async
+            | categoryFilter: 'assignedCategory' : form.controls['categoryFilter'].value
+            | filterBy: ['title']: form.controls['title'].value
+            | orderBy: ['title']"
+            [value]="location">
+            {{location.title}}
+          </mat-list-option>
+        </mat-selection-list>
+
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
 
-
-<!--
-          <div class="m-form__group m-form__group--inline">
-            <div class="m-form__label">
-              <label class="m-label m-label--single">{{ 'general.locations.list.filterTitle' | translate}}:</label>
-            </div>
-            <div class="m-form__control">
-              <div
-                class="btn-group bootstrap-select form-control m-bootstrap-select m-bootstrap-select--solid">
-                <button type="button" class="btn dropdown-toggle bs-placeholder btn-default" role="button"
-                        data-toggle="dropdown" title="{{'general.locations.list.filterTitle' | translate}}">
-              <span class="filter-option pull-left">
-                {{ !filterType  ? ('general.locations.list.allLocations' | translate)
-                : ('general.only' | translate) + ' ' + filterTitle}}
-              </span>
-                  <span class="bs-caret"><span class="caret"></span></span>
-                </button>
-                <div class="dropdown-menu open" role="combobox">
-                  <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                    <li data-original-index="0" [ngClass]="{'selected': filterKey === ''}">
-                      <a tabindex="0" class="" role="option" (click)="setFilter('', null)">
-                        <span class="text">{{'general.locations.list.allLocations' | translate}}</span>
-                        <span [ngClass]="{'glyphicon glyphicon-ok check-mark': filterType === '' }"></span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>-->
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

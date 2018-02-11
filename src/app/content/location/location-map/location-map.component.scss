@@ -1,7 +1,3 @@
-@import '../../../../assets/styles/scss/material.variables';
-
-.sebm-google-map-container {
-  width: 100%;
-  height: 500px;
-  display: flex;
+agm-map {
+  height: calc(100vh - 210px);
 }

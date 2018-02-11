@@ -8,7 +8,15 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { LocationService } from '../../shared/services/location/location.service';
 import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatOptionModule, MatSelectModule, MatTableModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatTableModule,
   MatTabsModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,6 +40,9 @@ import { MediaModule } from '../../shared/components/media/media.module';
 import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 import { LocationsByCategoryComponent } from './locations/locations-by-category/locations-by-category.component';
 import { ChartsModule } from 'ng2-charts';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CategoryFilterPipe } from '../../shared/pipes/category-filter.pipe';
 
 @NgModule({
   imports: [
@@ -51,10 +62,13 @@ import { ChartsModule } from 'ng2-charts';
     MatTableModule,
     MatTabsModule,
     MediaModule,
+    PerfectScrollbarModule,
     QuillModule,
-    SharedModule
+    ReactiveFormsModule,
+    SharedModule,
   ],
   declarations: [
+    CategoryFilterPipe,
     LocationContactFormComponent,
     LocationDetailComponent,
     LocationDetailContactComponent,
