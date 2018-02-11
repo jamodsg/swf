@@ -42,6 +42,7 @@ import { CategoryFilterPipe } from './pipes/category-filter.pipe';
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
+    CategoryFilterPipe,
     CommonModule,
     CreationModule,
     FlexLayoutModule,

@@ -64,7 +64,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PerfectScrollbarModule,
     QuillModule,
     ReactiveFormsModule,
-    SharedModule,
+    SharedModule
   ],
   declarations: [
     LocationContactFormComponent,
