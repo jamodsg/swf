@@ -67,34 +67,37 @@
 
                 <div fxLayout="row" fxLayoutWrap="wrap">
                   <mat-form-field fxFlex.gt-sm="30"
-                                  fxFlex.gt-xs="100"
-                                  fxFlex="30">
+                                  fxFlex="100">
                     <input matInput
                            formControlName="startDate"
                            [matDatepicker]="startPicker"
                            placeholder="{{'general.sponsors.edit.startDate' | translate}}">
                     <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #startPicker startView="day" [startAt]="startDate"></mat-datepicker>
+                    <mat-datepicker disabled="false"
+                                    touchUi="true"
+                                    #startPicker>
+                    </mat-datepicker>
                   </mat-form-field>
 
 
                   <mat-form-field fxFlexOffset="1"
                                   fxFlex.gt-sm="30"
-                                  fxFlex.gt-xs="100"
-                                  fxFlex="30">
+                                  fxFlex="100">
                     <input matInput
                            formControlName="endDate"
                            [matDatepicker]="endPicker"
                            placeholder="{{'general.sponsors.edit.endDate' | translate}}">
                     <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #endPicker startView="day" [startAt]="endDate"></mat-datepicker>
+                    <mat-datepicker disabled="false"
+                                    touchUi="true"
+                                    #endPicker>
+                    </mat-datepicker>
                   </mat-form-field>
 
 
                   <mat-form-field fxFlexOffset="1"
                                   fxFlex.gt-sm="38"
-                                  fxFlex.gt-xs="100"
-                                  fxFlex="38">
+                                  fxFlex="100">
                     <mat-select placeholder="{{'general.sponsors.edit.category' | translate}}"
                                 formControlName="assignedCategories" multiple>
                       <mat-option *ngFor="let category of categories$ | async | orderBy: ['title']"
@@ -123,7 +126,7 @@
               <button mat-raised-button
                       color="primary"
                       type="submit"
-                      [disabled]="!form.valid || isLoading">
+                      [disabled]="!form.valid">
                 {{'general.sponsors.edit.saveSponsor' | translate}}
               </button>
               <a mat-raised-button

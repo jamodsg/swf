@@ -26,9 +26,6 @@ export class SponsorEditComponent implements OnInit {
   public isSubmitting: boolean = false;
   public titleMaxLength: number = 50;
 
-  public startDate = new Date();
-  public endDate = new Date();
-
   constructor(private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
@@ -74,6 +71,12 @@ export class SponsorEditComponent implements OnInit {
 
   redirectToList() {
     this.router.navigate(['/sponsors']).then();
+  }
+
+  removeSponsor(){
+    this.sponsorService.removeSponsor(this.sponsor).then(
+      () => this.redirectToList()
+    );
   }
 
 }
