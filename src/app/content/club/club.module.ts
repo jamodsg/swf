@@ -27,6 +27,11 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { ClubManagementFormComponent } from './club-edit/club-management/club-management-form/club-management-form.component';
 import { ClubHonoraryFormComponent } from './club-edit/club-honoraries/club-honorary-form/club-honorary-form.component';
+import { PublicationModule } from '../../shared/components/publication/publication.module';
+import { ClubDetailMainComponent } from './club-detail/club-detail-main/club-detail-main.component';
+import { ClubDetailHistoryComponent } from './club-detail/club-detail-history/club-detail-history.component';
+import { ClubDetailManagementComponent } from './club-detail/club-detail-management/club-detail-management.component';
+import { ClubDetailHonorariesComponent } from './club-detail/club-detail-honoraries/club-detail-honoraries.component';
 
 @NgModule({
   imports: [
@@ -40,6 +45,7 @@ import { ClubHonoraryFormComponent } from './club-edit/club-honoraries/club-hono
     MatNativeDateModule,
     MatTabsModule,
     MediaModule,
+    PublicationModule,
     QuillModule,
     RouterModule.forChild(clubRoutes),
     SharedModule,
@@ -55,7 +61,11 @@ import { ClubHonoraryFormComponent } from './club-edit/club-honoraries/club-hono
     ClubManagementComponent,
     ClubHonorariesComponent,
     ClubManagementFormComponent,
-    ClubHonoraryFormComponent
+    ClubHonoraryFormComponent,
+    ClubDetailMainComponent,
+    ClubDetailHistoryComponent,
+    ClubDetailManagementComponent,
+    ClubDetailHonorariesComponent
   ],
   exports: [],
   providers: [

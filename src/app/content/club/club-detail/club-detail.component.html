@@ -1,9 +1,7 @@
 <div fxLayout="row"
      fxLayoutWrap="wrap">
 
-  <div fxFlex.gt-sm="100"
-       fxFlex.gt-xs="100"
-       fxFlex="100">
+  <div fxFlex="100">
     <div class="mat-card-top"
          *ngIf="club; else loadingTemplate">
 
@@ -18,35 +16,31 @@
 
           <mat-tab-group [dynamicHeight]="true">
             <mat-tab label="{{'general.clubs.edit.mainTitle' | translate}}">
-              <!--<club-edit-main [locations]="locations$ | async"
-                              [members]="members$ | async"
-                              [form]="form"></club-edit-main>-->
+              <club-detail-main [locations]="locations$ | async"
+                                [members]="members$ | async"
+                                [club]="club">
+              </club-detail-main>
             </mat-tab>
 
             <mat-tab label="{{ 'general.clubs.edit.historyTitle' | translate }}">
-              <!--<club-history (add)="addTimeLineEvent($event)"
-                            (cancel)="removeTimeLineEvent($event)"
-                            (save)="saveTimeLineEvent($event)"
-                            [selectedTimeLineEvent]="selectedClubTimeLineEvent"
-                            [events]="club.timeLine"
-                            [form]="form">
-              </club-history>-->
+              <club-detail-history [club]="club"></club-detail-history>
             </mat-tab>
 
             <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}">
-              <!--<club-management [form]="form"></club-management>-->
-            </mat-tab>
-
-            <mat-tab label="{{ 'general.clubs.edit.stadiumTitle' | translate }}">
-              Heimspielstätte und Vereinsheim
+              <club-detail-management [members]="members$ | async"
+                                      [positions]="positions$ | async"
+                                      [club]="club"></club-detail-management>
             </mat-tab>
 
             <mat-tab label="{{ 'general.clubs.edit.mediaTitle' | translate }}">
-              Dateien
+              <!-- ToDo: Dateiliste -->
+              <span style="color: red">Dateien</span>
             </mat-tab>
 
-            <mat-tab label="{{ 'general.clubs.edit.honorariesTitle' | translate}}">
-              <!--<club-honoraries></club-honoraries>-->
+            <mat-tab label="{{ 'general.clubs.edit.honoraries.title' | translate}}">
+              <club-detail-honoraries [club]="club"
+                                      [articles]="articles$ | async">
+              </club-detail-honoraries>
             </mat-tab>
 
           </mat-tab-group>
@@ -71,7 +65,6 @@
   </div>
 </div>
 
-
 <ng-template #loadingTemplate>
-  Lade ...
+  <loading-indicator></loading-indicator>
 </ng-template>

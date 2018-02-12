@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CategoryService } from '../../../../shared/services/category/category.service';
-import { Observable } from 'rxjs/Observable';
 import { ICategory } from '../../../../shared/interfaces/category.interface';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
-import { IClub } from '../../../../shared/interfaces/club/club.interface';
 
 @Component({
   selector: 'club-management',

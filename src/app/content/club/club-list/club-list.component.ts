@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'club-list',
-  templateUrl: 'club-list.component.html'
+  templateUrl: 'club-list.component.html',
+  styleUrls: ['club-list.component.scss']
 })
 
 export class ClubListComponent {

@@ -20,7 +20,8 @@ export class ClubHistoryComponent implements OnInit {
 
   @ViewChild('history') history: QuillEditorComponent;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

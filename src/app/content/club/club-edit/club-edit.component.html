@@ -46,10 +46,6 @@
                 </club-management>
               </mat-tab>
 
-              <mat-tab label="{{ 'general.clubs.edit.stadiumTitle' | translate }}">
-                Heimspielstätte und Vereinsheim
-              </mat-tab>
-
               <mat-tab label="{{ 'general.clubs.edit.mediaTitle' | translate }}">
                 Dateien
               </mat-tab>
@@ -58,17 +54,9 @@
                 label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
                 <div fxLayout="row"
                      fxLayoutWrap="wrap">
-                  <div fxFlex.gt-sm="20"
-                       fxFlex.gt-xs="100"
+                  <div fxFlex.gt-sm="30"
                        fxFlex="100">
-                    <creation-form [form]="form">
-                    </creation-form>
-                  </div>
-                  <div fxFlex.gt-sm="20"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100">
-                    Publication
-                    <!--<publication-form [item]="club"></publication-form>-->
+                    <creation-form [form]="form"></creation-form>
                   </div>
                 </div>
               </mat-tab>
@@ -113,5 +101,5 @@
 
 
 <ng-template #loadingTemplate>
-  Lade ...
+  <loading-indicator></loading-indicator>
 </ng-template>

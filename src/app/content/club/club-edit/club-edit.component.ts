@@ -11,7 +11,6 @@ import { LocationService } from '../../../shared/services/location/location.serv
 import { MemberService } from '../../../shared/services/member/member.service';
 import 'rxjs/add/operator/debounceTime';
 import { IClubManagement } from '../../../shared/interfaces/club/club-management.interface';
-import { CategoryFilterPipe } from '../../../shared/pipes/category-filter.pipe';
 import { CategoryService } from '../../../shared/services/category/category.service';
 import { ICategory } from '../../../shared/interfaces/category.interface';
 import { IClubHonorary } from '../../../shared/interfaces/club/club-honorary.interface';
@@ -40,12 +39,12 @@ export class ClubEditComponent implements OnInit {
   public selectedHonorary: number = -1;
 
   constructor(public clubService: ClubService,
-    private locationService: LocationService,
-    private memberService: MemberService,
-    private categoryService: CategoryService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router, ) {
+              private locationService: LocationService,
+              private memberService: MemberService,
+              private categoryService: CategoryService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,) {
     this.locations$ = locationService.locations$;
     this.members$ = memberService.members$;
     this.positions$ = categoryService.getCategoriesByCategoryType('club.position.types');
@@ -72,7 +71,7 @@ export class ClubEditComponent implements OnInit {
     });
 
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe(
-      (changes: IClub) => this.club = changes
+      (changes: IClub) => Object.assign({}, this.club, changes)
     );
   }
 
@@ -250,13 +249,14 @@ export class ClubEditComponent implements OnInit {
 
   saveClub(): void {
     let action;
+
     if (this.club.id) {
       action = this.clubService.updateClub(this.club.id, this.form.getRawValue());
     } else {
       action = this.clubService.createClub(this.club);
     }
     action.then(
-      () => this.redirectToList(),
+      () =>  this.redirectToList(),
       (error: any) => console.log(error)
     );
   }

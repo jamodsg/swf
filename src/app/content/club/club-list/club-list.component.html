@@ -1,15 +1,17 @@
 <div fxLayout="row" fxLayoutWrap="wrap">
 
-  <div fxFlex.gt-xs="33" fxFlex="100" *ngFor="let club of clubs$ as club">
+  <div fxFlex.gt-xs="33"
+       fxFlex="100"
+       *ngFor="let club of clubs$">
     <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="club-header-image" [ngStyle]="club.logoUrl ? ' background-image: url(' + club.logoUrl + ')' : ''"></div>
-        <mat-card-title>{{club.title}}</mat-card-title>
+      <mat-card-header class="mt-0">
+        <img matCardAvatar [src]="club.logoUrl">
         <mat-card-subtitle>
-          <a target="_blank" *ngIf="club.fussballde.clubUrl" [href]="club.fussballde.clubUrl">Fussball.de</a>
+          <a class="font-weight-bold mat-text-primary" target="_blank" *ngIf="club.fussballde.clubUrl" [href]="club.fussballde.clubUrl">Fussball.de</a>
         </mat-card-subtitle>
+        <mat-card-title>{{club.title}}</mat-card-title>
       </mat-card-header>
-      <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+
       <mat-card-content [innerHtml]="club.description"></mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" [routerLink]="['/clubs/detail', club.id]">
