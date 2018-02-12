@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+
+  public angularVersion: string;
+  public env: any;
+
   card1;
   card2;
   card3;
@@ -179,6 +184,8 @@ export class DashboardComponent {
   ];
 
   constructor() {
+    this.angularVersion = VERSION.full;
+    this.env = environment;
     this.fetch((data) => {
       this.rows = data;
     });
