@@ -41,10 +41,10 @@ export class LocationMapComponent implements OnInit {
   public mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
   constructor(public categoryService: CategoryService,
-              private locationService: LocationService,
-              private mapsService: MapsService,
-              private route: ActivatedRoute,
-              private fb: FormBuilder) {
+    private locationService: LocationService,
+    private mapsService: MapsService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder) {
     this.categories$ = categoryService.getCategoriesByCategoryType('location');
     this.locations$ = locationService.locations$;
   }

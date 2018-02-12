@@ -57,6 +57,7 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.0",
     "@swimlane/ngx-datatable": "^11.1.5",
+    "amazing-time-picker": "^1.4.4",
     "angular-calendar": "^0.22.1",
     "angular-tree-component": "^7.0.1",
     "angularfire2": "^5.0.0-rc.6",

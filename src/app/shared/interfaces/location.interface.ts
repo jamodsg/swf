@@ -3,6 +3,7 @@ import { ICategory } from './category.interface';
 import { ILocationContact } from './location-contact.interface';
 import { IMediaGallery } from './media/media-gallery.interface';
 import { IAddress } from './address.interface';
+import { IPublication } from './publication.interface';
 
 export interface ILocation {
   id?: string;
@@ -12,18 +13,9 @@ export interface ILocation {
   assignedCategory?: string | ICategory;
 
   assignedContacts?: ILocationContact[];
-  /*[{
-    isMember: boolean;
-    memberId?: string;
-    description: string;
-    firstName?: string;
-    lastName?: string;
-    phone?: string;
-    email?: string;
-  }]; */
 
-  assignedImages: string[];
-  assignedMediaGalleries: IMediaGallery[];
+  // assignedImages: string[];
+  // assignedMediaGalleries: IMediaGallery[];
   externalLink?: string;
   imageUrl?: string;
 
@@ -32,7 +24,7 @@ export interface ILocation {
 
   creation: ICreation;
   // modification?: IModification[];
-  // publication?: IPublication;
+  publication?: IPublication;
 
   address?: IAddress;
 }

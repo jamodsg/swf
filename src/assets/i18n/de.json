@@ -249,7 +249,9 @@
           "assignedArticle": "Verknüpfter Artikel",
           "assignedMember": "Verknüpftes Mitglied",
           "newHonoraryTitle": "Neues Ehrenmitglied",
+          "noHonoraries": "Es wurden noch keine Ehrenmitglieder ernannt.",
           "save": "Speichern",
+          "subTitle": "Ehre, wem Ehre gebührt!",
           "startDate": "Datum der Ernennung",
           "title": "Ehrenmitglieder"
         },
@@ -285,8 +287,10 @@
         "managementPhotoUrl": "Foto des Vorstandes",
         "managementTitle": "Vorstand",
         "mediaTitle": "Dateien",
+        "noAssignedContact": "Es wurde noch kein Ansprechpartner für diesen Verein ernannt",
         "noHistory": "Es wurde noch kein Artikel über die Geschichte des Vereins verfasst!",
         "noLogo": "Kein Vereinswappen vorhanden",
+        "noManagementPhoto": "Es wurde noch kein Foto des Vorstandes hochgeladen.",
         "positions": {
           "firstNameAndLastName": "Vorname und Nachname"
         },
@@ -391,6 +395,8 @@
         "mapTitle": "Kartenansicht",
         "mediaTitle": "Verknüpfte Dateien",
         "noAssignedArticles": "Mit dieser Spielstätte wurden noch keine Artikel verknüpft.",
+        "noOpening": "Es sind keine Öffnungszeiten gespeichert.",
+        "noPriceList": "Es wurde noch keine Preisliste hinterlegt",
         "title": "Treffpunkt-Details"
       },
       "edit": {
@@ -1146,18 +1152,14 @@
     "searchFor": "Suchen nach ...",
     "notSet": "nicht gesetzt",
     "publication": {
-      "alreadyPublished": "Dieses Element wurde bereits veröffentlicht.",
-      "chooseDate": "Veröffentlichungsart auswählen",
-      "choosePublisher": "Wähle den Veröffentlichenden",
-      "from": "von",
-      "noPublicationNeeded": "Dieses Element muss nicht explizit veröffentlicht werden",
+      "choosePublisher": "Wer ist der Veröffentlicher",
       "publication": "Veröffentlichung",
-      "publicationDateLabel": "Veröffentlichungsdatum",
+      "publicationDateLabel": "Datum der Veröffentlichung",
+      "publicationStateLabel": "Status der Veröffentlichung",
+      "publicationTimeLabel": "Uhrzeit der Veröffentlichung",
       "publishNow": "JETZT veröffentlichen",
       "saveAsDraft": "Als Entwurf speichern",
-      "selectDate": "Veröffentlichungszeitpunkt wählen",
-      "setPublicationDate": "Datum wählen",
-      "setPublicationTime": "Uhrzeit wählen"
+      "selectDate": "Veröffentlichungszeitpunkt wählen"
     },
     "creation": {
       "author": "Author",

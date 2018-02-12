@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ILocation } from '../../../../shared/interfaces/location.interface';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
 

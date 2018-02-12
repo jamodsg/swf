@@ -13,40 +13,71 @@
         <mat-tab-group [dynamicHeight]="true">
           <mat-tab label="{{'general.locations.edit.mainTitle' | translate}}">
             <div fxLayout="row" fxLayoutWrap="wrap">
-              <div fxFlex.gt-sm="65" fxFlex.gt-xs="100" fxFlex="100">
+              <div fxFlex.gt-sm="33"
+                   fxFlex="100">
                 <location-detail-main
                   [location]="location"
                   [categories$]="categories$">
                 </location-detail-main>
-
-                <location-detail-contact
-                  [showLinks]="false"
-                  [members]="members$ | async"
-                  [location]="location">
-                </location-detail-contact>
-
-                <h3>{{'general.locations.detail.assignedArticlesTitle' | translate }}</h3>
-                <ul *ngIf="(articles | filterBy: ['assignedLocation'] : location.id)?.length > 0; else noArticlesTemplate">
-                  <li *ngFor="let article of (articles | filterBy: ['assignedLocation'] : location.id) | orderBy: ['-articleDate']">
-                    <a [routerLink]="['/articles/detail', article.id]">
-                      {{article.title}} {{article.articleDate | date: 'dd.MM.yy'}}
-                    </a>
-                  </li>
-                </ul>
               </div>
 
-              <!--<div fxFlex.gt-sm="35" fxFlex.gt-xs="100" fxFlex="100">
+              <div fxFlexOffset="1"
+                   fxFlex.gt-sm="32"
+                   fxFlex="100">
                 <h3>{{'general.locations.edit.photoTitle' | translate}}</h3>
-                <img [src]="location.imageUrl" *ngIf="location.imageUrl; else noImageTemplate" />
-              </div>-->
+                <img [src]="location.imageUrl" *ngIf="location.imageUrl; else noImageTemplate"/>
+              </div>
 
-              <div fxFlex.gt-sm="35" fxFlex.gt-xs="100" fxFlex="100">
+              <div fxFlexOffset="1"
+                   fxFlex.gt-sm="32"
+                   fxFlex="100">
                 <h3>{{'general.locations.edit.mapTitle' | translate}}</h3>
                 <location-detail-map [location]="location"></location-detail-map>
               </div>
 
             </div>
           </mat-tab>
+
+          <mat-tab label="{{'general.locations.detail.assignedArticlesTitle' | translate}}">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex.gt-sm="30" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-list dense
+                          *ngIf="(articles$ | async | filterBy: ['assignedLocation'] : location.id)?.length > 0;
+                                  else noArticlesTemplate">
+                  <mat-list-option
+                    *ngFor="let article of (articles$ | async | filterBy: ['assignedLocation'] : location.id) | orderBy: ['-articleDate']">
+                    <a [routerLink]="['/articles/detail', article.id]">
+                      {{article.title}} {{article.articleDate | date: 'dd.MM.yy'}}
+                    </a>
+                  </mat-list-option>
+                </mat-list>
+
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="{{'general.locations.edit.contactTitle' | translate}}">
+            <location-detail-contact
+              [showLinks]="false"
+              [members]="members$ | async"
+              [location]="location">
+            </location-detail-contact>
+          </mat-tab>
+
+          <mat-tab
+            label="{{'general.locations.edit.prices' | translate }} & {{ 'general.locations.edit.opening' | translate }}">
+            <h3>{{'general.locations.edit.prices' | translate }}</h3>
+            <a *ngIf="location.prices"
+               [href]="location.prices"
+               target="_blank">{{ 'general.locations.edit.priceList' | translate}}
+            </a>
+            <p style="color: red" *ngIf="!location.prices">{{'general.locations.detail.noPriceList' | translate}}</p>
+
+            <h3>{{ 'general.locations.edit.opening' | translate }}</h3>
+            <div *ngIf="location.opening" [innerHtml]="location.opening"></div>
+            <p style="color: red" *ngIf="!location.opening">{{'general.locations.detail.noOpening' | translate}}</p>
+          </mat-tab>
+
           <mat-tab label="{{'general.locations.media.list' | translate}}">
             <div fxLayout="row" fxLayoutWrap="wrap">
               <div fxFlex.gt-sm="30" fxFlex.gt-xs="100" fxFlex="100">

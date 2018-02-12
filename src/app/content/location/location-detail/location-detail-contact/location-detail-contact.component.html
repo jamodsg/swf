@@ -12,22 +12,24 @@
         {{ (members | filterBy: ['id'] : contact.assignedMember)[0].lastName}}
         {{ (members | filterBy: ['id'] : contact.assignedMember)[0].firstName}}
       </a>
-      <span *ngIf="!contact.isMember">
-        {{contact.lastName}} {{contact.firstName}}<br/>
-        <a *ngIf="contact.contact.email" [href]="'mailto:' + contact.contact.email">{{contact.contact.email}} ,</a>
-        {{contact.contact.phoneMobile}}
-      </span>
     </h4>
+    <span *ngIf="!contact.isMember" matLine>
+      {{contact.lastName}} {{contact.firstName}}<br/>
+      <a *ngIf="contact.contact.email" [href]="'mailto:' + contact.contact.email">{{contact.contact.email}} ,</a>
+      {{contact.contact.phoneMobile}}
+    </span>
+
     <p matLine [innerHtml]="contact.description"></p>
-    <button mat-raised-button *ngIf="showLinks"
+    <!--<button mat-raised-button
+            *ngIf="showLinks"
             color="danger"
             (click)="removeLocationContact(i)"
             title="{{ 'general.locations.edit.contact.deleteContact' | translate}}">
       <mat-icon>delete</mat-icon>
-    </button>
+    </button>-->
   </mat-list-item>
 </mat-list>
 
 <ng-template #loadingTemplate>
-  Lade ...
+  <loading-indicator></loading-indicator>
 </ng-template>

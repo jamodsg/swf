@@ -6,12 +6,7 @@ import { ICategory } from '../../../../shared/interfaces/category.interface';
 @Component({
   selector: 'location-detail-main',
   templateUrl: './location-detail-main.component.html',
-  styles: [
-    `span {
-      display: block;
-      width: 25%
-    }`
-  ]
+  styleUrls: ['location-detail-main.component.scss']
 })
 export class LocationDetailMainComponent implements OnInit {
 

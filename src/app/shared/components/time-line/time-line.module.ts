@@ -16,6 +16,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { QuillModule } from 'ngx-quill';
 import { ArticleService } from '../../services/article/article.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TimeLineComponent } from './time-line.component';
 
 @NgModule({
   imports: [
@@ -39,12 +40,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     TimeLineFormComponent,
     TimeLineGraphHorizontalComponent,
-    TimeLineListComponent
+    TimeLineListComponent,
+    TimeLineComponent
   ],
   exports: [
     TimeLineFormComponent,
     TimeLineGraphHorizontalComponent,
-    TimeLineListComponent
+    TimeLineListComponent,
+    TimeLineComponent
   ],
   providers: [
     ArticleService

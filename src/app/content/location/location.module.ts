@@ -42,6 +42,7 @@ import { LocationsByCategoryComponent } from './locations/locations-by-category/
 import { ChartsModule } from 'ng2-charts';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PublicationModule } from '../../shared/components/publication/publication.module';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTabsModule,
     MediaModule,
     PerfectScrollbarModule,
+    PublicationModule,
     QuillModule,
     ReactiveFormsModule,
     SharedModule

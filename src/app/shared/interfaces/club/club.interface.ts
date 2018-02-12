@@ -3,6 +3,7 @@ import { IClubHonorary } from './club-honorary.interface';
 import { IAddress } from '../address.interface';
 import { ITimeLineEvent } from '../time-line-event.interface';
 import { ICreation } from '../creation.interface';
+import { IPublication } from '../publication.interface';
 
 export interface IClub {
   id?: string;

@@ -11,10 +11,7 @@ import { ICategoryType } from '../../../shared/interfaces/category-type.interfac
 import { ILocationContact } from '../../../shared/interfaces/location-contact.interface';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
-import { IUploaderConfig } from '../../../shared/interfaces/media/uploader-config.interface';
-import { IUploaderOptions } from '../../../shared/interfaces/media/uploader-options.interface';
 import { ComponentCanDeactivate } from '../../../shared/services/auth/pending-changes.guard';
-import { IMediaItem } from '../../../shared/interfaces/media/media-item.interface';
 
 @Component({
   selector: 'location-edit',
@@ -62,6 +59,7 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
       text: this.location.text,
       address: this.initAddress(),
       creation: this.initCreation(),
+      publication: this.initPublication(),
       assignedContacts: this.initAssignedContacts()
     });
 
@@ -85,19 +83,23 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
 
   initLocationContact(contact: ILocationContact): FormGroup {
     return this.fb.group({
-      isMember: contact ? contact.isMember : '',
-      description: contact ? contact.description : '',
-      assignedMember: contact ? contact.assignedMember : '',
-      firstName: contact ? contact.firstName : '',
-      lastName: contact ? contact.lastName : '',
+      isMember: [contact ? contact.isMember : false, [Validators.required]],
+      description: [contact ? contact.description : '', [Validators.required]],
+      assignedMember: [contact ? contact.assignedMember : '', /* [Validators.required] */],
+      firstName: [contact ? contact.firstName : '', [Validators.required]],
+      lastName: [contact ? contact.lastName : '', [Validators.required]],
       contact: this.initContactData(contact),
       address: contact ? contact.address : '',
     });
   }
 
   addLocationContact(): void {
+    const contact: ILocationContact = {
+      isMember: true,
+      description: ''
+    };
     const control = <FormArray>this.form.controls['assignedContacts'];
-    const addCtrl = this.initLocationContact(null);
+    const addCtrl = this.initLocationContact(contact);
     control.push(addCtrl);
   }
 
@@ -108,8 +110,8 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
 
   initContactData(contact: ILocationContact) {
     return this.fb.group({
-      email: contact.contact ? contact.contact.email : '',
-      phoneMobile: contact.contact ? contact.contact.phoneMobile : '',
+      email: [contact.contact ? contact.contact.email : '', [Validators.required]],
+      phoneMobile: [contact.contact ? contact.contact.phoneMobile : '', [Validators.required]],
     })
   }
 
@@ -117,6 +119,15 @@ export class LocationEditComponent implements OnInit, ComponentCanDeactivate {
     return this.fb.group({
       at: this.location.creation.at,
       from: this.location.creation.from
+    });
+  }
+
+  initPublication(): FormGroup {
+    return this.fb.group({
+      date: this.location.publication.date ? this.location.publication.date : '',
+      time: this.location.publication.time ? this.location.publication.time : '',
+      from: this.location.publication.from ? this.location.publication.from : '',
+      status: this.location.publication.status ? this.location.publication.status : 0
     });
   }
 

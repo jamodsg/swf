@@ -26,8 +26,7 @@
 
                   <div>
                     <mat-form-field fxFlex.gt-sm="24"
-                                    fxFlex.gt-xs="100"
-                                    fxFlex="25">
+                                    fxFlex="100">
                       <input matInput
                              placeholder="{{'general.locations.edit.namePlaceholder' | translate}}"
                              formControlName="title"/>
@@ -35,7 +34,6 @@
 
                     <mat-form-field fxFlexOffset="1"
                                     fxFlex.gt-sm="24"
-                                    fxFlex.gt-xs="100"
                                     fxFlex="25">
                       <mat-select placeholder="{{'general.category' | translate}}"
                                   formControlName="assignedCategory">
@@ -48,7 +46,6 @@
 
                     <mat-form-field fxFlexOffset="1"
                                     fxFlex.gt-sm="50"
-                                    fxFlex.gt-xs="100"
                                     fxFlex="100">
                       <input matInput
                              placeholder="{{'general.locations.edit.priceList' | translate}}"
@@ -58,7 +55,6 @@
 
                   <div>
                     <div fxFlex.gt-sm="24"
-                         fxFlex.gt-xs="100"
                          fxFlex="100">
                       <label>{{'general.locations.edit.opening' | translate}}</label><br/>
                       <quill-editor [style]="{height: '150px'}"
@@ -69,7 +65,6 @@
 
                     <div fxFlexOffset="1"
                          fxFlex.gt-sm="24"
-                         fxFlex.gt-xs="100"
                          fxFlex="100">
                       <label>{{'general.description' | translate}}</label><br/>
                       <quill-editor [style]="{height: '150px'}"
@@ -79,11 +74,10 @@
 
                     <div fxFlexOffset="1"
                          fxFlex.gt-sm="50"
-                         fxFlex.gt-xs="100"
                          fxFlex="100">
                       <label>{{'general.locations.edit.photoTitle' | translate}}</label><br/>
 
-                      <img [src]="location.imageUrl" class="md-card-image imagen" *ngIf="location.imageUrl"/>
+                      <img [src]="location.imageUrl" class="md-card-image" *ngIf="location.imageUrl"/>
 
                       <!--<media-uploader
                         (uploadCompleted)="logoUploadCompleted($event)"
@@ -103,7 +97,6 @@
                 <div fxLayout="row"
                      fxLayoutWrap="wrap">
                   <div fxFlex.gt-sm="49"
-                       fxFlex.gt-xs="100"
                        fxFlex="100">
                     <location-edit-address
                       [form]="form">
@@ -111,7 +104,6 @@
                   </div>
                   <div fxFlexOffset="1"
                        fxFlex.gt-sm="50"
-                       fxFlex.gt-xs="100"
                        fxFlex="100">
                     <location-edit-contact
                       [members]="members$ | async"
@@ -134,20 +126,17 @@
                 <!--<media-center></media-center>-->
               </mat-tab>
 
-              <mat-tab
-                label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
+              <mat-tab label="{{'general.tables.colTitles.creation' | translate }} & {{'general.tables.colTitles.publication' | translate }}">
                 <div fxLayout="row"
                      fxLayoutWrap="wrap">
-                  <div fxFlex.gt-sm="20"
-                       fxFlex.gt-xs="100"
+                  <div fxFlex.gt-sm="30"
                        fxFlex="100">
                     <creation-form [form]="form"></creation-form>
                   </div>
-                  <div fxFlex.gt-sm="20"
-                       fxFlex.gt-xs="100"
+                  <div fxFlexOffset="5"
+                       fxFlex.gt-sm="30"
                        fxFlex="100">
-                    Publication
-                    <!--<publication-form [form]="location"></publication-form>-->
+                    <publication-form [form]="form"></publication-form>
                   </div>
                 </div>
               </mat-tab>
@@ -157,7 +146,7 @@
           <mat-card-actions>
             <div class="button-row">
               <button mat-raised-button
-                      [disabled]="location === savedLocation"
+                      [disabled]="location === savedLocation || !form.valid"
                       color="primary"
                       type="submit">
                 {{ location.id
@@ -178,5 +167,5 @@
 </form>
 
 <ng-template #loadingTemplate>
-  Lade ...
+  <loading-indicator></loading-indicator>
 </ng-template>

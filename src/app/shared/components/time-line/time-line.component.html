@@ -1,0 +1,33 @@
+<mat-accordion class="example-headers-align"
+               *ngIf="events && events.length > 0; else noEventsTemplate">
+
+  <mat-expansion-panel
+    *ngFor="let event of events; let i = index; let first = first; let last = last"
+    [expanded]="step === i"
+    (opened)="setStep(i)"
+    hideToggle="true">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{event.title}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{event.startDate}} {{event.endDate ? '&ndash;' + event.endDate : ''}}
+        <mat-icon *ngIf="event.icon">{{event.icon}}</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div *ngIf="step === i" [innerHtml]="event.text"></div>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()" [disabled]="first">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()" [disabled]="last">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+<ng-template #noEventsTemplate>
+  <p style="color: red">{{ 'general.timeLine.noEvents' | translate}}</p>
+</ng-template>
+
