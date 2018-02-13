@@ -22,8 +22,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   removeUser(user: IUser) {
-    this.userService.removeUser(user).then(
-      () => this.router.navigate(['../list'])
+    this.userService.removeUser(user.id).then(
+      () => this.router.navigate(['/users/list'])
     );
   }
 
