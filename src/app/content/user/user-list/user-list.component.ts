@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUser } from '../../../shared/interfaces/user.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
 
@@ -14,15 +14,15 @@ export class UserListComponent implements OnInit {
 
   @Output() remove: EventEmitter<any> = new EventEmitter(false);
   @Output() update: EventEmitter<any> = new EventEmitter(false);
-  @Output() updateFilter: EventEmitter<any> = new EventEmitter(false);
 
   public form: FormGroup;
+  public searchFor: string = '';
 
   public itemsPerPageOptions = [
     5, 10, 25, 50, 100
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public authService: AuthService) {
   }
 
   ngOnInit() {
@@ -30,10 +30,11 @@ export class UserListComponent implements OnInit {
       searchFor: '',
       limit: 10
     });
+  }
 
-    this.form.valueChanges.subscribe((changes: any) => {
-      console.log(changes);
-    });
+  toggleUserStatus(user: IUser) {
+    user.isDisabled = !user.isDisabled;
+    console.log(user);
   }
 
 }

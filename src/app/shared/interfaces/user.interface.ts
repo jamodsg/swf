@@ -7,6 +7,8 @@ export interface IUser {
   password?: string;
   providerId?: string;
 
+  isDisabled?: boolean;
+
   email: string;
   firstName: string;
   lastName: string;

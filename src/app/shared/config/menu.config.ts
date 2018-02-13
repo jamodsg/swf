@@ -193,27 +193,11 @@ export const MENUITEMS = [
     name: 'user',
     type: 'sub',
     icon: 'people',
-    badge: [
-      {
-        type: 'yellow',
-        value: '?'
-      }
-    ],
     children: [
       {
         state: '',
         name: 'main',
         icon: 'accessibility'
-      },
-      {
-        state: 'roles',
-        name: 'roles',
-        icon: 'people'
-      },
-      {
-        state: 'statistics',
-        name: 'statistics',
-        icon: 'trending_up'
       }
     ]
   }

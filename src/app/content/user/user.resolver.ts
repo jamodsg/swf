@@ -13,14 +13,14 @@ export class UserResolver implements Resolve<IUser> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IUser> {
+    if (!route.params['userId']) {
+      this.router.navigate(['/users/list']).then();
+    }
     return this.userService.getUserById(route.params['userId']).take(1).map((user: IUser) => {
-      console.log(user);
-      if (route.params['userId'] === 'new') {
-        return this.userService.setNewUser();
-      } else if (user && user.id) {
+      if (user && user.id) {
         return user;
       } else {
-        this.router.navigate(['/users']).then();
+        this.router.navigate(['/users/list']).then();
       }
     });
   }

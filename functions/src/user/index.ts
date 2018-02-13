@@ -57,11 +57,10 @@ export const newUserCreated = functions.firestore.document('/users/{userId}').on
 });
 
 
+export const onUserPropertyChanged = functions.database.ref("/users/{userId}").onUpdate((event) => {
 
-
-
-export const onUserStatusChanged = functions.database.ref("/status/{userId}").onUpdate((event) => {
-
+  console.log(event);
+  console.log(event.data);
   if (!event || !event.params) return;
 
   const eventStatus = event.data.val();
