@@ -19,7 +19,7 @@ export class UserListComponent implements OnInit {
   public searchFor: string = '';
 
   public itemsPerPageOptions = [
-    5, 10, 25, 50, 100
+    1, 5, 10, 25, 50, 100
   ];
 
   constructor(private fb: FormBuilder, public authService: AuthService) {

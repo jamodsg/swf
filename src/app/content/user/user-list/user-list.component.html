@@ -28,16 +28,15 @@
      [formGroup]="form">
 
   <div fxFlex="100">
-    <ngx-datatable
-      *ngIf="users; else loadingTemplate"
-      class='material'
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="'auto'"
-      [limit]="10"
-      [rows]="users | filterBy: ['firstName', 'lastName', 'email'] : searchFor">
-
+    <ngx-datatable #myTable
+                   *ngIf="users; else loadingTemplate"
+                   class='material'
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [limit]="form.controls['limit'].value"
+                   [rows]="users | filterBy: ['firstName', 'lastName', 'email'] : form.controls['searchFor'].value">
 
       <ngx-datatable-column name="{{'general.users.edit.personal.lastName' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
@@ -78,7 +77,11 @@
                   (click)="toggleUserStatus(row)">
             <mat-icon>perm_identity</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="remove.emit(row.id)"></button>
+          <button mat-icon-button
+                  color="warn"
+                  (click)="remove.emit(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </ng-template>
       </ngx-datatable-column>
 
@@ -91,8 +94,25 @@
           let-curPage="curPage"
           let-offset="offset">
           <div style="padding: 5px 10px">
-            <div class="">Rows: {{rowCount}} | Size: {{pageSize}} | Current: {{curPage}} | Offset: {{offset}}</div>
+            <div class="">{{ 'general.items' | translate}}: {{rowCount}} |
+              Size: {{pageSize}} |
+              Current: {{curPage}} |
+              Offset: {{offset}}
+            </div>
           </div>
+
+          <datatable-pager
+            [pagerLeftArrowIcon]="'datatable-icon-left'"
+            [pagerRightArrowIcon]="'datatable-icon-right'"
+            [pagerPreviousIcon]="'datatable-icon-prev'"
+            [pagerNextIcon]="'datatable-icon-skip'"
+            [page]="curPage"
+            [size]="pageSize"
+            [count]="rowCount"
+            [hidden]="!((rowCount / pageSize) > 1)"
+            (change)="myTable.onFooterPage($event)">
+          </datatable-pager>
+
         </ng-template>
       </ngx-datatable-footer>
 
