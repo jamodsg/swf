@@ -3,7 +3,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
-import { MenuItemsService } from '../../shared/services/menu/menu-items.service';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -18,7 +17,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   private _router: Subscription;
 
   mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
-  today: number = Date.now();
   url: string;
   sidePanelOpened;
   options = {
@@ -31,26 +29,15 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   currentLang = 'en';
 
-  /*
-  url: string;
-  showSettings = false;
-  dark: boolean;
-  boxed: boolean;
-  collapseSidebar: boolean;
-  compactSidebar: boolean;
-  dir = 'ltr';
-  sidePanelOpened;
-  user; */
-
   @ViewChild('sidemenu') sidemenu;
   @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
 
   public config: PerfectScrollbarConfigInterface = {};
 
   constructor(private router: Router,
-    public translate: TranslateService,
-    public authService: AuthService,
-    private zone: NgZone) {
+              public translate: TranslateService,
+              public authService: AuthService,
+              private zone: NgZone) {
 
     translate.addLangs(['de', 'en', 'fr']);
     translate.setDefaultLang('de');
@@ -91,17 +78,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   changeTranslation(currentLang: string) {
-    console.log(currentLang);
     this.currentLang = currentLang;
     this.translate.use(currentLang);
   }
 
   isOver(): boolean {
-    if (this.url === '/apps/messages' ||
-      this.url === '/apps/calendar' ||
-      this.url === '/apps/media' ||
-      this.url === '/maps/leaflet' ||
-      this.url === '/taskboard') {
+    if (this.url === '/articles/editor') {
       return true;
     } else {
       return this.mediaMatcher.matches;

@@ -2,7 +2,6 @@
      fxLayoutWrap="wrap"
      [formGroup]="form">
 
-
   <mat-form-field fxFlex.gt-xs="33"
                   fxFlex="100">
     <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
@@ -23,6 +22,11 @@
            formControlName="searchFor"/>
   </mat-form-field>
 
+</div>
+
+<div fxLayout="row"
+     [formGroup]="form">
+
   <div fxFlex="100">
     <ngx-datatable
       *ngIf="users; else loadingTemplate"
@@ -33,25 +37,37 @@
       [rowHeight]="'auto'"
       [limit]="10"
       [rows]="users | filterBy: ['firstName', 'lastName', 'email'] : searchFor">
-      <ngx-datatable-column name="{{'general.users.list.colTitles.lastName' | translate}}">
+
+
+      <ngx-datatable-column name="{{'general.users.edit.personal.lastName' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
-          {{row.lastName}}
+          {{row.lastName ? row.lastName : row.displayName}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="{{'general.users.list.colTitles.firstName' | translate}}">
+
+      <ngx-datatable-column name="{{'general.users.edit.personal.firstName' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
           {{row.firstName}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="{{'general.users.list.colTitles.email' | translate}}">
+
+      <ngx-datatable-column name="{{'general.users.edit.personal.email' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
-          {{row.email}}
+          <a [href]="'mailto:' + row.email">{{row.email}}</a>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="{{'general.users.list.roleTitle' | translate}}">
+        <ng-template let-row="row" let-value="assignedRoles" ngx-datatable-cell-template>
+          {{row.assignedRoles.admin ? ('general.users.list.adminTitle' | translate)
+          : row.assignedRoles.editor ? ('general.users.list.editorTitle' | translate)
+          : ('general.users.list.guestTitle' | translate) }}
         </ng-template>
       </ngx-datatable-column>
 
       <ngx-datatable-column name="actions">
         <ng-template let-column="column" ngx-datatable-header-template>
-          Actions
+          {{'general.tables.colTitles.actions' | translate}}
         </ng-template>
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
           <edit-link [objectId]="row.id"></edit-link>
@@ -62,9 +78,7 @@
                   (click)="toggleUserStatus(row)">
             <mat-icon>perm_identity</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="remove.emit(row.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <button mat-icon-button color="warn" (click)="remove.emit(row.id)"></button>
         </ng-template>
       </ngx-datatable-column>
 

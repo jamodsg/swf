@@ -2,6 +2,7 @@
 
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import UserRecord = admin.auth.UserRecord;
 
 const SENDGRID_API_KEY = functions.config().sendgrid.key;
 
@@ -10,7 +11,45 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 
 const firestore = admin.firestore();
 
+export const createTestUser = admin.auth().createUser({
+  displayName: 'Administrator',
+  email: "admin@demo.com",
+  emailVerified: false,
+  password: 'start01'
+}).then((userRecord: UserRecord) => {
+  const userData = {
+    id: userRecord.uid,
+    displayName: userRecord.email,
+    email: userRecord.email,
+    emailVerified: userRecord.emailVerified,
+    providerId: 'firebase',
+    assignedRoles: {
+      admin: true,
+      editor: false,
+      subscriber: false
+    }
+  };
+  return firestore.collection('users').doc(userRecord.uid).set(userData)
+    .then(function () {
+      console.log("Successfully added user");
+    })
+    .catch(function (error) {
+      console.log("Error adding user:", error);
+    });
+});
 
+export const onDeleteUser = functions.firestore.document('/users/{userId}').onDelete((event: any) => {
+  const userId = event.params.userId;
+  return admin.auth().deleteUser(userId)
+    .then(function () {
+      console.log("Successfully deleted user");
+    })
+    .catch(function (error) {
+      console.log("Error deleting user:", error);
+    });
+});
+
+/*
 export const newUserCreated = functions.firestore.document('/users/{userId}').onCreate((event: any) => {
 
   const userId = event.params.userId;
@@ -33,7 +72,7 @@ export const newUserCreated = functions.firestore.document('/users/{userId}').on
         }
       };
 
-      return sgMail.send(msg).then(()  => {
+      return sgMail.send(msg).then(() => {
         const welcomeMsg = {
           to: user.email,
           from: 'hello@sfwinterbach.com',
@@ -56,14 +95,14 @@ export const newUserCreated = functions.firestore.document('/users/{userId}').on
     .catch((error: any) => console.log(error));
 });
 
+*/
 
 export const onUserPropertyChanged = functions.database.ref("/users/{userId}").onUpdate((event) => {
 
   console.log(event);
   console.log(event.data);
-  if (!event || !event.params) return;
 
-  const eventStatus = event.data.val();
+  /* const eventStatus = event.data.val();
   const userId = event.params.userId;
 
   const userStatusFirestoreRef = firestore.collection('status').doc(userId);
@@ -76,6 +115,7 @@ export const onUserPropertyChanged = functions.database.ref("/users/{userId}").o
 
     eventStatus.last_changed = new Date(eventStatus.last_changed);
     return userStatusFirestoreRef.set(eventStatus);
-  });
+  }); */
+  return true;
 
 });

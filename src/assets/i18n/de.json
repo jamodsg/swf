@@ -1110,6 +1110,7 @@
         "uploadsCount": "Hochgeladene Dateien"
       },
       "list": {
+        "adminTitle": "Administratoren",
         "allUsers": "Alle Benutzer",
         "colTitles": {
           "firstName": "Vorname",
@@ -1119,9 +1120,12 @@
           "status": "Benutzerstatus"
         },
         "createUser": "Benutzer hinzufügen",
+        "editorTitle": "Redakteure",
         "filterTitle": "Benutzer filtern nach",
+        "guestTitle": "Benutzer",
         "noMatchingResult": "Es wurden keine Benutzer mit diesen Suchkriterien gefunden.",
         "noResult": "Es wurden keine Benutzer gefunden.",
+        "roleTitle": "Rolle",
         "title": "Benutzer",
         "usersPerPage": "Benutzer / Seite"
       }

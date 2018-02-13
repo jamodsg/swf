@@ -22,7 +22,6 @@ export const createOrUpdateDFBMember = functions.database.ref('/dfb-members/{clu
   db.collection('clubs').where('title', '==', clubTitle.replace('-',' ')).get().then(
     (values: FirebaseFirestore.QuerySnapshot) => {
       if (!values.empty) {
-        console.log(values.docs[0].id);
         assignedClub = values.docs[0].id;
       }
     }
