@@ -10,26 +10,14 @@ import { IUser } from '../../../shared/interfaces/user.interface';
 
 export class UsersComponent {
 
-  rows = [];
-  temp = [];
-
-  users$: Observable<IUser[]> = null;
-
-  columns = [
-    { prop: 'email' },
-    { prop: 'lastName' },
-    { prop: 'firstName' },
-    { prop: 'assignedRole' },
-    { prop: 'onlineStatus' },
-    { name: 'Actions' }
-  ];
+  public users$: Observable<IUser[]>;
 
   constructor(public userService: UserService) {
     this.users$ = userService.users$;
   }
 
-  removeUser($event) {
-    this.userService.removeUser($event).then();
+  removeUser(userId: string) {
+    this.userService.removeUser(userId).then();
   }
 
   updateUser($event) {

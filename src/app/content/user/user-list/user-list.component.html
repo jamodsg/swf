@@ -1,22 +1,31 @@
-<div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
-  <div fxFlex.gt-sm="50%" fxFlex="100">
+<div fxLayout="row" [formGroup]="form">
 
-    <mat-form-field>
-      <mat-select placeholder="itemsPerPage" formControlName="limit">
-        <mat-option value="">All Items</mat-option>
-        <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }} items</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+  <mat-form-field fxFlex.gt-xs="33"
+                  fxFlex="100">
+    <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
+      <mat-option [value]="users.length" *ngIf="users">
+        {{ 'general.pagination.allItems' | translate}}
+      </mat-option>
+      <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
+        {{ 'general.items' | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <div fxFlex.gt-sm="50%" fxFlex="100">
-    <input
-      style="padding:8px; margin:15px auto; width:30%;"
-      placeholder="Type to filter the name column..."
-      formControlName="searchFor" />
-  </div>
+  <mat-form-field fxFlexOffset="1"
+                  fxFlex.gt-xs="33"
+                  fxFlex="100">
+    <input matInput
+           placeholder="{{ 'general.typeToFilter' | translate}}"
+           formControlName="searchFor"/>
+  </mat-form-field>
 
-  <div fxFlex.gt-sm="100%" fxFlex="100">
+</div>
+
+<div fxLayout="row"
+     [formGroup]="form">
+
+  <div fxFlex="100">
     <ngx-datatable
       *ngIf="users; else loadingTemplate"
       class='material'
@@ -27,18 +36,40 @@
       [rowHeight]="'auto'"
       [limit]="10"
       [rows]="users | filterBy: ['firstName', 'lastName', 'email'] : searchFor">
-      <ngx-datatable-column name="Last Name"></ngx-datatable-column>
-      <ngx-datatable-column name="First Name"></ngx-datatable-column>
-      <ngx-datatable-column name="Email"></ngx-datatable-column>
-      <ngx-datatable-column name="Online Status"></ngx-datatable-column>
+      <ngx-datatable-column name="{{'general.users.edit.personal.lastName' | translate}}">
+        <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
+          {{row.lastName ? row.lastName : row.displayName}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="{{'general.users.edit.personal.firstName' | translate}}">
+        <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
+          {{row.firstName}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="{{'general.users.edit.personal.email' | translate}}">
+        <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
+          <a [href]="'mailto:' + row.email">{{row.email}}</a>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="{{'general.users.list.roleTitle' | translate}}">
+        <ng-template let-row="row" let-value="assignedRoles" ngx-datatable-cell-template>
+          {{row.assignedRoles.admin ? ('general.users.list.adminTitle' | translate)
+                                      : row.assignedRoles.editor ? ('general.users.list.editorTitle' | translate)
+                                      : ('general.users.list.guestTitle' | translate) }}
+        </ng-template>
+      </ngx-datatable-column>
 
       <ngx-datatable-column name="actions">
         <ng-template let-column="column" ngx-datatable-header-template>
-          Actions
+          {{'general.tables.colTitles.actions' | translate}}
         </ng-template>
         <ng-template let-row="row" let-value="email" ngx-datatable-cell-template>
-          <detail-link [objectId]="row.id"></detail-link>
           <edit-link [objectId]="row.id"></edit-link>
+          <button mat-icon-button
+             color="warn"
+             (click)="remove.emit(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </ng-template>
       </ngx-datatable-column>
 
@@ -61,5 +92,5 @@
 </div>
 
 <ng-template #loadingTemplate>
-  LADEN
+  <loading-indicator></loading-indicator>
 </ng-template>

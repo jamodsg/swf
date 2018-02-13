@@ -11,12 +11,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class UserListComponent implements OnInit {
 
   @Input() users: IUser[];
-
   @Output() remove: EventEmitter<any> = new EventEmitter(false);
-  @Output() update: EventEmitter<any> = new EventEmitter(false);
-  @Output() updateFilter: EventEmitter<any> = new EventEmitter(false);
 
   public form: FormGroup;
+  public searchFor: string = '';
 
   public itemsPerPageOptions = [
     5, 10, 25, 50, 100

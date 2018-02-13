@@ -22,8 +22,8 @@ export class UserService {
     return this.afs.collection<IUser>(this.path).doc(user.id).set(user);
   }
 
-  removeUser(user: IUser): Promise<any> {
-    return this.afs.collection<IUser>(this.path).doc(user.id).delete();
+  removeUser(userId: string): Promise<any> {
+    return this.afs.collection<IUser>(this.path).doc(userId).delete();
   }
 
   updateUser(userId: string, user: IUser): Promise<any> {
