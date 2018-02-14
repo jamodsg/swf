@@ -24,7 +24,7 @@ export class MemberListComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       searchFor: '',
-      limit: 10
+      limit: 100
     });
   }
 

@@ -11,7 +11,6 @@ export const deleteDFBMember = functions.database.ref('/dfb-members/{userId}').o
 export const dfbMember = functions.database.ref('/dfb-members/{userId}').onWrite((event: any) => {
 
   const data = event.data.val();
-  console.log(data);
 
   const oldValue: IMember = event.data.previous.val();
 
@@ -46,20 +45,21 @@ export const dfbMember = functions.database.ref('/dfb-members/{userId}').onWrite
         dfbData: {
           passNumber: data.passNumber ? data.passNumber : '',
           ageGroup: data.ageGroup ? data.ageGroup : '',
-          eligibleForOfficialMatches: data.eligibleOfficial,
-          eligibleForFriendlyMatches: data.eligibleFriendly,
-          signOut: data.signOut,
+          eligibleForOfficialMatches: data.eligibleOfficial ? data.eligibleOfficial : '',
+          eligibleForFriendlyMatches: data.eligibleFriendly ? data.eligibleFriendly : '',
+          signOut: data.signOut ? data.signOut : '',
           playerStatus: data.playerStatus ? data.playerStatus : '',
           guestPlayer: {
             guestRight: data.guestRight ? data.guestRight : '',
             season: data.season ? data.season : '',
             type: data.type ? data.type : ''
           },
-          passPrint: data.passPrint,
-          // allowedToPlay: data.allowedToPlay
+          passPrint: data.passPrint ? data.passPrint : '',
+          allowedToPlay: data.allowedToPlay
         }
         //assignedDFBId: event.params.userId
       };
+      console.log(memberData);
 
       if (value.empty) {
         console.info('Creating User ...');
@@ -73,7 +73,6 @@ export const dfbMember = functions.database.ref('/dfb-members/{userId}').onWrite
       else {
         console.info('Updating User ...');
         const doc = value.docs[0];
-        memberData.creation = oldValue.creation;
         return doc.ref.set(memberData, {merge: true});
       }
     })

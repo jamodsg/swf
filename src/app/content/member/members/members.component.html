@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutWrap="wrap">
-  <div fxFlex.gt-xs="66" fxFlex="100">
+  <div fxFlex="100">
     <mat-card>
       <mat-card-title>
         <mat-icon>list</mat-icon>
@@ -14,10 +14,5 @@
           [categoryTypes]="categoryTypes$ | async | filterBy: ['link'] : 'member.types'" -->
       </mat-card-content>
     </mat-card>
-  </div>
-  <div fxFlex.gt-xs="33" fxFlex="100">
-    <!--<members-by-category
-      [members]="members$ | async">
-    </members-by-category>-->
   </div>
 </div>
