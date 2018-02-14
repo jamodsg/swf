@@ -66,15 +66,6 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <!--<ngx-datatable-column name="{{'general.members.detail.main.address' | translate}}" fxHide.xs>
-        <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
-          <span *ngIf="row.address">
-            {{row.address.streetName}} {{row.address.houseNumber !== 0 ? row.address.houseNumber : ''}}<br/>
-            {{row.address.zip}} {{row.address.city}}
-          </span>
-        </ng-template>
-      </ngx-datatable-column>-->
-
       <ngx-datatable-column name="{{'general.members.detail.main.ageGroupAndPassData' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
           <span *ngIf="row.dfbData">
