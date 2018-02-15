@@ -6,46 +6,46 @@ export class MemberStateService {
 
   private memberStates: IMemberState[] = [
     {
-      title: 'Kein Mitglied',
+      title: 'none',
       value: 0
     },
     {
-      title: 'Mitglied',
+      title: 'member',
       value: 1
     },
     {
-      title: 'Ehrenmitglied',
+      title: 'honorary',
       value: 2
     },
     {
-      title: 'Mitglied Kind',
+      title: 'child',
       value: 3
     },
     {
-      title: 'Mitglied Jugend',
+      title: 'teenager',
       value: 4
     },
     {
-      title: 'Mitglied Familie',
+      title: 'family',
       value: 5
     },
     {
-      title: 'Mitglied Turnen',
+      title: 'gymnastics',
       value: 6
     }
   ];
 
   private ahStates: IMemberState[] = [
     {
-      title: 'Kein Mitglied',
+      title: 'none',
       value: 0
     },
     {
-      title: 'Mitglied',
+      title: 'member',
       value: 1
     },
     {
-      title: 'Ehrenmitglied',
+      title: 'honorary',
       value: 2
     }
   ];

@@ -498,6 +498,21 @@
       }
     },
     "members": {
+      "ahMemberStates": {
+        "honorary": "Ehrenmitglied",
+        "member": "Mitglied",
+        "none": "Kein Mitglied"
+      },
+      "clubMemberStates": {
+        "ahOnlyMembers": "AH-Only Mitglieder",
+        "child": "Kinder",
+        "family": "Familie",
+        "gymnastics": "Turner",
+        "honorary": "Ehrenmitglied",
+        "member": "Mitglied",
+        "none": "Kein Mitglied",
+        "teenager": "Jugendliche"
+      },
       "detail": {
         "drive": {
           "ah": "Alte Herren",
@@ -573,6 +588,7 @@
       },
       "statistics": {
         "ahTitle": "Alte Herren",
+        "birthdayTitle": "Geburtstagsliste",
         "clubTitle": "Verein",
         "noBirthdayTitle": "Fehlende Geburtstage",
         "noEmailTitle": "Fehlende E-Mail Adressen"

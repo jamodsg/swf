@@ -13,6 +13,7 @@ import { MemberStatisticsComponent } from './member-statistics/member-statistics
 import { MemberDetailMainComponent } from './member-detail/member-detail-main/member-detail-main.component';
 import { MemberDetailDriveComponent } from './member-detail/member-detail-drive/member-detail-drive.component';
 import { MemberStateService } from '../../shared/services/member/member-state.service';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { MemberStateService } from '../../shared/services/member/member-state.se
     MatListModule,
     MatTabsModule,
     memberRoutingModule,
+    PerfectScrollbarModule,
     SharedModule
   ],
   declarations: [
