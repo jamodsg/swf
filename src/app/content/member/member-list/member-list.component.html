@@ -33,7 +33,7 @@
 <div fxLayout="row" [formGroup]="form">
 
   <div fxFlex="100"
-       *ngIf="members; else loadingTemplate">
+       *ngIf="members && clubMemberStates && ahMemberStates; else loadingTemplate">
     <ngx-datatable #myTable
                    class='material'
                    [columnMode]="'force'"
@@ -100,7 +100,9 @@
             <span *ngIf="row.clubData.joined" style="color: green">{{ row.clubData.joined | date : 'dd.MM.yy' }}<br /></span>
             <span *ngIf="row.clubData.left" style="color: red">{{ row.clubData.left | date : 'dd.MM.yy' }}<br /></span>
             <span *ngIf="row.clubData.payment">{{ row.clubData.payment }} &euro;<br /></span>
-            <span *ngIf="row.clubData.status">{{ memberStateService.getMemberStateByValue(row.clubData.status) }}</span>
+            <span *ngIf="row.clubData.status && row.clubData.status !== '?'">
+              {{(clubMemberStates | filterBy: ['value'] : row.clubData.status) ? (clubMemberStates | filterBy: ['value'] : row.clubData.status)[0].title : ''}}
+            </span>
           </span>
         </ng-template>
       </ngx-datatable-column>
@@ -111,7 +113,9 @@
             <span *ngIf="row.ahData.joined" style="color: green">{{ row.ahData.joined | date : 'dd.MM.yy' }}<br /></span>
             <span *ngIf="row.ahData.left" style="color: red">{{ row.ahData.left | date : 'dd.MM.yy' }}<br /></span>
             <span *ngIf="row.ahData.payment">{{ row.ahData.payment }} &euro;<br /></span>
-            <span *ngIf="row.ahData.status">{{ memberStateService.getAHMemberStateByValue(row.ahData.status) }}</span>
+            <span *ngIf="row.ahData.status">
+             <!-- {{(ahMemberStates | filterBy: ['value'] : row.ahData.status) ? (ahMemberStates | filterBy: ['value'] : row.ahData.status)[0].title : ''}}-->
+            </span>
           </span>
         </ng-template>
       </ngx-datatable-column>

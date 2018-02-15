@@ -514,8 +514,18 @@
             "payment": "Mitgliedsbeitrag",
             "status": "Mitglieder-Status"
           },
-          "dfb": "DFB.net-Daten",
+          "dfb": {
+            "eligible": "Spielberechtigt ab:",
+            "friendly": "Freundschaftsspiele",
+            "guest": "Gastspieler",
+            "official": "Pflichtspiele",
+            "pass": "Passdaten",
+            "signOut": "Abmeldung",
+            "status": "Status",
+            "title": "DFB.net-Daten"
+          },
           "noAHData": "Es sind keine Altherren-Daten für diesen Benuter vorhanden.",
+          "noBirthday": "Kein Geburtsdatum gespeichert.",
           "noClubData": "Es sind keine Vereins-Daten für diesen Benuter vorhanden.",
           "noContact": "Es wurden keine Kontaktdaten für dieses Mitglied hinterlegt.",
           "noDFBData": "Es sind keine DFB.net Daten für diesen Benuter vorhanden."
@@ -527,9 +537,6 @@
           "comment": "Bemerkung",
           "contact": "Kontaktdaten",
           "createMember": "Mitglied erstellen",
-          "dfb": {
-            "title": "DFB-Daten"
-          },
           "email": "E-Mail",
           "fax": "Fax-Nr.",
           "female": "Frau",

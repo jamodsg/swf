@@ -44,29 +44,81 @@
   </div>
 
   <div fxFlexOffset="1"
-       fxFlex.gt-xs="24"
+       fxFlex.gt-xs="49"
        fxFlex="100">
-    Verein
-    <ul>
-      <li>kein Mitglied 0</li>
-      <li>Mitglied 1</li>
-      <li>Ehrenmitglied 2</li>
-      <li>Mitglied Kind 3</li>
-      <li>Mitglied Jugend 4</li>
-      <li>Mitglied Familie 5</li>
-      <li>Mitglied Turnen 6</li>
-    </ul>
-  </div>
 
-  <div fxFlexOffset="1"
-       fxFlex.gt-xs="24"
-       fxFlex="100">
-    Alte Herren
-    <ul>
-      <li>kein Mitglied 0</li>
-      <li>Mitglied 1</li>
-      <li>Ehrenmitglied 2</li>
-    </ul>
+    <div fxLayout="row"
+         fxLayoutWrap="wrap">
+
+      <div fxFlex="100"
+           class="mat-card-top">
+        <mat-card>
+          <mat-card-title>
+            <mat-icon>show_chart</mat-icon>
+            {{'general.members.statistics.clubTitle' | translate}}
+          </mat-card-title>
+
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item>
+                <span>noMember</span>
+
+              </mat-list-item>
+              <mat-list-item>
+                <span>Member</span>
+
+              </mat-list-item>
+              <mat-list-item>
+                <span>honorary</span>
+
+              </mat-list-item>
+              <mat-list-item>
+                <span>child</span>
+
+              </mat-list-item>
+              <mat-list-item>
+                <span>teenager</span>
+
+              </mat-list-item>
+              <mat-list-item>
+                <span>family</span>
+
+              </mat-list-item>
+              <mat-list-item>
+                <span>gymnastics</span>
+
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div fxFlex="100"
+           class="mat-card-top">
+        <mat-card>
+          <mat-card-title>
+            <mat-icon>show_chart</mat-icon>
+            {{'general.members.statistics.ahTitle' | translate}}
+          </mat-card-title>
+          <mat-list>
+            <mat-list-item>
+              <span>noMember</span>
+
+            </mat-list-item>
+            <mat-list-item>
+              <span>Member</span>
+
+            </mat-list-item>
+            <mat-list-item>
+              <span>honorary</span>
+
+            </mat-list-item>
+          </mat-list>
+          <mat-card-content>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 
 </div>

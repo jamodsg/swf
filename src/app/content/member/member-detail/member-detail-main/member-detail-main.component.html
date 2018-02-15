@@ -20,9 +20,11 @@
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.main.birthday' | translate}}</span>
-        {{member.mainData.birthday ? (member.mainData.birthday | date: 'dd.MM.yy') : ''}}
-        {{ member.mainData.birthday ? '(' + (calculateAge(member.mainData.birthday) + ' ' +
-        ('general.members.detail.main.years' | translate)) + ')' : '' }}
+        <span style="font-weight: normal"
+              *ngIf="member.mainData.birthday; else noBirthdayTemplate">
+          {{member.mainData.birthday | date: 'dd.MM.yy' }}
+        {{ calculateAge(member.mainData.birthday) }} {{'general.members.detail.main.years' | translate}}
+        </span>
       </mat-list-item>
       <mat-list-item *ngIf="member.mainData.birthday">
         <span>{{'general.members.detail.main.zodiac' | translate}}</span>
@@ -40,7 +42,7 @@
        fxFlex.gt-xs="100">
     <h3>{{'general.members.detail.main.contact' | translate}}</h3>
     <mat-list dense
-              *ngIf="member.contact; else noContactTemplate">
+              *ngIf="member.contact && (member.contact.email !== '' || member.contact.phoneHome !== '' || member.contact.phoneMobile !== '' || member.contact.phoneWork || member.contact.fax); else noContactTemplate">
       <mat-list-item *ngIf="member.contact.email">
         <span>{{'general.members.detail.main.email' | translate}}</span>
         <a href="mailto: {{member.contact.email}}">{{member.contact.email}}</a>
@@ -90,4 +92,8 @@
 
 <ng-template #noContactTemplate>
   <p>{{'general.members.detail.drive.noContact' | translate}}</p>
+</ng-template>
+
+<ng-template #noBirthdayTemplate>
+  <p>{{'general.members.detail.drive.noBirthday' | translate}}</p>
 </ng-template>

@@ -30,6 +30,34 @@ export const driveMember = functions.database.ref('/drive-members/{userId}').onW
     .get()
     .then((value: FirebaseFirestore.QuerySnapshot) => {
 
+      const addressData = (data.street !== '' || data.houseNumber !== '' || data.city !== '' || data.zip !== '') ? {
+        streetName: data.street ? data.street : '',
+          houseNumber: data.houseNumber ? data.houseNumber : '',
+          city: data.city ? data.city : '',
+          zip: data.zip ? data.zip : '',
+      } : undefined;
+
+      const contactData = (data.email !== '' || data.phoneHome !== '' || data.phoneMobile !== '') ? {
+        email: data.email ? data.email : '',
+        phoneHome: data.phoneHome ? data.phoneHome : '',
+        phoneMobile: data.phoneMobile ? data.phoneMobile : ''
+      } : undefined;
+
+      const clubData = {
+        status: data.clubStatus ? data.clubStatus : 0,
+        joined: data.clubJoined ? data.clubJoined : '',
+        left: data.clubLeft ? data.clubLeft : '',
+        payment: data.clubPayment ? data.clubPayment : '',
+        positionsInClub: data.positionsInClub ? data.positionsInClub : ''
+      };
+
+      const ahData = {
+        status: data.ahStatus ? data.ahStatus : 0,
+        joined: data.ahJoined ? data.ahJoined : '',
+        left: data.ahLeft ? data.ahLeft : '',
+        payment: data.ahPayment ? data.ahPayment : '',
+      };
+
       let memberData: IMember = {
         isImported: true,
         mainData: {
@@ -39,36 +67,17 @@ export const driveMember = functions.database.ref('/drive-members/{userId}').onW
           lastName: data.lastName,
           birthday: birthDate
         },
-        address: {
-          streetName: data.street ? data.street : '',
-          houseNumber: data.houseNumber ? data.houseNumber : '',
-          city: data.city ? data.city : '',
-          zip: data.zip ? data.zip : '',
-        },
-        contact: {
-          email: data.email ? data.email : '',
-          phoneHome: data.phoneHome ? data.phoneHome : '',
-          phoneMobile: data.phoneMobile ? data.phoneMobile : ''
-        },
-        clubData: {
-          status: data.clubStatus ? data.clubStatus : 0,
-          joined: data.clubJoined ? data.clubJoined : '',
-          left: data.clubLeft ? data.clubLeft : '',
-          payment: data.clubPayment ? data.clubPayment : '',
-          positionsInClub: data.positionsInClub ? data.positionsInClub : ''
-        },
-        ahData: {
-          status: data.ahStatus ? data.ahStatus : 0,
-          joined: data.ahJoined ? data.ahJoined : '',
-          left: data.ahLeft ? data.ahLeft : '',
-          payment: data.ahPayment ? data.ahPayment : ''
-        },
+        address: addressData,
+        contact: contactData,
+        clubData: clubData,
+        ahData: ahData,
         creation: {
           from: 'system',
           at: new Date()
         },
         comment: data.comment ? data.comment : ''
       };
+
 
       if (value.empty) {
         console.info('Creating User ...');
