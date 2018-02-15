@@ -27,9 +27,6 @@ export interface IMember {
   interview?: IInterview[];
   comment?: string;
 
-  assignedDriveId?: number;
-  assignedDFBId?: number;
-
   // teamCategory?: ICategory;
   // fullSearch?: string;
   // status?: boolean;

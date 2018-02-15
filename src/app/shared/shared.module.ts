@@ -23,6 +23,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 import { CategoryFilterPipe } from './pipes/category-filter.pipe';
+import { IsEmptyPipe } from './pipes/is-empty.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CategoryFilterPipe } from './pipes/category-filter.pipe';
     AccordionLinkDirective,
     AccordionDirective,
     CategoryFilterPipe,
+    IsEmptyPipe,
     ToggleFullscreenDirective,
     SanitizeHtmlPipe,
     SnackbarComponent,
@@ -46,6 +48,7 @@ import { CategoryFilterPipe } from './pipes/category-filter.pipe';
     CommonModule,
     CreationModule,
     FlexLayoutModule,
+    IsEmptyPipe,
     LinkModule,
     LoadingIndicatorComponent,
     MatCardModule,

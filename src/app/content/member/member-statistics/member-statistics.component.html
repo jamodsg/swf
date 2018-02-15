@@ -1,9 +1,52 @@
-<h3>Statistiken</h3>
+<div fxLayout="row"
+     fxFlex="100">
 
-<ul>
-  <li>Fehlende Geburtstage & Geburtstagsliste</li>
-  <li>fehlende Email</li>
-  <li>Verein:
+  <div fxFlex.gt-xs="25"
+       fxFlex="100"
+       class="mat-card-top">
+
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>cake</mat-icon>
+        {{'general.members.statistics.noBirthdayTitle' | translate}}
+      </mat-card-title>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item
+            *ngFor="let member of members$ | async | isEmpty: 'mainData.birthday' | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']">
+            <a [routerLink]="['/members/edit', member.id]">{{member.mainData.lastName}} {{member.mainData.firstName}}</a>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  <div fxFlexOffset="1"
+       fxFlex.gt-xs="24"
+       fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>email</mat-icon>
+        {{'general.members.statistics.noEmailTitle' | translate}}
+      </mat-card-title>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item
+            *ngFor="let member of members$ | async | isEmpty: 'contact.email' | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']">
+            <a [routerLink]="['/members/edit', member.id]">{{member.mainData.lastName}} {{member.mainData.firstName}}</a>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlexOffset="1"
+       fxFlex.gt-xs="24"
+       fxFlex="100">
+    Verein
     <ul>
       <li>kein Mitglied 0</li>
       <li>Mitglied 1</li>
@@ -13,12 +56,17 @@
       <li>Mitglied Familie 5</li>
       <li>Mitglied Turnen 6</li>
     </ul>
-  </li>
-  <li>Alte Herren
+  </div>
+
+  <div fxFlexOffset="1"
+       fxFlex.gt-xs="24"
+       fxFlex="100">
+    Alte Herren
     <ul>
       <li>kein Mitglied 0</li>
       <li>Mitglied 1</li>
       <li>Ehrenmitglied 2</li>
     </ul>
-  </li>
-</ul>
+  </div>
+
+</div>

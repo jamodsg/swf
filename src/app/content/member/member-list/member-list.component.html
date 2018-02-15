@@ -62,7 +62,7 @@
 
       <ngx-datatable-column name="{{'general.members.detail.main.birthday' | translate}}">
         <ng-template let-row="row" let-value="mainData.birthday" ngx-datatable-cell-template>
-          {{ row.mainData.birthday | date: 'dd.MM.yy'}}
+          <span *ngIf="row.mainData.birthday">{{ row.mainData.birthday | date: 'dd.MM.yy'}}</span>
         </ng-template>
       </ngx-datatable-column>
 
@@ -78,9 +78,40 @@
 
       <ngx-datatable-column name="{{'general.members.detail.main.guestPlayerData' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
-          <span *ngIf="row.dfbData.guestPlayer.guestRight">
+          <span *ngIf="row.dfbData && row.dfbData.guestPlayer.guestRight">
             {{row.dfbData.guestPlayer.guestRight  | date: 'dd.MM.yy'}} <br />
             ({{row.dfbData.guestPlayer.type}} {{row.dfbData.guestPlayer.season}})
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="{{'general.members.detail.main.address' | translate}}">
+        <ng-template let-row="row" let-value="address" ngx-datatable-cell-template>
+          <span *ngIf="row.address">
+            {{ row.address.streetName }} <span *ngIf="row.address.houseNumber">{{row.address.houseNumber}}</span><br />
+            {{ row.address.zip}} {{row.address.city}}
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="{{'general.members.detail.drive.club' | translate}}">
+        <ng-template let-row="row" let-value="clubData" ngx-datatable-cell-template>
+          <span *ngIf="row.clubData">
+            <span *ngIf="row.clubData.joined" style="color: green">{{ row.clubData.joined | date : 'dd.MM.yy' }}<br /></span>
+            <span *ngIf="row.clubData.left" style="color: red">{{ row.clubData.left | date : 'dd.MM.yy' }}<br /></span>
+            <span *ngIf="row.clubData.payment">{{ row.clubData.payment }} &euro;<br /></span>
+            <span *ngIf="row.clubData.status">{{ memberStateService.getMemberStateByValue(row.clubData.status) }}</span>
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="{{'general.members.detail.drive.ah' | translate}}">
+        <ng-template let-row="row" let-value="clubData" ngx-datatable-cell-template>
+          <span *ngIf="row.ahData">
+            <span *ngIf="row.ahData.joined" style="color: green">{{ row.ahData.joined | date : 'dd.MM.yy' }}<br /></span>
+            <span *ngIf="row.ahData.left" style="color: red">{{ row.ahData.left | date : 'dd.MM.yy' }}<br /></span>
+            <span *ngIf="row.ahData.payment">{{ row.ahData.payment }} &euro;<br /></span>
+            <span *ngIf="row.ahData.status">{{ memberStateService.getAHMemberStateByValue(row.ahData.status) }}</span>
           </span>
         </ng-template>
       </ngx-datatable-column>

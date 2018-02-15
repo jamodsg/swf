@@ -13,5 +13,6 @@ import * as member from './member';
 // export const createTestUser = user.createTestUser;
 // export const onUserDelete = user.onDeleteUser;
 
-export const memberDFB = member.dfbMember;
+export const memberImportDFB = member.dfbMember;
+export const memberImportDrive = member.driveMember;
 // export const deleteDFBMember = member.deleteDFBMember;

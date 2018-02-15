@@ -57,8 +57,28 @@ export class MemberStateService {
     return this.memberStates;
   }
 
+  getMemberStateByValue(value: number) {
+    const memberStateArray = this.memberStates.filter((memberState: IMemberState) => {
+      return memberState.value === value;
+    });
+    if(memberStateArray.length === 1){
+      return memberStateArray[0].title;
+    }
+    return false;
+  }
+
   getAHStates() {
     return this.ahStates;
+  }
+
+  getAHMemberStateByValue(value: number) {
+    const memberStateArray = this.ahStates.filter((memberState: IMemberState) => {
+      return memberState.value === value;
+    });
+    if(memberStateArray.length === 1){
+      return memberStateArray[0].title;
+    }
+    return false;
   }
 
 }

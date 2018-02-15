@@ -8,7 +8,7 @@
     <mat-list dense *ngIf="member.clubData; else noClubTemplate">
       <mat-list-item>
         <span>{{'general.members.detail.drive.clubData.status' | translate}}</span>
-        {{ (memberStateService.getMemberStates() | filterBy: ['value'] : member.clubData.status)[0].title | translate }}
+        {{ memberStateService.getMemberStateByValue(member.clubData.status) }}
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.clubData.joined' | translate}}</span>
@@ -20,7 +20,7 @@
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.clubData.payment' | translate}}</span>
-        {{ member.clubData.payment }}
+        <span *ngIf="member.clubData.payment">{{ member.clubData.payment }} &euro;</span>
       </mat-list-item>
     </mat-list>
   </div>
@@ -32,7 +32,7 @@
     <mat-list dense *ngIf="member.ahData; else noAHTemplate">
       <mat-list-item>
         <span>{{'general.members.detail.drive.ahData.status' | translate}}</span>
-        {{ (memberStateService.getAHStates() | filterBy: ['value'] : member.ahData.status)[0].title | translate }}
+        {{ memberStateService.getAHMemberStateByValue(member.ahData.status) }}
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.ahData.joined' | translate}}</span>
@@ -44,7 +44,7 @@
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.ahData.payment' | translate}}</span>
-        {{ member.ahData.payment }}
+        <span *ngIf="member.ahData.payment">{{ member.ahData.payment }} &euro;</span>
       </mat-list-item>
     </mat-list>
   </div>
@@ -52,7 +52,7 @@
   <div fxFlexOffset="2"
        fxFlex.gt-sm="32"
        fxFlex.gt-xs="100">
-    <h3>{{'general.members.detail.drive.dfb' | translate}}</h3>
+    <h3>{{'general.members.detail.drive.dfb.title' | translate}}</h3>
     <mat-list dense *ngIf="member.dfbData !== {}; else noDFBTemplate">
       <mat-list-item>
         <span>{{'general.members.detail.main.gender' | translate}}</span>

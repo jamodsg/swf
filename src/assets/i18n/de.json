@@ -515,9 +515,10 @@
             "status": "Mitglieder-Status"
           },
           "dfb": "DFB.net-Daten",
-          "noAHData": "Es sind keine Altherren-Daten für diesen Benuter vorhanden",
-          "noClubData": "Es sind keine Vereins-Daten für diesen Benuter vorhanden",
-          "noDFBData": "Es sind keine DFB.net Daten für diesen Benuter vorhanden"
+          "noAHData": "Es sind keine Altherren-Daten für diesen Benuter vorhanden.",
+          "noClubData": "Es sind keine Vereins-Daten für diesen Benuter vorhanden.",
+          "noContact": "Es wurden keine Kontaktdaten für dieses Mitglied hinterlegt.",
+          "noDFBData": "Es sind keine DFB.net Daten für diesen Benuter vorhanden."
         },
         "main": {
           "address": "Adresse",
@@ -526,6 +527,9 @@
           "comment": "Bemerkung",
           "contact": "Kontaktdaten",
           "createMember": "Mitglied erstellen",
+          "dfb": {
+            "title": "DFB-Daten"
+          },
           "email": "E-Mail",
           "fax": "Fax-Nr.",
           "female": "Frau",
@@ -559,6 +563,12 @@
           "Scorpio": "Scorpion",
           "Sagittarius": "Schütze"
         }
+      },
+      "statistics": {
+        "ahTitle": "Alte Herren",
+        "clubTitle": "Verein",
+        "noBirthdayTitle": "Fehlende Geburtstage",
+        "noEmailTitle": "Fehlende E-Mail Adressen"
       },
       "tabs": {
         "main": "Wichtigste Daten",

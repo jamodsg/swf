@@ -7,7 +7,7 @@
     <h3>{{'general.members.detail.main.person' | translate}}</h3>
     <mat-list dense>
       <mat-list-item>
-        <span>{{'general.members.detail.main.gender' | translate}}</span>
+        <span>{{'general.members.detail.main.salutation' | translate}}</span>
         {{ 'general.members.detail.main.' + member.mainData.gender | translate}}
       </mat-list-item>
       <mat-list-item *ngIf="member.mainData.title">
@@ -30,7 +30,7 @@
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.main.isImported' | translate}}</span>
-        {{ member.isImported ? ('general.yes' | translate) :  ('general.no' | translate) }}
+        {{ member.isImported ? ('general.yes' | translate) : ('general.no' | translate) }}
       </mat-list-item>
     </mat-list>
   </div>
@@ -39,7 +39,8 @@
        fxFlex.gt-sm="32"
        fxFlex.gt-xs="100">
     <h3>{{'general.members.detail.main.contact' | translate}}</h3>
-    <mat-list dense>
+    <mat-list dense
+              *ngIf="member.contact; else noContactTemplate">
       <mat-list-item *ngIf="member.contact.email">
         <span>{{'general.members.detail.main.email' | translate}}</span>
         <a href="mailto: {{member.contact.email}}">{{member.contact.email}}</a>
@@ -67,11 +68,14 @@
        fxFlex.gt-sm="32"
        fxFlex.gt-xs="100">
     <h3>{{'general.members.detail.main.address' | translate}}</h3>
-    <mat-list dense *ngIf="member.address; else noAddressTemplate">
+    <mat-list dense
+              *ngIf="member.address; else noAddressTemplate">
       <mat-list-item>
-        <p matLine>{{member.address.streetName}} {{member.address.houseNumber}}</p>
-        <p matLine>{{member.address.zip}} {{member.address.city}}</p>
-        <p matLine>{{member.address.county}}</p>
+        <p matLine>
+          {{member.address.streetName}} {{member.address.houseNumber}}<br/>
+          {{member.address.zip}} {{member.address.city}}<br/>
+          {{member.address.county}}
+        </p>
       </mat-list-item>
     </mat-list>
 
@@ -82,4 +86,8 @@
 
 <ng-template #noAddressTemplate>
   <p>{{'general.members.detail.main.noAddress' | translate}}</p>
+</ng-template>
+
+<ng-template #noContactTemplate>
+  <p>{{'general.members.detail.drive.noContact' | translate}}</p>
 </ng-template>

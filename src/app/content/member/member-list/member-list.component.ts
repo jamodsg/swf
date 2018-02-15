@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
+import { MemberStateService } from '../../../shared/services/member/member-state.service';
 
 @Component({
   selector: 'member-list',
@@ -18,7 +19,9 @@ export class MemberListComponent implements OnInit {
   public form: FormGroup;
   public itemsPerPageOptions = [5, 10, 25, 50, 100];
 
-  constructor(private fb: FormBuilder, private memberService: MemberService) {
+  constructor(private fb: FormBuilder,
+              private memberService: MemberService,
+              public memberStateService: MemberStateService) {
   }
 
   ngOnInit() {
