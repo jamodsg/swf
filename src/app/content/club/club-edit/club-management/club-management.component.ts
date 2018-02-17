@@ -25,7 +25,7 @@ export class ClubManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ToDo: Save new Position and listing');
+    console.log(this.form.controls['management']['controls']['positions']['controls']);
   }
 
   setStep(index: number) {

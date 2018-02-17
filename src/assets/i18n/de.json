@@ -277,6 +277,7 @@
             "description": "Tätigkeiten",
             "editToDos": "Aufgabentext editieren",
             "endDate": "Ende",
+            "noPersons": "Diese Position wurde noch von keinem Mitglied geführt.",
             "savePosition": "Amt speichern",
             "startDate": "Datum der Ernennung",
             "timeLineTitle": "Chronologie",

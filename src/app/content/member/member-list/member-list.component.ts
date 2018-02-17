@@ -23,8 +23,8 @@ export class MemberListComponent implements OnInit {
   public ahMemberStates: IMemberState[];
 
   constructor(private fb: FormBuilder,
-              private memberService: MemberService,
-              public memberStateService: MemberStateService) {
+    private memberService: MemberService,
+    public memberStateService: MemberStateService) {
     this.clubMemberStates = memberStateService.getMemberStates();
     this.ahMemberStates = memberStateService.getAHStates();
   }

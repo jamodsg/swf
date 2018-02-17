@@ -61,7 +61,7 @@ export class MemberStateService {
     const memberStateArray = this.memberStates.filter((memberState: IMemberState) => {
       return memberState.value === value;
     });
-    if(memberStateArray.length === 1){
+    if (memberStateArray.length === 1) {
       return memberStateArray[0].title;
     }
     return false;
@@ -75,7 +75,7 @@ export class MemberStateService {
     const memberStateArray = this.ahStates.filter((memberState: IMemberState) => {
       return memberState.value === value;
     });
-    if(memberStateArray.length === 1){
+    if (memberStateArray.length === 1) {
       return memberStateArray[0].title;
     }
     return false;

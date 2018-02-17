@@ -1,5 +1,7 @@
 <div fxLayout="row"
-     fxLayoutWrap="wrap" [formGroup]="form">
+     fxLayoutWrap="wrap"
+     *ngIf="positions && members; else loadingTemplate"
+     [formGroup]="form">
 
   <div fxFlex.gt-sm="34"
        fxFlex.gt-xs="100"
@@ -57,9 +59,21 @@
             </a>
           </mat-tab>
           <mat-tab label="{{'general.clubs.edit.management.positions.timeLineTitle' | translate}}">
+            <p *ngIf="( form.controls['management']['controls']['positions']['controls'] | filterBy: ['value.assignedPosition'] : category.id).length === 0">
+              {{'general.clubs.edit.management.positions.noPersons' | translate}}
+            </p>
             <mat-list>
-              <mat-list-item>Volker Morsch 2016 &ndash; heute</mat-list-item>
-              <mat-list-item>Dieter Kunz 2008 - 2016</mat-list-item>
+              <mat-list-item *ngFor="let position of form.controls['management']['controls']['positions']['controls'] | filterBy: ['value.assignedPosition'] : category.id | orderBy: 'values.startDate'">
+                <span style="display: block; width: 50%">
+                  {{position.value.startDate | date: 'dd.MM.yy' }}
+                  <span *ngIf="position.value.endDate">&ndash; {{position.value.endDate | date: 'dd.MM.yy' }}</span>
+                </span>
+                <a [routerLink]="['/members/edit', position.value.assignedMember]">
+                  {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.lastName}}
+                  {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.firstName}}
+                  {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.birthday | date: 'dd.MM.yy'}}
+                </a>
+              </mat-list-item>
             </mat-list>
           </mat-tab>
         </mat-tab-group>
@@ -91,4 +105,8 @@
     </club-management-form>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>
 

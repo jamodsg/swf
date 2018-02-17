@@ -73,7 +73,7 @@ export class SponsorEditComponent implements OnInit {
     this.router.navigate(['/sponsors']).then();
   }
 
-  removeSponsor(){
+  removeSponsor() {
     this.sponsorService.removeSponsor(this.sponsor).then(
       () => this.redirectToList()
     );

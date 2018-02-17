@@ -21,7 +21,7 @@
     <h3>{{'general.clubs.edit.management.positions.title' | translate}}</h3>
 
     <mat-accordion class="example-headers-align"
-                   [displayMode]="'flat'">
+                   [displayMode]="'flat'" *ngIf="positions && members; else loadingTemplate">
       <mat-expansion-panel
         *ngFor="let category of positions | orderBy: ['title']; let i = index; let first = first; let last = last"
         [expanded]="step === i"
@@ -41,9 +41,21 @@
             <div [innerHtml]="category.description | sanitizeHtml"></div>
           </mat-tab>
           <mat-tab label="{{'general.clubs.edit.management.positions.timeLineTitle' | translate}}">
+            <p *ngIf="( club.management.positions | filterBy: ['assignedPosition'] : category.id).length === 0">
+              {{'general.clubs.edit.management.positions.noPersons' | translate}}
+            </p>
             <mat-list>
-              <!-- ToDo: Liste der bisherigen Inhaber dieser Position -->
-              <mat-list-item style="color: red">ToDo</mat-list-item>
+              <mat-list-item *ngFor="let position of club.management.positions | filterBy: ['assignedPosition'] : category.id | orderBy: 'startDate'">
+                <span style="display: block; width: 50%">
+                  {{position.startDate | date: 'dd.MM.yy' }}
+                  <span *ngIf="position.endDate">&ndash; {{position.endDate | date: 'dd.MM.yy' }}</span>
+                </span>
+                <a [routerLink]="['/members/edit', position.assignedMember]">
+                  {{ (members | filterBy: ['id'] : position.assignedMember)[0].mainData.lastName}}
+                  {{ (members | filterBy: ['id'] : position.assignedMember)[0].mainData.firstName}}
+                  {{ (members | filterBy: ['id'] : position.assignedMember)[0].mainData.birthday | date: 'dd.MM.yy'}}
+                </a>
+              </mat-list-item>
             </mat-list>
           </mat-tab>
         </mat-tab-group>
@@ -56,4 +68,8 @@
 
 <ng-template #noPhotoTemplate>
   <p>{{'general.clubs.edit.noManagementPhoto' | translate}}</p>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
 </ng-template>

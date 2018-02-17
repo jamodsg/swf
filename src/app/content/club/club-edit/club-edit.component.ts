@@ -256,7 +256,7 @@ export class ClubEditComponent implements OnInit {
       action = this.clubService.createClub(this.club);
     }
     action.then(
-      () =>  this.redirectToList(),
+      () => this.redirectToList(),
       (error: any) => console.log(error)
     );
   }
