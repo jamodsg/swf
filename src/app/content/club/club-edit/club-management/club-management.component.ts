@@ -25,7 +25,6 @@ export class ClubManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.form.controls['management']['controls']['positions']['controls']);
   }
 
   setStep(index: number) {

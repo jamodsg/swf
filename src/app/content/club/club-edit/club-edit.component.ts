@@ -239,6 +239,7 @@ export class ClubEditComponent implements OnInit {
 
   saveClubManagementPosition($event: boolean): void {
     this.selectedClubManagementPosition = -1;
+    // this.saveClub(false);
   }
 
   removeClubManagementPosition($event: boolean): void {
@@ -247,7 +248,7 @@ export class ClubEditComponent implements OnInit {
     this.selectedClubManagementPosition = -1;
   }
 
-  saveClub(): void {
+  saveClub(redirect: boolean = true): void {
     let action;
 
     if (this.club.id) {
@@ -256,7 +257,10 @@ export class ClubEditComponent implements OnInit {
       action = this.clubService.createClub(this.club);
     }
     action.then(
-      () => this.redirectToList(),
+      () => {
+        if(redirect)
+        this.redirectToList()
+      },
       (error: any) => console.log(error)
     );
   }

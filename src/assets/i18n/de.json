@@ -270,7 +270,7 @@
             "title": "Aktuelle und alte Vorstandsmitglieder erfassen"
           },
           "positions": {
-            "addMember": "Mitglied auswählen",
+            "addMember": "Neues Vorstandsmitglied auswählen",
             "assignedCategory": "Position",
             "assignedMember": "Mitglied",
             "create": "Neue Position",

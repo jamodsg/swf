@@ -32,78 +32,84 @@
   </div>
 
   <div fxFlexOffset="3"
-       fxFlex.gt-sm="30"
+       fxFlex.gt-sm="60"
        fxFlex.gt-xs="100">
-    <h3>{{'general.clubs.edit.management.positions.title' | translate}}</h3>
 
-    <mat-accordion class="example-headers-align" [displayMode]="'flat'">
-      <mat-expansion-panel
-        *ngFor="let category of positions | orderBy: ['title']; let i = index; let first = first; let last = last"
-        [expanded]="step === i"
-        (opened)="setStep(i)"
-        hideToggle="false">
+    <div *ngIf="selectedClubManagementPosition !== -1">
+      <h3>{{'general.clubs.edit.management.list.title' | translate}}</h3>
 
-        <mat-expansion-panel-header [collapsedHeight]="'24px'" [expandedHeight]="'24px'">
-          <mat-panel-title>
-            {{category.title}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+      <club-management-form *ngIf="selectedClubManagementPosition !== -1"
+                            [form]="form"
+                            [members]="members"
+                            [positions]="positions"
+                            [selectedClubManagementPosition]="selectedClubManagementPosition"
+                            (cancel)="cancel.emit($event)"
+                            (save)="save.emit($event)">
+      </club-management-form>
+    </div>
 
-      <mat-tab-group class="mat-tab-group"
-                       *ngIf="step === i"
-                       [dynamicHeight]="true">
-          <mat-tab label="{{'general.clubs.edit.management.positions.todoTitle' | translate}}">
-            <div [innerHtml]="category.description | sanitizeHtml"></div>
-            <a mat-raised-button color="warn" [routerLink]="['/categories/edit', category.id]">
-              {{'general.clubs.edit.management.positions.editToDos' | translate}}
-            </a>
-          </mat-tab>
-          <mat-tab label="{{'general.clubs.edit.management.positions.timeLineTitle' | translate}}">
-            <p *ngIf="( form.controls['management']['controls']['positions']['controls'] | filterBy: ['value.assignedPosition'] : category.id).length === 0">
-              {{'general.clubs.edit.management.positions.noPersons' | translate}}
-            </p>
-            <mat-list>
-              <mat-list-item *ngFor="let position of form.controls['management']['controls']['positions']['controls'] | filterBy: ['value.assignedPosition'] : category.id | orderBy: 'values.startDate'">
+    <div *ngIf="selectedClubManagementPosition === -1">
+      <h3>{{'general.clubs.edit.management.positions.title' | translate}}</h3>
+
+      <button type="button"
+              style="margin-bottom: 25px"
+              mat-raised-button
+              color="primary"
+              (click)="add.emit(true)">
+        {{'general.clubs.edit.management.positions.addMember' | translate}}
+      </button>
+
+      <mat-accordion class="example-headers-align"
+                     [displayMode]="'flat'">
+        <mat-expansion-panel
+          *ngFor="let category of positions | orderBy: ['title']; let i = index; let first = first; let last = last"
+          [expanded]="step === i"
+          (opened)="setStep(i)"
+          hideToggle="false">
+
+          <mat-expansion-panel-header [collapsedHeight]="'24px'" [expandedHeight]="'24px'">
+            <mat-panel-title>
+              {{category.title}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-tab-group class="mat-tab-group"
+                         *ngIf="step === i"
+                         [dynamicHeight]="true">
+            <mat-tab label="{{'general.clubs.edit.management.positions.todoTitle' | translate}}">
+              <div [innerHtml]="category.description | sanitizeHtml"></div>
+              <a mat-raised-button color="warn" [routerLink]="['/categories/edit', category.id]">
+                {{'general.clubs.edit.management.positions.editToDos' | translate}}
+              </a>
+            </mat-tab>
+            <mat-tab label="{{'general.clubs.edit.management.positions.timeLineTitle' | translate}}">
+              <p
+                *ngIf="( form.controls['management']['controls']['positions']['controls'] | filterBy: ['value.assignedPosition'] : category.id).length === 0">
+                {{'general.clubs.edit.management.positions.noPersons' | translate}}
+              </p>
+              <mat-list>
+                <mat-list-item
+                  *ngFor="let position of form.controls['management']['controls']['positions']['controls'] | filterBy: ['value.assignedPosition'] : category.id | orderBy: 'values.startDate'">
                 <span style="display: block; width: 50%">
                   {{position.value.startDate | date: 'dd.MM.yy' }}
                   <span *ngIf="position.value.endDate">&ndash; {{position.value.endDate | date: 'dd.MM.yy' }}</span>
                 </span>
-                <a [routerLink]="['/members/edit', position.value.assignedMember]">
-                  {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.lastName}}
-                  {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.firstName}}
-                  {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.birthday | date: 'dd.MM.yy'}}
-                </a>
-              </mat-list-item>
-            </mat-list>
-          </mat-tab>
-        </mat-tab-group>
+                  <a [routerLink]="['/members/edit', position.value.assignedMember]">
+                    {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.lastName}}
+                    {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.firstName}}
+                    {{ (members | filterBy: ['id'] : position.value.assignedMember)[0].mainData.birthday | date:
+                    'dd.MM.yy'}}
+                  </a>
+                </mat-list-item>
+              </mat-list>
+            </mat-tab>
+          </mat-tab-group>
 
-      </mat-expansion-panel>
-    </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
   </div>
 
-  <div fxFlexOffset="3"
-       fxFlex.gt-sm="30"
-       fxFlex.gt-xs="100">
-    <h3>{{'general.clubs.edit.management.list.title' | translate}}</h3>
-
-    <button type="button"
-            mat-raised-button
-            color="primary"
-            *ngIf="selectedClubManagementPosition === -1"
-            (click)="add.emit(true)">
-      {{'general.clubs.edit.management.positions.addMember' | translate}}
-    </button>
-
-    <club-management-form *ngIf="selectedClubManagementPosition !== -1"
-                          [form]="form"
-                          [members]="members"
-                          [positions]="positions"
-                          [selectedClubManagementPosition]="selectedClubManagementPosition"
-                          (cancel)="cancel.emit($event)"
-                          (save)="save.emit($event)">
-    </club-management-form>
-  </div>
 </div>
 
 <ng-template #loadingTemplate>
