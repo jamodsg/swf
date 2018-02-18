@@ -6,7 +6,7 @@ mat-toolbar {
     height: 40px;
     line-height: 24px;
   }
-  .toolbar-avatar img{
+  .toolbar-avatar img {
     width: 40px;
     border-radius: 50%;
   }
@@ -28,7 +28,7 @@ mat-toolbar {
   &.main-header {
     padding: 0 8px;
     position: relative;
-    box-shadow: 0 1px 8px rgba(0,0,0,.3);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     z-index: 9;
     .branding {
       display: -webkit-box;
@@ -44,11 +44,11 @@ mat-toolbar {
       padding: 0 64px 0 16px;
     }
     .logo {
-      background-image: url(/assets/images/logo.svg);
-      width: 109px;
-      height: 25px;
-      -webkit-background-size: 109px 25px;
-      background-size: 109px 25px;
+      background-image: url('/assets/sfw/sfw.png');
+      width: 47px;
+      height: 47px;
+      -webkit-background-size: 47px 47px;
+      background-size: 47px 47px;
       margin: auto;
     }
     .search-bar {
@@ -61,7 +61,7 @@ mat-toolbar {
         max-width: 800px;
         input {
           font-size: 1rem;
-          padding: .95rem .75rem;
+          padding: 0.95rem 0.75rem;
           z-index: 2;
           cursor: text;
           text-indent: 30px;
@@ -90,16 +90,16 @@ mat-toolbar {
         padding: 0 16px 0 16px;
       }
       .logo {
-        width: 87px;
-        height: 20px;
-        -webkit-background-size: 87px 20px;
-        background-size: 87px 20px;
+        width: 37px;
+        height: 37px;
+        -webkit-background-size: 37px 37px;
+        background-size: 37px 37px;
       }
     }
   }
 }
 
-[dir="rtl"] {
+[dir='rtl'] {
   .main-header {
     .branding {
       padding: 0 16px 0 64px;

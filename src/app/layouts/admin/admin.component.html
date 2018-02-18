@@ -37,7 +37,8 @@
     </div>
   </mat-sidenav-container>
 
-  <app-options [currentLang]="currentLang"
+  <app-options fxHide.xs="true"
+               [currentLang]="currentLang"
                (changeTranslation)="changeTranslation($event)"
                (messageEvent)="receiveOptions($event)">
   </app-options>

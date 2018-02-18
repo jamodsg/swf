@@ -241,7 +241,7 @@
         "foundedIn": "Gründungsjahr",
         "fussballDeId": "ID auf fussball.de",
         "fussballDeUrl": "Link zu Fussball.de",
-        "history": "Die Geschichte des Vereins ...",
+        "history": "Die Geschichte des Vereins",
         "historyTitle": "Vereinschronik",
         "homepage": "Homepage (ohne http://)",
         "honoraries": {
@@ -270,7 +270,7 @@
             "title": "Aktuelle und alte Vorstandsmitglieder erfassen"
           },
           "positions": {
-            "addMember": "Neues Vorstandsmitglied auswählen",
+            "addMember": "Neues Vorstandsmitglied",
             "assignedCategory": "Position",
             "assignedMember": "Mitglied",
             "create": "Neue Position",
@@ -1062,7 +1062,7 @@
       "icon": "Verknüpftes Icon",
       "listEvents": "Liste",
       "noEvents": "Es wurden noch keine Ereignisse gespeichert",
-      "saveEvent": "Ereignis speichern",
+      "saveEvent": "Fertig",
       "startDate": "Startdatum",
       "subTitle": "Untertitel",
       "text": "Text",
