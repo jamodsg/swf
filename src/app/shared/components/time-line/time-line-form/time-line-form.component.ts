@@ -14,8 +14,8 @@ export class TimeLineFormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() selectedTimeLineEvent: number;
 
-  @Output() cancel: EventEmitter<any> = new EventEmitter(false);
-  @Output() save: EventEmitter<any> = new EventEmitter(false);
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>(false);
+  @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   @ViewChild('text') text: QuillEditorComponent;
 

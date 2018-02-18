@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
+import { ArticleService } from '../../../../shared/services/article/article.service';
+import { Observable } from 'rxjs/Observable';
+import { IArticle } from '../../../../shared/interfaces/article.interface';
 
 @Component({
   selector: 'club-honoraries',
@@ -17,11 +20,17 @@ export class ClubHonorariesComponent implements OnInit {
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   public step = -1;
+  public articles$: Observable<IArticle[]>;
 
-  constructor() {
+  constructor(private articleService: ArticleService) {
+    this.articles$ = articleService.articles$;
   }
 
   ngOnInit() {
-    console.log('ToDo: get articles and members => save Honorary; show List of current Honoraries');
   }
+
+  setStep(i: number) {
+    this.step = i;
+  }
+
 }

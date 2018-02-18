@@ -1,12 +1,11 @@
 <form novalidate
       (ngSubmit)="saveClub()"
       [formGroup]="form">
+
   <div fxLayout="row"
        fxLayoutWrap="wrap">
 
-    <div fxFlex.gt-sm="100"
-         fxFlex.gt-xs="100"
-         fxFlex="100">
+    <div fxFlex="100">
       <div class="mat-card-top"
            *ngIf="club; else loadingTemplate">
         <mat-card>
@@ -18,29 +17,34 @@
 
           <mat-card-content>
 
-            <mat-tab-group [dynamicHeight]="true">
+            <mat-tab-group [dynamicHeight]="true"
+                           *ngIf="members$ | async as members; else loadingTemplate">
+
               <mat-tab label="{{'general.clubs.edit.mainTitle' | translate}}">
                 <club-edit-main [locations]="locations$ | async"
-                                [members]="members$ | async"
+                                [members]="members"
                                 [form]="form"></club-edit-main>
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.historyTitle' | translate }}">
                 <club-history (add)="addTimeLineEvent($event)"
-                              (cancel)="removeTimeLineEvent($event)"
+                              (delete)="removeTimeLineEvent($event)"
+                              (edit)="editTimeLineEvent($event)"
                               (save)="saveTimeLineEvent($event)"
                               [selectedTimeLineEvent]="selectedClubTimeLineEvent"
-                              [events]="club.timeLine"
                               [form]="form">
                 </club-history>
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}">
                 <club-management (add)="addClubManagementPosition($event)"
-                                 (cancel)="removeClubManagementPosition($event)"
+                                 (delete)="removeClubManagementPosition($event)"
+                                 (edit)="editClubManagementPosition($event)"
                                  (save)="saveClubManagementPosition($event)"
                                  [selectedClubManagementPosition]="selectedClubManagementPosition"
-                                 [members]="members$ | async"
+                                 [members]="members"
+                                 [showLinks]="true"
+                                 [club]="club"
                                  [positions]="positions$ | async"
                                  [form]="form">
                 </club-management>
@@ -62,13 +66,14 @@
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.honoraries.title' | translate}}">
-                <club-honoraries (add)="addHonorary()"
+                ToDo
+                <!--<club-honoraries (add)="addHonorary()"
                                  (cancel)="removeHonorary()"
                                  (save)="saveHonorary()"
                                  [selectedHonorary]="selectedHonorary"
-                                 [members]="members$ | async"
+                                 [members]="members | filterBy: ['clubData.status'] : '2'"
                                  [form]="form">
-                </club-honoraries>
+                </club-honoraries>-->
               </mat-tab>
 
               <mat-tab label="test">
@@ -78,7 +83,7 @@
             </mat-tab-group>
           </mat-card-content>
 
-          <mat-card-actions>
+          <!--<mat-card-actions>
             <div class="button-row">
               <button mat-raised-button
                       color="primary"
@@ -92,7 +97,7 @@
                 {{'general.cancel' | translate}}
               </a>
             </div>
-          </mat-card-actions>
+          </mat-card-actions>-->
         </mat-card>
       </div>
     </div>

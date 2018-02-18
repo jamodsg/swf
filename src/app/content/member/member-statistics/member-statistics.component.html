@@ -51,11 +51,11 @@
       <mat-card-content style="max-height: 80vh;" [perfectScrollbar]="config">
         <mat-list dense>
           <mat-list-item *ngFor="let memberState of memberStates | orderBy: ['value']">
-            <span fxFlex="30">{{'general.members.clubMemberStates.' + memberState.title | translate}}</span>
+            <span fxFlex="70">{{'general.members.clubMemberStates.' + memberState.title | translate}}</span>
             {{ (members | filterBy: ['clubData.status'] : memberState.value).length}}
           </mat-list-item>
           <mat-list-item>
-            <span fxFlex="30">{{'general.members.clubMemberStates.ahOnlyMembers' | translate}}</span>
+            <span fxFlex="70">{{'general.members.clubMemberStates.ahOnlyMembers' | translate}}</span>
             {{ (members | filterBy: ['clubData.status'] : 0 | filterBy: ['ahData.status'] : 1).length}}
           </mat-list-item>
         </mat-list>
@@ -74,7 +74,7 @@
       <mat-card-content>
         <mat-list dense>
           <mat-list-item *ngFor="let memberState of ahStates | orderBy: ['value']">
-            <span fxFlex="50">{{'general.members.ahMemberStates.' + memberState.title | translate}}</span>
+            <span fxFlex="70">{{'general.members.ahMemberStates.' + memberState.title | translate}}</span>
             {{ (members | filterBy: ['ahData.status'] : memberState.value).length}}
           </mat-list-item>
         </mat-list>

@@ -14,7 +14,7 @@ export class ClubManagementFormComponent implements OnInit {
   @Input() positions: ICategory[];
   @Input() members: IMember[];
 
-  @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>(false);
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor() {

@@ -2,28 +2,31 @@
      fxLayoutWrap="wrap" [formGroup]="form">
 
   <div fxFlex.gt-sm="49"
-       fxFlex.gt-xs="100"
+       fxFlex="100"
        formGroupName="honoraries">
 
     <!--<mat-accordion
       class="example-headers-align"
       [displayMode]="'flat'">
+
       <mat-expansion-panel
-        *ngFor="let category of positions | orderBy: ['title']; let i = index; let first = first; let last = last"
+        *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']; let i = index; let first = first; let last = last"
         [expanded]="step === i"
         (opened)="setStep(i)"
         hideToggle="false">
 
         <mat-expansion-panel-header [collapsedHeight]="'24px'" [expandedHeight]="'24px'">
           <mat-panel-title>
-            {{category.title}}
+            {{member.mainData.lastName}}
+            {{member.mainData.firstName}}
+            {{member.mainData.birthday | date : 'dd.MM.yy'}}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <mat-tab-group class="mat-tab-group"
                        *ngIf="step === i"
                        [dynamicHeight]="true">
-          <mat-tab label="{{'general.clubs.edit.management.positions.todoTitle' | translate}}">
+          <!--<mat-tab label="{{'general.clubs.edit.management.positions.todoTitle' | translate}}">
             <div [innerHtml]="category.description | sanitizeHtml"></div>
             <a mat-raised-button color="warn" [routerLink]="['/categories/edit', category.id]">
               {{'general.clubs.edit.management.positions.editToDos' | translate}}
@@ -44,7 +47,7 @@
 
   <div fxFlexOffset="2"
        fxFlex.gt-sm="49"
-       fxFlex.gt-xs="100">
+       fxFlex="100">
     <button type="button"
             mat-raised-button
             color="primary"

@@ -10,7 +10,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { ClubService } from '../../shared/services/club/club.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-  MatButtonModule, MatDatepickerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule,
+  MatButtonModule, MatDatepickerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule,
+  MatNativeDateModule, MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
@@ -32,6 +33,7 @@ import { ClubDetailMainComponent } from './club-detail/club-detail-main/club-det
 import { ClubDetailHistoryComponent } from './club-detail/club-detail-history/club-detail-history.component';
 import { ClubDetailManagementComponent } from './club-detail/club-detail-management/club-detail-management.component';
 import { ClubDetailHonorariesComponent } from './club-detail/club-detail-honoraries/club-detail-honoraries.component';
+import { ClubManagementListComponent } from './club-edit/club-management/club-management-list/club-management-list.component';
 
 @NgModule({
   imports: [
@@ -43,6 +45,7 @@ import { ClubDetailHonorariesComponent } from './club-detail/club-detail-honorar
     MatInputModule,
     MatListModule,
     MatNativeDateModule,
+    MatSnackBarModule,
     MatTabsModule,
     MediaModule,
     PublicationModule,
@@ -65,7 +68,8 @@ import { ClubDetailHonorariesComponent } from './club-detail/club-detail-honorar
     ClubDetailMainComponent,
     ClubDetailHistoryComponent,
     ClubDetailManagementComponent,
-    ClubDetailHonorariesComponent
+    ClubDetailHonorariesComponent,
+    ClubManagementListComponent
   ],
   exports: [],
   providers: [

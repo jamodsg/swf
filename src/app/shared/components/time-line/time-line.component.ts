@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ITimeLineEvent } from '../../interfaces/time-line-event.interface';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'time-line',
@@ -8,25 +8,21 @@ import { ITimeLineEvent } from '../../interfaces/time-line-event.interface';
 })
 export class TimeLineComponent implements OnInit {
 
-  @Input() events: ITimeLineEvent[];
-  public step = -1;
+  @Input() form: FormGroup;
+  @Input() selectedTimeLineEvent: number;
+  @Input() showLinks: boolean;
+
+  @Output() add: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>(false);
+  @Output() edit: EventEmitter<number> = new EventEmitter<number>(false);
+
 
   constructor() {
   }
 
   ngOnInit() {
-  }
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
   }
 
 }

@@ -101,7 +101,8 @@
             <span *ngIf="row.clubData.left" style="color: red">{{ row.clubData.left | date : 'dd.MM.yy' }}<br /></span>
             <span *ngIf="row.clubData.payment">{{ row.clubData.payment }} &euro;<br /></span>
             <span *ngIf="row.clubData.status && row.clubData.status !== '?'">
-              {{(clubMemberStates | filterBy: ['value'] : row.clubData.status) ? 'general.members.ahMemberStates.' + ((clubMemberStates | filterBy: ['value'] : row.clubData.status)[0].title | translate) : ''}}
+              {{(clubMemberStates | filterBy: ['value'] : row.clubData.status)
+              ? ('general.members.clubMemberStates.' + (clubMemberStates | filterBy: ['value'] : row.clubData.status)[0].title | translate) : ''}}
             </span>
           </span>
         </ng-template>
@@ -114,7 +115,8 @@
             <span *ngIf="row.ahData.left" style="color: red">{{ row.ahData.left | date : 'dd.MM.yy' }}<br /></span>
             <span *ngIf="row.ahData.payment">{{ row.ahData.payment }} &euro;<br /></span>
             <span *ngIf="row.ahData.status">
-             {{(ahMemberStates | filterBy: ['value'] : row.ahData.status) ? ((ahMemberStates | filterBy: ['value'] : row.ahData.status)[0].title | translate) : ''}}
+             {{(ahMemberStates | filterBy: ['value'] : row.ahData.status)
+              ? ((ahMemberStates | filterBy: ['value'] : row.ahData.status)[0].title | translate) : ''}}
             </span>
           </span>
         </ng-template>

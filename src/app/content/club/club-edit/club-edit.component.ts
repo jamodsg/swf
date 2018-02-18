@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -13,7 +13,8 @@ import 'rxjs/add/operator/debounceTime';
 import { IClubManagement } from '../../../shared/interfaces/club/club-management.interface';
 import { CategoryService } from '../../../shared/services/category/category.service';
 import { ICategory } from '../../../shared/interfaces/category.interface';
-import { IClubHonorary } from '../../../shared/interfaces/club/club-honorary.interface';
+import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'club-edit',
@@ -36,7 +37,6 @@ export class ClubEditComponent implements OnInit {
 
   public selectedClubTimeLineEvent: number = -1;
   public selectedClubManagementPosition: number = -1;
-  public selectedHonorary: number = -1;
 
   constructor(public clubService: ClubService,
               private locationService: LocationService,
@@ -44,6 +44,7 @@ export class ClubEditComponent implements OnInit {
               private categoryService: CategoryService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
+              public snackBar: MatSnackBar,
               private router: Router,) {
     this.locations$ = locationService.locations$;
     this.members$ = memberService.members$;
@@ -61,113 +62,21 @@ export class ClubEditComponent implements OnInit {
       title: [this.club.title, [Validators.required, Validators.minLength(10)]],
       description: this.club.description,
       assignedLocation: this.club.assignedLocation,
-      creation: this.initCreation(),
-      management: this.initManagement(),
       history: this.club.history,
+      creation: this.initCreation(),
       info: this.initInfo(),
+      management: this.initManagement(),
       fussballde: this.initFussballDe(),
-      timeLine: this.initClubTimeLine(),
-      honoraries: this.initHonoraries()
+      timeLine: this.initClubTimeLine()
+      // honoraries: this.initHonoraries()
     });
 
-    this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe(
-      (changes: IClub) => Object.assign({}, this.club, changes)
-    );
-  }
-
-  // Honoraries
-  initHonoraries(): FormArray {
-    const formArray = [];
-    if (this.club.honoraries) {
-      for (let i = 0; i < this.club.honoraries.length; i++) {
-        formArray.push(this.initHonorary(this.club.honoraries[i]));
+    this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: IClub) => {
+      this.club = Object.assign({}, this.club, changes);
+      if(!this.form.invalid){
+        this.saveClub();
       }
-    }
-    return this.fb.array(formArray);
-  }
-
-  initHonorary(honorary: IClubHonorary): FormGroup {
-    return this.fb.group({
-      assignedArticle: [honorary ? honorary.assignedArticle : null, [Validators.required]],
-      assignedMember: [honorary ? honorary.assignedMember : null, [Validators.required]],
-      startDate: [honorary ? honorary.startDate : new Date()],
     });
-  }
-
-  addHonorary(): void {
-    const control = <FormArray>this.form.controls['honoraries'];
-    const honorary: IClubHonorary = {
-      assignedArticle: null,
-      assignedMember: null,
-      startDate: ''
-    };
-    const addCtrl = this.initHonorary(honorary);
-    control.push(addCtrl);
-    this.setSelectedHonorary(this.form.controls['honoraries']['controls'].length - 1);
-  }
-
-  setSelectedHonorary(honorary: number): void {
-    this.selectedHonorary = honorary;
-  }
-
-  saveHonorary(): void {
-    this.selectedHonorary = -1;
-  }
-
-  removeHonorary(): void {
-    const control = <FormArray>this.form.controls['honoraries'];
-    control.removeAt(this.selectedHonorary);
-    this.selectedHonorary = -1;
-  }
-
-  // TimeLine
-  initClubTimeLine(): FormArray {
-    const formArray = [];
-    if (this.club.timeLine) {
-      for (let i = 0; i < this.club.timeLine.length; i++) {
-        formArray.push(this.initTimeLineEvent(this.club.timeLine[i]));
-      }
-    }
-    return this.fb.array(formArray);
-  }
-
-  initTimeLineEvent(event: ITimeLineEvent): FormGroup {
-    return this.fb.group({
-      title: [event ? event.title : '', [Validators.required, Validators.maxLength(100)]],
-      subTitle: [event ? event.subTitle : ''],
-      text: [event ? event.text : ''],
-      icon: [event ? event.icon : ''],
-      color: [event ? event.color : ''],
-      assignedMediaItem: [event ? event.assignedMediaItem : ''],
-      assignedArticle: [event ? event.assignedArticle : ''],
-      startDate: [event ? event.startDate : new Date()],
-      endDate: [event ? event.endDate : new Date()]
-    });
-  }
-
-  addTimeLineEvent(): void {
-    const control = <FormArray>this.form.controls['timeLine'];
-    const event: ITimeLineEvent = {
-      title: '',
-      startDate: ''
-    };
-    const addCtrl = this.initTimeLineEvent(event);
-    control.push(addCtrl);
-    this.setSelectedClubTimeLineEvent(this.form.controls['timeLine']['controls'].length - 1);
-  }
-
-  setSelectedClubTimeLineEvent(event: number): void {
-    this.selectedClubTimeLineEvent = event;
-  }
-
-  saveTimeLineEvent($event: boolean): void {
-    this.selectedClubTimeLineEvent = -1;
-  }
-
-  removeTimeLineEvent($event: boolean): void {
-    const control = <FormArray>this.form.controls['timeLine'];
-    control.removeAt(this.selectedClubTimeLineEvent);
-    this.selectedClubTimeLineEvent = -1;
   }
 
   initInfo(): FormGroup {
@@ -201,6 +110,56 @@ export class ClubEditComponent implements OnInit {
     });
   }
 
+  // TimeLine
+  initClubTimeLine(): FormArray {
+    const formArray = [];
+    if (this.club.timeLine) {
+      for (let i = 0; i < this.club.timeLine.length; i++) {
+        formArray.push(this.initTimeLineEvent(this.club.timeLine[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initTimeLineEvent(event: ITimeLineEvent): FormGroup {
+    return this.fb.group({
+      title: [event ? event.title : '', [Validators.required, Validators.maxLength(100)]],
+      subTitle: [event ? event.subTitle : ''],
+      icon: [event ? event.icon : ''],
+      color: [event ? event.color : ''],
+      assignedMediaItem: [event ? event.assignedMediaItem : ''],
+      assignedArticle: [event ? event.assignedArticle : ''],
+      startDate: [event ? event.startDate : new Date()],
+      endDate: [event ? event.endDate : new Date()]
+    });
+  }
+
+  addTimeLineEvent(): void {
+    const control = <FormArray>this.form.controls['timeLine'];
+    const event: ITimeLineEvent = {
+      title: '',
+      startDate: ''
+    };
+    const addCtrl = this.initTimeLineEvent(event);
+    control.push(addCtrl);
+    this.selectedClubTimeLineEvent = this.form.controls['timeLine']['controls'].length - 1;
+  }
+
+  editTimeLineEvent($event: number): void {
+    this.selectedClubTimeLineEvent = $event;
+  }
+
+  saveTimeLineEvent($event: boolean): void {
+    this.selectedClubTimeLineEvent = -1;
+  }
+
+  removeTimeLineEvent($event: number): void {
+    const control = <FormArray>this.form.controls['timeLine'];
+    control.removeAt($event);
+    this.selectedClubTimeLineEvent = -1;
+  }
+
+
   // Club-Management
   initClubManagementPositions(): FormArray {
     const formArray = [];
@@ -230,25 +189,28 @@ export class ClubEditComponent implements OnInit {
     };
     const addCtrl = this.initClubManagementPosition(position);
     control.push(addCtrl);
-    this.setSelectedClubManagementPosition(this.form.controls['management']['controls']['positions']['controls'].length - 1);
+    this.selectedClubManagementPosition =this.form.controls['management']['controls']['positions']['controls'].length - 1;
   }
 
-  setSelectedClubManagementPosition($event: number): void {
-    this.selectedClubManagementPosition = $event;
-  }
+  /* editClubManagementPosition($event:any): void {
+    console.log($event);
+    const control = <FormArray>this.form.controls['management']['controls']['positions'];
+    console.log(control.controls.indexOf($event));
+    // this.selectedClubManagementPosition = $event;
+    // this.selectedClubManagementPosition = $event;
+  } */
 
   saveClubManagementPosition($event: boolean): void {
     this.selectedClubManagementPosition = -1;
-    // this.saveClub(false);
   }
 
-  removeClubManagementPosition($event: boolean): void {
+  removeClubManagementPosition($event: number): void {
     const control = <FormArray>this.form.controls['management']['controls']['positions'];
-    control.removeAt(this.selectedClubManagementPosition);
+    control.removeAt($event);
     this.selectedClubManagementPosition = -1;
   }
 
-  saveClub(redirect: boolean = true): void {
+  saveClub(redirect: boolean = false): void {
     let action;
 
     if (this.club.id) {
@@ -256,10 +218,20 @@ export class ClubEditComponent implements OnInit {
     } else {
       action = this.clubService.createClub(this.club);
     }
-    action.then(
+     action.then(
       () => {
-        if(redirect)
-        this.redirectToList()
+        if (redirect) {
+          this.redirectToList();
+        }
+        this.snackBar.openFromComponent(SnackbarComponent, {
+          data: {
+            status: 'success',
+            message: 'general.applications.updateMessage'
+          },
+          duration: 2500,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        });
       },
       (error: any) => console.log(error)
     );

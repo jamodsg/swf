@@ -1,15 +1,13 @@
 <div fxLayout="row"
-     fxLayoutWrap="wrap"
-     *ngFor="let control of form.controls['timeLine']['controls']; let i = index"
-     [formGroup]="form">
+     [formGroup]="form"
+     fxLayoutWrap="wrap">
 
 
-  <div fxFlex.gt-sm="100"
-       fxFlex.gt-xs="100"
-       fxFlex="100"
-       formArrayName="timeLine">
+  <div fxFlex="100"
+       *ngFor="let control of form.controls; let i = index; let first = first; let last = last">
 
-    <mat-card *ngIf="i === selectedTimeLineEvent" [formGroupName]="i">
+    <mat-card *ngIf="i === selectedTimeLineEvent"
+              [formGroupName]="i">
 
       <mat-card-title>{{'general.timeLine.addEvent' | translate}}</mat-card-title>
 
@@ -78,12 +76,6 @@
             </mat-select>
           </mat-form-field>
 
-          <div fxFlex="100" style="margin-top: 25px;">
-            <label>{{ 'general.timeLine.text' | translate}}</label>
-            <quill-editor [style]="{height: '150px'}"
-                          formControlName="text">
-            </quill-editor>
-          </div>
 
         </div>
 
@@ -92,7 +84,7 @@
       <mat-card-actions>
         <div class="button-row">
           <button mat-raised-button
-                  [disabled]="!form.get('timeLine').valid"
+                  [disabled]="!form.controls[i].valid"
                   color="primary"
                   type="button"
                   (click)="save.emit(true)">
@@ -101,13 +93,13 @@
           <button type="button"
                   mat-raised-button
                   color="accent"
-                  (click)="cancel.emit(true)">
-            {{'general.cancel' | translate}}
+                  (click)="delete.emit(i)">
+            {{'general.timeLine.deleteEvent' | translate}}
           </button>
         </div>
       </mat-card-actions>
+
     </mat-card>
-
   </div>
-</div>
 
+</div>

@@ -1,31 +1,33 @@
-<mat-accordion class="example-headers-align"
-               *ngIf="events && events.length > 0; else noEventsTemplate">
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
 
-  <mat-expansion-panel
-    *ngFor="let event of events; let i = index; let first = first; let last = last"
-    [expanded]="step === i"
-    (opened)="setStep(i)"
-    hideToggle="true">
+  <div fxFlex="100"
+       *ngIf="selectedTimeLineEvent === -1">
+    <button mat-raised-button
+            style="margin-bottom: 25px;"
+            type="button"
+            color="accent"
+            (click)="add.emit(true)">
+      {{'general.timeLine.addEvent' | translate}}
+    </button>
 
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{event.title}}
-      </mat-panel-title>
-      <mat-panel-description>
-        {{event.startDate}} {{event.endDate ? '&ndash;' + event.endDate : ''}}
-        <mat-icon *ngIf="event.icon">{{event.icon}}</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+    <time-line-list [form]="form"
+                    [showLinks]="showLinks"
+                    (add)="add.emit($event)"
+                    (delete)="delete.emit($event)"
+                    (edit)="edit.emit($event)">
+    </time-line-list>
+  </div>
 
-    <div *ngIf="step === i" [innerHtml]="event.text"></div>
+  <div fxFlex="100" *ngIf="selectedTimeLineEvent !== -1">
+    <time-line-form [selectedTimeLineEvent]="selectedTimeLineEvent"
+                    (save)="save.emit($event)"
+                    (delete)="delete.emit($event)"
+                    [form]="form">
+    </time-line-form>
+  </div>
 
-    <mat-action-row>
-      <button mat-button color="warn" (click)="prevStep()" [disabled]="first">Previous</button>
-      <button mat-button color="primary" (click)="nextStep()" [disabled]="last">Next</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-
-</mat-accordion>
+</div>
 
 <ng-template #noEventsTemplate>
   <p style="color: red">{{ 'general.timeLine.noEvents' | translate}}</p>

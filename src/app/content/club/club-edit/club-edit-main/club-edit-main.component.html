@@ -1,5 +1,8 @@
 <div fxLayout="row"
-     fxLayoutWrap="wrap" [formGroup]="form">
+     fxLayoutWrap="wrap"
+     *ngIf="locations; else loadingTemplate"
+     [formGroup]="form">
+
   <div fxFlex.gt-sm="65"
        fxFlex.gt-xs="100">
 
@@ -97,7 +100,7 @@
 
     <div fxLayout="row"
          fxLayoutWrap="wrap"
-         style="margin-top: 25px;">
+         style="margin-top: 25px">
       <div fxFlex="100">
         <label>{{'general.clubs.edit.description' | translate}}</label>
         <quill-editor [style]="{height: '150px'}"
@@ -107,12 +110,15 @@
     </div>
   </div>
 
-
-  <div fxFlexOffset="5"
+  <div fxFlexOffset.gt-sm="5"
        fxFlex.gt-sm="30"
        fxFlex.gt-xs="100">
-    <div style="height: 500px; width: 100%; background-color: #7c7c7c">Vereinswappen: Upload und Anzeige</div>
+    <div style="height: 500px; width: 100%; background-color: #7c7c7c; margin-top: 25px">Vereinswappen: Upload und Anzeige</div>
   </div>
 
 </div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>
 
