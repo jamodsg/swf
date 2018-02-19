@@ -1,18 +1,23 @@
-import * as admin from 'firebase-admin'
-import * as functions from 'firebase-functions'
+'use strict';
+
+import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 admin.initializeApp(functions.config().firebase);
 
-admin.database.enableLogging(true);
-
 import * as user from './user';
+export const newUserCreated = user.userCreated;
+export const onUserDelete = user.userDeleted;
+
+
 import * as member from './member';
+export const birthdayReminder = member.birthdayCronJob;
 
-// export const newUserCreated = user.newUserCreated;      // Mail an Admin + Main an neuen Benutzer
-// export const onUserPropertyChanged = user.onUserPropertyChanged;
-// export const createTestUser = user.createTestUser;
-// export const onUserDelete = user.onDeleteUser;
 
-export const memberImportDFB = member.dfbMember;
-export const memberImportDrive = member.driveMember;
-// export const deleteDFBMember = member.deleteDFBMember;
+/*
+export const hourlyCronJob = functions.pubsub.topic('hourly-tick').onPublish((event: any) => {
+  console.log('This job is ran every hour!');
+});
+*/
+
+

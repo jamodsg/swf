@@ -4,6 +4,7 @@ import { IMember } from '../../../../shared/interfaces/member/member.interface';
 import { ArticleService } from '../../../../shared/services/article/article.service';
 import { Observable } from 'rxjs/Observable';
 import { IArticle } from '../../../../shared/interfaces/article.interface';
+import { IClub } from '../../../../shared/interfaces/club/club.interface';
 
 @Component({
   selector: 'club-honoraries',
@@ -12,11 +13,12 @@ import { IArticle } from '../../../../shared/interfaces/article.interface';
 export class ClubHonorariesComponent implements OnInit {
 
   @Input() form: FormGroup;
+  @Input() club: IClub;
   @Input() selectedHonorary: number;
   @Input() members: IMember[];
 
   @Output() add: EventEmitter<boolean> = new EventEmitter(false);
-  @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   public step = -1;

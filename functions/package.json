@@ -12,12 +12,13 @@
     "cors": "^2.8.4",
     "firebase": "^4.9.1",
     "firebase-admin": "^5.8.2",
-    "firebase-functions": "^0.8.1"
+    "firebase-functions": "^0.8.1",
+    "moment": "^2.20.1"
   },
   "devDependencies": {
     "tslint": "^5.9.1",
     "typescript": "^2.7.1"
   },
-  "main": "build/functions/src/index.js",
+  "main": "build/index.js",
   "private": true
 }

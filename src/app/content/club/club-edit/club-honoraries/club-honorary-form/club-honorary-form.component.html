@@ -9,7 +9,7 @@
     <mat-card *ngIf="i === selectedHonorary"
               formGroupName="honoraries">
 
-      <mat-card-title>{{'general.clubs.edit.honoraries.newHonoraryTitle' | translate}}</mat-card-title>
+      <mat-card-title>{{'general.clubs.edit.honoraries.listTitle' | translate}}</mat-card-title>
 
 
       <mat-card-content [formGroupName]="i">
@@ -68,8 +68,8 @@
           <button type="button"
                   mat-raised-button
                   color="accent"
-                  (click)="cancel.emit()">
-            {{'general.cancel' | translate}}
+                  (click)="delete.emit()">
+            {{ 'general.clubs.edit.honoraries.delete' | translate}}
           </button>
         </div>
       </mat-card-actions>

@@ -15,8 +15,7 @@ export class ClubHonoraryFormComponent implements OnInit {
   @Input() members: IMember[];
   @Input() articles: IArticle[];
 
-  @Output() add: EventEmitter<boolean> = new EventEmitter(false);
-  @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor() { }

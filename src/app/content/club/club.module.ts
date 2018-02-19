@@ -34,6 +34,7 @@ import { ClubDetailHistoryComponent } from './club-detail/club-detail-history/cl
 import { ClubDetailManagementComponent } from './club-detail/club-detail-management/club-detail-management.component';
 import { ClubDetailHonorariesComponent } from './club-detail/club-detail-honoraries/club-detail-honoraries.component';
 import { ClubManagementListComponent } from './club-edit/club-management/club-management-list/club-management-list.component';
+import { ClubHonoraryListComponent } from './club-edit/club-honoraries/club-honorary-list/club-honorary-list.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { ClubManagementListComponent } from './club-edit/club-management/club-ma
     ClubDetailHistoryComponent,
     ClubDetailManagementComponent,
     ClubDetailHonorariesComponent,
-    ClubManagementListComponent
+    ClubManagementListComponent,
+    ClubHonoraryListComponent
   ],
   exports: [],
   providers: [

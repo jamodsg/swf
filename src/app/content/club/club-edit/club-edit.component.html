@@ -37,9 +37,9 @@
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.managementTitle' | translate }}">
+                <!-- (edit)="editClubManagementPosition($event)" -->
                 <club-management (add)="addClubManagementPosition($event)"
                                  (delete)="removeClubManagementPosition($event)"
-                                 (edit)="editClubManagementPosition($event)"
                                  (save)="saveClubManagementPosition($event)"
                                  [selectedClubManagementPosition]="selectedClubManagementPosition"
                                  [members]="members"
@@ -66,38 +66,22 @@
               </mat-tab>
 
               <mat-tab label="{{ 'general.clubs.edit.honoraries.title' | translate}}">
-                ToDo
-                <!--<club-honoraries (add)="addHonorary()"
-                                 (cancel)="removeHonorary()"
-                                 (save)="saveHonorary()"
-                                 [selectedHonorary]="selectedHonorary"
+                <club-honoraries (add)="addHonorary($event)"
+                                 (delete)="removeHonorary($event)"
+                                 (save)="saveHonorary($event)"
                                  [members]="members | filterBy: ['clubData.status'] : '2'"
+                                 [selectedHonorary]="selectedHonorary"
                                  [form]="form">
-                </club-honoraries>-->
+                </club-honoraries>
               </mat-tab>
 
-              <mat-tab label="test">
+              <!--<mat-tab label="test">
                 <pre>{{club | json}}</pre>
-              </mat-tab>
+              </mat-tab>-->
 
             </mat-tab-group>
           </mat-card-content>
 
-          <!--<mat-card-actions>
-            <div class="button-row">
-              <button mat-raised-button
-                      color="primary"
-                      [disabled]="!form.valid"
-                      type="submit">
-                {{ club.id ? ('general.clubs.edit.editClub' | translate) : 'general.clubs.edit.saveClub' | translate}}
-              </button>
-              <a mat-raised-button
-                 color="accent"
-                 (click)="cancel()">
-                {{'general.cancel' | translate}}
-              </a>
-            </div>
-          </mat-card-actions>-->
         </mat-card>
       </div>
     </div>

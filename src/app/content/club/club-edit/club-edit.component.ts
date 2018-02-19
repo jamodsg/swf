@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +15,7 @@ import { CategoryService } from '../../../shared/services/category/category.serv
 import { ICategory } from '../../../shared/interfaces/category.interface';
 import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
+import { IClubHonorary } from '../../../shared/interfaces/club/club-honorary.interface';
 
 @Component({
   selector: 'club-edit',
@@ -37,6 +38,7 @@ export class ClubEditComponent implements OnInit {
 
   public selectedClubTimeLineEvent: number = -1;
   public selectedClubManagementPosition: number = -1;
+  public selectedHonorary: number = -1;
 
   constructor(public clubService: ClubService,
               private locationService: LocationService,
@@ -67,13 +69,13 @@ export class ClubEditComponent implements OnInit {
       info: this.initInfo(),
       management: this.initManagement(),
       fussballde: this.initFussballDe(),
-      timeLine: this.initClubTimeLine()
-      // honoraries: this.initHonoraries()
+      timeLine: this.initClubTimeLine(),
+      honoraries: this.initHonoraries()
     });
 
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: IClub) => {
       this.club = Object.assign({}, this.club, changes);
-      if(!this.form.invalid){
+      if (!this.form.invalid) {
         this.saveClub();
       }
     });
@@ -108,6 +110,49 @@ export class ClubEditComponent implements OnInit {
       photoUrl: this.club.management ? this.club.management.photoUrl : '',
       photoDescription: this.club.management ? this.club.management.photoDescription : ''
     });
+  }
+
+  // honoraries
+  initHonoraries(): FormArray {
+    const formArray = [];
+    if (this.club.honoraries) {
+      for (let i = 0; i < this.club.honoraries.length; i++) {
+        formArray.push(this.initHonorary(this.club.honoraries[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initHonorary(honorary: IClubHonorary): FormGroup {
+    return this.fb.group({
+      assignedMember: [honorary ? honorary.assignedMember : null, [Validators.required]],
+      assignedArticle: [honorary ? honorary.assignedArticle : null, [Validators.required]],
+      startDate: [honorary ? honorary.startDate : new Date(), [Validators.required]],
+    });
+  }
+
+  addHonorary(): void {
+    const control = <FormArray>this.form.controls['honoraries'];
+    const honorary: IClubHonorary = {
+      startDate: new Date()
+    };
+    const addCtrl = this.initHonorary(honorary);
+    control.push(addCtrl);
+    this.selectedHonorary = this.form.controls['honoraries']['controls'].length - 1;
+  }
+
+  editHonorary($event: number): void {
+    this.selectedHonorary = $event;
+  }
+
+  saveHonorary($event: boolean): void {
+    this.selectedHonorary = -1;
+  }
+
+  removeHonorary($event: number): void {
+    const control = <FormArray>this.form.controls['honoraries'];
+    control.removeAt($event);
+    this.selectedHonorary = -1;
   }
 
   // TimeLine
@@ -159,7 +204,6 @@ export class ClubEditComponent implements OnInit {
     this.selectedClubTimeLineEvent = -1;
   }
 
-
   // Club-Management
   initClubManagementPositions(): FormArray {
     const formArray = [];
@@ -189,7 +233,7 @@ export class ClubEditComponent implements OnInit {
     };
     const addCtrl = this.initClubManagementPosition(position);
     control.push(addCtrl);
-    this.selectedClubManagementPosition =this.form.controls['management']['controls']['positions']['controls'].length - 1;
+    this.selectedClubManagementPosition = this.form.controls['management']['controls']['positions']['controls'].length - 1;
   }
 
   /* editClubManagementPosition($event:any): void {
@@ -218,7 +262,7 @@ export class ClubEditComponent implements OnInit {
     } else {
       action = this.clubService.createClub(this.club);
     }
-     action.then(
+    action.then(
       () => {
         if (redirect) {
           this.redirectToList();

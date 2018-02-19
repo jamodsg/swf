@@ -3,6 +3,6 @@ import { IArticle } from '../article.interface';
 
 export interface IClubHonorary {
   assignedArticle?: IArticle | string;
-  assignedMember: IMember | string;
-  startDate: string;
+  assignedMember?: IMember | string;
+  startDate: Date;
 }

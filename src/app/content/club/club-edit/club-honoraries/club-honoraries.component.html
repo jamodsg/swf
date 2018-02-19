@@ -1,71 +1,35 @@
 <div fxLayout="row"
-     fxLayoutWrap="wrap" [formGroup]="form">
+     fxLayoutWrap="wrap"
+     [formGroup]="form">
 
   <div fxFlex.gt-sm="49"
-       fxFlex="100"
-       formGroupName="honoraries">
-
-    <!--<mat-accordion
-      class="example-headers-align"
-      [displayMode]="'flat'">
-
-      <mat-expansion-panel
-        *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']; let i = index; let first = first; let last = last"
-        [expanded]="step === i"
-        (opened)="setStep(i)"
-        hideToggle="false">
-
-        <mat-expansion-panel-header [collapsedHeight]="'24px'" [expandedHeight]="'24px'">
-          <mat-panel-title>
-            {{member.mainData.lastName}}
-            {{member.mainData.firstName}}
-            {{member.mainData.birthday | date : 'dd.MM.yy'}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-tab-group class="mat-tab-group"
-                       *ngIf="step === i"
-                       [dynamicHeight]="true">
-          <!--<mat-tab label="{{'general.clubs.edit.management.positions.todoTitle' | translate}}">
-            <div [innerHtml]="category.description | sanitizeHtml"></div>
-            <a mat-raised-button color="warn" [routerLink]="['/categories/edit', category.id]">
-              {{'general.clubs.edit.management.positions.editToDos' | translate}}
-            </a>
-          </mat-tab>
-          <mat-tab label="{{'general.clubs.edit.management.positions.timeLineTitle' | translate}}">
-            <mat-list>
-              <mat-list-item>Volker Morsch 2016 &ndash; heute</mat-list-item>
-              <mat-list-item>Dieter Kunz 2008 - 2016</mat-list-item>
-            </mat-list>
-          </mat-tab>
-        </mat-tab-group>
-
-      </mat-expansion-panel>
-    </mat-accordion>-->
-
+       fxFlex="100">
+    <h3>{{'general.clubs.edit.honoraries.title' | translate}}</h3>
+    <p>{{'general.clubs.edit.honoraries.description' | translate}}</p>
+    <club-honorary-list [club]="club"
+                        [members]="members">
+    </club-honorary-list>
   </div>
 
-  <div fxFlexOffset="2"
-       fxFlex.gt-sm="49"
+  <div fxFlex.gt-sm="49"
+       fxFlexOffset.gt-sm="2"
        fxFlex="100">
-    <button type="button"
-            mat-raised-button
-            color="primary"
+    <button mat-raised-button
+            style="margin-bottom: 25px"
             *ngIf="selectedHonorary === -1"
-            (click)="add.emit()">
-      {{'general.clubs.edit.honoraries.add' | translate}}
+            type="button"
+            color="primary"
+            (click)="add.emit(true)">
+      {{'general.clubs.edit.honoraries.addHonorary' | translate}}
     </button>
 
-    <club-honorary-form *ngIf="selectedHonorary !== -1"
-                        [form]="form"
+    <club-honorary-form [form]="form"
                         [members]="members"
-                        [articles]="articles$ | async"
                         [selectedHonorary]="selectedHonorary"
-                        (cancel)="cancel.emit()"
-                        (save)="save.emit()">
+                        (delete)="delete.emit($event)"
+                        (save)="save.emit($event)">
     </club-honorary-form>
   </div>
-
 </div>
 
 

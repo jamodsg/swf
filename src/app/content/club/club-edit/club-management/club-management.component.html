@@ -24,16 +24,16 @@
         <label>
           {{'general.clubs.edit.management.current.description' | translate}}
         </label>
-        <quill-editor [style]="{height: '350px;'}"
-                      formControlName="photoDescription">
+        <quill-editor formControlName="photoDescription">
         </quill-editor>
       </div>
     </div>
   </div>
 
-  <div fxFlexOffset.gt-sm="3"
-       fxFlex.gt-sm="50"
-       fxFlex.gt-xs="100">
+
+  <div fxFlex.gt-sm="50"
+       fxFlexOffset.gt-sm="3"
+       fxFlex="100">
 
     <div *ngIf="selectedClubManagementPosition === -1">
       <h3>{{'general.clubs.edit.management.positions.title' | translate}}</h3>

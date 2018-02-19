@@ -245,13 +245,13 @@
         "historyTitle": "Vereinschronik",
         "homepage": "Homepage (ohne http://)",
         "honoraries": {
-          "add": "Ehrenmitglied hinzufügen",
+          "addHonorary": "Ehrenmitglied ernennen",
           "assignedArticle": "Verknüpfter Artikel",
-          "assignedMember": "Verknüpftes Mitglied",
-          "newHonoraryTitle": "Neues Ehrenmitglied",
-          "noHonoraries": "Es wurden noch keine Ehrenmitglieder ernannt.",
+          "assignedMember": "Ehrenmitglied wählen",
+          "delete": "Löschen",
+          "description": "Neue Ehrenmitglieder müssen in der Mitgliederliste im Google Drive mit dem Mitgliederstatus 2 gespeichert werden. Nach ca. 5 Minuten erscheinen diese dann hier in der Liste.",
+          "listTitle": "Ehrenmitglieder mit Artikel verknüpfen",
           "save": "Speichern",
-          "subTitle": "Ehre, wem Ehre gebührt!",
           "startDate": "Datum der Ernennung",
           "title": "Ehrenmitglieder"
         },

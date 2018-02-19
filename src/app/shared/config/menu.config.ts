@@ -50,25 +50,13 @@ export const MENUITEMS = [
     state: 'categories',
     name: 'category',
     type: 'link',
-    icon: 'list',
-    badge: [
-      {
-        type: 'green',
-        value: 'OK'
-      }
-    ]
+    icon: 'list'
   },
   {
     state: 'clubs',
     name: 'club',
     type: 'link',
-    icon: 'business',
-    badge: [
-      {
-        type: 'yellow',
-        value: '?'
-      }
-    ]
+    icon: 'business'
   },
   {
     state: 'locations',
