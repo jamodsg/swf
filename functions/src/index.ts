@@ -1,5 +1,8 @@
 'use strict';
 
+// add cronJobs via gcloud console:
+// gcloud app deploy app.yaml cron.yaml
+
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 

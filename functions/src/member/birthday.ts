@@ -41,7 +41,7 @@ export const birthdayCronJob = functions.pubsub.topic('quarter-hour-tick').onPub
       }
 
       const welcomeMsg = {
-        to: 'thomas.handle@gmail.com,  mail@r-klein.com ',
+        to: 'thomas.handle@gmail.com, mail@r-klein.com, ronnyhassel@gmail.com',
         from: 'Geburtstage@sfwinterbach.com',
         subject: 'Geburtstage vom ' + moment().format("LL"),
         templateId: '3b21edd6-0c49-40c2-a2e3-68ae679ff440',
