@@ -7,6 +7,7 @@
 
 ## Based on
 - Primer Admin Theme
+- Google Cloud CronJobs
 - Angularfire 2
 - Firebase (Auth, Storage, Firestore-DB, Firebase-Admin)
 - Sendgrid/mail
