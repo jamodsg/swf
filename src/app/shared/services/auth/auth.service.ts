@@ -100,7 +100,6 @@ export class AuthService implements OnDestroy {
 
 
   private updateOnConnect() {
-    console.log('test');
     return this.db.object('.info/connected').valueChanges().do(connected => {
       console.log(connected);
       /*

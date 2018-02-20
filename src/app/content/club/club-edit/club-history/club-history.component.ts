@@ -26,7 +26,7 @@ export class ClubHistoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  cancel($event){
+  cancel($event) {
     console.log($event);
   }
 }

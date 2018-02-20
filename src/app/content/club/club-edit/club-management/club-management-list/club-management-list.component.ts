@@ -32,7 +32,7 @@ export class ClubManagementListComponent implements OnInit {
   ngOnInit() {
   }
 
-  setStep(i: number){
+  setStep(i: number) {
     this.step = i;
   }
 

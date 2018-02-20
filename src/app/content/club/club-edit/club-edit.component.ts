@@ -41,13 +41,13 @@ export class ClubEditComponent implements OnInit {
   public selectedHonorary: number = -1;
 
   constructor(public clubService: ClubService,
-              private locationService: LocationService,
-              private memberService: MemberService,
-              private categoryService: CategoryService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              public snackBar: MatSnackBar,
-              private router: Router,) {
+    private locationService: LocationService,
+    private memberService: MemberService,
+    private categoryService: CategoryService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar,
+    private router: Router, ) {
     this.locations$ = locationService.locations$;
     this.members$ = memberService.members$;
     this.positions$ = categoryService.getCategoriesByCategoryType('club.position.types');
