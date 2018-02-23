@@ -16,7 +16,7 @@ function calculateAge(birthday: string) {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
-export const birthdayCronJob = functions.pubsub.topic('daily-tick').onPublish((event: any) => {
+export const birthdayReminderCron = functions.pubsub.topic('daily-tick').onPublish((event: any) => {
 
   let birthdayList = '<ul>';
 

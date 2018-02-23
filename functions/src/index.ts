@@ -15,7 +15,7 @@ export const onUserDelete = user.userDeleted;
 
 
 import * as member from './member';
-export const birthdayReminder = member.birthdayCronJob;
+export const birthdayReminder = member.birthdayReminderCron;
 
 
 /*
