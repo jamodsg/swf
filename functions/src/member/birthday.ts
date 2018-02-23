@@ -36,8 +36,12 @@ export const birthdayReminderCron = functions.pubsub.topic('daily-tick').onPubli
 
       // if no there are no birthdays today
       if(birthdayList === '<ul></ul>'){
+        console.log('No birthdays today' + moment().format("DD.MM"));
         return true;
       }
+
+      console.log('birthdays found:');
+      console.log(birthdayList);
 
       const welcomeMsg = {
         to: ['thomas.handle@gmail.com', 'mail@r-klein.com', 'ronnyhassel@gmail.com'],
