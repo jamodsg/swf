@@ -19,6 +19,10 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/category/category.module#CategoryModule'
       },
       {
+        path: 'calendar',
+        loadChildren: '../../content/calendar/calendar.module#CalendarModule'
+      },
+      {
         path: 'clubs',
         loadChildren: '../../content/club/club.module#ClubModule'
       },

@@ -6,6 +6,12 @@ export const MENUITEMS = [
     icon: 'dashboard'
   },
   {
+    state: '/',
+    name: 'event',
+    type: 'link',
+    icon: 'event'
+  },
+  {
     state: 'uploader',
     name: 'uploader',
     type: 'link',
