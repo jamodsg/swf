@@ -185,7 +185,6 @@
           </p>
           <mat-divider inset="true" *ngIf="!last"></mat-divider>
         </mat-list-item>
-        <mat-divider inset="true" *ngIf="!last"></mat-divider>
         <h3 mat-subheader>{{'general.dashboard.yesterday' | translate}}</h3>
         <mat-list-item *ngFor="let message of messages; let last = last">
           <img mat-list-avatar src="assets/images/face4.jpg" alt="Image of {{message.from}}">
