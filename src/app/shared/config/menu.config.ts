@@ -6,7 +6,7 @@ export const MENUITEMS = [
     icon: 'dashboard'
   },
   {
-    state: '/',
+    state: 'calendar',
     name: 'event',
     type: 'link',
     icon: 'event'

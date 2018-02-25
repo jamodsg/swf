@@ -20,7 +20,7 @@ export const adminRoutes: Routes = [
       },
       {
         path: 'calendar',
-        loadChildren: '../../content/calendar/calendar.module#CalendarModule'
+        loadChildren: '../../content/sfw-calendar/sfw-calendar.module#SFWCalendarModule'
       },
       {
         path: 'clubs',

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SFWCalendarComponent } from './sfw-calendar.component';
+import { CalendarDialogComponent } from './calendar-dialog.component';
 
-describe('SFWCalendarComponent', () => {
-  let component: SFWCalendarComponent;
-  let fixture: ComponentFixture<SFWCalendarComponent>;
+describe('CalendarDialogComponent', () => {
+  let component: CalendarDialogComponent;
+  let fixture: ComponentFixture<CalendarDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SFWCalendarComponent]
+      declarations: [CalendarDialogComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SFWCalendarComponent);
+    fixture = TestBed.createComponent(CalendarDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

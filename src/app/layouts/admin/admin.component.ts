@@ -83,7 +83,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   isOver(): boolean {
-    if (this.url === '/articles/editor') {
+    if (this.url === '/articles/editor' || this.url === '/calendar') {
       return true;
     } else {
       return this.mediaMatcher.matches;
