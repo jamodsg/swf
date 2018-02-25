@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SFWCalendarComponent } from './sfw-calendar.component';
 import { CalendarModule } from 'ap-angular2-fullcalendar';
+import { CalendarDialogComponent } from './calendar-dialog/calendar-dialog.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { CalendarModule } from 'ap-angular2-fullcalendar';
     SharedModule
   ],
   declarations: [
+    CalendarDialogComponent,
     SFWCalendarComponent
   ],
   providers: []
