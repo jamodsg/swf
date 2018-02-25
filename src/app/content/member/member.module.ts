@@ -6,7 +6,16 @@ import { MemberResolver } from './member.resolver';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '../../shared/shared.module';
 import { MemberService } from '../../shared/services/member/member.service';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatListModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
+  MatSnackBarModule,
+  MatTabsModule
+} from '@angular/material';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { MemberStatisticsComponent } from './member-statistics/member-statistics.component';
@@ -14,17 +23,25 @@ import { MemberDetailMainComponent } from './member-detail/member-detail-main/me
 import { MemberDetailDriveComponent } from './member-detail/member-detail-drive/member-detail-drive.component';
 import { MemberStateService } from '../../shared/services/member/member-state.service';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { MemberEditMainComponent } from './member-edit/member-edit-main/member-edit-main.component';
+import { MemberEditDriveComponent } from './member-edit/member-edit-drive/member-edit-drive.component';
+import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
     FlexLayoutModule,
     MatButtonModule,
+    MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
     MatTabsModule,
     memberRoutingModule,
     PerfectScrollbarModule,
+    QuillModule,
     SharedModule
   ],
   declarations: [
@@ -34,12 +51,15 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     MemberEditComponent,
     MemberStatisticsComponent,
     MemberDetailMainComponent,
-    MemberDetailDriveComponent
+    MemberDetailDriveComponent,
+    MemberEditMainComponent,
+    MemberEditDriveComponent
   ],
   providers: [
     MemberResolver,
     MemberService,
-    MemberStateService
+    MemberStateService,
+    PendingChangesGuard
   ]
 })
 

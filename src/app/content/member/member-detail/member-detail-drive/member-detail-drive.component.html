@@ -8,7 +8,8 @@
     <mat-list dense *ngIf="member.clubData; else noClubTemplate">
       <mat-list-item>
         <span>{{'general.members.detail.drive.clubData.status' | translate}}</span>
-        {{ memberStateService.getMemberStateByValue(member.clubData.status) }}
+        {{('general.members.clubMemberStates.' +memberStateService.getMemberStateByValue(member.clubData.status) |
+        translate)}}
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.clubData.joined' | translate}}</span>
@@ -32,7 +33,8 @@
     <mat-list dense *ngIf="member.ahData; else noAHTemplate">
       <mat-list-item>
         <span>{{'general.members.detail.drive.ahData.status' | translate}}</span>
-        {{ memberStateService.getAHMemberStateByValue(member.ahData.status) }}
+        {{('general.members.ahMemberStates.' +memberStateService.getAHMemberStateByValue(member.ahData.status) |
+        translate)}}
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.ahData.joined' | translate}}</span>
@@ -56,24 +58,27 @@
     <mat-list dense *ngIf="member.dfbData; else noDFBTemplate">
       <mat-list-item>
         <span>{{'general.members.detail.drive.dfb.status' | translate}}</span>
-        {{ member.dfbData.ageGroup }} {{ member.dfbData.playerStatus ? '(' + member.dfbData.playerStatus +')' : '' }} <br  />
+        {{ member.dfbData.ageGroup }} {{ member.dfbData.playerStatus ? '(' + member.dfbData.playerStatus +')' : '' }}
+        <br/>
         {{ member.dfbData.allowedToPlay }}
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.dfb.pass' | translate}}</span>
-        {{ member.dfbData.passNumber }} <br  />
+        {{ member.dfbData.passNumber }} <br/>
         {{ member.dfbData.passPrint ? (member.dfbData.passPrint | date: 'dd.MM.yy') : ''}}
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.drive.dfb.eligible' | translate}}</span>
-        {{ member.dfbData.eligibleForOfficialMatches ? ((member.dfbData.eligibleForOfficialMatches | date: 'dd.MM.yy') + ' ' + ('general.members.detail.drive.dfb.official' | translate)) : '' }}<br/>
-        {{ member.dfbData.eligibleForFriendlyMatches ? ((member.dfbData.eligibleForFriendlyMatches | date: 'dd.MM.yy') + ' ' + ('general.members.detail.drive.dfb.friendly' | translate)) : '' }}
+        {{ member.dfbData.eligibleForOfficialMatches ? ((member.dfbData.eligibleForOfficialMatches | date: 'dd.MM.yy') +
+        ' ' + ('general.members.detail.drive.dfb.official' | translate)) : '' }}<br/>
+        {{ member.dfbData.eligibleForFriendlyMatches ? ((member.dfbData.eligibleForFriendlyMatches | date: 'dd.MM.yy') +
+        ' ' + ('general.members.detail.drive.dfb.friendly' | translate)) : '' }}
       </mat-list-item>
       <mat-list-item *ngIf="member.dfbData.guestPlayer && member.dfbData.guestPlayer.guestRight !== ''">
         <span>{{'general.members.detail.drive.dfb.guest' | translate}}</span>
         <span style="font-weight: normal">
-          {{ member.dfbData.guestPlayer.guestRight }} <br />
-          {{ member.dfbData.guestPlayer.season }} <br />
+          {{ member.dfbData.guestPlayer.guestRight }} <br/>
+          {{ member.dfbData.guestPlayer.season }} <br/>
           {{ member.dfbData.guestPlayer.type }}
         </span>
       </mat-list-item>

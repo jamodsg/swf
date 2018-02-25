@@ -23,12 +23,14 @@
         "../node_modules/quill/dist/quill.bubble.css",
         "../node_modules/@swimlane/ngx-datatable/release/index.css",
         "../node_modules/@swimlane/ngx-datatable/release/themes/material.css",
+        "../node_modules/fullcalendar/dist/fullcalendar.min.css",
         "assets/fonts/data-table/icons.css",
         "assets/styles/app.scss"
       ],
       "scripts": [
         "../node_modules/hammerjs/hammer.min.js",
-        "../node_modules/chart.js/dist/Chart.bundle.min.js"
+        "../node_modules/chart.js/dist/Chart.bundle.min.js",
+        "../node_modules/fullcalendar/dist/locale/de.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -1,3 +1,60 @@
-<p>
-  member-edit works!
-</p>
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="75"
+       fxFlex.gt-xs="100">
+    <div class="mat-card-top"
+         *ngIf="member; else loadingTemplate">
+
+      <mat-card>
+        <mat-card-title>
+          <mat-icon>mode_edit</mat-icon>
+          {{'general.menu.member.edit' | translate}}
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+
+        <mat-card-content>
+
+          <mat-tab-group [dynamicHeight]="true">
+            <mat-tab label="{{'general.members.tabs.main' | translate}}">
+              <member-edit-main [form]="form"
+                                [member]="member">
+              </member-edit-main>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.driveAndDFB' | translate}}">
+              <member-edit-drive [form]="form"
+                                 [member]="member">
+              </member-edit-drive>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.interview' | translate}}">
+              <h3>Interviews</h3>
+              <p>Liste mit den Interviews (Artikeln), die mit dem Benutzer geführt worden sind. Sortiert nach Datum,
+                absteigend.</p>
+              <h3>Profil</h3>
+              <p>Steckbrief für den Benutzer (VÖ muss durch das Mitglied bestätigt werden)</p>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.media' | translate}}">
+              <p>Mit dem Mitglied verknüpfte Fotos, Videos etc.</p>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.teams' | translate}}">
+              <p>Liste aller Mannschaften, in denen das Mitglied als Spieler tätig war.</p>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.others' | translate}}">
+              <p>Sonstige Tätigkeiten des Mitglieds (Vorstand oder Trainer?)</p>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div fxFlex.gt-sm="25"
+       fxFlex.gt-xs="100">
+    <pre *ngIf="member">{{member | json}}</pre>
+  </div>
+</div>
+
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

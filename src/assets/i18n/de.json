@@ -253,6 +253,7 @@
           "listTitle": "Ehrenmitglieder mit Artikel verknüpfen",
           "save": "Speichern",
           "startDate": "Datum der Ernennung",
+          "subTitle": "Ehre, wem Ehre gebührt",
           "title": "Ehrenmitglieder"
         },
         "isMainClub": "Ist es der Hauptverein?",
@@ -274,6 +275,7 @@
             "assignedCategory": "Position",
             "assignedMember": "Mitglied",
             "create": "Neue Position",
+            "deletePosition": "Löschen",
             "description": "Tätigkeiten",
             "editToDos": "Aufgabentext editieren",
             "endDate": "Ende",
@@ -305,6 +307,9 @@
         "saveClub": "Verein speichern",
         "seasonsTitle": "Mannschaften",
         "stadiumTitle": "Spielstätte",
+        "statistics": {
+          "title": "Statistiken"
+        },
         "timeLineClub": "Die Präsidenten-Chronik",
         "timeLineTitle": "Wichtige Ereignisse im Verein",
         "title": "Vereinsname",
@@ -346,22 +351,29 @@
       }
     },
     "dashboard": {
-      "currentBirthdays": "Heutige Geburtstage",
+      "birthdays": "Geburtstage",
       "endedMatchesWithoutResult": "Beendete Spiele ohne Ergebnis",
       "endedMatchesWithResult": "Beendete Spiele mit Ergebnis",
+      "lastArticles": "Neueste Artikel",
+      "lastMatches": "Letzte Spiele",
       "matchChart": {
         "chartTitle": "Spiele der Mannschaften",
         "totalArticles": "Artikel vorhanden"
       },
+      "matches": "Spiele unserer Mannschaften",
       "matchesWithoutResult": "Ergebnismeldung",
-      "upComingMatches": "Kommende Spiele",
+      "mindText": "Was gibt´s Neues?",
       "statistics": {
         "applicationStatus": "Infos zur Anwendung",
         "main": "Statistiken",
         "newestUser": "Neuster Benutzer",
         "usersOnline": "Momentan aktiv",
         "weatherIn": "Wetter in"
-      }
+      },
+      "today": "heute",
+      "tomorrow": "morgen",
+      "upComingMatches": "Kommende Spiele",
+      "yesterday": "gestern"
     },
     "datetime": {
       "months": {
@@ -531,11 +543,16 @@
             "status": "Mitglieder-Status"
           },
           "dfb": {
+            "ageGroup": "Altersklasse",
+            "allowedToPlay": "Einsetzbar?",
             "eligible": "Spielberechtigt ab:",
             "friendly": "Freundschaftsspiele",
             "guest": "Gastspieler",
             "official": "Pflichtspiele",
             "pass": "Passdaten",
+            "passNumber": "Passnummer",
+            "passPrint": "Passdatum",
+            "playerStatus": "Spielerstatus",
             "signOut": "Abmeldung",
             "status": "Status",
             "title": "DFB.net-Daten"
@@ -599,6 +616,7 @@
         "driveAndDFB": "DFB.net / Google Drive",
         "interview": "Profil & Interview",
         "media": "Dateien",
+        "others": "Sonstige Tätgigkeiten",
         "teams": "Mannschaften"
       }
     },
@@ -641,6 +659,9 @@
         "main": "Startseite",
         "statistics": "Statistiken"
       },
+      "event": {
+        "main": "Kalender"
+      },
       "location": {
         "create": "Treffpunkt erstellen",
         "detail": "Treffpunktdetails",
@@ -656,6 +677,7 @@
       "member": {
         "main": "Mitglieder",
         "detail": "Mitgliederdetails",
+        "edit": "Mitglied editieren",
         "list": "Alle Mitglieder",
         "interviews": "Interviews",
         "profile": "Steckbriefe",
@@ -1215,6 +1237,7 @@
     "assignedMedia": "Verknüpfte Dateien",
     "birthdays": "Geburtstage",
     "create": "Erstellen",
+    "currentPage": "Aktuelle Seite",
     "darkMode": "Nachtmodus",
     "delete": "Löschen",
     "detail": "Details",
@@ -1223,6 +1246,7 @@
     "filteredRecords": "gefilterten Einträgen",
     "from": "von",
     "items": "Einträge",
+    "itemsPerPage": "Einträge pro Seite",
     "languages": {
       "de": "Deutsch",
       "en": "Englisch",

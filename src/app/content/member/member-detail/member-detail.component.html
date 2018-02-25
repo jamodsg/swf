@@ -22,9 +22,21 @@
             <mat-tab label="{{'general.members.tabs.driveAndDFB' | translate}}">
               <member-detail-drive [member]="member"></member-detail-drive>
             </mat-tab>
-            <mat-tab label="{{'general.members.tabs.interview' | translate}}"></mat-tab>
-            <mat-tab label="{{'general.members.tabs.media' | translate}}"></mat-tab>
-            <mat-tab label="{{'general.members.tabs.teams' | translate}}"></mat-tab>
+            <mat-tab label="{{'general.members.tabs.interview' | translate}}">
+              <h3>Interviews</h3>
+              <p>Liste mit den Interviews (Artikeln), die mit dem Benutzer geführt worden sind. Sortiert nach Datum, absteigend.</p>
+              <h3>Profil</h3>
+              <p>Steckbrief für den Benutzer (VÖ muss durch das Mitglied bestätigt werden)</p>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.media' | translate}}">
+              <p>Mit dem Mitglied verknüpfte Fotos, Videos etc.</p>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.teams' | translate}}">
+              <p>Liste aller Mannschaften, in denen das Mitglied als Spieler tätig war.</p>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.others' | translate}}">
+              <p>Sonstige Tätigkeiten des Mitglieds (Vorstand oder Trainer?)</p>
+            </mat-tab>
           </mat-tab-group>
         </mat-card-content>
 
