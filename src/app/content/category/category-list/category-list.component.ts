@@ -33,7 +33,7 @@ export class CategoryListComponent implements OnInit {
 
   removeCategory(category: ICategory) {
     this.remove.emit(category);
-    this.form.controls['searchFor'].reset();
+    // this.form.controls['searchFor'].reset();
   }
 
 }
