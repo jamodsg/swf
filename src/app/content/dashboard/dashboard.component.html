@@ -165,7 +165,7 @@
       </mat-card-title>
       <mat-list>
         <h3 mat-subheader>{{'general.dashboard.today' | translate}}</h3>
-        <mat-list-item *ngFor="let message of messages; last as last">
+        <mat-list-item *ngFor="let message of messages; let last = last">
           <img mat-list-avatar src="assets/images/face3.jpg" alt="Image of {{message.from}}">
           <h4 mat-line>{{message.from}}</h4>
           <p mat-line>
@@ -176,7 +176,7 @@
         </mat-list-item>
         <mat-divider></mat-divider>
         <h3 mat-subheader>{{'general.dashboard.tomorrow' | translate}}</h3>
-        <mat-list-item *ngFor="let message of messages; last as last">
+        <mat-list-item *ngFor="let message of messages; let last = last">
           <img mat-list-avatar src="assets/images/face6.jpg" alt="Image of {{message.from}}">
           <h4 mat-line>{{message.from}}</h4>
           <p mat-line>
@@ -187,7 +187,7 @@
         </mat-list-item>
         <mat-divider inset="true" *ngIf="!last"></mat-divider>
         <h3 mat-subheader>{{'general.dashboard.yesterday' | translate}}</h3>
-        <mat-list-item *ngFor="let message of messages; last as last">
+        <mat-list-item *ngFor="let message of messages; let last = last">
           <img mat-list-avatar src="assets/images/face4.jpg" alt="Image of {{message.from}}">
           <h4 mat-line>{{message.from}}</h4>
           <p mat-line>
