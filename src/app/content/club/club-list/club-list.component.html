@@ -7,7 +7,10 @@
       <mat-card-header class="mt-0">
         <img matCardAvatar [src]="club.logoUrl">
         <mat-card-subtitle>
-          <a class="font-weight-bold mat-text-primary" target="_blank" *ngIf="club.fussballde.clubUrl" [href]="club.fussballde.clubUrl">Fussball.de</a>
+          <a class="font-weight-bold mat-text-primary" target="_blank"
+             *ngIf="club.fussballde.clubUrl"
+             [href]="club.fussballde.clubUrl">Fussball.de
+          </a>
         </mat-card-subtitle>
         <mat-card-title>{{club.title}}</mat-card-title>
       </mat-card-header>

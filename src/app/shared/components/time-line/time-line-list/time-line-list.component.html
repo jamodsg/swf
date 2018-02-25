@@ -3,6 +3,10 @@
 
   <div fxFlex="100">
 
+    <p *ngIf="form['controls'].length === 0">
+      {{'general.timeLine.noEvents' | translate}}
+    </p>
+
     <mat-accordion [hideToggle]="true"
                    dense
                    class="example-headers-align">

@@ -25,7 +25,7 @@ export class ClubEditComponent implements OnInit {
 
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
-    return JSON.stringify(this.club).toLowerCase() === JSON.stringify(this.savedClub).toLowerCase();
+    return true; // JSON.stringify(this.club).toLowerCase() === JSON.stringify(this.savedClub).toLowerCase();
   }
 
   public club: IClub;

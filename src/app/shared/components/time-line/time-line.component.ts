@@ -23,6 +23,7 @@ export class TimeLineComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.form);
   }
 
 }

@@ -45,8 +45,8 @@
 
       <mat-list-item *ngIf="club.assignedLocation; else noAssignedLocationTemplate">
         <h3 matSubheader>{{'general.clubs.edit.location' | translate}}</h3>
-        <a [routerLink]="['/locations/detail', club.assignedLocation]">
-          {{(locations | filterBy: ['id'] : club.assignedLocation)[0].title}}
+        <a [routerLink]="['/locations/detail', club.assignedLocation]" *ngFor="let location of locations | filterBy: ['id'] : club.assignedLocation">
+            {{location.title}}
         </a>
       </mat-list-item>
 
