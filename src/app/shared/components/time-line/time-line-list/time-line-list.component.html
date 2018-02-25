@@ -3,7 +3,7 @@
 
   <div fxFlex="100">
 
-    <p *ngIf="form['controls'].length === 0">
+    <p *ngIf="!form['controls'][0]">
       {{'general.timeLine.noEvents' | translate}}
     </p>
 
