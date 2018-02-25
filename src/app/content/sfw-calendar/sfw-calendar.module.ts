@@ -4,9 +4,11 @@ import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SFWCalendarComponent } from './sfw-calendar.component';
+import { CalendarModule } from 'ap-angular2-fullcalendar';
 
 @NgModule({
   imports: [
+    CalendarModule,
     FlexLayoutModule,
     RouterModule.forChild(sfwCalendarRoutes),
     SharedModule
