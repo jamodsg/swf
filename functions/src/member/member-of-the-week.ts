@@ -71,7 +71,7 @@ export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPubli
           }
         };
       }
-      // return sgMail.send(msg);
+      return sgMail.send(msg);
     });
 
 });
