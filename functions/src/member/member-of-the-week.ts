@@ -18,7 +18,7 @@ export const memberOfTheWeekCron = functions.pubsub.topic('minutly-tick').onPubl
       values.forEach(function (doc) {
         const memberData = doc.data();
         // if ('profileImageUrl' in memberData && memberData.profileImageUrl !== '') {
-          memberList.push(memberData);
+        memberList.push(memberData);
         // }
       });
 
@@ -28,43 +28,50 @@ export const memberOfTheWeekCron = functions.pubsub.topic('minutly-tick').onPubl
 
       let msg: any = '';
 
-      if(memberList.length > 0 ) {
+      const now = moment();
+
+      if (memberList.length > 0) {
         const sample = memberList[Math.floor(Math.random() * memberList.length)];
 
-        msg = {
-          to: ['thomas.handle@gmail.com'],
-          from: 'mitglieder@sfwinterbach.com',
-          subject: 'Mitglied der Woche für den ' + moment().format("LL") + ' bis '  + moment().add(6, 'days').format("LL"),
-          templateId: 'fc184c8b-b721-450f-add7-69ef4d20fe10',
-          substitutionWrappers: ['{{', '}}'],
-          substitutions: {
-            adminName: 'Thomas',
-            memberList: sample,
-            weekString: moment().week(),
-            dateString: moment().format("LL") + ' bis '  + moment().add(6, 'days').format("LL")
+        const id = admin.firestore().collection('member-of-the-week').doc().id;
+
+        admin.firestore().collection('member-of-the-week').doc(id).create({
+          assignedMemberId: sample.id,
+          week: now.week() + '-' + now.format('YY')
+        }).then(
+          () => {
+            msg = {
+              to: ['thomas.handle@gmail.com'],
+              from: 'mitglieder@sfwinterbach.com',
+              subject: 'Mitglied der Woche für den ' + now.format('LL') + ' bis ' + now.add(6, 'days').format('LL'),
+              templateId: 'fc184c8b-b721-450f-add7-69ef4d20fe10',
+              substitutionWrappers: ['{{', '}}'],
+              substitutions: {
+                adminName: 'Thomas',
+                memberList: sample,
+                weekString: now.week(),
+                dateString: now.format('LL') + ' bis ' + now.add(6, 'days').format('LL')
+              }
+            };
           }
-        };
+        );
+
       } else {
         msg = {
           to: ['thomas.handle@gmail.com'],
           from: 'mitglieder@sfwinterbach.com',
-          subject: 'Mitglied der Woche für den ' + moment().format("LL") + ' bis '  + moment().add(6, 'days').format("LL"),
+          subject: 'Mitglied der Woche für den ' + now.format('LL') + ' bis ' + now.add(6, 'days').format('LL'),
           templateId: 'fc184c8b-b721-450f-add7-69ef4d20fe10',
           substitutionWrappers: ['{{', '}}'],
           substitutions: {
             adminName: 'Thomas',
             memberList: 'Keine Mitglieder mit Foto gefunden',
-            weekString: moment().week(),
-            dateString: moment().format("LL") + ' bis '  + moment().add(6, 'days').format("LL")
+            weekString: now.week(),
+            dateString: now.format('LL') + ' bis ' + now.add(6, 'days').format('LL')
           }
         };
-
-        return false;
       }
-
-      return sgMail.send(msg);
-      /*
-      */
+      // return sgMail.send(msg);
     });
 
 });
