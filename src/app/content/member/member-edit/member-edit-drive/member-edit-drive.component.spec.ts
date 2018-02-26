@@ -8,9 +8,9 @@ describe('MemberEditDriveComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemberEditDriveComponent ]
+      declarations: [MemberEditDriveComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

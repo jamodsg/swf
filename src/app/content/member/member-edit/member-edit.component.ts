@@ -26,10 +26,10 @@ export class MemberEditComponent implements OnInit {
   public form: FormGroup;
 
   constructor(public route: ActivatedRoute,
-              public snackBar: MatSnackBar,
-              private fb: FormBuilder,
-              private memberService: MemberService,
-              private router: Router) {
+    public snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private memberService: MemberService,
+    private router: Router) {
   }
 
   ngOnInit() {

@@ -12,11 +12,11 @@ export class SFWCalendarComponent {
   calendarOptions: Object = {
     allDayText: 'ganztägig',
     buttonText: {
-      today:    'Heute',
-      month:    'Monat',
-      week:     'Woche',
-      day:      'Tag',
-      list:     'Liste'
+      today: 'Heute',
+      month: 'Monat',
+      week: 'Woche',
+      day: 'Tag',
+      list: 'Liste'
     },
     defaultDate: moment().toISOString(),
     displayEventEnd: true,
@@ -52,9 +52,9 @@ export class SFWCalendarComponent {
     fixedWeekCount: true,
     footer: true,
     header: {
-      left:   'title',
+      left: 'title',
       center: 'month, basicWeek, basicDay, agendaDay', // agendaWeek,
-      right:  'today prev,next'
+      right: 'today prev,next'
     },
     height: '100',
     locale: 'de',

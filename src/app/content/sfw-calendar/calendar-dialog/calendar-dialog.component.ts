@@ -7,7 +7,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 
 export class CalendarDialogComponent {
+
   constructor(public dialogRef: MatDialogRef<CalendarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
+
 }
