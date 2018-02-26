@@ -165,9 +165,9 @@
       </mat-card-title>
       <mat-card-content>
         <mat-list *ngIf="members$ | async as members; else loadingTemplate">
-          <h3 mat-subheader>{{'general.dashboard.today' | translate}} {{today.format('DD.MM')}}</h3>
+          <h3 mat-subheader>{{'general.dashboard.today' | translate}}, {{today.format('DD.MM.YY')}}</h3>
           <mat-list-item *ngFor="let member of members | birthdayFilter: today; let last = last">
-            <img mat-list-avatar src="assets/images/face3.jpg"
+            <img mat-list-avatar [src]="member.profileImageUrl ? member.profileImageUrl : 'assets/images/face3.jpg'"
                  alt="{{member.mainData.firstName}} {{member.mainData.lastName}}">
             <h4 mat-line>{{member.mainData.firstName}} {{member.mainData.lastName}}</h4>
             <p mat-line>
@@ -180,9 +180,9 @@
             <mat-divider inset="true" *ngIf="!last"></mat-divider>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <h3 mat-subheader>{{'general.dashboard.tomorrow' | translate}} {{tomorrow.format('DD.MM')}}</h3>
+          <h3 mat-subheader>{{'general.dashboard.tomorrow' | translate}}, {{tomorrow.format('DD.MM.YY')}}</h3>
           <mat-list-item *ngFor="let member of members | birthdayFilter: tomorrow; let last = last">
-            <img mat-list-avatar src="assets/images/face3.jpg"
+            <img mat-list-avatar [src]="member.profileImageUrl ? member.profileImageUrl : 'assets/images/face1.jpg'"
                  alt="{{member.mainData.firstName}} {{member.mainData.lastName}}">
             <h4 mat-line>{{member.mainData.firstName}} {{member.mainData.lastName}}</h4>
             <p mat-line>
@@ -195,9 +195,9 @@
             <mat-divider inset="true" *ngIf="!last"></mat-divider>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <h3 mat-subheader>{{'general.dashboard.yesterday' | translate}} {{yesterday.format('DD.MM')}}</h3>
+          <h3 mat-subheader>{{'general.dashboard.yesterday' | translate}}, {{yesterday.format('DD.MM.YY')}}</h3>
           <mat-list-item *ngFor="let member of members | birthdayFilter: yesterday; let last = last">
-            <img mat-list-avatar src="assets/images/face3.jpg"
+            <img mat-list-avatar [src]="member.profileImageUrl ? member.profileImageUrl : 'assets/images/face2.jpg'"
                  alt="{{member.mainData.firstName}} {{member.mainData.lastName}}">
             <h4 mat-line>{{member.mainData.firstName}} {{member.mainData.lastName}}</h4>
             <p mat-line>

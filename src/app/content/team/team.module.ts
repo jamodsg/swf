@@ -6,7 +6,14 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { TeamResolver } from './team.resolver';
 import { TeamService } from '../../shared/services/team/team.service';
-import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTabsModule
+} from '@angular/material';
 import { TeamDetailComponent } from './team-detail/team-detail.component';
 import { TeamEditComponent } from './team-edit/team-edit.component';
 import { QuillModule } from 'ngx-quill';
@@ -23,8 +30,8 @@ import { LocationService } from '../../shared/services/location/location.service
 import { ApplicationService } from '../../shared/services/application/application.service';
 import { TeamPositionsComponent } from './team-edit/team-positions/team-positions.component';
 import { TeamPositionFormComponent } from './team-edit/team-positions/team-position-form/team-position-form.component';
-import { TeamOfTheMonthComponent } from './team-of-the-month/team-of-the-month.component';
 import { TeamMediaComponent } from './team-media/team-media.component';
+import { FameTeamComponent } from './fame-team/fame-team.component';
 
 @NgModule({
   imports: [
@@ -48,8 +55,8 @@ import { TeamMediaComponent } from './team-media/team-media.component';
     TeamTrainingFormComponent,
     TeamPositionsComponent,
     TeamPositionFormComponent,
-    TeamOfTheMonthComponent,
-    TeamMediaComponent
+    TeamMediaComponent,
+    FameTeamComponent
   ],
   providers: [
     ApplicationService,

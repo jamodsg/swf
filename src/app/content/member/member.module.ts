@@ -27,7 +27,7 @@ import { MemberEditMainComponent } from './member-edit/member-edit-main/member-e
 import { MemberEditDriveComponent } from './member-edit/member-edit-drive/member-edit-drive.component';
 import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 import { QuillModule } from 'ngx-quill';
-import { MomentModule } from 'angular2-moment';
+import { FameMemberComponent } from './fame-member/fame-member.component';
 
 @NgModule({
   imports: [
@@ -41,21 +41,21 @@ import { MomentModule } from 'angular2-moment';
     MatSnackBarModule,
     MatTabsModule,
     memberRoutingModule,
-    MomentModule,
     PerfectScrollbarModule,
     QuillModule,
     SharedModule
   ],
   declarations: [
-    MemberListComponent,
-    MembersComponent,
+    FameMemberComponent,
     MemberDetailComponent,
-    MemberEditComponent,
-    MemberStatisticsComponent,
     MemberDetailMainComponent,
     MemberDetailDriveComponent,
+    MemberEditComponent,
     MemberEditMainComponent,
-    MemberEditDriveComponent
+    MemberEditDriveComponent,
+    MemberListComponent,
+    MembersComponent,
+    MemberStatisticsComponent
   ],
   providers: [
     MemberResolver,

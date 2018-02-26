@@ -6,6 +6,7 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberResolver } from './member.resolver';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { MemberStatisticsComponent } from './member-statistics/member-statistics.component';
+import { FameMemberComponent } from './fame-member/fame-member.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'statistics',
     component: MemberStatisticsComponent
+  },
+  {
+    path: 'fame',
+    component: FameMemberComponent
   },
   {
     path: '**',

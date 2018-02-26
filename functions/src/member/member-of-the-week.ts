@@ -9,7 +9,7 @@ const SENDGRID_API_KEY = functions.config().sendgrid.key;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPublish((event: any) => {
+export const memberOfTheWeekCron = functions.pubsub.topic('minutly-tick').onPublish((event: any) => {
 
   return admin.firestore().collection('members').get()
     .then((values) => {
@@ -17,9 +17,9 @@ export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPubli
 
       values.forEach(function (doc) {
         const memberData = doc.data();
-        if ('profileImageUrl' in memberData && memberData.profileImageUrl !== '') {
+        // if ('profileImageUrl' in memberData && memberData.profileImageUrl !== '') {
           memberList.push(memberData);
-        }
+        // }
       });
 
       return memberList;

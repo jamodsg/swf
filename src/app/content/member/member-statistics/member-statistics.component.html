@@ -1,7 +1,8 @@
 <div fxLayout="row"
-     fxFlex="100" *ngIf="members$ | async as members; else loadingTemplate">
+     fxLayoutWrap="wrap"
+     *ngIf="members$ | async as members; else loadingTemplate">
 
-  <div fxFlex.gt-xs="20"
+  <div fxFlex.gt-sm="20"
        fxFlex="100">
     <mat-card>
       <mat-card-title>
@@ -21,7 +22,7 @@
   </div>
 
   <div fxFlexOffset="1"
-       fxFlex.gt-xs="19"
+       fxFlex.gt-sm="19"
        fxFlex="100">
     <mat-card>
       <mat-card-title>
@@ -41,7 +42,7 @@
   </div>
 
   <div fxFlexOffset="1"
-       fxFlex.gt-xs="19"
+       fxFlex.gt-sm="19"
        fxFlex="100">
     <mat-card>
       <mat-card-title>
@@ -64,7 +65,7 @@
   </div>
 
   <div fxFlexOffset="1"
-       fxFlex.gt-xs="19"
+       fxFlex.gt-sm="19"
        fxFlex="100">
     <mat-card>
       <mat-card-title style="max-height: 80vh;" [perfectScrollbar]="config">
@@ -83,7 +84,7 @@
   </div>
 
   <div fxFlexOffset="1"
-       fxFlex.gt-xs="19"
+       fxFlex.gt-sm="19"
        fxFlex="100">
     <mat-card>
       <mat-card-title>

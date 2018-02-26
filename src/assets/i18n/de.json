@@ -682,6 +682,7 @@
         "main": "Mitglieder",
         "detail": "Mitgliederdetails",
         "edit": "Mitglied editieren",
+        "fame": "Mitglieder des Monats",
         "list": "Alle Mitglieder",
         "interviews": "Interviews",
         "profile": "Steckbriefe",
@@ -723,6 +724,7 @@
         "main": "Mannschaften",
         "detail": "Mannschafts-Details",
         "edit": "Mannschaft editieren",
+        "fame": "Team des Monats",
         "list": "Alle Mannschaften",
         "media": "Neue Uploads",
         "position": {

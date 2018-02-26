@@ -1,6 +1,9 @@
 <div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
 
-  <div fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex.gt-md="30" fxFlex="100">
+  <div fxFlex.gt-xs="25"
+       fxFlex.gt-sm="25"
+       fxFlex.gt-md="30"
+       fxFlex="100">
     <mat-form-field style="width: 95%">
       <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
         <mat-option [value]="categories.length" *ngIf="categories">
@@ -13,19 +16,26 @@
     </mat-form-field>
   </div>
 
-  <div fxFlex.gt-xs="50" fxFlex.gt-sm="40" fxFlex="100" style="margin-bottom: 15px">
+  <div fxFlex.gt-xs="50"
+       fxFlex.gt-sm="40"
+       fxFlex="100"
+       style="margin-bottom: 15px">
     <input style="padding:10px; width: 90%"
       placeholder="{{ 'general.typeToFilter' | translate}}"
       formControlName="searchFor"/>
   </div>
 
-  <div fxFlex.gt-xs="25" fxFlex.gt-sm="35" fxFlex="100" style="margin-bottom: 15px">
+  <div fxFlex.gt-xs="25"
+       fxFlex.gt-sm="35"
+       fxFlex="100"
+       style="margin-bottom: 15px">
     <a mat-raised-button color="primary" [routerLink]="['./edit/new']">
       {{ 'general.categories.list.createCategory' | translate}}
     </a>
   </div>
 
-  <div fxFlex.gt-sm="100%" fxFlex="100" *ngIf="categories && categoryTypes; else loadingTemplate">
+  <div fxFlex="100"
+       *ngIf="categories && categoryTypes; else loadingTemplate">
     <ngx-datatable #myTable
                    class='material'
                    [columnMode]="'force'"
@@ -39,7 +49,7 @@
           {{row.title}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="{{'general.categories.list.colTitles.category' | translate}}" fxHide.xs>
+      <ngx-datatable-column name="{{'general.categories.list.colTitles.category' | translate}}">
         <ng-template let-row="row" let-value="assignedCategoryType" ngx-datatable-cell-template>
           {{ 'general.menu.' + (categoryTypes | filterBy: ['id'] : row.assignedCategoryType)[0].link + '.main' |
           translate}}

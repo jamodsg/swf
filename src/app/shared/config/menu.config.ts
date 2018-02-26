@@ -114,6 +114,11 @@ export const MENUITEMS = [
         state: 'statistics',
         name: 'statistics',
         icon: 'trending_up'
+      },
+      {
+        state: 'fame',
+        name: 'fame',
+        icon: 'alarm_on'
       }
     ]
   },
@@ -171,9 +176,9 @@ export const MENUITEMS = [
         icon: 'list',
       },
       {
-        state: 'teamOfTheMonth',
-        name: 'teamOfTheMonth',
-        icon: 'event'
+        state: 'fame',
+        name: 'fame',
+        icon: 'alarm_on'
       },
       {
         state: 'media',

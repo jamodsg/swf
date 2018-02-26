@@ -1,7 +1,7 @@
 <form class="form-horizontal" novalidate (ngSubmit)="saveCategory()" [formGroup]="form">
   <div fxLayout="row" fxLayoutWrap="wrap">
 
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <div fxFlex="100">
       <div class="mat-card-top">
         <mat-card>
           <mat-card-title>
@@ -12,77 +12,80 @@
 
           <mat-card-content *ngIf="category; else loadingTemplate">
 
-            <mat-tab-group class="demo-tab-group" [dynamicHeight]="true">
-              <mat-tab label="{{'general.categories.edit.mainTitle' | translate}}">
+            <!--<mat-tab-group class="demo-tab-group" [dynamicHeight]="true">
+              <mat-tab label="{{'general.categories.edit.mainTitle' | translate}}">-->
 
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                  <mat-form-field fxFlex.gt-sm="50"
-                                  fxFlex.gt-xs="100"
-                                  fxFlex="50"
-                                  hintLabel="Max {{titleMaxLength}} characters">
-                    <input matInput maxlength="{{titleMaxLength}}"
-                           placeholder="{{'general.categories.list.colTitles.title' | translate}}"
-                           formControlName="title">
-                    <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
-                  </mat-form-field>
+            <div fxLayout="row" fxLayoutWrap="wrap">
 
-                  <mat-form-field fxFlexOffset="1"
-                                  fxFlex.gt-sm="49"
-                                  fxFlex.gt-xs="100"
-                                  fxFlex="49">
-                    <mat-select placeholder="{{'general.categories.list.colTitles.category' | translate}}"
-                                formControlName="assignedCategoryType">
-                      <mat-option *ngFor="let categoryType of categoryTypes$ | async | orderBy: 'link'"
-                                  [value]="categoryType.id">
-                        {{ 'general.menu.' + categoryType.link + '.main' | translate}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-hint align="end">
-                      {{'general.categories.edit.categoryDefaultPlaceholder' | translate }}
-                    </mat-hint>
-                  </mat-form-field>
+              <mat-form-field fxFlex.gt-sm="50"
+                              fxFlex="100"
+                              hintLabel="Max {{titleMaxLength}} characters">
+                <input matInput maxlength="{{titleMaxLength}}"
+                       placeholder="{{'general.categories.list.colTitles.title' | translate}}"
+                       formControlName="title">
+                <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field fxFlexOffset="1"
+                              fxFlex.gt-sm="49"
+                              fxFlex="100">
+                <mat-select placeholder="{{'general.categories.list.colTitles.category' | translate}}"
+                            formControlName="assignedCategoryType">
+                  <mat-option *ngFor="let categoryType of categoryTypes$ | async | orderBy: 'link'"
+                              [value]="categoryType.id">
+                    {{ 'general.menu.' + categoryType.link + '.main' | translate}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint align="end">
+                  {{'general.categories.edit.categoryDefaultPlaceholder' | translate }}
+                </mat-hint>
+              </mat-form-field>
 
 
-                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" style="margin-top: 25px;">
-                    <label>{{'general.categories.edit.descriptionPlaceHolder' | translate}}</label>
-                    <quill-editor [style]="{height: '250px'}"
-                                  formControlName="description"
-                                  placeholder="{{'general.categories.edit.descriptionPlaceHolder' | translate}}">
-                    </quill-editor>
-                  </div>
-                </div>
-              </mat-tab>
-              <mat-tab label="{{'general.categories.edit.assignedObjectsTitle' | translate}}">
-                <div class="form-container">ToDo</div>
-                <!--<category-assign-objects *ngIf="categoryTypes"
-                                 [form]="form"
-                                 [seasons]="seasonService.getSeasons() | async"
-                                 [categoryTypes]="categoryTypes">
-                                 </category-assign-objects>
-                                 -->
-              </mat-tab>
-              <mat-tab label="{{'general.tables.colTitles.creation' | translate }}">
-                <creation-form class="form-container"
+              <div fxFlex="100" style="margin-top: 25px;">
+                <label>{{'general.categories.edit.descriptionPlaceHolder' | translate}}</label>
+                <quill-editor [style]="{height: '250px'}"
+                              formControlName="description"
+                              placeholder="{{'general.categories.edit.descriptionPlaceHolder' | translate}}">
+                </quill-editor>
+              </div>
+            </div>
+            <!--</mat-tab>
+            <mat-tab label="{{'general.categories.edit.assignedObjectsTitle' | translate}}">
+              <div class="form-container">ToDo</div>
+              <!--<category-assign-objects *ngIf="categoryTypes"
                                [form]="form"
-                               [users]="users$ | async">
-                </creation-form>
-              </mat-tab>
-            </mat-tab-group>
+                               [seasons]="seasonService.getSeasons() | async"
+                               [categoryTypes]="categoryTypes">
+                               </category-assign-objects>
+            </mat-tab>
+            <mat-tab label="{{'general.tables.colTitles.creation' | translate }}">
+              <creation-form class="form-container"
+                             [form]="form"
+                             [users]="users$ | async">
+              </creation-form>
+            </mat-tab>
+          </mat-tab-group>-->
 
             <mat-card-actions>
-              <div class="button-row">
-                <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || isLoading">
-                  {{'general.categories.edit.saveCategory' | translate}}
-                </button>
-                <a mat-raised-button color="accent" (click)="cancel()">
-                  {{'general.cancel' | translate}}
-                </a>
-                <a mat-raised-button color="warn"
-                   (click)="removeCategory()"
-                   *ngIf="category.id && !category.isImported">
-                  {{'general.categories.list.removeCategory' | translate}}
-                </a>
-              </div>
+              <button mat-raised-button
+                      color="primary"
+                      type="submit"
+                      [disabled]="!form.valid">
+                {{'general.categories.edit.saveCategory' | translate}}
+              </button>
+              <button type="button"
+                      mat-raised-button
+                      color="accent"
+                      (click)="cancel()">
+                {{'general.cancel' | translate}}
+              </button>
+              <button mat-raised-button
+                      color="warn"
+                      (click)="removeCategory()"
+                      *ngIf="category.id && !category.isImported">
+                {{'general.categories.list.removeCategory' | translate}}
+              </button>
             </mat-card-actions>
 
           </mat-card-content>
@@ -94,5 +97,5 @@
 </form>
 
 <ng-template #loadingTemplate>
-  Loading ...
+  <loading-indicator></loading-indicator>
 </ng-template>
