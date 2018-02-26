@@ -9,7 +9,7 @@ const SENDGRID_API_KEY = functions.config().sendgrid.key;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-export const memberOfTheWeekCron = functions.pubsub.topic('minutly-tick').onPublish((event: any) => {
+export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPublish((event: any) => {
 
   return admin.firestore().collection('members').get()
     .then((values) => {
