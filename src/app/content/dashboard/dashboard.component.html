@@ -163,39 +163,54 @@
         <h2 mat-card-widget-title>{{'general.dashboard.birthdays' | translate}}</h2>
         <hr>
       </mat-card-title>
-      <mat-list>
-        <h3 mat-subheader>{{'general.dashboard.today' | translate}}</h3>
-        <mat-list-item *ngFor="let message of messages; let last = last">
-          <img mat-list-avatar src="assets/images/face3.jpg" alt="Image of {{message.from}}">
-          <h4 mat-line>{{message.from}}</h4>
-          <p mat-line>
-            <span>{{message.subject}} -- </span>
-            <span class="demo-secondary-text">{{message.message}}</span>
-          </p>
-          <mat-divider inset="true" *ngIf="!last"></mat-divider>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>{{'general.dashboard.tomorrow' | translate}}</h3>
-        <mat-list-item *ngFor="let message of messages; let last = last">
-          <img mat-list-avatar src="assets/images/face6.jpg" alt="Image of {{message.from}}">
-          <h4 mat-line>{{message.from}}</h4>
-          <p mat-line>
-            <span>{{message.subject}} -- </span>
-            <span class="demo-secondary-text">{{message.message}}</span>
-          </p>
-          <mat-divider inset="true" *ngIf="!last"></mat-divider>
-        </mat-list-item>
-        <h3 mat-subheader>{{'general.dashboard.yesterday' | translate}}</h3>
-        <mat-list-item *ngFor="let message of messages; let last = last">
-          <img mat-list-avatar src="assets/images/face4.jpg" alt="Image of {{message.from}}">
-          <h4 mat-line>{{message.from}}</h4>
-          <p mat-line>
-            <span>{{message.subject}} -- </span>
-            <span class="demo-secondary-text">{{message.message}}</span>
-          </p>
-          <mat-divider inset="true" *ngIf="!last"></mat-divider>
-        </mat-list-item>
-      </mat-list>
+      <mat-card-content>
+        <mat-list *ngIf="members$ | async as members; else loadingTemplate">
+          <h3 mat-subheader>{{'general.dashboard.today' | translate}} {{today.format('DD.MM')}}</h3>
+          <mat-list-item *ngFor="let member of members | birthdayFilter: today; let last = last">
+            <img mat-list-avatar src="assets/images/face3.jpg"
+                 alt="{{member.mainData.firstName}} {{member.mainData.lastName}}">
+            <h4 mat-line>{{member.mainData.firstName}} {{member.mainData.lastName}}</h4>
+            <p mat-line>
+              <span class="demo-secondary-text">
+                {{'general.dashboard.isGetting' | translate}}
+                {{memberService.calculateAge(member.mainData.birthday)}}
+                {{'general.dashboard.yearsOld' | translate}}
+              </span>
+            </p>
+            <mat-divider inset="true" *ngIf="!last"></mat-divider>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <h3 mat-subheader>{{'general.dashboard.tomorrow' | translate}} {{tomorrow.format('DD.MM')}}</h3>
+          <mat-list-item *ngFor="let member of members | birthdayFilter: tomorrow; let last = last">
+            <img mat-list-avatar src="assets/images/face3.jpg"
+                 alt="{{member.mainData.firstName}} {{member.mainData.lastName}}">
+            <h4 mat-line>{{member.mainData.firstName}} {{member.mainData.lastName}}</h4>
+            <p mat-line>
+              <span class="demo-secondary-text">
+                {{'general.dashboard.willGet' | translate}}
+                {{memberService.calculateAge(member.mainData.birthday)}}
+                {{'general.dashboard.yearsOld' | translate}}
+              </span>
+            </p>
+            <mat-divider inset="true" *ngIf="!last"></mat-divider>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <h3 mat-subheader>{{'general.dashboard.yesterday' | translate}} {{yesterday.format('DD.MM')}}</h3>
+          <mat-list-item *ngFor="let member of members | birthdayFilter: yesterday; let last = last">
+            <img mat-list-avatar src="assets/images/face3.jpg"
+                 alt="{{member.mainData.firstName}} {{member.mainData.lastName}}">
+            <h4 mat-line>{{member.mainData.firstName}} {{member.mainData.lastName}}</h4>
+            <p mat-line>
+              <span class="demo-secondary-text">
+                {{'general.dashboard.got' | translate}}
+                {{memberService.calculateAge(member.mainData.birthday)}}
+                {{'general.dashboard.yearsOld' | translate}}
+              </span>
+            </p>
+            <mat-divider inset="true" *ngIf="!last"></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
     </mat-card>
   </div>
 
@@ -221,7 +236,6 @@
   <div fxFlex.gt-sm="50"
        fxFlex="100">
     <mat-card>
-
       <mat-card-title class="mat-amber">
         <h2 mat-card-widget-title>{{'general.dashboard.matches' | translate}}</h2>
         <hr>
@@ -237,3 +251,7 @@
   </div>
 
 </div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

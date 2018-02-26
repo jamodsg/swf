@@ -1,6 +1,8 @@
-<div fxLayout="row" fxLayoutWrap="wrap">
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
 
-  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100">
+  <div fxFlex.gt-sm="50"
+       fxFlex="100">
     <mat-card class="mat-card-top">
       <mat-card-title>
         <mat-icon>details</mat-icon>
@@ -9,7 +11,7 @@
       <mat-card-subtitle></mat-card-subtitle>
 
       <mat-card-content *ngIf="category; else loadingTemplate">
-        <table>
+        <table *ngIf="categoryTypes$ | async as categoryTypes; else loadingTemplate">
           <tr>
             <td>{{'general.categories.list.colTitles.title' | translate}}</td>
             <td>{{category.title}}</td>
@@ -22,20 +24,23 @@
             <td>{{'general.categories.list.colTitles.category' | translate}}</td>
             <td>
               <span
-                *ngFor="let categoryType of categoryTypes$ | async | filterBy: ['id'] : category.assignedCategoryType">
+                *ngFor="let categoryType of categoryTypes | filterBy: ['id'] : category.assignedCategoryType">
                 {{ 'general.menu.' + categoryType.link + '.main' | translate}}
               </span>
             </td>
           </tr>
-          <!--<tr>
+          <tr>
             <td>{{'general.tables.colTitles.creation' | translate}}</td>
             <td>
-              <user-avatar *ngIf="category.creation.from !== 'system'"
-                           [authorId]="category.creation.from"></user-avatar>
-              <span *ngIf="category.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
+              <span *ngIf="category.creation.from === 'system'" translate>
+                {{'general.tables.importedViaScript'}}
+              </span>
               <creation-date [creation]="category.creation.at"></creation-date>
+              <user-avatar *ngIf="category.creation.from !== 'system'"
+                           [userId]="category.creation.from">
+              </user-avatar>
             </td>
-          </tr>-->
+          </tr>
         </table>
       </mat-card-content>
 
@@ -55,15 +60,18 @@
     </mat-card>
   </div>
 
-  <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100" *ngIf="category">
+  <!--<div fxFlex.gt-sm="50"
+       fxFlex="100"
+       *ngIf="category">
+    <pre>{{category | json}}</pre>
     <category-assigned-objects
       [categoryTypes]="categoryTypes$ | async"
       [category]="category"
       [showList]="true">
     </category-assigned-objects>
-  </div>
+  </div>-->
 </div>
 
 <ng-template #loadingTemplate>
-  Laden <!--<app-loading-indicator></app-loading-indicator>-->
+  <loading-indicator></loading-indicator>
 </ng-template>

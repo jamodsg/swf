@@ -13,6 +13,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 import { SharedModule } from '../../shared/shared.module';
+import { MemberService } from '../../shared/services/member/member.service';
 
 @NgModule({
   imports: [
@@ -31,6 +32,9 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   declarations: [
     DashboardComponent
+  ],
+  providers: [
+    MemberService
   ]
 })
 

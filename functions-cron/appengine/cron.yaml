@@ -7,13 +7,17 @@ cron:
   url: /publish/daily-tick
   schedule: every 24 hours
 
-#- description: Push a "tick" onto pubsub every week
-#  url: /publish/weekly-tick
-#  schedule: every saturday 00:00
+- description: Push a "tick" onto pubsub every week
+  url: /publish/weekly-tick
+  schedule: every monday 00:01
 
-#- description: Push a "tick" onto pubsub every minute
-#  url: /publish/minutly-tick
-#  schedule: every 1 minutes
+- description: Push a "tick" onto pubsub every month
+  url: /publish/monthly-tick
+  schedule: 1 of month 00:01
+
+- description: Push a "tick" onto pubsub every minute
+  url: /publish/minutly-tick
+  schedule: every 1 minutes
 
 #- description: Push a "tick" onto pubsub every 15 minutes
 #  url: /publish/quarter-hour-tick

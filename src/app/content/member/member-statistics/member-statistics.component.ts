@@ -6,7 +6,10 @@ import { MemberStateService } from '../../../shared/services/member/member-state
 import { IMemberState } from '../../../shared/interfaces/member/member-state.interface';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import * as moment from 'moment';
+
 import 'moment/min/locales';
+
+moment.locale('de-de');
 
 @Component({
   selector: 'member-statistics',
@@ -19,64 +22,18 @@ export class MemberStatisticsComponent implements OnInit {
   public memberStates: IMemberState[];
   public ahStates: IMemberState[];
   public config: PerfectScrollbarConfigInterface = {};
-  public showCurrentBirthdaysOnly: boolean = false;
+  public today: any;
+  public currentYear:any
 
   constructor(private memberService: MemberService, private memberStateService: MemberStateService) {
     this.members$ = memberService.members$;
     this.memberStates = memberStateService.getMemberStates();
     this.ahStates = memberStateService.getAHStates();
+    this.today = moment().format('MM-DD');
+    this.currentYear = moment().format('YY');
   }
 
   ngOnInit() {
   }
-
-  generateBirthdayList(members: any) {
-    return members;
-    /*.sort(this.sortByDaysToNextBirthday);/*
-    .filter((member: IMember) => {
-      if (!this.showCurrentBirthdaysOnly) {
-        return member;
-      }
-      return moment(member.mainData.birthday).format('DD.MM') === currentDay;
-    });*/
-  }
-
-  /*sortByDaysToNextBirthday(a: IMember, b: IMember) {
-
-    const thisYear: any = moment().format('YYYY');
-    const now: any = moment();
-
-    if(!a.mainData.birthday || !b.mainData.birthday)
-      return null;
-
-    let birthdayMemberA: any = moment(a.mainData.birthday).set('year', thisYear);
-    console.log(birthdayMemberA);
-
-    let daysToNextBirthdayMemberA: number;
-    let daysToNextBirthdayMemberB: number;
-
-    if (now.unix() <= birthdayMemberA.unix()) {
-      daysToNextBirthdayMemberA = birthdayMemberA.diff(now, 'days');
-    } else {
-      birthdayMemberA = moment(a.mainData.birthday).set('year', thisYear).add(1, 'years');
-      daysToNextBirthdayMemberA = birthdayMemberA.diff(now, 'days');
-    }
-
-    let birthdayMemberB: any = moment(b.mainData.birthday).set('year', thisYear);
-    if (now.unix() <= birthdayMemberB.unix()) {
-      daysToNextBirthdayMemberB = birthdayMemberB.diff(now, 'days');
-    } else {
-      birthdayMemberB = moment(b.mainData.birthday).set('year', thisYear).add(1, 'years');
-      daysToNextBirthdayMemberB = birthdayMemberB.diff(now, 'days');
-    }
-
-    if (daysToNextBirthdayMemberA < daysToNextBirthdayMemberB) {
-      return -1;
-    }
-    if (daysToNextBirthdayMemberA > daysToNextBirthdayMemberB) {
-      return 1;
-    }
-    return 0;
-  } */
 
 }

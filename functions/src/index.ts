@@ -16,12 +16,4 @@ export const onUserDelete = user.userDeleted;
 
 import * as member from './member';
 export const birthdayReminder = member.birthdayReminderCron;
-
-
-/*
-export const hourlyCronJob = functions.pubsub.topic('hourly-tick').onPublish((event: any) => {
-  console.log('This job is ran every hour!');
-});
-*/
-
-
+export const memberOfTheWeekCron = member.memberOfTheWeekCron;

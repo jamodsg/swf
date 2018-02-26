@@ -1,6 +1,10 @@
 import { Component, OnInit, VERSION } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MemberService } from '../../shared/services/member/member.service';
+import { Observable } from 'rxjs/Observable';
+import { IMember } from '../../shared/interfaces/member/member.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +16,11 @@ export class DashboardComponent implements OnInit {
   public angularVersion: string;
   public env: any;
   public mindForm: FormGroup;
+  public members$: Observable<IMember[]>;
+
+  public today = moment();
+  public tomorrow = moment().add(1, 'days');
+  public yesterday = moment().subtract(1, 'days');
 
   // newsfeed
   messages: Object[] = [{
@@ -32,9 +41,10 @@ export class DashboardComponent implements OnInit {
   }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public memberService: MemberService) {
     this.angularVersion = VERSION.full;
     this.env = environment;
+    this.members$ = memberService.members$;
   }
 
   ngOnInit() {

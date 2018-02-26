@@ -354,6 +354,8 @@
       "birthdays": "Geburtstage",
       "endedMatchesWithoutResult": "Beendete Spiele ohne Ergebnis",
       "endedMatchesWithResult": "Beendete Spiele mit Ergebnis",
+      "got": "Wurde gestern",
+      "isGetting": "Wird heute",
       "lastArticles": "Neueste Artikel",
       "lastMatches": "Letzte Spiele",
       "matchChart": {
@@ -373,6 +375,8 @@
       "today": "heute",
       "tomorrow": "morgen",
       "upComingMatches": "Kommende Spiele",
+      "willGet": "Wird morgen",
+      "yearsOld": "Jahre alt",
       "yesterday": "gestern"
     },
     "datetime": {

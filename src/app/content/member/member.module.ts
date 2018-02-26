@@ -27,6 +27,7 @@ import { MemberEditMainComponent } from './member-edit/member-edit-main/member-e
 import { MemberEditDriveComponent } from './member-edit/member-edit-drive/member-edit-drive.component';
 import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 import { QuillModule } from 'ngx-quill';
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { QuillModule } from 'ngx-quill';
     MatSnackBarModule,
     MatTabsModule,
     memberRoutingModule,
+    MomentModule,
     PerfectScrollbarModule,
     QuillModule,
     SharedModule

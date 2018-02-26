@@ -1,2 +1,5 @@
-import * as member from './birthday';
-export const birthdayReminderCron = member.birthdayReminderCron;
+import * as birthday from './birthday';
+import * as motW from './member-of-the-week';
+
+export const birthdayReminderCron = birthday.birthdayReminderCron;
+export const memberOfTheWeekCron = motW.memberOfTheWeekCron;

@@ -35,10 +35,37 @@ export class MemberService {
     return this.afs.doc<IMember>(this.path + '/' + memberId).valueChanges();
   }
 
-  /*getProfileImage(imageUrl, gender) {
-    const path = './assets/sfw/placeholder/';
-    return imageUrl ? imageUrl : (gender === 'male') ? path + 'avatar_male.jpg' : path + 'avatar_female.jpg';
-  } */
+
+  getZodiac(birthday) {
+    const dateOfBirth = new Date(birthday);
+    const month = dateOfBirth.getMonth();
+    const day = dateOfBirth.getDate();
+
+    const zodiac = [
+      'Capricorn',
+      'Aquarius',
+      'Pisces',
+      'Aries',
+      'Taurus',
+      'Gemini',
+      'Cancer',
+      'Leo',
+      'Virgo',
+      'Libra',
+      'Scorpio',
+      'Sagittarius',
+      'Capricorn'
+    ];
+    const lastDay = [19, 18, 20, 20, 21, 21, 22, 22, 21, 22, 21, 20, 19];
+    return (day > lastDay[month]) ? zodiac[month * 1 + 1] : zodiac[month];
+  }
+
+  calculateAge(birthday) {
+    const dateOfBirth = new Date(birthday);
+    const ageDifMs = Date.now() - dateOfBirth.getTime();
+    const ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
 
   setNewMember(): Observable<IMember> {
     return Observable.of(null);

@@ -23,12 +23,12 @@
         <span style="font-weight: normal"
               *ngIf="member.mainData.birthday; else noBirthdayTemplate">
           {{member.mainData.birthday | date: 'dd.MM.yy' }}
-        {{ calculateAge(member.mainData.birthday) }} {{'general.members.detail.main.years' | translate}}
+        {{ memberService.calculateAge(member.mainData.birthday) }} {{'general.members.detail.main.years' | translate}}
         </span>
       </mat-list-item>
       <mat-list-item *ngIf="member.mainData.birthday">
         <span>{{'general.members.detail.main.zodiac' | translate}}</span>
-        {{ 'general.members.detail.zodiacList.' + getZodiac(member.mainData.birthday) | translate }}
+        {{ 'general.members.detail.zodiacList.' + memberService.getZodiac(member.mainData.birthday) | translate }}
       </mat-list-item>
       <mat-list-item>
         <span>{{'general.members.detail.main.isImported' | translate}}</span>

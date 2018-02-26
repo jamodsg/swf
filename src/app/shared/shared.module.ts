@@ -24,18 +24,26 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 import { CategoryFilterPipe } from './pipes/category-filter.pipe';
 import { IsEmptyPipe } from './pipes/is-empty.pipe';
+import { BirthdayFilterPipe } from './pipes/birthday-filter.pipe';
+import { UserAvatarComponent } from './components/user/user-avatar/user-avatar.component';
+import { UserService } from './services/user/user.service';
+import { RouterModule } from '@angular/router';
+import { BirthdayRangeFilterPipe } from './pipes/birthday-range-filter.pipe';
 
 @NgModule({
   declarations: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
+    BirthdayFilterPipe,
     CategoryFilterPipe,
     IsEmptyPipe,
     ToggleFullscreenDirective,
     SanitizeHtmlPipe,
     SnackbarComponent,
-    LoadingIndicatorComponent
+    LoadingIndicatorComponent,
+    UserAvatarComponent,
+    BirthdayRangeFilterPipe
   ],
   entryComponents: [
     SnackbarComponent
@@ -44,6 +52,8 @@ import { IsEmptyPipe } from './pipes/is-empty.pipe';
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
+    BirthdayFilterPipe,
+    BirthdayRangeFilterPipe,
     CategoryFilterPipe,
     CommonModule,
     CreationModule,
@@ -62,13 +72,18 @@ import { IsEmptyPipe } from './pipes/is-empty.pipe';
     ReactiveFormsModule,
     SanitizeHtmlPipe,
     ToggleFullscreenDirective,
-    TranslateModule
+    TranslateModule,
+    UserAvatarComponent
   ],
   imports: [
-    MatProgressSpinnerModule
+    CommonModule,
+    MatProgressSpinnerModule,
+    NgPipesModule,
+    RouterModule
   ],
   providers: [
-    MenuItemsService
+    MenuItemsService,
+    UserService
   ]
 })
 export class SharedModule {
