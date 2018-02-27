@@ -1,0 +1,34 @@
+<div fxLayout="row"
+     fxLayoutWrap="wrap"
+     *ngIf="members && club; else loadingTemplate">
+
+  <div fxFlex.gt-sm="25"
+       fxFlex="100">
+    <h3>{{'general.clubs.edit.mainTitle' | translate}}</h3>
+    <mat-list dense>
+      <mat-list-item *ngFor="let memberState of memberStateService.getMemberStates()">
+        <div matLine
+             fxLayout="row"
+             fxLayoutWrap="wrap">
+          <span fxFlex="60">{{'general.members.clubMemberStates.' + memberState.title | translate}}</span>
+          <span fxFlex="40">{{(members | filterBy: ['clubData.assignedClub'] : club.id | filterBy: ['clubData.status'] : memberState.value).length}}</span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div fxFlexOffset.gt-sm="1"
+       fxFlex.gt-sm="24"
+       fxFlex="100">
+    <h3>{{'general.clubs.edit.assignedTeams.teams' | translate}} / {{'general.clubs.edit.assignedTeams.season' |
+      translate}}</h3>
+    <mat-list dense>
+      <mat-list-item></mat-list-item>
+    </mat-list>
+  </div>
+
+</div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

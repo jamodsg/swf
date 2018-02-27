@@ -39,17 +39,15 @@
 
             <mat-tab label="{{ 'general.clubs.edit.honoraries.title' | translate}}">
               <club-detail-honoraries [club]="club"
+                                      [members]="members$ | async"
                                       [articles]="articles$ | async">
               </club-detail-honoraries>
             </mat-tab>
 
             <mat-tab label="{{ 'general.clubs.edit.statistics.title' | translate}}">
-              <ul>
-                <li>Mitglieder</li>
-                <li>Mannschaften</li>
-                <li>Spiele (S/N/U)</li>
-              </ul>
-
+              <club-detail-statistics [members]="members$ | async"
+                                      [club]="club">
+              </club-detail-statistics>
             </mat-tab>
 
           </mat-tab-group>

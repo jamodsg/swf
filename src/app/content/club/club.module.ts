@@ -35,6 +35,8 @@ import { ClubDetailManagementComponent } from './club-detail/club-detail-managem
 import { ClubDetailHonorariesComponent } from './club-detail/club-detail-honoraries/club-detail-honoraries.component';
 import { ClubManagementListComponent } from './club-edit/club-management/club-management-list/club-management-list.component';
 import { ClubHonoraryListComponent } from './club-edit/club-honoraries/club-honorary-list/club-honorary-list.component';
+import { ClubDetailStatisticsComponent } from './club-detail/club-detail-statistics/club-detail-statistics.component';
+import { MemberStateService } from '../../shared/services/member/member-state.service';
 
 @NgModule({
   imports: [
@@ -57,21 +59,22 @@ import { ClubHonoraryListComponent } from './club-edit/club-honoraries/club-hono
   ],
   declarations: [
     ClubDetailComponent,
+    ClubDetailHistoryComponent,
+    ClubDetailHonorariesComponent,
+    ClubDetailMainComponent,
+    ClubDetailManagementComponent,
+    ClubDetailStatisticsComponent,
     ClubEditComponent,
-    ClubListComponent,
-    ClubsComponent,
     ClubEditMainComponent,
     ClubHistoryComponent,
-    ClubManagementComponent,
     ClubHonorariesComponent,
-    ClubManagementFormComponent,
     ClubHonoraryFormComponent,
-    ClubDetailMainComponent,
-    ClubDetailHistoryComponent,
-    ClubDetailManagementComponent,
-    ClubDetailHonorariesComponent,
+    ClubHonoraryListComponent,
+    ClubListComponent,
+    ClubManagementComponent,
+    ClubManagementFormComponent,
     ClubManagementListComponent,
-    ClubHonoraryListComponent
+    ClubsComponent,
   ],
   exports: [],
   providers: [
@@ -81,6 +84,7 @@ import { ClubHonoraryListComponent } from './club-edit/club-honoraries/club-hono
     ClubService,
     LocationService,
     MemberService,
+    MemberStateService,
     PendingChangesGuard
   ]
 })
