@@ -5,8 +5,6 @@ import { ICategory } from './category.interface';
 import { ITag } from './tag.interface';
 import { ISeason } from './season.interface';
 import { ICreation } from './creation.interface';
-// import { IModification } from './modification.interface';
-// import { IPublication } from './publication.interface';
 
 export interface IArticle {
   id?: string;

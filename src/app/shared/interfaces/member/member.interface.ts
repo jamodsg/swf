@@ -7,6 +7,7 @@ import { IClubData } from './club-data.interface';
 import { IClubDFBData } from './club-dfb-data.interface';
 import { IClubAHData } from './club-ah-data.interface';
 import { IInterview } from './interview.interface';
+import { IArticle } from '../article.interface';
 
 export interface IMember {
   id?: string;
@@ -27,8 +28,9 @@ export interface IMember {
   interview?: IInterview[];
   comment?: string;
 
+  assignedInterviews?: IInterview[];
+  opinions: IProfile[];
   // teamCategory?: ICategory;
-  // fullSearch?: string;
   // status?: boolean;
   // assignedImages?: string[];
 }

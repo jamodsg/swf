@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.interface';
 import { IProfile } from '../../../shared/interfaces/member/profile.interface';
+import { IInterview } from '../../../shared/interfaces/member/interview.interface';
+import { IArticle } from '../../../shared/interfaces/article.interface';
 
 @Component({
   selector: 'member-edit',
@@ -50,7 +52,9 @@ export class MemberEditComponent implements OnInit {
       creation: this.initCreation(),
       dfbData: this.initDFBData(),
       mainData: this.initMainData(),
-      profile: this.initProfile()
+      profile: this.initProfile(),
+      opinions: this.initOpinions(),
+      interviews: this.initInterviews()
     });
 
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: IClub) => {
@@ -149,7 +153,71 @@ export class MemberEditComponent implements OnInit {
     });
   }
 
-  // TimeLine
+  // Interviews
+  initInterviews(): FormArray {
+    const formArray = [];
+    if (this.member.assignedInterviews) {
+      for (let i = 0; i < this.member.assignedInterviews.length; i++) {
+        formArray.push(this.initInterview(this.member.assignedInterviews[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initInterview(interview: IInterview): FormGroup {
+    return this.fb.group({
+      assignedArticleId: [interview.assignedArticleId ? interview.assignedArticleId : '', [Validators.required, Validators.maxLength(100)]],
+    });
+  }
+
+  addInterview(): void {
+    const control = <FormArray>this.form.controls['interviews'];
+    const interview: IInterview = {
+      assignedArticleId: ''
+    };
+    const addCtrl = this.initInterview(interview);
+    control.push(addCtrl);
+  }
+
+  removeInterview($event: number): void {
+    const control = <FormArray>this.form.controls['interviews'];
+    control.removeAt($event);
+  }
+
+  // Das sagen die anderen
+  initOpinions(): FormArray {
+    const formArray = [];
+    if (this.member.opinions) {
+      for (let i = 0; i < this.member.opinions.length; i++) {
+        formArray.push(this.initOpinion(this.member.opinions[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initOpinion(profile: IProfile): FormGroup {
+    return this.fb.group({
+      entry: [profile ? profile.entry : '', [Validators.required, Validators.maxLength(100)]],
+      value: [profile ? profile.value : '', [Validators.required, Validators.maxLength(100)]],
+    });
+  }
+
+  addOpinion(): void {
+    const control = <FormArray>this.form.controls['opinions'];
+    const profile: IProfile = {
+      entry: '',
+      value: ''
+    };
+    const addCtrl = this.initOpinion(profile);
+    control.push(addCtrl);
+  }
+
+  removeOpinion($event: number): void {
+    const control = <FormArray>this.form.controls['opinions'];
+    control.removeAt($event);
+  }
+
+  // Steckbrief
   initProfile(): FormArray {
     const formArray = [];
     if (this.member.profile) {

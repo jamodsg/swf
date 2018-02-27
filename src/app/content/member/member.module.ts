@@ -30,6 +30,10 @@ import { QuillModule } from 'ngx-quill';
 import { FameMemberComponent } from './fame-member/fame-member.component';
 import { MemberEditProfileComponent } from './member-edit/member-edit-profile/member-edit-profile.component';
 import { MemberEditInterviewsComponent } from './member-edit/member-edit-interviews/member-edit-interviews.component';
+import { MemberDetailProfileComponent } from './member-detail/member-detail-profile/member-detail-profile.component';
+import { MemberDetailInterviewsComponent } from './member-detail/member-detail-interviews/member-detail-interviews.component';
+import { ArticleService } from '../../shared/services/article/article.service';
+import { MemberEditOtherOpinionsComponent } from './member-edit/member-edit-other-opinions/member-edit-other-opinions.component';
 
 @NgModule({
   imports: [
@@ -52,6 +56,8 @@ import { MemberEditInterviewsComponent } from './member-edit/member-edit-intervi
     MemberDetailComponent,
     MemberDetailMainComponent,
     MemberDetailDriveComponent,
+    MemberDetailInterviewsComponent,
+    MemberDetailProfileComponent,
     MemberEditComponent,
     MemberEditMainComponent,
     MemberEditDriveComponent,
@@ -59,9 +65,11 @@ import { MemberEditInterviewsComponent } from './member-edit/member-edit-intervi
     MembersComponent,
     MemberStatisticsComponent,
     MemberEditProfileComponent,
-    MemberEditInterviewsComponent
+    MemberEditInterviewsComponent,
+    MemberEditOtherOpinionsComponent
   ],
   providers: [
+    ArticleService,
     MemberResolver,
     MemberService,
     MemberStateService,

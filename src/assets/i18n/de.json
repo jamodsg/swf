@@ -614,13 +614,21 @@
       },
       "edit": {
         "interviews": {
-          "addEntry": "Neuer Eintrag",
+          "addEntry": "Interview verknüpfen",
+          "articleTitle": "Wähle bitte den Artikel aus der Liste",
+          "noEntries": "Es wurde noch keine Interviews mit dem Mitglied verlinkt.",
           "text": "Interviews sind längere Fragen und dazugehörige Antworten, die zu einem aktuellen Geschehnis Bezug nehmen. So zum Beispiel das Grußwort des Trainers zu Beginn der Saison",
           "title": "Interviews"
+        },
+        "opinions": {
+          "addEntry": "Neuer Kommentar",
+          "text": "Hier können Aussagen von Mitspielern, ehemaligen Trainern usw. erfasst werden.",
+          "title": "Das sagen Andere über"
         },
         "profile": {
           "addEntry": "Neuer Eintrag",
           "entry": "Eigenschaft",
+          "noEntries": "Es wurde noch kein Eintrag im Steckbrief erstellt.",
           "text": "Die Profileinträge erfolgen wie früher in einem Album mit Frage und dazugehöriger Antwort (z.B. Lieblingsessen: Pizza)",
           "title": "Steckbrief",
           "value": "Eintrag / Antwort"
@@ -638,6 +646,7 @@
         "driveAndDFB": "DFB.net / Google Drive",
         "interview": "Profil & Interview",
         "media": "Dateien",
+        "otherOpinions": "Das sagen Andere",
         "others": "Sonstige Tätgigkeiten",
         "teams": "Mannschaften"
       }

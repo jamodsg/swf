@@ -31,20 +31,26 @@
                    fxLayoutWrap="wrap">
                 <div fxFlex.gt-sm="49"
                      fxFlex="100">
-                  <member-edit-interviews [form]="form"></member-edit-interviews>
+                  <member-edit-interviews (add)="addInterview($event)"
+                                          (delete)="removeInterview($event)"
+                                          [form]="form">
+                  </member-edit-interviews>
                 </div>
                 <div fxFlexOffset.gt-sm="2"
                      fxFlex.gt-sm="49"
                      fxFlex="100">
                   <member-edit-profile (add)="addProfileEntry($event)"
                                        (delete)="removeProfileEntry($event)"
-                                       (edit)="editProfileEntry($event)"
-                                       (save)="saveProfileEntry($event)"
-                                       [selectedProfileEntry]="selectedProfileEntry"
                                        [form]="form">
                   </member-edit-profile>
                 </div>
               </div>
+            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.otherOpinions' | translate}}">
+              <member-edit-other-opinions (add)="addOpinion($event)"
+                                          (delete)="removeOpinion($event)"
+                                          [form]="form">
+              </member-edit-other-opinions>
             </mat-tab>
             <mat-tab label="{{'general.members.tabs.media' | translate}}">
               <p>Mit dem Mitglied verknüpfte Fotos, Videos etc.</p>

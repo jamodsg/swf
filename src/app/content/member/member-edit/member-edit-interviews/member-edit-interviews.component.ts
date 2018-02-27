@@ -1,5 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { IInterview } from '../../../../shared/interfaces/member/interview.interface';
+import { ArticleService } from '../../../../shared/services/article/article.service';
+import { Observable } from 'rxjs/Observable';
+import { IArticle } from '../../../../shared/interfaces/article.interface';
 
 @Component({
   selector: 'member-edit-interviews',
@@ -10,10 +14,22 @@ export class MemberEditInterviewsComponent implements OnInit {
 
   @Input() form: FormGroup;
 
-  constructor() {
+  @Output() add: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() delete: EventEmitter<IInterview> = new EventEmitter<IInterview>(false);
+
+  public articles$: Observable<IArticle[]>;
+  public showForm: boolean = false;
+
+  constructor(private articleService: ArticleService) {
+    this.articles$ = articleService.articles$;
   }
 
   ngOnInit() {
+  }
+
+  addEntry() {
+    this.showForm = true;
+    this.add.emit(true);
   }
 
 }

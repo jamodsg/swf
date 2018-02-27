@@ -10,13 +10,9 @@ import { IProfile } from '../../../../shared/interfaces/member/profile.interface
 export class MemberEditProfileComponent implements OnInit {
 
   @Input() form: FormGroup;
-  @Input() selectedProfileEntry: number;
 
   @Output() add: EventEmitter<boolean> = new EventEmitter<boolean>(false);
-  @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>(false);
-
   @Output() delete: EventEmitter<IProfile> = new EventEmitter<IProfile>(false);
-  @Output() edit: EventEmitter<IProfile> = new EventEmitter<IProfile>(false);
 
   constructor() {
   }
