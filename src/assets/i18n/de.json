@@ -352,8 +352,12 @@
     },
     "dashboard": {
       "birthdays": "Geburtstage",
+      "buildStatus": "Build Status",
+      "dependencyStatus": "Dependency Status",
+      "devDependencyStatus": "Dev-Dependency Status",
       "endedMatchesWithoutResult": "Beendete Spiele ohne Ergebnis",
       "endedMatchesWithResult": "Beendete Spiele mit Ergebnis",
+      "gitVersion": "Git-Version",
       "got": "Wurde gestern",
       "isGetting": "Wird heute",
       "lastArticles": "Neueste Artikel",

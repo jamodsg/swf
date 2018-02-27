@@ -68,94 +68,90 @@
 
     <div fxLayout="row"
          fxLayoutWrap="wrap">
-      <div fxFlex="100">
-        <mat-card class="card-widget">
-          <mat-card-content class="pb-0">
-            <div fxLayout="row"
-                 fxLayoutAlign="start center"
-                 class="mb-2">
-              <div fxFlex>
-                <h1 class="mt-0 mb-0">London, UK</h1>
-                <h2 class="mt-0 mb-0">Saturday 2:00 AM</h2>
-                <p class="mat-text-muted mt-0 mb-0">Mostly Sunny</p>
-              </div>
-              <span fxFlex></span>
-              <div fxFlex class="text-xs-right">
-                <h1 class="text-xxl mt-0 mb-0">
-                  <span class="pe-is-w-moon-sea mat-text-accent"></span>
-                  <span>6 &deg;<sup></sup></span>
-                </h1>
-              </div>
+      <div fxFlex.gt-sm="50"
+           fxFlex="100">
+        <mat-card class="card-widget mat-teal">
+          <div mat-card-widget>
+            <div mat-card-float-icon>
+              <mat-icon>grade</mat-icon>
             </div>
-            <div fxLayout="row"
-                 layout-align="center"
-                 class="mb-2 text-md">
-              <div class="pr-1" fxFlex>
-                <div fxLayout="row">
-                  <span>Pressure</span>
-                  <span fxFlex></span>
-                  <span>30.09</span>
-                  <span>hPa</span>
-                </div>
-
-                <div fxLayout="row">
-                  <span>Visibility</span>
-                  <span fxFlex></span>
-                  <span>11.27</span>
-                  <span>km</span>
-                </div>
-
-                <div fxLayout="row">
-                  <span>Light</span>
-                  <span fxFlex></span>
-                  <span>0.00</span>
-                </div>
-
-                <div fxLayout="row">
-                  <span>Light</span>
-                  <span fxFlex></span>
-                  <span>16</span>
-                  <span>C</span>
-                </div>
-              </div>
-              <div class="pl-1" fxFlex>
-                <div fxLayout="row">
-                  <span>Humidity</span>
-                  <span fxFlex></span>
-                  <span>94</span>
-                  <span>%</span>
-                </div>
-
-                <div fxLayout="row">
-                  <span>Precp.</span>
-                  <span fxFlex></span>
-                  <span></span>
-                  <span>mm</span>
-                </div>
-
-                <div fxLayout="row">
-                  <span>Snow Depth</span>
-                  <span fxFlex></span>
-                  <span></span>
-                </div>
-
-                <div fxLayout="row">
-                  <span>Wind Gust</span>
-                  <span fxFlex></span>
-                  <span></span>
-                </div>
-              </div>
+            <div class="pl-0">
+              <h2 mat-card-widget-title>
+                <a class="pull-right" href="https://travis-ci.org/Meistercoach83/sfw" target="_blank">
+                  <img src="https://travis-ci.org/Meistercoach83/sfw.svg?branch=master"/>
+                </a>
+              </h2>
+              <p>{{'general.dashboard.buildStatus' | translate}}</p>
             </div>
-          </mat-card-content>
+          </div>
         </mat-card>
       </div>
-    </div>
 
+      <div fxFlex.gt-sm="50"
+           fxFlex="100">
+        <mat-card class="card-widget mat-purple">
+          <div mat-card-widget>
+            <div mat-card-float-icon>
+              <mat-icon>grade</mat-icon>
+            </div>
+            <div class="pl-0">
+              <h2 mat-card-widget-title>
+                <a class="pull-right" href="https://david-dm.org/Meistercoach83/sfw" target="_blank">
+                  <img src="https://david-dm.org/Meistercoach83/sfw/status.svg"/>
+                </a>
+              </h2>
+              <p>{{'general.dashboard.dependencyStatus' | translate}}</p>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxFlex.gt-sm="50"
+           fxFlex="100">
+        <mat-card class="card-widget mat-teal">
+          <div mat-card-widget>
+            <div mat-card-float-icon>
+              <mat-icon>grade</mat-icon>
+            </div>
+            <div class="pl-0">
+              <h2 mat-card-widget-title>
+                <a class="pull-right" href="https://david-dm.org/Meistercoach83/sfw" target="_blank">
+                  <img src="https://david-dm.org/Meistercoach83/sfw/dev-status.svg"/>
+                </a>
+              </h2>
+              <p>{{'general.dashboard.devDependencyStatus' | translate}}</p>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxFlex.gt-sm="50"
+           fxFlex="100">
+        <mat-card class="card-widget mat-purple">
+          <div mat-card-widget>
+            <div mat-card-float-icon>
+              <mat-icon>grade</mat-icon>
+            </div>
+            <div class="pl-0">
+              <h2 mat-card-widget-title>
+                <a class="pull-right" href="https://badge.fury.io/gh/Meistercoach83%2F-sfw" target="_blank">
+                  <img src="https://badge.fury.io/gh/Meistercoach83%2Fsfw.svg"/>
+                </a>
+              </h2>
+              <p>{{'general.dashboard.gitVersion' | translate}}</p>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
   </div>
 
 </div>
 
-<div fxLayout="row" fxLayoutWrap="wrap">
+
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
   <div fxFlex.gt-sm="25"
        fxFlex="100">
     <mat-card>
@@ -214,7 +210,8 @@
     </mat-card>
   </div>
 
-  <div fxFlex.gt-sm="25"
+  <div fxFlex.gt-sm="24"
+       fxFlexOffset.gt-sm="1"
        fxFlex="100">
     <mat-card>
       <mat-card-title class="mat-blue">
@@ -246,6 +243,86 @@
           <mat-tab label="{{'general.dashboard.lastMatches' | translate}}"></mat-tab>
           <mat-tab label="{{'general.dashboard.matchesWithoutResult' | translate}}"></mat-tab>
         </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-widget">
+      <mat-card-content class="pb-0">
+        <div fxLayout="row"
+             fxLayoutAlign="start center"
+             class="mb-2">
+          <div fxFlex>
+            <h1 class="mt-0 mb-0">London, UK</h1>
+            <h2 class="mt-0 mb-0">Saturday 2:00 AM</h2>
+            <p class="mat-text-muted mt-0 mb-0">Mostly Sunny</p>
+          </div>
+          <span fxFlex></span>
+          <div fxFlex class="text-xs-right">
+            <h1 class="text-xxl mt-0 mb-0">
+              <span class="pe-is-w-moon-sea mat-text-accent"></span>
+              <span>6 &deg;<sup></sup></span>
+            </h1>
+          </div>
+        </div>
+        <div fxLayout="row"
+             layout-align="center"
+             class="mb-2 text-md">
+          <div class="pr-1" fxFlex>
+            <div fxLayout="row">
+              <span>Pressure</span>
+              <span fxFlex></span>
+              <span>30.09</span>
+              <span>hPa</span>
+            </div>
+
+            <div fxLayout="row">
+              <span>Visibility</span>
+              <span fxFlex></span>
+              <span>11.27</span>
+              <span>km</span>
+            </div>
+
+            <div fxLayout="row">
+              <span>Light</span>
+              <span fxFlex></span>
+              <span>0.00</span>
+            </div>
+
+            <div fxLayout="row">
+              <span>Light</span>
+              <span fxFlex></span>
+              <span>16</span>
+              <span>C</span>
+            </div>
+          </div>
+          <div class="pl-1" fxFlex>
+            <div fxLayout="row">
+              <span>Humidity</span>
+              <span fxFlex></span>
+              <span>94</span>
+              <span>%</span>
+            </div>
+
+            <div fxLayout="row">
+              <span>Precp.</span>
+              <span fxFlex></span>
+              <span></span>
+              <span>mm</span>
+            </div>
+
+            <div fxLayout="row">
+              <span>Snow Depth</span>
+              <span fxFlex></span>
+              <span></span>
+            </div>
+
+            <div fxLayout="row">
+              <span>Wind Gust</span>
+              <span fxFlex></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
