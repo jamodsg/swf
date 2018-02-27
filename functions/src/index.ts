@@ -17,3 +17,5 @@ export const onUserDelete = user.userDeleted;
 import * as member from './member';
 export const birthdayReminder = member.birthdayReminderCron;
 export const memberOfTheWeekCron = member.memberOfTheWeekCron;
+export const dfbMemberCron = member.dfbMemberCron;
+export const driveMemberCron = member.driveMemberCron;

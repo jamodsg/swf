@@ -40,7 +40,6 @@ export const birthdayReminderCron = functions.pubsub.topic('daily-tick').onPubli
         return true;
       }
 
-      console.log('birthdays found:');
       console.log(birthdayList);
 
       const welcomeMsg = {
