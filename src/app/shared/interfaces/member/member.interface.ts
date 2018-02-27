@@ -8,6 +8,7 @@ import { IClubDFBData } from './club-dfb-data.interface';
 import { IClubAHData } from './club-ah-data.interface';
 import { IInterview } from './interview.interface';
 import { IArticle } from '../article.interface';
+import { IOpinion } from './opinion.interface';
 
 export interface IMember {
   id?: string;
@@ -29,7 +30,7 @@ export interface IMember {
   comment?: string;
 
   assignedInterviews?: IInterview[];
-  opinions: IProfile[];
+  opinions: IOpinion[];
   // teamCategory?: ICategory;
   // status?: boolean;
   // assignedImages?: string[];

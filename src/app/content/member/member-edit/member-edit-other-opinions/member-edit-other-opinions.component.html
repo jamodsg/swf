@@ -6,55 +6,89 @@
      [formGroup]="form">
 
   <div fxFlex="100"
-       *ngIf="members$ | async as members; else loadingTemplate"
        formArrayName="opinions">
 
     <button mat-raised-button
             style="margin-bottom: 25px"
             type="button"
             color="primary"
-            (click)="add.emit(true)">
+            (click)="addOpinion()">
       {{'general.members.edit.opinions.addEntry' | translate}}
     </button>
 
-    <div fxLayout="row"
-         fxLayoutWrap="wrap"
-         *ngFor="let control of form.get('opinions')['controls']; let i = index">
-
-      <div fxFlex="100"
-           [formGroupName]="i">
-
+    <div *ngIf="showForm">
+      <div *ngIf="members$ | async as members; else loadingTemplate">
         <div fxLayout="row"
-             fxLayoutWrap="wrap">
+             fxLayoutWrap="wrap"
+             *ngFor="let control of form.get('opinions')['controls']; let i = index; let last = last">
 
-          <mat-form-field fxflex.gt-sm="10"
-                          fxFlex="100">
-            <mat-select placeholder="{{'general.members.edit.interviews.articleTitle' | translate}}"
-                        formControlName="assignedArticleId">
-              <mat-option
-                *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
-                [value]="member.id">
-                {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date:
-                'dd.MM.yy'}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div fxFlex="100"
+               [formGroupName]="i">
 
-          <div fxFlexOffset.gt-sm="3"
-               fxflex.gt-sm="82"
-              fxFlex="100">
+            <div fxLayout="row"
+                 fxLayoutWrap="wrap">
+
+              <mat-form-field fxFlex.gt-sm="25"
+                              fxFlex="100"
+                              *ngIf="!showMemberSelect">
+                <input matInput
+                       placeholder="{{'general.members.edit.opinions.lastAndFirstName' | translate}}"
+                       formControlName="name"/>
+              </mat-form-field>
+
+              <mat-form-field fxFlex.gt-sm="25"
+                              fxFlex="100"
+                              *ngIf="showMemberSelect">
+                <mat-select placeholder="{{'general.members.edit.opinions.userTitle' | translate}}"
+                            formControlName="assignedMember">
+                  <mat-option
+                    *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
+                    [value]="member.id">
+                    {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date:
+                    'dd.MM.yy'}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div fxFlexOffset.gt-sm="5"
+                   fxFlex.gt-sm="25"
+                   fxFlex="100">
+                <button mat-raised-button
+                        (click)="toggleMemberSelect()"
+                        color="primary">
+                  {{showMemberSelect ? ('general.members.edit.opinions.perTextField' | translate) :
+                  ('general.members.edit.opinions.perSelectField' | translate)}}
+                </button>
+              </div>
+
+              <div fxFlex.gt-sm="45"
+                   fxFlex="100"
+                   class="text-md-right">
+                <button mat-icon-button
+                        (click)="delete.emit(i)"
+                        color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+            </div>
+
+            <div fxLayout="row"
+                 fxLayoutWrap="wrap">
+              <div fxFlex="100">
+                <h3>{{'general.members.edit.opinions.comment' | translate}}</h3>
+                <quill-editor [style]="{height: '150px'}"
+                              formControlName="comment">
+                </quill-editor>
+              </div>
+            </div>
+
+            <hr *ngIf="!last" style="margin: 25px 0;" />
+
           </div>
-
-          <button fxflex.gt-sm="5"
-                  mat-icon-button
-                  (click)="delete.emit(i)"
-                  color="warn">
-            <mat-icon>delete</mat-icon>
-          </button>
 
         </div>
       </div>
-
     </div>
 
   </div>

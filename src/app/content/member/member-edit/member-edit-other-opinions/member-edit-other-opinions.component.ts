@@ -18,12 +18,23 @@ export class MemberEditOtherOpinionsComponent implements OnInit {
   @Output() delete: EventEmitter<IProfile> = new EventEmitter<IProfile>(false);
 
   public members$: Observable<IMember[]>;
+  public showMemberSelect: boolean = true;
+  public showForm: boolean = false;
 
   constructor(private memberService: MemberService) {
     this.members$ = memberService.members$;
   }
 
   ngOnInit() {
+  }
+
+  toggleMemberSelect() {
+    this.showMemberSelect = !this.showMemberSelect;
+  }
+
+  addOpinion() {
+    this.showForm = true;
+    this.add.emit(true);
   }
 
 }

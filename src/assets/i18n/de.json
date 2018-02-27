@@ -622,6 +622,11 @@
         },
         "opinions": {
           "addEntry": "Neuer Kommentar",
+          "comment": "Der Kommentar",
+          "lastAndFirstName": "Vor- und Nachname des Kommentators",
+          "perSelectField": "aus der Mitgliederliste wählen",
+          "perTextField": "freie Texteingabe",
+          "userTitle": "Wähle bitte das Mitglied aus der Liste",
           "text": "Hier können Aussagen von Mitspielern, ehemaligen Trainern usw. erfasst werden.",
           "title": "Das sagen Andere über"
         },

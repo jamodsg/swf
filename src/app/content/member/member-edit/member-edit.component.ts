@@ -12,6 +12,7 @@ import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.inter
 import { IProfile } from '../../../shared/interfaces/member/profile.interface';
 import { IInterview } from '../../../shared/interfaces/member/interview.interface';
 import { IArticle } from '../../../shared/interfaces/article.interface';
+import { IOpinion } from '../../../shared/interfaces/member/opinion.interface';
 
 @Component({
   selector: 'member-edit',
@@ -195,20 +196,22 @@ export class MemberEditComponent implements OnInit {
     return this.fb.array(formArray);
   }
 
-  initOpinion(profile: IProfile): FormGroup {
+  initOpinion(opinion: IOpinion): FormGroup {
     return this.fb.group({
-      entry: [profile ? profile.entry : '', [Validators.required, Validators.maxLength(100)]],
-      value: [profile ? profile.value : '', [Validators.required, Validators.maxLength(100)]],
+      name: [opinion ? opinion.name : '', [Validators.required]],
+      assignedMember: [opinion ? opinion.assignedMember : '', [Validators.required]],
+      comment: [opinion ? opinion.comment : '', [Validators.required]],
     });
   }
 
   addOpinion(): void {
     const control = <FormArray>this.form.controls['opinions'];
-    const profile: IProfile = {
-      entry: '',
-      value: ''
+    const opinion: IOpinion = {
+      name: '',
+      comment: '',
+      assignedMember: null
     };
-    const addCtrl = this.initOpinion(profile);
+    const addCtrl = this.initOpinion(opinion);
     control.push(addCtrl);
   }
 
