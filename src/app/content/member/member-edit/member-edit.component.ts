@@ -2,12 +2,14 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
 import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
+import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.interface';
+import { IProfile } from '../../../shared/interfaces/member/profile.interface';
 
 @Component({
   selector: 'member-edit',
@@ -24,6 +26,7 @@ export class MemberEditComponent implements OnInit {
   public member: IMember;
   private savedMember: IMember;
   public form: FormGroup;
+  public selectedProfileEntry: number = -1;
 
   constructor(public route: ActivatedRoute,
     public snackBar: MatSnackBar,
@@ -46,7 +49,8 @@ export class MemberEditComponent implements OnInit {
       contact: this.initContact(),
       creation: this.initCreation(),
       dfbData: this.initDFBData(),
-      mainData: this.initMainData()
+      mainData: this.initMainData(),
+      profile: this.initProfile()
     });
 
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: IClub) => {
@@ -143,6 +147,39 @@ export class MemberEditComponent implements OnInit {
       lastName: this.member.mainData.lastName,
       title: this.member.mainData.title
     });
+  }
+
+  // TimeLine
+  initProfile(): FormArray {
+    const formArray = [];
+    if (this.member.profile) {
+      for (let i = 0; i < this.member.profile.length; i++) {
+        formArray.push(this.initProfileEntry(this.member.profile[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initProfileEntry(profile: IProfile): FormGroup {
+    return this.fb.group({
+      entry: [profile ? profile.entry : '', [Validators.required, Validators.maxLength(100)]],
+      value: [profile ? profile.value : '', [Validators.required, Validators.maxLength(100)]],
+    });
+  }
+
+  addProfileEntry(): void {
+    const control = <FormArray>this.form.controls['profile'];
+    const profile: IProfile = {
+      entry: '',
+      value: ''
+    };
+    const addCtrl = this.initProfileEntry(profile);
+    control.push(addCtrl);
+  }
+
+  removeProfileEntry($event: number): void {
+    const control = <FormArray>this.form.controls['profile'];
+    control.removeAt($event);
   }
 
   saveMember(redirect: boolean = false): void {

@@ -116,7 +116,7 @@
             <span *ngIf="row.ahData.payment">{{ row.ahData.payment }} &euro;<br /></span>
             <span *ngIf="row.ahData.status">
              {{(ahMemberStates | filterBy: ['value'] : row.ahData.status)
-              ? ((ahMemberStates | filterBy: ['value'] : row.ahData.status)[0].title | translate) : ''}}
+              ? ('general.members.ahMemberStates.' + (ahMemberStates | filterBy: ['value'] : row.ahData.status)[0].title | translate) : ''}}
             </span>
           </span>
         </ng-template>

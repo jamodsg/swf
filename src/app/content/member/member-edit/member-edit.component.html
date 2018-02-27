@@ -27,11 +27,24 @@
               </member-edit-drive>
             </mat-tab>
             <mat-tab label="{{'general.members.tabs.interview' | translate}}">
-              <h3>Interviews</h3>
-              <p>Liste mit den Interviews (Artikeln), die mit dem Benutzer geführt worden sind. Sortiert nach Datum,
-                absteigend.</p>
-              <h3>Profil</h3>
-              <p>Steckbrief für den Benutzer (VÖ muss durch das Mitglied bestätigt werden)</p>
+              <div fxLayout="row"
+                   fxLayoutWrap="wrap">
+                <div fxFlex.gt-sm="49"
+                     fxFlex="100">
+                  <member-edit-interviews [form]="form"></member-edit-interviews>
+                </div>
+                <div fxFlexOffset.gt-sm="2"
+                     fxFlex.gt-sm="49"
+                     fxFlex="100">
+                  <member-edit-profile (add)="addProfileEntry($event)"
+                                       (delete)="removeProfileEntry($event)"
+                                       (edit)="editProfileEntry($event)"
+                                       (save)="saveProfileEntry($event)"
+                                       [selectedProfileEntry]="selectedProfileEntry"
+                                       [form]="form">
+                  </member-edit-profile>
+                </div>
+              </div>
             </mat-tab>
             <mat-tab label="{{'general.members.tabs.media' | translate}}">
               <p>Mit dem Mitglied verknüpfte Fotos, Videos etc.</p>

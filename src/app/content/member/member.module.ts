@@ -28,6 +28,8 @@ import { MemberEditDriveComponent } from './member-edit/member-edit-drive/member
 import { PendingChangesGuard } from '../../shared/services/auth/pending-changes.guard';
 import { QuillModule } from 'ngx-quill';
 import { FameMemberComponent } from './fame-member/fame-member.component';
+import { MemberEditProfileComponent } from './member-edit/member-edit-profile/member-edit-profile.component';
+import { MemberEditInterviewsComponent } from './member-edit/member-edit-interviews/member-edit-interviews.component';
 
 @NgModule({
   imports: [
@@ -55,7 +57,9 @@ import { FameMemberComponent } from './fame-member/fame-member.component';
     MemberEditDriveComponent,
     MemberListComponent,
     MembersComponent,
-    MemberStatisticsComponent
+    MemberStatisticsComponent,
+    MemberEditProfileComponent,
+    MemberEditInterviewsComponent
   ],
   providers: [
     MemberResolver,

@@ -17,7 +17,7 @@ export interface IMember {
   clubData?: IClubData;
   ahData?: IClubAHData;
   dfbData?: IClubDFBData;
-  profile?: IProfile;
+  profile?: IProfile[];
   otherData?: IMemberOtherData;
 
   profileImageUrl?: string;
