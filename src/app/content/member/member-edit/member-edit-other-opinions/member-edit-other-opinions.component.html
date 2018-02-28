@@ -6,39 +6,73 @@
      [formGroup]="form">
 
   <div fxFlex="100"
-       formArrayName="opinions">
+       formArrayName="opinions"><!--
+       *ngIf="members; else loadingTemplate"-->
 
     <button mat-raised-button
             style="margin-bottom: 25px"
             type="button"
             color="primary"
-            (click)="addOpinion()">
+            (click)="add.emit(true)">
       {{'general.members.edit.opinions.addEntry' | translate}}
     </button>
 
-    <div *ngIf="showForm">
-      <div *ngIf="members$ | async as members; else loadingTemplate">
+    <div fxLayout="row"
+         fxLayoutWrap="wrap"
+         *ngFor="let control of form.get('opinions')['controls']; let i = index; let last = last">
+
+      <div fxFlex="100"
+           [formGroupName]="i">
+
         <div fxLayout="row"
-             fxLayoutWrap="wrap"
-             *ngFor="let control of form.get('opinions')['controls']; let i = index; let last = last">
+             fxLayoutWrap="wrap">
 
           <div fxFlex="100"
-               [formGroupName]="i">
+               style="margin-bottom: 40px;">
+            <button mat-raised-button
+                    [disabled]="form.get('opinions')['controls'][i]['controls']['type'].value === 'textField'"
+                    (click)="toggleMemberLookup.emit({'id': i, 'type': 'textField' })"
+                    color="primary">
+              {{'general.members.edit.opinions.perTextField' | translate}}
+            </button>
 
+            <button mat-raised-button
+                    [disabled]="form.get('opinions')['controls'][i]['controls']['type'].value === 'selectField'"
+                    (click)="toggleMemberLookup.emit({'id': i, 'type': 'selectField' })"
+                    color="primary">
+              {{'general.members.edit.opinions.perSelectField' | translate}}
+            </button>
+          </div>
+
+          <div *ngIf="form.get('opinions')['controls'][i]['controls']['type'].value === 'textField'"
+               fxFlex.gt-sm="90"
+               fxFlex="100"
+               formGroupName="name">
             <div fxLayout="row"
                  fxLayoutWrap="wrap">
-
-              <mat-form-field fxFlex.gt-sm="25"
-                              fxFlex="100"
-                              *ngIf="!showMemberSelect">
+              <mat-form-field fxFlex.gt-sm="49"
+                              fxFlex="100">
                 <input matInput
-                       placeholder="{{'general.members.edit.opinions.lastAndFirstName' | translate}}"
-                       formControlName="name"/>
+                       placeholder="{{'general.members.edit.opinions.firstName' | translate}}"
+                       formControlName="firstName"/>
               </mat-form-field>
+              <mat-form-field fxFlexOffset.gt-sm="2"
+                              fxFlex.gt-sm="49"
+                              fxFlex="100">
+                <input matInput
+                       placeholder="{{'general.members.edit.opinions.lastName' | translate}}"
+                       formControlName="lastName"/>
+              </mat-form-field>
+            </div>
+          </div>
 
-              <mat-form-field fxFlex.gt-sm="25"
-                              fxFlex="100"
-                              *ngIf="showMemberSelect">
+          <div *ngIf="form.get('opinions')['controls'][i]['controls']['type'].value === 'selectField'"
+               fxFlex.gt-sm="90"
+               fxFlex="100"
+               formGroupName="assignedMember">
+            <div fxLayout="row"
+                 fxLayoutWrap="wrap">
+              <mat-form-field fxFlex="100">
                 <mat-select placeholder="{{'general.members.edit.opinions.userTitle' | translate}}"
                             formControlName="assignedMember">
                   <mat-option
@@ -49,49 +83,38 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-
-              <div fxFlexOffset.gt-sm="5"
-                   fxFlex.gt-sm="25"
-                   fxFlex="100">
-                <button mat-raised-button
-                        (click)="toggleMemberSelect()"
-                        color="primary">
-                  {{showMemberSelect ? ('general.members.edit.opinions.perTextField' | translate) :
-                  ('general.members.edit.opinions.perSelectField' | translate)}}
-                </button>
-              </div>
-
-              <div fxFlex.gt-sm="45"
-                   fxFlex="100"
-                   class="text-md-right">
-                <button mat-icon-button
-                        (click)="delete.emit(i)"
-                        color="warn">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-
             </div>
+          </div>
 
-            <div fxLayout="row"
-                 fxLayoutWrap="wrap">
-              <div fxFlex="100">
-                <h3>{{'general.members.edit.opinions.comment' | translate}}</h3>
-                <quill-editor [style]="{height: '150px'}"
-                              formControlName="comment">
-                </quill-editor>
-              </div>
-            </div>
-
-            <hr *ngIf="!last" style="margin: 25px 0;" />
-
+          <div fxFlex.gt-sm="10"
+               fxFlex="100"
+               class="text-md-right">
+            <button mat-icon-button
+                    (click)="delete.emit(i)"
+                    color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
 
         </div>
-      </div>
-    </div>
 
+        <div fxLayout="row"
+             fxLayoutWrap="wrap">
+          <div fxFlex="100">
+            <h3>{{'general.members.edit.opinions.comment' | translate}}</h3>
+            <quill-editor [style]="{height: '150px'}"
+                          formControlName="comment">
+            </quill-editor>
+          </div>
+        </div>
+
+        <hr *ngIf="!last" style="margin: 25px 0;"/>
+
+      </div>
+
+    </div>
   </div>
+
 </div>
 
 <ng-template #loadingTemplate>

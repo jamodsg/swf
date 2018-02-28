@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { IProfile } from '../../../../shared/interfaces/member/profile.interface';
-import { MemberService } from '../../../../shared/services/member/member.service';
-import { Observable } from 'rxjs/Observable';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
 
 @Component({
@@ -13,28 +11,62 @@ import { IMember } from '../../../../shared/interfaces/member/member.interface';
 export class MemberEditOtherOpinionsComponent implements OnInit {
 
   @Input() form: FormGroup;
+  @Input() members: IMember[];
 
   @Output() add: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() delete: EventEmitter<IProfile> = new EventEmitter<IProfile>(false);
 
-  public members$: Observable<IMember[]>;
-  public showMemberSelect: boolean = true;
-  public showForm: boolean = false;
+  @Output() toggleMemberLookup: EventEmitter<{ id: number, type: string }> = new EventEmitter<{ id: number, type: string }>(false);
 
-  constructor(private memberService: MemberService) {
-    this.members$ = memberService.members$;
+
+  constructor() {
   }
 
   ngOnInit() {
+    this.subscribeToMemberLookupChanges();
   }
 
-  toggleMemberSelect() {
-    this.showMemberSelect = !this.showMemberSelect;
-  }
+  subscribeToMemberLookupChanges() {
 
-  addOpinion() {
-    this.showForm = true;
-    this.add.emit(true);
+    const formControl = (<any>this.form).controls['opinions'];
+
+    const changes$ = formControl.valueChanges;
+
+    changes$.subscribe((changes: any) => {
+
+      for (let i = 0; i < changes.length; i++) {
+
+        const textFieldCtrl = formControl['controls'][i]['controls']['name'];
+        const selectFieldCtrl = formControl['controls'][i]['controls']['assignedMember'];
+
+        if (changes[i].type === 'textField') {
+          Object.keys(textFieldCtrl.controls).forEach(key => {
+            textFieldCtrl.controls[key].setValidators(Validators.required, Validators.minLength(3));
+            textFieldCtrl.controls[key].updateValueAndValidity();
+          });
+
+          Object.keys(selectFieldCtrl.controls).forEach(key => {
+            selectFieldCtrl.controls[key].setValidators(null);
+            selectFieldCtrl.controls[key].updateValueAndValidity();
+          });
+        }
+
+        if (changes[i].type === 'selectField') {
+
+          Object.keys(selectFieldCtrl.controls).forEach(key => {
+            selectFieldCtrl.controls[key].setValidators(Validators.required, Validators.minLength(3));
+            selectFieldCtrl.controls[key].updateValueAndValidity();
+          });
+
+          Object.keys(textFieldCtrl.controls).forEach(key => {
+            textFieldCtrl.controls[key].setValidators(null);
+            textFieldCtrl.controls[key].updateValueAndValidity();
+          });
+        }
+
+      }
+
+    });
   }
 
 }

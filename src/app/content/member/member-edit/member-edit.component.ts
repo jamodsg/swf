@@ -2,16 +2,14 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MemberService } from '../../../shared/services/member/member.service';
 import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
 import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
-import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.interface';
 import { IProfile } from '../../../shared/interfaces/member/profile.interface';
 import { IInterview } from '../../../shared/interfaces/member/interview.interface';
-import { IArticle } from '../../../shared/interfaces/article.interface';
 import { IOpinion } from '../../../shared/interfaces/member/opinion.interface';
 
 @Component({
@@ -29,13 +27,14 @@ export class MemberEditComponent implements OnInit {
   public member: IMember;
   private savedMember: IMember;
   public form: FormGroup;
-  public selectedProfileEntry: number = -1;
+  public members$: Observable<IMember[]>;
 
   constructor(public route: ActivatedRoute,
-    public snackBar: MatSnackBar,
-    private fb: FormBuilder,
-    private memberService: MemberService,
-    private router: Router) {
+              public snackBar: MatSnackBar,
+              private fb: FormBuilder,
+              private memberService: MemberService,
+              private router: Router) {
+    this.members$ = memberService.members$;
   }
 
   ngOnInit() {
@@ -61,6 +60,7 @@ export class MemberEditComponent implements OnInit {
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: IClub) => {
       this.member = Object.assign({}, this.member, changes);
       if (!this.form.invalid) {
+        console.log(changes);
         this.saveMember();
       }
     });
@@ -186,6 +186,11 @@ export class MemberEditComponent implements OnInit {
   }
 
   // Das sagen die anderen
+  toggleMemberLookup($event: {id: number, type: string}) {
+    const ctrl: FormControl = (<any>this.form).controls['opinions']['controls'][$event.id].controls['type'];
+    ctrl.setValue($event.type);
+  }
+
   initOpinions(): FormArray {
     const formArray = [];
     if (this.member.opinions) {
@@ -198,18 +203,33 @@ export class MemberEditComponent implements OnInit {
 
   initOpinion(opinion: IOpinion): FormGroup {
     return this.fb.group({
-      name: [opinion ? opinion.name : '', [Validators.required]],
-      assignedMember: [opinion ? opinion.assignedMember : '', [Validators.required]],
-      comment: [opinion ? opinion.comment : '', [Validators.required]],
+      type: [opinion ? opinion.type : 'selectField'],
+      name: this.initNameModel(),
+      assignedMember: this.initAssignedMemberModel(),
+      comment: [opinion ? opinion.comment : '', [Validators.required]]
+    });
+  }
+
+  initNameModel(){
+    return this.fb.group({
+      firstName: ['', [Validators.required, Validators.maxLength(100)]],
+      lastName:  ['', [Validators.required, Validators.maxLength(100)]],
+    });
+  }
+
+  initAssignedMemberModel(){
+    return this.fb.group({
+      assignedMember:  ['', [Validators.required, Validators.maxLength(100)]],
     });
   }
 
   addOpinion(): void {
     const control = <FormArray>this.form.controls['opinions'];
     const opinion: IOpinion = {
+      type: 'selectField',
       name: '',
-      comment: '',
-      assignedMember: null
+      assignedMember: null,
+      comment: ''
     };
     const addCtrl = this.initOpinion(opinion);
     control.push(addCtrl);
@@ -219,6 +239,7 @@ export class MemberEditComponent implements OnInit {
     const control = <FormArray>this.form.controls['opinions'];
     control.removeAt($event);
   }
+
 
   // Steckbrief
   initProfile(): FormArray {

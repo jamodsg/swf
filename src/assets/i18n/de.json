@@ -623,7 +623,8 @@
         "opinions": {
           "addEntry": "Neuer Kommentar",
           "comment": "Der Kommentar",
-          "lastAndFirstName": "Vor- und Nachname des Kommentators",
+          "firstName": "Vorname des Kommentators",
+          "lastName": "Nachname des Kommentators",
           "perSelectField": "aus der Mitgliederliste wählen",
           "perTextField": "freie Texteingabe",
           "userTitle": "Wähle bitte das Mitglied aus der Liste",
