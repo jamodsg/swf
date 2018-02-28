@@ -11,6 +11,9 @@ import 'rxjs/add/operator/debounceTime';
 import { IProfile } from '../../../shared/interfaces/member/profile.interface';
 import { IInterview } from '../../../shared/interfaces/member/interview.interface';
 import { IOpinion } from '../../../shared/interfaces/member/opinion.interface';
+import { ITeam } from '../../../shared/interfaces/team/team.interface';
+import { ClubService } from '../../../shared/services/club/club.service';
+import { TeamService } from '../../../shared/services/team/team.service';
 
 @Component({
   selector: 'member-edit',
@@ -28,13 +31,19 @@ export class MemberEditComponent implements OnInit {
   private savedMember: IMember;
   public form: FormGroup;
   public members$: Observable<IMember[]>;
+  //public clubs$: Observable<IClub[]>;
+  //public teams$: Observable<ITeam[]>;
 
   constructor(public route: ActivatedRoute,
               public snackBar: MatSnackBar,
+              //private clubService: ClubService,
+              //private teamService: TeamService,
               private fb: FormBuilder,
               private memberService: MemberService,
               private router: Router) {
+    //this.clubs$ = clubService.clubs$;
     this.members$ = memberService.members$;
+    //this.teams$ = this.teamService.teams$;
   }
 
   ngOnInit() {

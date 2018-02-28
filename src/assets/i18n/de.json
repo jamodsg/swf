@@ -571,6 +571,14 @@
           "noContact": "Es wurden keine Kontaktdaten für dieses Mitglied hinterlegt.",
           "noDFBData": "Es sind keine DFB.net Daten für diesen Benuter vorhanden."
         },
+        "functions": {
+          "asPlayer": "Als Spieler",
+          "inClubManagement": "Im Vorstand",
+          "inTeamManagement": "In der Mannschaftsbetreuung",
+          "others": "Sonstige",
+          "othersComment": "(Kommentarfeld aus dem Drive)",
+          "title": "Bekleidete Positionen im Verein"
+        },
         "main": {
           "address": "Adresse",
           "ageGroupAndPassData": "Altersklasse, Pass-Nr./-datum",
@@ -596,6 +604,10 @@
           "salutation": "Anrede",
           "years": "Jahre",
           "zodiac": "Sternzeichen"
+        },
+        "opinions": {
+          "noEntries": "Es wurden noch keine Kommentare von anderen Personen erfasst.",
+          "title": "Das sagen andere über ihn / sie ..."
         },
         "zodiacList": {
           "Capricorn": "Steinbock",
@@ -648,12 +660,14 @@
         "noEmailTitle": "Fehlende E-Mail Adressen"
       },
       "tabs": {
-        "main": "Wichtigste Daten",
         "driveAndDFB": "DFB.net / Google Drive",
+        "functions": "Funkionen",
         "interview": "Profil & Interview",
+        "main": "Wichtigste Daten",
         "media": "Dateien",
         "otherOpinions": "Das sagen Andere",
         "others": "Sonstige Tätgigkeiten",
+        "statistics": "Statistiken",
         "teams": "Mannschaften"
       }
     },
@@ -1309,6 +1323,7 @@
       "compactSidebar": "Kompaktes Menü",
       "withIcons": "Nur Icons anzeigen"
     },
+    "since": "seit",
     "typeToFilter": "Suchen ...",
     "yes": "Ja"
   }

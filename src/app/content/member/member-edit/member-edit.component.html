@@ -54,15 +54,18 @@
                                           [form]="form">
               </member-edit-other-opinions><!-- members$ | async-->
             </mat-tab>
-            <mat-tab label="{{'general.members.tabs.media' | translate}}">
+            <!--<mat-tab label="{{'general.members.tabs.media' | translate}}">
               <p>Mit dem Mitglied verknüpfte Fotos, Videos etc.</p>
             </mat-tab>
             <mat-tab label="{{'general.members.tabs.teams' | translate}}">
               <p>Liste aller Mannschaften, in denen das Mitglied als Spieler tätig war.</p>
             </mat-tab>
-            <mat-tab label="{{'general.members.tabs.others' | translate}}">
-              <p>Sonstige Tätigkeiten des Mitglieds (Vorstand oder Trainer?)</p>
-            </mat-tab>
+            <mat-tab label="{{'general.members.tabs.functions' | translate}}">
+              <member-functions [teams]="teams$ | async"
+                                [clubs]="clubs$ | async"
+                                [showLinks]="true">
+              </member-functions>
+            </mat-tab>-->
           </mat-tab-group>
         </mat-card-content>
       </mat-card>

@@ -1,8 +1,7 @@
 <div fxLayout="row"
      fxLayoutWrap="wrap">
 
-  <div fxFlex.gt-sm="75"
-       fxFlex.gt-xs="100">
+  <div fxFlex="100">
     <div class="mat-card-top"
          *ngIf="member; else loadingTemplate">
 
@@ -37,16 +36,22 @@
               </div>
             </mat-tab>
             <mat-tab label="{{'general.members.tabs.otherOpinions' | translate}}">
-              <p>Das sagen andere über ihn / sie</p>
+              <member-detail-opinions [member]="member"
+                                      [members]="members$ | async">
+              </member-detail-opinions>
             </mat-tab>
             <mat-tab label="{{'general.members.tabs.media' | translate}}">
               <p>Mit dem Mitglied verknüpfte Fotos, Videos etc.</p>
             </mat-tab>
-            <mat-tab label="{{'general.members.tabs.teams' | translate}}">
-              <p>Liste aller Mannschaften, in denen das Mitglied als Spieler tätig war.</p>
+            <mat-tab label="{{'general.members.tabs.functions' | translate}}">
+              <member-functions [member]="member"
+                                [categories]="categories$ | async"
+                                [clubs]="clubs$ | async"
+                                [teams]="teams$ | async">
+              </member-functions>
             </mat-tab>
-            <mat-tab label="{{'general.members.tabs.others' | translate}}">
-              <p>Sonstige Tätigkeiten des Mitglieds (Vorstand oder Trainer?)</p>
+            <mat-tab label="{{'general.members.tabs.statistics' | translate}}">
+              Spielstatistiken
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>
@@ -69,12 +74,7 @@
     </div>
   </div>
 
-  <div fxFlex.gt-sm="25"
-       fxFlex.gt-xs="100">
-    <pre *ngIf="member">{{member | json}}</pre>
-  </div>
 </div>
-
 
 <ng-template #loadingTemplate>
   <loading-indicator></loading-indicator>

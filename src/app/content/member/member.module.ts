@@ -34,6 +34,12 @@ import { MemberDetailProfileComponent } from './member-detail/member-detail-prof
 import { MemberDetailInterviewsComponent } from './member-detail/member-detail-interviews/member-detail-interviews.component';
 import { ArticleService } from '../../shared/services/article/article.service';
 import { MemberEditOtherOpinionsComponent } from './member-edit/member-edit-other-opinions/member-edit-other-opinions.component';
+import { MemberFunctionsComponent } from './member-functions/member-functions.component';
+import { ClubService } from '../../shared/services/club/club.service';
+import { TeamService } from '../../shared/services/team/team.service';
+import { MemberDetailOpinionsComponent } from './member-detail/member-detail-opinions/member-detail-opinions.component';
+import { CategoryService } from '../../shared/services/category/category.service';
+import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 
 @NgModule({
   imports: [
@@ -57,6 +63,7 @@ import { MemberEditOtherOpinionsComponent } from './member-edit/member-edit-othe
     MemberDetailMainComponent,
     MemberDetailDriveComponent,
     MemberDetailInterviewsComponent,
+    MemberDetailOpinionsComponent,
     MemberDetailProfileComponent,
     MemberEditComponent,
     MemberEditMainComponent,
@@ -66,14 +73,19 @@ import { MemberEditOtherOpinionsComponent } from './member-edit/member-edit-othe
     MemberStatisticsComponent,
     MemberEditProfileComponent,
     MemberEditInterviewsComponent,
-    MemberEditOtherOpinionsComponent
+    MemberEditOtherOpinionsComponent,
+    MemberFunctionsComponent
   ],
   providers: [
     ArticleService,
+    CategoryService,
+    CategoryTypeService,
+    ClubService,
     MemberResolver,
     MemberService,
     MemberStateService,
-    PendingChangesGuard
+    PendingChangesGuard,
+    TeamService
   ]
 })
 
