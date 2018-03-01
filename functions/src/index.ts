@@ -19,3 +19,6 @@ export const birthdayReminder = member.birthdayReminderCron;
 export const memberOfTheWeekCron = member.memberOfTheWeekCron;
 export const dfbMemberCron = member.dfbMemberCron;
 export const driveMemberCron = member.driveMemberCron;
+
+import * as team from './team';
+export const spielplanCron = team.spielplanCron;
