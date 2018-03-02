@@ -1,14 +1,16 @@
 export interface IMatch {
+
   id?: string;
+
   homeTeam: {
     logo: string;
     externalTeamLink: string;
-    name: string;
+    title: string;
   };
   guestTeam: {
     logo: string;
     externalTeamLink: string;
-    name: string;
+    title: string;
   };
 
   isHomeTeam: boolean;
