@@ -3,15 +3,14 @@ import { IClubHonorary } from './club-honorary.interface';
 import { IAddress } from '../address.interface';
 import { ITimeLineEvent } from '../time-line-event.interface';
 import { ICreation } from '../creation.interface';
-import { IPublication } from '../publication.interface';
 
 export interface IClub {
-  id?: string;
+  id: string;
 
   title: string;
   description?: string;
   history?: string;
-  logoUrl?: string;
+  logoURL?: string;
   address?: IAddress;
 
   fussballde: {
@@ -19,7 +18,6 @@ export interface IClub {
     clubUrl?: string;
   };
 
-  assignedFiles: any; // IMediaItem[];
   assignedLocation: string;
 
   timeLine: ITimeLineEvent[];
@@ -41,5 +39,4 @@ export interface IClub {
   };
 
   creation: ICreation;
-  // modification?: IModification[];
 }

@@ -12,14 +12,16 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
 
   const db = admin.firestore();
 
-  const seasonPath = 'seasons';
-  const teamPath = 'teams';
-  const matchPath = 'match-fixtures';
-  const locationPath = 'locations';
-  const categoryPath = 'categories';
-  const categoryTypePath = 'category-types';
+  const clubPath: string = 'clubs';
+  const seasonPath: string = 'seasons';
+  const teamPath: string = 'teams';
+  const matchPath: string = 'match-fixtures';
+  const locationPath: string = 'locations';
+  const categoryPath: string = 'categories';
+  const categoryTypePath: string = 'category-types';
 
   let assignedSeason: string;
+  let assignedClub: string;
 
   let assignedTeamCategoryType: string;
   let assignedLocationCategoryType: string;
@@ -30,8 +32,8 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
   let assignedLocation: string;
   let assignedTeam: string;
 
-  const locationData = data.location.split(',');
-  const streetAndHouseNumber = locationData[3].trim();
+  const locationParts = data.location.split(',');
+  const streetAndHouseNumber = locationParts[3].trim();
   const streetSplit = streetAndHouseNumber.split(/(\d+)/g);
   let houseNumber: string = '';
   let street = streetAndHouseNumber.replace(streetSplit[1], '');
@@ -43,17 +45,19 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
     street = street.replace('str.', 'straße');
   }
 
-  const zipAndCounty = locationData[4].trim();
+  const zipAndCounty = locationParts[4].trim();
   const zip = zipAndCounty.slice(0, 5);
   const county = zipAndCounty.slice(6);
 
   let locationCategoryTitle = '';
-  if (locationData[0].trim().indexOf('Halle') > -1) locationCategoryTitle += 'Hallen';
-  if (locationData[0].trim().indexOf('Hartplatz') > -1) locationCategoryTitle += 'Hartplätze';
-  if (locationData[0].trim().indexOf('Rasenplatz') > -1) locationCategoryTitle += 'Rasenplätze';
-  if (locationData[0].trim().indexOf('Kunstrasenplatz') > -1) locationCategoryTitle += 'Kunstrasenplätze';
+  if (locationParts[0].trim().indexOf('Halle') > -1) locationCategoryTitle += 'Hallen';
+  if (locationParts[0].trim().indexOf('Hartplatz') > -1) locationCategoryTitle += 'Hartplätze';
+  if (locationParts[0].trim().indexOf('Rasenplatz') > -1) locationCategoryTitle += 'Rasenplätze';
+  if (locationParts[0].trim().indexOf('Kunstrasenplatz') > -1) locationCategoryTitle += 'Kunstrasenplätze';
 
   const teamCategoryTitle = data.subject.split(':')[0];
+
+  let isHomeTeam: boolean;
 
   // Description
   /*
@@ -70,12 +74,12 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
   const description = data.description.split('---');
   const matchType = description[0];
   const homeTeam = {
-    title: description[4],
+    title: description[1],
     logoURL: description[3],
     externalTeamLink: description[2]
   };
   const guestTeam = {
-    title: description[7],
+    title: description[4],
     logoURL: description[6],
     externalTeamLink: description[5]
   };
@@ -85,25 +89,27 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
     .where('title', '==', 'Saison ' + seasonTitle)
     .get()
     .then((values: FirebaseFirestore.QuerySnapshot) => {
-      if (values.docs.length === 0) {
-        assignedSeason = db.collection(seasonPath).doc().id;
-        const season = {
-          id: assignedSeason,
-          isImported: true,
-          description: 'Alle Informationen zur Saison ' + seasonTitle,
-          creation: {
-            from: 'system',
-            at: new Date()
-          },
-          publication: {
-            at: '',
-            from: '',
-            status: ''
-          },
-          title: 'Saison' + seasonTitle
+
+      let seasonData: any = {
+        isImported: true,
+        description: 'Alle Informationen zur Saison ' + seasonTitle,
+        title: 'Saison ' + seasonTitle
+      };
+
+      if (values.empty) {
+        assignedSeason = seasonData.id = db.collection(seasonPath).doc().id;
+        seasonData.creation = {
+          from: 'system',
+          at: new Date()
         };
-        db.collection(seasonPath).doc(assignedSeason).set(season);
+        seasonData.publication = {
+          at: '',
+          from: '',
+          status: ''
+        };
+        db.collection(seasonPath).doc(assignedSeason).set(seasonData);
       } else {
+        values.docs[0].ref.set(seasonData, { merge: true });
         assignedSeason = values.docs[0].id;
       }
       return true;
@@ -113,19 +119,20 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         .where('link', '==', 'location.types')
         .get()
         .then((values: FirebaseFirestore.QuerySnapshot) => {
-          // CategoryType
+
+          let categoryTypeData: any = {
+            link: 'location.types'
+          };
+
           if (values.docs.length === 0) {
-            assignedLocationCategoryType = db.collection(categoryTypePath).doc().id;
-            const categoryType = {
-              id: assignedLocationCategoryType,
-              creation: {
-                from: 'system',
-                at: new Date()
-              },
-              link: 'location.types'
+            assignedLocationCategoryType = categoryTypeData.id = db.collection(categoryTypePath).doc().id;
+            categoryTypeData.creation = {
+              from: 'system',
+              at: new Date()
             };
-            db.collection(categoryTypePath).doc(assignedLocationCategoryType).set(categoryType);
+            db.collection(categoryTypePath).doc(assignedLocationCategoryType).set(categoryTypeData);
           } else {
+            values.docs[0].ref.set(categoryTypeData, { merge: true });
             assignedLocationCategoryType = values.docs[0].id;
           }
         });
@@ -135,19 +142,21 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         .where('link', '==', 'team.types')
         .get()
         .then((values: FirebaseFirestore.QuerySnapshot) => {
+
+          let categoryTypeData: any = {
+            link: 'team.types'
+          };
+
           // CategoryType
           if (values.docs.length === 0) {
-            assignedTeamCategoryType = db.collection(categoryTypePath).doc().id;
-            const categoryType = {
-              id: assignedTeamCategoryType,
-              creation: {
-                from: 'system',
-                at: new Date()
-              },
-              link: 'team.types'
+            assignedTeamCategoryType = categoryTypeData.id = db.collection(categoryTypePath).doc().id;
+            categoryTypeData.creation = {
+              from: 'system',
+              at: new Date()
             };
-            db.collection(categoryTypePath).doc(assignedTeamCategoryType).set(categoryType);
+            db.collection(categoryTypePath).doc(assignedTeamCategoryType).set(categoryTypeData);
           } else {
+            values.docs[0].ref.set(categoryTypeData, { merge: true });
             assignedTeamCategoryType = values.docs[0].id;
           }
         });
@@ -158,21 +167,23 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         .where('assignedCategoryType', '==', assignedLocationCategoryType)
         .get()
         .then((values: FirebaseFirestore.QuerySnapshot) => {
+
+          let categoryData: any = {
+            title: locationCategoryTitle,
+            assignedCategoryType: assignedLocationCategoryType,
+            description: 'Alle erfassten ' + locationCategoryTitle + ' in der Region'
+          };
+
           if (values.docs.length === 0) {
-            assignedLocationCategory = db.collection(categoryPath).doc().id;
-            const category = {
-              id: assignedLocationCategory,
-              title: locationCategoryTitle,
-              creation: {
-                from: 'system',
-                at: new Date()
-              },
-              assignedCategoryType: assignedLocationCategoryType,
-              description: 'Alle erfassten ' + locationCategoryTitle + ' in der Region'
+            assignedLocationCategory = categoryData.id = db.collection(categoryPath).doc().id;
+            categoryData.creation = {
+              from: 'system',
+              at: new Date()
             };
-            db.collection(categoryPath).doc(assignedLocationCategory).set(category);
+            db.collection(categoryPath).doc(assignedLocationCategory).set(categoryData);
           }
           else {
+            values.docs[0].ref.set(categoryData, { merge: true });
             assignedLocationCategory = values.docs[0].id;
           }
         });
@@ -183,69 +194,171 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         .where('assignedCategoryType', '==', assignedTeamCategoryType)
         .get()
         .then((values: FirebaseFirestore.QuerySnapshot) => {
+
+          let categoryData: any = {
+            title: teamCategoryTitle,
+            assignedCategoryType: assignedTeamCategoryType,
+            description: 'Alle erfassten ' + teamCategoryTitle
+          };
+
           if (values.docs.length === 0) {
-            assignedTeamCategory = db.collection(categoryPath).doc().id;
-            const category = {
-              id: assignedTeamCategory,
-              title: teamCategoryTitle,
-              creation: {
-                from: 'system',
-                at: new Date()
-              },
-              assignedCategoryType: assignedTeamCategoryType,
-              description: 'Alle erfassten ' + teamCategoryTitle
+            assignedTeamCategory = categoryData.id = db.collection(categoryPath).doc().id;
+            categoryData.creation = {
+              from: 'system',
+              at: new Date()
             };
-            db.collection(categoryPath).doc(assignedTeamCategory).set(category);
+            db.collection(categoryPath).doc(assignedTeamCategory).set(categoryData);
           }
           else {
+            values.docs[0].ref.set(categoryData, { merge: true });
             assignedTeamCategory = values.docs[0].id;
           }
         });
     }).then(() => {
       // Location
       return db.collection(locationPath)
-        .where('title', '==', locationData[0] + ' ' + locationData[1])
+        .where('title', '==', locationParts[0] + ' ' + locationParts[1])
         .where('assignedCategory', '==', assignedLocationCategory)
         .where('address.county', '==', county)
-        .where('address.city', '==', locationData[1])
+        .where('address.city', '==', locationParts[1])
         .where('address.zip', '==', zip)
         .where('address.streetName', '==', street)
         .where('address.houseNumber', '==', houseNumber)
         .get()
         .then((values: FirebaseFirestore.QuerySnapshot) => {
 
-          if (values.docs.length === 0 /*values.empty*/) {
-            assignedLocation = db.collection(locationPath).doc().id;
-            const location = {
-              id: assignedLocation,
-              isImported: true,
-              title: locationData[0] + ' ' + locationData[1],
-              assignedCategory: assignedLocationCategory,
-              address: {
-                city: locationData[1],
-                zip: zip,
-                streetName: street,
-                houseNumber: houseNumber,
-                county: county
-              },
-              creation: {
-                from: 'system',
-                at: new Date()
-              },
+          let locationData: any = {
+            isImported: true,
+            title: locationParts[0] + ' ' + locationParts[1],
+            assignedCategory: assignedLocationCategory,
+            address: {
+              city: locationParts[1],
+              zip: zip,
+              streetName: street,
+              houseNumber: houseNumber,
+              county: county
+            },
+          };
+
+          if (values.empty) {
+            assignedLocation = locationData.id = db.collection(locationPath).doc().id;
+            locationData.creation = {
+              from: 'system',
+              at: new Date()
             };
-            db.collection(locationPath).doc(assignedLocation).set(location);
+            db.collection(locationPath).doc(assignedLocation).set(locationData);
           }
           else {
+            values.docs[0].ref.set(locationData, { merge: true });
             assignedLocation = values.docs[0].id;
           }
         });
     }).then(() => {
-      // Team
-      return true;
+      let clubName: string = '';
+      const homeOrGuestSplit = data.description.split('---|---');
+      isHomeTeam = homeOrGuestSplit[1] === '';
+
+      let clubNameTest = isHomeTeam ? description[1] : description[4];
+      if (clubNameTest.indexOf('Winterbach') > -1 || (clubNameTest.indexOf('Bliesen') > -1 && teamCategoryTitle.indexOf('Junioren') > -1)) {
+        clubName += 'SF Winterbach';
+      } else {
+        console.error(clubName);
+        return;
+      }
+      // Club
+      return db.collection(clubPath)
+        .where('title', '==', clubName)
+        .get()
+        .then((values: FirebaseFirestore.QuerySnapshot) => {
+
+          let clubData: any = {
+            title: clubName,
+            logoURL: isHomeTeam ? description[3] : description[6]
+          };
+
+          // CategoryType
+          if (values.empty) {
+            assignedClub = clubData.id = db.collection(clubPath).doc().id;
+            clubData.fussballde = {
+              clubId: '',
+              clubUrl: ''
+            };
+            clubData.creation = {
+              from: 'system',
+              at: new Date()
+            };
+            clubData.timeLine = [];
+            clubData.info = {
+              founding: '',
+              clubColours: '',
+              assignedContact: '',
+              website: '',
+            };
+            clubData.management = {
+              positions: [],
+              photoUrl: '',
+              photoDescription: '',
+              timeLine: []
+            };
+            db.collection(clubPath).doc(assignedClub).set(clubData);
+          } else {
+            values.docs[0].ref.set(clubData, { merge: true });
+            assignedClub = values.docs[0].id;
+          }
+        });
     }).then(() => {
+
+
+      let subTitle = isHomeTeam ? description[1] : description[4];
+      const lastChar = subTitle.slice(-1);
+
+      if(lastChar === 1){
+        subTitle = subTitle.splice(-2);
+      }
+      console.log(subTitle);
+      /* Team
+      return db.collection(matchPath)
+        .where('title', '==', teamCategoryTitle)
+        .where('assignedClub', '==', assignedClub)
+        .where('subTitle', '==', subTitle)
+        .where('assignedSeason', '==', assignedSeason)
+        .get()
+        .then((values: FirebaseFirestore.QuerySnapshot) => {
+
+          let teamData: any = {
+            title: teamCategoryTitle,
+            subTitle: isHomeTeam ? description[1] : description[4],
+            assignedSeason: assignedSeason,
+            externalTeamLink: isHomeTeam ? description[2] : description[5],
+            isOfficialTeam: true,
+            logoURL: isHomeTeam ? description[3] : description[6],
+            assignedClub: assignedClub,
+          };
+
+          if (values.docs.length === 0) {
+            assignedTeam = teamData.id = db.collection(teamPath).doc().id;
+            teamData.assignedPlayers = [];
+            teamData.assignedPositions = [];
+            teamData.assignedTrainings = [];
+            teamData.assignedCompetitions = [];
+            teamData.assignedEvents = [];
+            teamData.creation = {
+              from: 'system',
+              at: new Date()
+            };
+            db.collection(teamPath).doc(teamData.id).set(teamData);
+          }
+          else {
+            values.docs[0].ref.set(teamData, { merge: true });
+            assignedTeam = values.docs[0].id;
+          }
+        });
+        */
+    })/*.then(() => {
       // Match
       return db.collection(matchPath)
-        .where('title', '==', data.title)
+        .where('homeTeam', '==', homeTeam)
+        .where('guestTeam', '==', guestTeam)
         .where('startDate', '==', data.startDate)
         .where('endDate', '==', data.endDate)
         .where('location', '==', assignedLocation)
@@ -254,7 +367,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
 
           let matchData: any = {
             isImported: true,
-            isHomeTeam: true,
+            isHomeTeam: isHomeTeam,
             assignedSeason: assignedSeason,
             assignedTeam: assignedTeam,
             homeTeam: homeTeam,
@@ -263,17 +376,10 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             matchType: matchType,
             startDate: data.startDate,
             endDate: data.endDate,
-            location: assignedLocation,
-            result: {
-              otherEvent: '',
-              homeTeamGoals: '',
-              guestTeamGoals: ''
-            }
+            location: assignedLocation
           };
 
-          console.log(matchData);
-
-          /*if (values.docs.length === 0) {
+          if (values.docs.length === 0) {
             matchData.id = db.collection(matchPath).doc().id;
             matchData.creation = {
               from: 'system',
@@ -283,10 +389,9 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
           }
           else {
             return values.docs[0].ref.set(matchData, {merge: true});
-          } */
-          return true;
+          }
         });
 
-    }).catch((error: any) => console.error(error));
+    })*/.catch((error: any) => console.error(error));
 
 });

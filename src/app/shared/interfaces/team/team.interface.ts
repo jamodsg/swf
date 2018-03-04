@@ -5,27 +5,28 @@ import { ITraining } from '../training.interface';
 import { ITeamManagement } from './team-management.interface';
 import { ICompetition } from './competition.interface';
 import { ITimeLineEvent } from '../time-line-event.interface';
+import { ISeason } from '../season.interface';
+import { IClub } from '../club/club.interface';
 
 export interface ITeam {
-  id?: string;
-  title: string;
-  shortTitle?: string;
-  greetingWord: string;
 
+  id: string;
+  title: string;
+  subTitle?: string;
   externalTeamLink?: string;
   isOfficialTeam: boolean;
-
   logoURL?: string;
+
   photoURL?: string;
   photoDescription?: string;
 
-  assignedClub?: string;
-  assignedSeason?: string;
+  assignedClub?: IClub;
+  assignedTeamCategory: ICategory[];
+  assignedSeason: ISeason;
 
   assignedPlayers: IMember[];
   assignedPositions: ITeamManagement[];
   assignedTrainings: ITraining[];
-  assignedCategories: ICategory[];
   assignedCompetitions: ICompetition[];
   assignedEvents: ITimeLineEvent[];
 
