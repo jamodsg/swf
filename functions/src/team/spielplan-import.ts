@@ -322,7 +322,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         subTitle = subTitle.slice(-2);
       }
 
-      if(((subTitle.indexOf('SF Winterbach') > -1) || subTitle.indexOf('SV Bliesen') > -1) && teamCategoryTitle.indexOf('Junioren') > -1 ) {
+      if(((subTitle.indexOf('Winterbach') > -1) || subTitle.indexOf('Bliesen') > -1) && subTitle.indexOf('SG') > -1 ) { // && teamCategoryTitle.indexOf('Junioren') > -1
         subTitle = 'SG SF Winterbach';
       }
 
@@ -337,7 +337,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
 
           let teamData: any = {
             title: teamCategoryTitle,
-            subTitle: isHomeTeam ? description[1] : description[4],
+            subTitle: subTitle,
             assignedSeason: assignedSeason,
             externalTeamLink: isHomeTeam ? description[2] : description[5],
             isOfficialTeam: true,
