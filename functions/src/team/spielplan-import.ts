@@ -310,13 +310,23 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
 
 
       let subTitle = isHomeTeam ? description[1] : description[4];
+      const lastFourChars = subTitle.slice(-4);
       const lastChar = subTitle.slice(-1);
 
-      if(lastChar === 1){
-        subTitle = subTitle.splice(-2);
+      // delete a.W.
+      if(lastFourChars === 'a.W.'){
+        subTitle = subTitle.slice(-5);
       }
-      console.log(subTitle);
-      /* Team
+
+      if(lastChar === '1'){
+        subTitle = subTitle.slice(-2);
+      }
+
+      if(((subTitle.indexOf('SF Winterbach') > -1) || subTitle.indexOf('SV Bliesen') > -1) && teamCategoryTitle.indexOf('Junioren') > -1 ) {
+        subTitle = 'SG SF Winterbach';
+      }
+
+      // Team
       return db.collection(matchPath)
         .where('title', '==', teamCategoryTitle)
         .where('assignedClub', '==', assignedClub)
@@ -333,6 +343,8 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             isOfficialTeam: true,
             logoURL: isHomeTeam ? description[3] : description[6],
             assignedClub: assignedClub,
+            assignedTeamCategory: assignedTeamCategory,
+            assignedTeamCategoryType: assignedTeamCategoryType
           };
 
           if (values.docs.length === 0) {
@@ -353,7 +365,6 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             assignedTeam = values.docs[0].id;
           }
         });
-        */
     })/*.then(() => {
       // Match
       return db.collection(matchPath)

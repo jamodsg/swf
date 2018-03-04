@@ -43,12 +43,12 @@ export class TeamService {
   setNewTeam(): ITeam {
     return {
       title: '',
-      shortTitle: '',
+      subTitle: '',
       isOfficialTeam: true,
-      greetingWord: '',
       creation: this.authService.getCreation(),
-      assignedCategories: [],
-      assignedClub: '',
+      assignedTeamCategory: null,
+      assignedClub: null,
+      assignedSeason: null,
       assignedPlayers: [],
       assignedCompetitions: [],
       assignedEvents: [],

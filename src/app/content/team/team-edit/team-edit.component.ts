@@ -71,11 +71,11 @@ export class TeamEditComponent implements OnInit {
 
     this.form = this.fb.group({
       title: [this.team.title, [Validators.required, Validators.minLength(5), Validators.maxLength(this.titleMaxLength)]],
-      shortTitle: this.team.shortTitle,
+      shortTitle: this.team.subTitle,
       externalLink: this.team.externalTeamLink,
       isOfficialTeam: this.team.isOfficialTeam,
-      greetingWord: this.team.greetingWord,
-      assignedCategories: [this.team.assignedCategories, [Validators.required]],
+      // greetingWord: this.team.greetingWord,
+      assignedTeamCategory: [this.team.assignedTeamCategory, [Validators.required]],
       assignedPlayers: this.team.assignedPlayers,
       assignedClub: [this.team.assignedClub, [Validators.required]],
       photoDescription: this.team.photoDescription,

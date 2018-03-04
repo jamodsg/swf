@@ -10,7 +10,7 @@ import { IClub } from '../club/club.interface';
 
 export interface ITeam {
 
-  id: string;
+  id?: string;
   title: string;
   subTitle?: string;
   externalTeamLink?: string;

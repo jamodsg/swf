@@ -5,7 +5,8 @@ import { ITimeLineEvent } from '../time-line-event.interface';
 import { ICreation } from '../creation.interface';
 
 export interface IClub {
-  id: string;
+
+  id?: string;
 
   title: string;
   description?: string;

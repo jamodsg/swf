@@ -41,15 +41,15 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="assignedClub" fxHide.xs>
+      <ngx-datatable-column name="subTitle" fxHide.xs>
         <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.assignedClub' | translate}}
+          {{'general.teams.edit.subTitle' | translate}}
         </ng-template>
       </ngx-datatable-column>
 
       <ngx-datatable-column name="assignedClub" fxHide.xs>
         <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.players.title' | translate}}
+          {{'general.teams.edit.assignedClub' | translate}}
         </ng-template>
       </ngx-datatable-column>
 
@@ -59,11 +59,23 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="photo" fxHide.xs>
+      <ngx-datatable-column name="ssignedTeamCategory" fxHide.xs>
+        <ng-template let-column="column" ngx-datatable-header-template>
+          {{'general.teams.edit.assignedTeamCategory' | translate}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="ssignedTeamCategoryType" fxHide.xs>
+        <ng-template let-column="column" ngx-datatable-header-template>
+          {{'general.teams.edit.assignedTeamCategoryType' | translate}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!--<ngx-datatable-column name="photo" fxHide.xs>
         <ng-template let-column="column" ngx-datatable-header-template>
           {{'general.teams.edit.photo.title' | translate}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column>-->
 
       <ngx-datatable-column name="Categories" fxHide.xs>
         <ng-template let-column="column" ngx-datatable-header-template>
