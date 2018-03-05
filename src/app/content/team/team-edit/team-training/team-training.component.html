@@ -1,5 +1,5 @@
 <div fxLayout="column" [formGroup]="form">
-  <p>{{'general.teams.edit.training.description' | translate}}</p>
+  <p style="margin-bottom: 25px;">{{'general.teams.edit.training.description' | translate}}</p>
 
   <p *ngIf="!form.controls['assignedTrainings']">{{'general.teams.edit.training.noTraining' | translate}}</p>
 

@@ -1,0 +1,27 @@
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
+  <div fxFlex="100">
+    <h3>{{'general.teams.edit.training.title' | translate}}</h3>
+
+    <mat-list dense
+              *ngIf="locations; else loadingTemplate">
+      <mat-list-item *ngFor="let training of team.assignedTrainings">
+        <h3 matLine>
+          {{'general.datetime.weekdays.' + training.day | translate }},
+          {{training.startTime}} {{'general.oClock' | translate}}
+          &ndash; {{training.endTime}} {{'general.oClock' | translate}} @
+          <a [routerLink]="['/locations/detail', location.id]"
+             *ngFor="let location of locations | filterBy: ['id'] : training.assignedLocation">
+            {{location.title}}
+          </a>
+        </h3>
+        <p matLine [innerHTML]="training.comment"></p>
+      </mat-list-item>
+    </mat-list>
+
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

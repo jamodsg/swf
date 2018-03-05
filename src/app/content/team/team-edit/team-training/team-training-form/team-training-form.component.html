@@ -2,10 +2,10 @@
 
   <div fxFlex="100">
 
-    <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxLayout="row"
+         fxLayoutWrap="wrap">
 
-      <mat-form-field fxFlex.gt-sm="10"
-                      fxFlex.gt-xs="100"
+      <mat-form-field fxFlex.gt-sm="24"
                       fxFlex="100">
         <mat-select placeholder="{{'general.teams.edit.training.day' | translate}}"
                     formControlName="day">
@@ -16,9 +16,8 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="1"
-                      fxFlex.gt-sm="9"
-                      fxFlex.gt-xs="100"
+      <mat-form-field fxFlexOffset.gt-sm="1"
+                      fxFlex.gt-sm="24"
                       fxFlex="100">
         <input matInput
                formControlName="startTime"
@@ -26,18 +25,16 @@
       </mat-form-field>
 
 
-      <mat-form-field fxFlexOffset="1"
-                      fxFlex.gt-sm="9"
-                      fxFlex.gt-xs="100"
+      <mat-form-field fxFlexOffset.gt-sm="1"
+                      fxFlex.gt-sm="24"
                       fxFlex="100">
         <input matInput
                formControlName="endTime"
                placeholder="{{'general.teams.edit.training.endTime' | translate}}">
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="1"
-                      fxFlex.gt-sm="19"
-                      fxFlex.gt-xs="100"
+      <mat-form-field fxFlexOffset.gt-sm="1"
+                      fxFlex.gt-sm="25"
                       fxFlex="100">
         <mat-select placeholder="{{'general.teams.edit.training.location' | translate}}"
                     formControlName="assignedLocation">
@@ -49,9 +46,7 @@
       </mat-form-field>
 
 
-      <div fxFlexOffset="1"
-           fxFlex.gt-sm="39"
-           fxFlex.gt-xs="100"
+      <div fxFlex.gt-sm="74"
            fxFlex="100">
         <quill-editor [style]="{height: '100px'}"
                       formControlName="comment">
@@ -59,9 +54,8 @@
         <label>{{'general.teams.edit.training.comment' | translate}}</label><br/>
       </div>
 
-      <div fxFlexOffset="1"
-           fxFlex.gt-sm="5"
-           fxFlex.gt-xs="100"
+      <div fxFlexOffset.gt-sm="1"
+           fxFlex.gt-sm="25"
            fxFlex="100">
         <button
           mat-raised-button

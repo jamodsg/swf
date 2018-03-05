@@ -11,6 +11,8 @@ import { SeasonService } from '../../../shared/services/season/season.service';
 import { ISeason } from '../../../shared/interfaces/season.interface';
 import { IClub } from '../../../shared/interfaces/club/club.interface';
 import { ClubService } from '../../../shared/services/club/club.service';
+import { ILocation } from '../../../shared/interfaces/location.interface';
+import { LocationService } from '../../../shared/services/location/location.service';
 
 @Component({
   selector: 'team-detail',
@@ -20,6 +22,7 @@ export class TeamDetailComponent implements OnInit {
 
   public team: ITeam;
   public categories$: Observable<ICategory[]>;
+  public locations$: Observable<ILocation[]>;
   public members$: Observable<IMember[]>;
   public seasons$: Observable<ISeason[]>;
   public clubs$: Observable<IClub[]>;
@@ -28,10 +31,12 @@ export class TeamDetailComponent implements OnInit {
               private seasonService: SeasonService,
               private clubService: ClubService,
               private teamService: TeamService,
-              public categoryService: CategoryService,
-              public memberService: MemberService,
+              private categoryService: CategoryService,
+              private memberService: MemberService,
+              private locationService: LocationService,
               private router: Router) {
     this.clubs$ = clubService.clubs$;
+    this.locations$ = locationService.locations$;
     this.categories$ = categoryService.categories$;
     this.members$ = memberService.members$;
     this.seasons$ = seasonService.seasons$;

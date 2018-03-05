@@ -35,6 +35,9 @@ import { FameTeamComponent } from './fame-team/fame-team.component';
 import { TeamEditMainComponent } from './team-edit/team-edit-main/team-edit-main.component';
 import { TeamDetailMainComponent } from './team-detail/team-detail-main/team-detail-main.component';
 import { TeamDetailPositionsComponent } from './team-detail/team-detail-positions/team-detail-positions.component';
+import { TimeLineModule } from '../../shared/components/time-line/time-line.module';
+import { TeamDetailEventsComponent } from './team-detail/team-detail-events/team-detail-events.component';
+import { TeamDetailTrainingComponent } from './team-detail/team-detail-training/team-detail-training.component';
 
 @NgModule({
   imports: [
@@ -49,7 +52,8 @@ import { TeamDetailPositionsComponent } from './team-detail/team-detail-position
     MatTabsModule,
     QuillModule,
     RouterModule.forChild(teamRoutes),
-    SharedModule
+    SharedModule,
+    TimeLineModule
   ],
   declarations: [
     TeamDetailComponent,
@@ -64,7 +68,9 @@ import { TeamDetailPositionsComponent } from './team-detail/team-detail-position
     FameTeamComponent,
     TeamEditMainComponent,
     TeamDetailMainComponent,
-    TeamDetailPositionsComponent
+    TeamDetailPositionsComponent,
+    TeamDetailEventsComponent,
+    TeamDetailTrainingComponent
   ],
   providers: [
     ApplicationService,

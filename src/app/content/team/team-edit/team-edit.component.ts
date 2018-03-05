@@ -24,6 +24,7 @@ import { ITeamManagement } from '../../../shared/interfaces/team/team-management
 import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
+import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.interface';
 
 @Component({
   selector: 'team-edit',
@@ -45,6 +46,8 @@ export class TeamEditComponent implements OnInit {
 
   public form: FormGroup;
   public titleMaxLength: number = 50;
+
+  public selectedEvent: number = -1;
 
   @ViewChild('description') description: QuillEditorComponent;
 
@@ -81,21 +84,71 @@ export class TeamEditComponent implements OnInit {
       externalLink: this.team.externalTeamLink,
       isOfficialTeam: this.team.isOfficialTeam,
       assignedTeamCategories: [this.team.assignedTeamCategories, [Validators.required]],
-      assignedPlayers: this.team.assignedPlayers,
       assignedClub: [this.team.assignedClub, [Validators.required]],
-      photoDescription: this.team.photoDescription,
+      //photoDescription: this.team.photoDescription,
       assignedSeason: this.team.assignedSeason,
       creation: this.initCreation(),
       assignedTrainings: this.initAssignedTrainings(),
-      assignedPositions: this.initAssignedPositions()
+      // assignedPositions: this.initAssignedPositions(),
+      // assignedPlayers: this.team.assignedPlayers,
+      assignedEvents: this.initAssignedEvents()
     });
 
-    this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: ITeam) => {
+    /* this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: ITeam) => {
       this.team = Object.assign({}, this.team, changes);
       if (!this.form.invalid) {
         this.saveTeam();
       }
+    }); */
+  }
+
+  // TimeLine
+  initAssignedEvents(): FormArray {
+    const formArray = [];
+    if (this.team.assignedEvents) {
+      for (let i = 0; i < this.team.assignedEvents.length; i++) {
+        formArray.push(this.initAssignedEvent(this.team.assignedEvents[i]));
+      }
+    }
+    return this.fb.array(formArray);
+  }
+
+  initAssignedEvent(event: ITimeLineEvent): FormGroup {
+    return this.fb.group({
+      title: [event ? event.title : '', [Validators.required, Validators.maxLength(100)]],
+      subTitle: [event ? event.subTitle : ''],
+      icon: [event ? event.icon : ''],
+      color: [event ? event.color : ''],
+      assignedMediaItem: [event ? event.assignedMediaItem : ''],
+      assignedArticle: [event ? event.assignedArticle : ''],
+      startDate: [event ? event.startDate : new Date()],
+      endDate: [event ? event.endDate : new Date()]
     });
+  }
+
+  addEvent(): void {
+    const control = <FormArray>this.form.controls['assignedEvents'];
+    const event: ITimeLineEvent = {
+      title: '',
+      startDate: ''
+    };
+    const addCtrl = this.initAssignedEvent(event);
+    control.push(addCtrl);
+    this.selectedEvent = this.form.controls['assignedEvents']['controls'].length - 1;
+  }
+
+  editEvent($event: number): void {
+    this.selectedEvent = $event;
+  }
+
+  saveEvent($event: boolean): void {
+    this.selectedEvent = -1;
+  }
+
+  removeEvent($event: number): void {
+    const control = <FormArray>this.form.controls['timeLine'];
+    control.removeAt($event);
+    this.selectedEvent = -1;
   }
 
   initCreation(): FormGroup {

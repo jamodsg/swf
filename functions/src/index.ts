@@ -22,3 +22,4 @@ export const driveMemberCron = member.driveMemberCron;
 
 import * as team from './team';
 export const spielplanCron = team.spielplanCron;
+export const teamCron = team.teamOfTheMonthCron;
