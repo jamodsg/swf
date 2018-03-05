@@ -1,0 +1,61 @@
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="70"
+       fxFlex="100">
+    <mat-list *ngIf="team && seasons && clubs && categories; else loadingTemplate">
+
+      <mat-list-item fxLayout="column">
+        <h4 fxFlex="25">{{'general.teams.edit.title' | translate}}</h4>
+        {{team.title}}
+      </mat-list-item>
+
+      <mat-list-item fxLayout="column">
+        <h4 fxFlex="25">{{'general.teams.edit.subTitle' | translate}}</h4>
+        {{team.subTitle}}
+      </mat-list-item>
+
+      <mat-list-item fxLayout="column">
+        <h4 fxFlex="25">{{'general.teams.edit.assignedClub' | translate}}</h4>
+        <a [routerLink]="['clubs/detail', club.id]"
+           *ngFor="let club of clubs | filterBy: ['id'] : team.assignedClub">
+          {{club.title}}
+        </a>
+      </mat-list-item>
+
+      <mat-list-item fxLayout="column">
+        <h4 fxFlex="25">{{'general.teams.edit.externalLink' | translate}}</h4>
+        <a target="_blank" [href]="team.externalTeamLink">{{team.externalTeamLink}}</a>
+      </mat-list-item>
+
+      <mat-list-item fxLayout="column">
+        <h4 fxFlex="25">{{'general.teams.edit.assignedSeason' | translate}}</h4>
+        <span *ngFor="let season of seasons | filterBy: ['id'] : team.assignedSeason">{{season.title}}</span>
+      </mat-list-item>
+
+      <mat-list-item fxLayout="column">
+        <h4 fxFlex="25">{{'general.teams.edit.assignedCategories' | translate}}</h4>
+        <span *ngFor="let categoryId of team.assignedTeamCategories">
+          {{(categories | filterBy: ['id'] : categoryId)[0].title}}
+        </span>
+      </mat-list-item>
+
+      <mat-list-item fxLayout="column">
+        <h4 fxFlex="25">{{'general.teams.edit.isOfficialTeam' | translate}}</h4>
+        <mat-checkbox [checked]="team.isOfficialTeam"></mat-checkbox>
+      </mat-list-item>
+
+    </mat-list>
+  </div>
+
+  <div fxFlex.gt-sm="30"
+       fxFlex="100">
+    <h3>{{'general.teams.edit.photo.title' | translate}}</h3><br/>
+    Logo und Wappen ToDo
+  </div>
+</div>
+
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

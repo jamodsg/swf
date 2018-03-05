@@ -1,0 +1,40 @@
+<div fxLayout="row"
+     fxLayoutWrap="wrap"
+     *ngIf="team && members; else loadingTemplate">
+
+  <div fxFlex.gt-sm="32"
+       fxFlex="100">
+    <h3>{{'general.teams.edit.position.players' | translate}}</h3>
+    <p *ngIf="!team.assignedPlayers">{{'general.teams.edit.players.noPlayers' | translate}}</p>
+
+    <mat-list dense>
+      <mat-list-item *ngFor="let memberId of team.assignedPlayers" fxLayout="column">
+        <span *ngFor="let member of members | filterBy: ['id'] : memberId">
+            {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
+        </span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div fxFlexOffset.gt-sm="2"
+       fxFlex.gt-sm="32"
+       fxFlex="100">
+    <h3>{{'general.teams.edit.management.title' | translate}}</h3>
+    <p *ngIf="!team.assignedPositions">{{'general.teams.edit.position.noPosition' | translate}}</p>
+
+    <mat-list *ngIf="team && members; else loadingTemplate">
+      <mat-list-item *ngFor="let position of team.assignedPositions"
+                     fxLayout="column">
+        <span *ngFor="let member of members | filterBy: ['id'] : position.assignedMember">
+            {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
+            ({{position.position}})
+        </span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+</div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

@@ -9,13 +9,13 @@ import { ITimeLineEvent } from '../../../shared/interfaces/time-line-event.inter
 import { ClubService } from '../../../shared/services/club/club.service';
 import { LocationService } from '../../../shared/services/location/location.service';
 import { MemberService } from '../../../shared/services/member/member.service';
-import 'rxjs/add/operator/debounceTime';
 import { IClubManagement } from '../../../shared/interfaces/club/club-management.interface';
 import { CategoryService } from '../../../shared/services/category/category.service';
 import { ICategory } from '../../../shared/interfaces/category.interface';
 import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
 import { IClubHonorary } from '../../../shared/interfaces/club/club-honorary.interface';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'club-edit',

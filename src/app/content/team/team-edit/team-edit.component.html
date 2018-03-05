@@ -1,5 +1,8 @@
-<form class="form-horizontal" novalidate (ngSubmit)="saveTeam()" [formGroup]="form">
-  <div fxLayout="row" fxLayoutWrap="wrap">
+<form class="form-horizontal"
+      novalidate
+      [formGroup]="form">
+  <div fxLayout="row"
+       fxLayoutWrap="wrap">
 
     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
       <div class="mat-card-top">
@@ -14,151 +17,30 @@
 
             <mat-tab-group class="demo-tab-group" [dynamicHeight]="true">
               <mat-tab label="{{'general.teams.edit.mainTitle' | translate}}">
-
-                <div fxLayout="row" fxLayoutWrap="wrap">
-
-                  <div fxFlex.gt-sm="75"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100">
-
-                    <div fxLayout="row" fxLayoutWrap="wrap">
-                      <mat-form-field fxFlex.gt-sm="24"
-                                      fxFlex.gt-xs="100"
-                                      fxFlex="100"
-                                      hintLabel="Max {{titleMaxLength}} characters">
-                        <input matInput maxlength="{{titleMaxLength}}"
-                               placeholder="{{'general.teams.list.colTitles.name' | translate}}"
-                               formControlName="title">
-                        <mat-hint align="end">{{form.get('title').value.length || 0}}/{{titleMaxLength}}</mat-hint>
-                      </mat-form-field>
-
-                      <mat-form-field fxFlexOffset="1"
-                                      fxFlex.gt-sm="24"
-                                      fxFlex.gt-xs="100"
-                                      fxFlex="100"
-                                      hintLabel="Max {{shortTitleMaxLength}} characters">
-                        <input matInput maxlength="{{shortTitleMaxLength}}"
-                               placeholder="{{'general.teams.edit.shortTitle' | translate}}"
-                               formControlName="shortTitle">
-                        <mat-hint align="end">{{form.get('shortTitle').value.length || 0}}/{{shortTitleMaxLength}}</mat-hint>
-                      </mat-form-field>
-
-                      <mat-form-field fxFlexOffset="1"
-                                      fxFlex.gt-sm="50"
-                                      fxFlex.gt-xs="100"
-                                      fxFlex="100">
-                        <mat-select placeholder="{{'general.teams.edit.assignedCategories' | translate}}"
-                                    formControlName="assignedCategories" multiple>
-                          <mat-option *ngFor="let category of (categories$ | async | orderBy: ['title'])"
-                                      [value]="category.id">
-                            {{category.title}}
-
-                            <span *ngFor="let categoryType of (categoryTypes$ | async | filterBy: ['id'] : category.assignedCategoryType)">
-                              ({{ 'general.menu.' + categoryType.link + '.main' | translate}})
-                            </span>
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field fxFlex.gt-sm="24"
-                                      fxFlex.gt-xs="100"
-                                      fxFlex="100">
-                        <mat-select placeholder="{{'general.teams.edit.assignedClub' | translate}}"
-                                    formControlName="assignedClub">
-                          <mat-option *ngFor="let club of (clubs$ | async | orderBy: ['title'])"
-                                      [value]="club.id">
-                            {{club.title}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field fxFlexOffset="1"
-                                      fxFlex.gt-sm="24"
-                                      fxFlex.gt-xs="100"
-                                      fxFlex="100">
-                        <mat-select placeholder="{{'general.teams.edit.assignedSeason' | translate}}"
-                                    formControlName="assignedSeason">
-                          <mat-option *ngFor="let season of seasons$ | async | orderBy: ['title']"
-                                      [value]="season.id">
-                            {{season.title}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field fxFlexOffset="1"
-                                      fxFlex.gt-sm="49"
-                                      fxFlex.gt-xs="100"
-                                      fxFlex="100">
-                        <input matInput
-                               placeholder="{{'general.teams.edit.externalLink' | translate}}"
-                               formControlName="externalLink">
-                      </mat-form-field>
-
-                      <div fxFlexOffset="1"
-                           fxFlex.gt-sm="49"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100" style="margin-top: 25px;">
-                        <mat-checkbox formControlName="isOfficialTeam" fxFlex="95">
-                          {{'general.teams.edit.isOfficialTeam' | translate}}
-                        </mat-checkbox>
-                      </div>
-
-                      <div fxFlex.gt-sm="49"
-                           fxFlex.gt-xs="100"
-                           fxFlex="100" style="margin-top: 25px;">
-                        <label>{{'general.teams.edit.trainerIntro' | translate}}</label><br/>
-                        <quill-editor [style]="{height: '150px'}"
-                                      formControlName="greetingWord">
-                        </quill-editor>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <div fxFlexOffset="1"
-                       fxFlex.gt-sm="24"
-                       fxFlex.gt-xs="100"
-                       fxFlex="100">
-                    <label>{{'general.teams.edit.logo.title' | translate}}</label><br/>
-                    <img [src]="team.logoURL" class="md-card-image" *ngIf="team.logoURL"/>
-
-                    <label>{{'general.teams.edit.photo.title' | translate}}</label><br/>
-
-                    <img [src]="team.photoURL" class="md-card-image" *ngIf="team.photoURL"/>
-
-                    <label>{{'general.teams.edit.photo.description' | translate}}</label><br/>
-                    <p>{{'general.teams.edit.photo.descriptionText' | translate}}</p>
-                    <quill-editor [style]="{height: '150px'}"
-                                  formControlName="photoDescription">
-                    </quill-editor>
-                    <!--<media-uploader
-                      (uploadCompleted)="logoUploadCompleted($event)"
-                      (removedMedia)="removedMedia($event)"
-                      [form]="form"
-                      [uploaderOptions]="logoUploaderOptions"
-                      [uploaderConfig]="logoUploaderConfig">
-                    </media-uploader>-->
-                  </div>
-                </div>
-
+                <!--<team-edit-main [form]="form"
+                                [categories]="categories$ | async"
+                                [categoryTypes]="categoryTypes$ | async"
+                                [clubs]="clubs$ | async"
+                                [seasons]="seasons$ | async">
+                </team-edit-main>-->
               </mat-tab>
 
               <mat-tab label="{{'general.teams.edit.management.title' | translate}}">
-                <team-positions [form]="form"
+                <!--<team-positions [form]="form"
                                 [categories]="categories$ | async"
                                 [categoryTypes]="categoryTypes$ | async"
                                 [members]="members$ | async"
                                 (addPosition)="addPosition($event)"
                                 (removePosition)="removePosition($event)">
-                </team-positions>
+                </team-positions>-->
               </mat-tab>
 
               <mat-tab label="{{'general.teams.edit.training.title' | translate}}">
-                <team-training [form]="form"
+                <!--<team-training [form]="form"
                                [locations]="locations$ | async"
                                (addTraining)="addTraining($event)"
                                (removeTraining)="removeTraining($event)">
-                </team-training>
+                </team-training>-->
               </mat-tab>
 
               <mat-tab label="{{'general.teams.edit.timeLine.title' | translate}}">
@@ -189,23 +71,6 @@
               </mat-tab>
 
             </mat-tab-group>
-
-            <mat-card-actions>
-              <div class="button-row">
-                <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
-                  {{'general.teams.edit.saveTeam' | translate}}
-                </button>
-                <a mat-raised-button color="accent" (click)="cancel()">
-                  {{'general.cancel' | translate}}
-                </a>
-                <a mat-raised-button color="warn"
-                   (click)="removeTeam()"
-                   *ngIf="team.id">
-                  {{'general.teams.edit.removeTeam' | translate}}
-                </a>
-              </div>
-            </mat-card-actions>
-
           </mat-card-content>
         </mat-card>
       </div>
@@ -215,5 +80,5 @@
 </form>
 
 <ng-template #loadingTemplate>
-  Loading ...
+  <loading-indicator></loading-indicator>
 </ng-template>

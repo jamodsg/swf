@@ -21,6 +21,9 @@ import { ITraining } from '../../../shared/interfaces/training.interface';
 import { LocationService } from '../../../shared/services/location/location.service';
 import { ILocation } from '../../../shared/interfaces/location.interface';
 import { ITeamManagement } from '../../../shared/interfaces/team/team-management.interface';
+import { SnackbarComponent } from '../../../shared/components/snackbar/snackbar.component';
+import { MatSnackBar } from '@angular/material';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'team-edit',
@@ -31,6 +34,7 @@ import { ITeamManagement } from '../../../shared/interfaces/team/team-management
 export class TeamEditComponent implements OnInit {
 
   public team: ITeam;
+  public savedTeam: ITeam;
   public members$: Observable<IMember[]>;
   public users$: Observable<IUser[]>;
   public clubs$: Observable<IClub[]>;
@@ -40,23 +44,22 @@ export class TeamEditComponent implements OnInit {
   public locations$: Observable<ILocation[]>;
 
   public form: FormGroup;
+  public titleMaxLength: number = 50;
 
   @ViewChild('description') description: QuillEditorComponent;
 
-  public titleMaxLength: number = 50;
-  public shortTitleMaxLength: number = 25;
-
-  constructor(private teamService: TeamService,
-    private categoryTypeService: CategoryTypeService,
-    private memberService: MemberService,
-    private seasonService: SeasonService,
-    private clubService: ClubService,
-    private categoryService: CategoryService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private locationService: LocationService,
-    private userService: UserService) {
+  constructor(public snackBar: MatSnackBar,
+              private teamService: TeamService,
+              private categoryTypeService: CategoryTypeService,
+              private memberService: MemberService,
+              private seasonService: SeasonService,
+              private clubService: ClubService,
+              private categoryService: CategoryService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,
+              private locationService: LocationService,
+              private userService: UserService) {
     this.users$ = userService.users$;
     this.members$ = memberService.members$;
     this.clubs$ = clubService.clubs$;
@@ -67,15 +70,17 @@ export class TeamEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { team: ITeam }) => this.team = data.team);
+    this.route.data.subscribe((data: { team: ITeam }) => {
+      this.team = data.team;
+      this.savedTeam = Object.freeze(Object.assign({}, this.team));
+    });
 
     this.form = this.fb.group({
       title: [this.team.title, [Validators.required, Validators.minLength(5), Validators.maxLength(this.titleMaxLength)]],
       shortTitle: this.team.subTitle,
       externalLink: this.team.externalTeamLink,
       isOfficialTeam: this.team.isOfficialTeam,
-      // greetingWord: this.team.greetingWord,
-      assignedTeamCategory: [this.team.assignedTeamCategory, [Validators.required]],
+      assignedTeamCategories: [this.team.assignedTeamCategories, [Validators.required]],
       assignedPlayers: this.team.assignedPlayers,
       assignedClub: [this.team.assignedClub, [Validators.required]],
       photoDescription: this.team.photoDescription,
@@ -85,8 +90,11 @@ export class TeamEditComponent implements OnInit {
       assignedPositions: this.initAssignedPositions()
     });
 
-    this.form.valueChanges.subscribe((changes: ITeam) => {
+    this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: ITeam) => {
       this.team = Object.assign({}, this.team, changes);
+      if (!this.form.invalid) {
+        this.saveTeam();
+      }
     });
   }
 
@@ -157,29 +165,35 @@ export class TeamEditComponent implements OnInit {
     control.removeAt(i);
   }
 
-
-  saveTeam() {
-    console.log(this.team);
-    console.log(this.form.getRawValue());
+  saveTeam(redirect: boolean = false): void {
     let action;
-    // const assignedItems: any[] = this.form.get('assignedItems').value;
-    /* this.form.get('assignedItems').reset();
 
     if (this.team.id) {
       action = this.teamService.updateTeam(this.team.id, this.form.getRawValue());
     } else {
-      action = this.teamService.createTeam(this.form.getRawValue());
+      action = this.teamService.createTeam(this.team);
     }
-    action.then(() => this.redirectToList());
-    */
+    action.then(
+      () => {
+        if (redirect) {
+          this.redirectToList();
+        }
+        this.snackBar.openFromComponent(SnackbarComponent, {
+          data: {
+            status: 'success',
+            message: 'general.applications.updateMessage'
+          },
+          duration: 2500,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        });
+      },
+      (error: any) => console.log(error)
+    );
   }
 
   cancel() {
     this.redirectToList();
-  }
-
-  removeTeam(event: ITeam) {
-    this.teamService.removeTeam(event).then(() => this.redirectToList());
   }
 
   redirectToList() {

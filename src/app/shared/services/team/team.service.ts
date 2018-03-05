@@ -46,7 +46,7 @@ export class TeamService {
       subTitle: '',
       isOfficialTeam: true,
       creation: this.authService.getCreation(),
-      assignedTeamCategory: null,
+      assignedTeamCategories: [],
       assignedClub: null,
       assignedSeason: null,
       assignedPlayers: [],

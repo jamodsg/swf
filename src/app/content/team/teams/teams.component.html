@@ -9,6 +9,9 @@
       <mat-card-content>
         <team-list
           [teams]="teams$ | async"
+          [categories]="categories$ | async"
+          [clubs]="clubs$ | async"
+          [seasons]="seasons$ | async"
           (remove)="removeTeam($event)"
           (update)="updateTeam($event)">
         </team-list>

@@ -3,6 +3,8 @@ import { ILocation } from '../../../shared/interfaces/location.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ICategoryType } from '../../../shared/interfaces/category-type.interface';
 import { LocationService } from '../../../shared/services/location/location.service';
+import { IClub } from '../../../shared/interfaces/club/club.interface';
+import { ISeason } from '../../../shared/interfaces/season.interface';
 
 @Component({
   selector: 'location-list',
@@ -14,6 +16,8 @@ export class LocationListComponent implements OnInit {
   @Input() categories: ILocation[];
   @Input() categoryTypes: ICategoryType[];
   @Input() locations: ILocation[];
+  @Input() clubs: IClub[];
+  @Input() seasons: ISeason[];
 
   @Output() remove = new EventEmitter(false);
   @Output() update = new EventEmitter(false);
@@ -32,8 +36,9 @@ export class LocationListComponent implements OnInit {
   }
 
   removeLocation(location: ILocation) {
-    this.locationService.removeLocation(location).then(
-      () => this.form.controls['searchFor'].reset()
+    this.locationService.removeLocation(location).then(() => {
+        //this.form.controls['searchFor'].reset()
+      }
     );
   }
 

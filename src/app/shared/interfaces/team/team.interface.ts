@@ -21,7 +21,7 @@ export interface ITeam {
   photoDescription?: string;
 
   assignedClub?: IClub;
-  assignedTeamCategory: ICategory[];
+  assignedTeamCategories: ICategory[];
   assignedSeason: ISeason;
 
   assignedPlayers: IMember[];

@@ -25,10 +25,9 @@
     </a>
   </div>
 
-  <div fxFlex.gt-sm="100%" fxFlex="100" *ngIf="teams; else loadingTemplate">
+  <div fxFlex.gt-sm="100%" fxFlex="100" *ngIf="teams && categories && clubs && seasons; else loadingTemplate">
     <ngx-datatable #myTable
                    class='material'
-                   [columns]="columns"
                    [columnMode]="'force'"
                    [headerHeight]="50"
                    [footerHeight]="50"
@@ -47,44 +46,32 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="assignedClub" fxHide.xs>
-        <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.assignedClub' | translate}}
+      <ngx-datatable-column name="{{'general.teams.edit.assignedClub' | translate}}">
+        <ng-template let-row="row" let-value="assignedClub" ngx-datatable-cell-template>
+          <a [routerLink]="['/clubs/detail', club.id]"
+             *ngFor="let club of clubs | filterBy: ['id'] : row.assignedClub">
+            {{club.title}}
+          </a>
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="assignedSeason" fxHide.xs>
-        <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.assignedSeason' | translate}}
+      <ngx-datatable-column name="{{'general.teams.edit.assignedSeason' | translate}}" fxHide.xs>
+        <ng-template let-row="row" let-value="assignedClub" ngx-datatable-cell-template>
+          <span *ngFor="let season of seasons | filterBy: ['id'] : row.assignedSeason">
+            {{season.title}}
+          </span>
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="assignedTeamCategory" fxHide.xs>
-        <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.assignedTeamCategory' | translate}}
+      <ngx-datatable-column name="{{'general.teams.edit.assignedCategories' | translate}}">
+        <ng-template let-row="row" let-value="assignedClub" ngx-datatable-cell-template>
+          <span *ngFor="let assignedTeamCategory of row.assignedTeamCategories; let last = last">
+          <a [routerLink]="['/categories/detail', category.id]"
+             *ngFor="let category of categories | filterBy: ['id'] : assignedTeamCategory">
+            {{category.title}}
+          </a><span *ngIf="!last">, </span>
+          </span>
         </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="assignedTeamCategoryType" fxHide.xs>
-        <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.assignedTeamCategoryType' | translate}}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <!--<ngx-datatable-column name="photo" fxHide.xs>
-        <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.photo.title' | translate}}
-        </ng-template>
-      </ngx-datatable-column>-->
-
-      <ngx-datatable-column name="Categories" fxHide.xs>
-        <ng-template let-column="column" ngx-datatable-header-template>
-          {{'general.teams.edit.assignedCategories' | translate}}
-        </ng-template>
-        <!--<ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
-          {{ 'general.menu.' + (categoryTypes | filterBy: ['id'] : row.assignedCategoryType)[0].link + '.main' |
-          translate}}
-        </ng-template>-->
       </ngx-datatable-column>
 
       <ngx-datatable-column name="actions">
@@ -112,9 +99,8 @@
           let-offset="offset">
           <div style="padding: 5px 10px">
             <div class="">{{ 'general.items' | translate}}: {{rowCount}} |
-              Size: {{pageSize}} |
-              Current: {{curPage}} |
-              Offset: {{offset}}
+              {{pageSize}} {{'general.itemsPerPage' | translate}} |
+              {{'general.currentPage' | translate}}: {{curPage}}
             </div>
           </div>
 
@@ -138,5 +124,5 @@
 </div>
 
 <ng-template #loadingTemplate>
-  LADEN
+  <loading-indicator></loading-indicator>
 </ng-template>

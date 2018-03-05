@@ -21,24 +21,24 @@
         <a target="_blank" [href]="club.fussballde.clubUrl">{{club.fussballde.clubUrl}}</a>
       </mat-list-item>
 
-      <mat-list-item>
+      <mat-list-item *ngIf="club.info">
         <h3 matSubheader>{{'general.clubs.edit.foundedIn' | translate}}</h3>
         {{club.info.founding}}
       </mat-list-item>
 
-      <mat-list-item>
+      <mat-list-item *ngIf="club.info">
         <h3 matSubheader>{{'general.clubs.edit.clubColours' | translate}}</h3>
         {{club.info.clubColours}}
       </mat-list-item>
 
-      <mat-list-item *ngIf="club.info.assignedContact; else noAssignedContactTemplate">
+      <mat-list-item *ngIf="club.info && club.info.assignedContact; else noAssignedContactTemplate">
         <h3 matSubheader>{{'general.clubs.edit.contact' | translate}}</h3>
         <span *ngFor="let member of members | filterBy: ['id'] : club.info.assignedContact">
             {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
         </span>
       </mat-list-item>
 
-      <mat-list-item *ngIf="club.info.website">
+      <mat-list-item *ngIf="club.info && club.info.website">
         <h3 matSubheader>{{'general.clubs.edit.homepage' | translate}}</h3>
         <a target="_blank" [href]="club.info.website">{{club.info.website}}</a>
       </mat-list-item>

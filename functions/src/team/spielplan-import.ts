@@ -28,6 +28,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
 
   let assignedLocationCategory: string;
   let assignedTeamCategory: string;
+  let assignedTeamMainCategory: string = '';
 
   let assignedLocation: string;
   let assignedTeam: string;
@@ -109,7 +110,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         };
         db.collection(seasonPath).doc(assignedSeason).set(seasonData);
       } else {
-        values.docs[0].ref.set(seasonData, { merge: true });
+        values.docs[0].ref.set(seasonData, {merge: true});
         assignedSeason = values.docs[0].id;
       }
       return true;
@@ -132,7 +133,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             };
             db.collection(categoryTypePath).doc(assignedLocationCategoryType).set(categoryTypeData);
           } else {
-            values.docs[0].ref.set(categoryTypeData, { merge: true });
+            values.docs[0].ref.set(categoryTypeData, {merge: true});
             assignedLocationCategoryType = values.docs[0].id;
           }
         });
@@ -156,7 +157,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             };
             db.collection(categoryTypePath).doc(assignedTeamCategoryType).set(categoryTypeData);
           } else {
-            values.docs[0].ref.set(categoryTypeData, { merge: true });
+            values.docs[0].ref.set(categoryTypeData, {merge: true});
             assignedTeamCategoryType = values.docs[0].id;
           }
         });
@@ -183,7 +184,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             db.collection(categoryPath).doc(assignedLocationCategory).set(categoryData);
           }
           else {
-            values.docs[0].ref.set(categoryData, { merge: true });
+            values.docs[0].ref.set(categoryData, {merge: true});
             assignedLocationCategory = values.docs[0].id;
           }
         });
@@ -210,10 +211,49 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             db.collection(categoryPath).doc(assignedTeamCategory).set(categoryData);
           }
           else {
-            values.docs[0].ref.set(categoryData, { merge: true });
+            values.docs[0].ref.set(categoryData, {merge: true});
             assignedTeamCategory = values.docs[0].id;
           }
         });
+    }).then(() => {
+      // Other-Team-Categories
+      let assignedTeamMainCategoryTitle: string;
+      if(teamCategoryTitle.indexOf('Junioren') > -1){
+        assignedTeamMainCategoryTitle = 'Junioren';
+      } else if (teamCategoryTitle.indexOf('Altherren') > -1){
+        assignedTeamMainCategoryTitle = 'Altherren';
+      } else if(teamCategoryTitle.indexOf('Frauen') > -1){
+        assignedTeamMainCategoryTitle = 'Frauen';
+      } else {
+        assignedTeamMainCategoryTitle = 'Herren';
+      }
+
+      return db.collection(categoryPath)
+        .where('title', '==', assignedTeamMainCategoryTitle)
+        .where('assignedCategoryType', '==', assignedTeamCategoryType)
+        .get()
+        .then((values: FirebaseFirestore.QuerySnapshot) => {
+
+          let categoryData: any = {
+            title: assignedTeamMainCategoryTitle,
+            assignedCategoryType: assignedTeamCategoryType,
+            description: 'Alle erfassten ' + assignedTeamMainCategoryTitle + ' Mannschaften'
+          };
+
+          if (values.docs.length === 0) {
+            assignedTeamMainCategory = categoryData.id = db.collection(categoryPath).doc().id;
+            categoryData.creation = {
+              from: 'system',
+              at: new Date()
+            };
+            db.collection(categoryPath).doc(assignedTeamMainCategory).set(categoryData);
+          }
+          else {
+            values.docs[0].ref.set(categoryData, {merge: true});
+            assignedTeamMainCategory = values.docs[0].id;
+          }
+        });
+
     }).then(() => {
       // Location
       return db.collection(locationPath)
@@ -249,7 +289,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             db.collection(locationPath).doc(assignedLocation).set(locationData);
           }
           else {
-            values.docs[0].ref.set(locationData, { merge: true });
+            values.docs[0].ref.set(locationData, {merge: true});
             assignedLocation = values.docs[0].id;
           }
         });
@@ -302,32 +342,30 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             };
             db.collection(clubPath).doc(assignedClub).set(clubData);
           } else {
-            values.docs[0].ref.set(clubData, { merge: true });
+            values.docs[0].ref.set(clubData, {merge: true});
             assignedClub = values.docs[0].id;
           }
         });
     }).then(() => {
-
-
       let subTitle = isHomeTeam ? description[1] : description[4];
       const lastFourChars = subTitle.slice(-4);
       const lastChar = subTitle.slice(-1);
 
       // delete a.W.
-      if(lastFourChars === 'a.W.'){
-        subTitle = subTitle.slice(-5);
+      if (lastFourChars === 'a.W.') {
+        subTitle = subTitle.slice(0, -5);
       }
 
-      if(lastChar === '1'){
-        subTitle = subTitle.slice(-2);
+      if (lastChar === '1') {
+        subTitle = subTitle.slice(0, -2);
       }
 
-      if(((subTitle.indexOf('Winterbach') > -1) || subTitle.indexOf('Bliesen') > -1) && subTitle.indexOf('SG') > -1 ) { // && teamCategoryTitle.indexOf('Junioren') > -1
+      if (((subTitle.indexOf('Winterbach') > -1) || subTitle.indexOf('Bliesen') > -1) && subTitle.indexOf('SG') > -1 && teamCategoryTitle.indexOf('Junioren') > -1){
         subTitle = 'SG SF Winterbach';
       }
 
       // Team
-      return db.collection(matchPath)
+      return db.collection(teamPath)
         .where('title', '==', teamCategoryTitle)
         .where('assignedClub', '==', assignedClub)
         .where('subTitle', '==', subTitle)
@@ -343,11 +381,10 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             isOfficialTeam: true,
             logoURL: isHomeTeam ? description[3] : description[6],
             assignedClub: assignedClub,
-            assignedTeamCategory: assignedTeamCategory,
-            assignedTeamCategoryType: assignedTeamCategoryType
+            assignedTeamCategories: assignedTeamCategory !== assignedTeamMainCategory ? [ assignedTeamCategory, assignedTeamMainCategory] : [ assignedTeamCategory ]
           };
 
-          if (values.docs.length === 0) {
+          if (values.empty) {
             assignedTeam = teamData.id = db.collection(teamPath).doc().id;
             teamData.assignedPlayers = [];
             teamData.assignedPositions = [];
@@ -361,7 +398,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             db.collection(teamPath).doc(teamData.id).set(teamData);
           }
           else {
-            values.docs[0].ref.set(teamData, { merge: true });
+            values.docs[0].ref.set(teamData, {merge: true});
             assignedTeam = values.docs[0].id;
           }
         });

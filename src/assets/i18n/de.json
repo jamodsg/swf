@@ -1050,10 +1050,11 @@
         "competitions": {
           "title": "Verknüpfte Wettbewerbe"
         },
+        "editTeam": "Mannschaft editieren",
         "externalLink": "Externer Link",
         "isOfficialTeam": "Ist die Mannschaft eine offiziell gemeldete Mannschaft?",
         "logo": {
-          "noLogo": "Es wurde noch kein Mannschaftslogo hochgeladen",
+          "noLogo": "Es wurde noch kein Wappen hochgeladen",
           "title": "Wappen"
         },
         "mainTitle": "Wichtigste Daten",
@@ -1063,10 +1064,12 @@
         "photo": {
           "description": "Bildbeschreibung",
           "noClub": "Mannschaft gehört nicht zu einem Verein",
+          "noPhoto": "Es wurde noch kein Mannschaftsfoto hochgeladen.",
           "descriptionText": "Wer ist wo zu sehen auf dem Foto?",
           "title": "Mannschaftsfoto"
         },
         "players": {
+          "noPlayers": "Es wurden noch keine Spieler ernannt",
           "title": "Spieler"
         },
         "position": {
@@ -1081,7 +1084,7 @@
         },
         "removeTeam": "Mannschaft löschen",
         "saveTeam": "Mannschaft speichern",
-        "shortTitle": "Kurzname (meist SF Winterbach)",
+        "subTitle": "Untertitel",
         "timeLine": {
           "title": "Erfolge / Ereignisse"
         },

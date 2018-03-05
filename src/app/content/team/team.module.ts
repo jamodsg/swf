@@ -11,7 +11,7 @@ import {
   MatCheckboxModule,
   MatDatepickerModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatInputModule, MatListModule, MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
 import { TeamDetailComponent } from './team-detail/team-detail.component';
@@ -32,6 +32,9 @@ import { TeamPositionsComponent } from './team-edit/team-positions/team-position
 import { TeamPositionFormComponent } from './team-edit/team-positions/team-position-form/team-position-form.component';
 import { TeamMediaComponent } from './team-media/team-media.component';
 import { FameTeamComponent } from './fame-team/fame-team.component';
+import { TeamEditMainComponent } from './team-edit/team-edit-main/team-edit-main.component';
+import { TeamDetailMainComponent } from './team-detail/team-detail-main/team-detail-main.component';
+import { TeamDetailPositionsComponent } from './team-detail/team-detail-positions/team-detail-positions.component';
 
 @NgModule({
   imports: [
@@ -41,6 +44,8 @@ import { FameTeamComponent } from './fame-team/fame-team.component';
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
+    MatSnackBarModule,
     MatTabsModule,
     QuillModule,
     RouterModule.forChild(teamRoutes),
@@ -56,7 +61,10 @@ import { FameTeamComponent } from './fame-team/fame-team.component';
     TeamPositionsComponent,
     TeamPositionFormComponent,
     TeamMediaComponent,
-    FameTeamComponent
+    FameTeamComponent,
+    TeamEditMainComponent,
+    TeamDetailMainComponent,
+    TeamDetailPositionsComponent
   ],
   providers: [
     ApplicationService,

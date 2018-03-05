@@ -17,9 +17,9 @@ export class LocationsComponent {
   public categoryTypes$: Observable<ICategoryType[]>;
   public locations$: Observable<ILocation[]>;
 
-  constructor(public categoryService: CategoryService,
-    public categoryTypeService: CategoryTypeService,
-    public locationService: LocationService) {
+  constructor(private categoryService: CategoryService,
+              private categoryTypeService: CategoryTypeService,
+              private locationService: LocationService,) {
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
     this.locations$ = locationService.locations$;
