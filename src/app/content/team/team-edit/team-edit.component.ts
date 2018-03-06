@@ -94,12 +94,12 @@ export class TeamEditComponent implements OnInit {
       assignedEvents: this.initAssignedEvents()
     });
 
-    /* this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: ITeam) => {
+    this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: ITeam) => {
       this.team = Object.assign({}, this.team, changes);
       if (!this.form.invalid) {
         this.saveTeam();
       }
-    }); */
+    });
   }
 
   // TimeLine

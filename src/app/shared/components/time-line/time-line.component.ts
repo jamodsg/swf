@@ -18,12 +18,10 @@ export class TimeLineComponent implements OnInit {
   @Output() delete: EventEmitter<number> = new EventEmitter<number>(false);
   @Output() edit: EventEmitter<number> = new EventEmitter<number>(false);
 
-
   constructor() {
   }
 
   ngOnInit() {
-    console.log(this.form);
   }
 
 }

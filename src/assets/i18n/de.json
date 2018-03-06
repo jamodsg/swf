@@ -1101,6 +1101,7 @@
           "lesson": "Einheit",
           "location": "Trainingsort",
           "noTraining": "Es wurden bisher noch keine Trainingseinheiten für diese Mannschaft erstellt.",
+          "place": "Ort",
           "startTime": "Beginn",
           "title": "Trainingszeiten und -Orte"
         }
