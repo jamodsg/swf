@@ -24,14 +24,14 @@ export class MemberFunctionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  getMemberPositionsInClubs(clubs: IClub[]){
-    if(this.positionList)
+  getMemberPositionsInClubs(clubs: IClub[]) {
+    if (this.positionList)
       return this.positionList;
 
     let positionList = [];
-    for(let i = 0; i < clubs.length; i++){
+    for (let i = 0; i < clubs.length; i++) {
       clubs[i].management.positions.filter((position: IClubManagement) => {
-          return position.assignedMember === this.member.id;
+        return position.assignedMember === this.member.id;
       }).map((position: IClubManagement) => {
         positionList.push(position);
       });

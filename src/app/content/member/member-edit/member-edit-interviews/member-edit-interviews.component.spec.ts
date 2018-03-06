@@ -8,9 +8,9 @@ describe('MemberEditInterviewsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemberEditInterviewsComponent ]
+      declarations: [MemberEditInterviewsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

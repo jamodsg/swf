@@ -26,36 +26,6 @@ export const dfbMemberCron = functions.database.ref('/dfb-members/{userId}').onW
       .get()
       .then((values: FirebaseFirestore.QuerySnapshot) => {
 
-        let eligibleForOfficialMatches = '';
-        if (data.eligibleForOfficialMatches) {
-          const eO = data.eligibleForOfficialMatches.split('.');
-          eligibleForOfficialMatches = eO.length === 3 ? eO[2] + '-' + eO[1] + '-' + eO[0] : '';
-        }
-
-        let eligibleForFriendlyMatches = '';
-        if (data.eligibleForFriendlyMatches) {
-          const eF = data.eligibleForFriendlyMatches.split('.');
-          eligibleForFriendlyMatches = eF.length === 3 ? eF[2] + '-' + eF[1] + '-' + eF[0] : '';
-        }
-
-        let signOut = '';
-        if (data.signOut) {
-          const sO = data.signOut.split('.');
-          signOut = sO.length === 3 ? sO[2] + '-' + sO[1] + '-' + sO[0] : '';
-        }
-
-        let passPrint = '';
-        if (data.passPrint) {
-          const pP = data.passPrint.split('.');
-          passPrint = pP.length === 3 ? pP[2] + '-' + pP[1] + '-' + pP[0] : '';
-        }
-
-        let guestRight = '';
-        if (data.guestRight) {
-          const gR = data.guestRight.split('.');
-          guestRight = gR.guestRight === 3 ? gR[2] + '-' + gR[1] + '-' + gR[0] : '';
-        }
-
         const mainData = {
           firstName: data.firstName,
           lastName: data.lastName,
@@ -66,16 +36,16 @@ export const dfbMemberCron = functions.database.ref('/dfb-members/{userId}').onW
         const dfbData = {
           passNumber: data.passNumber ? data.passNumber : '',
           ageGroup: data.ageGroup ? data.ageGroup : '',
-          eligibleForOfficialMatches: eligibleForOfficialMatches,
-          eligibleForFriendlyMatches: eligibleForFriendlyMatches,
-          signOut: signOut,
+          eligibleForOfficialMatches: data.eligibleFriendly,
+          eligibleForFriendlyMatches: data.eligibleOfficial,
+          signOut: data.signOut,
           playerStatus: data.playerStatus ? data.playerStatus : '',
           guestPlayer: {
-            guestRight: guestRight ? data.guestRight : '',
+            guestRight: data.guestRight,
             season: data.season ? data.season : '',
             type: data.type ? data.type : ''
           },
-          passPrint: passPrint,
+          passPrint: data.passPrint,
           allowedToPlay: data.allowedToPlay
         };
 

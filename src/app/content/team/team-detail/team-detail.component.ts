@@ -28,13 +28,13 @@ export class TeamDetailComponent implements OnInit {
   public clubs$: Observable<IClub[]>;
 
   constructor(private route: ActivatedRoute,
-              private seasonService: SeasonService,
-              private clubService: ClubService,
-              private teamService: TeamService,
-              private categoryService: CategoryService,
-              private memberService: MemberService,
-              private locationService: LocationService,
-              private router: Router) {
+    private seasonService: SeasonService,
+    private clubService: ClubService,
+    private teamService: TeamService,
+    private categoryService: CategoryService,
+    private memberService: MemberService,
+    private locationService: LocationService,
+    private router: Router) {
     this.clubs$ = clubService.clubs$;
     this.locations$ = locationService.locations$;
     this.categories$ = categoryService.categories$;

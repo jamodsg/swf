@@ -35,12 +35,12 @@ export class MemberEditComponent implements OnInit {
   //public teams$: Observable<ITeam[]>;
 
   constructor(public route: ActivatedRoute,
-              public snackBar: MatSnackBar,
-              //private clubService: ClubService,
-              //private teamService: TeamService,
-              private fb: FormBuilder,
-              private memberService: MemberService,
-              private router: Router) {
+    public snackBar: MatSnackBar,
+    //private clubService: ClubService,
+    //private teamService: TeamService,
+    private fb: FormBuilder,
+    private memberService: MemberService,
+    private router: Router) {
     //this.clubs$ = clubService.clubs$;
     this.members$ = memberService.members$;
     //this.teams$ = this.teamService.teams$;
@@ -195,7 +195,7 @@ export class MemberEditComponent implements OnInit {
   }
 
   // Das sagen die anderen
-  toggleMemberLookup($event: {id: number, type: string}) {
+  toggleMemberLookup($event: { id: number, type: string }) {
     const ctrl: FormControl = (<any>this.form).controls['opinions']['controls'][$event.id].controls['type'];
     ctrl.setValue($event.type);
   }
@@ -219,16 +219,16 @@ export class MemberEditComponent implements OnInit {
     });
   }
 
-  initNameModel(){
+  initNameModel() {
     return this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(100)]],
-      lastName:  ['', [Validators.required, Validators.maxLength(100)]],
+      lastName: ['', [Validators.required, Validators.maxLength(100)]],
     });
   }
 
-  initAssignedMemberModel(){
+  initAssignedMemberModel() {
     return this.fb.group({
-      assignedMember:  ['', [Validators.required, Validators.maxLength(100)]],
+      assignedMember: ['', [Validators.required, Validators.maxLength(100)]],
     });
   }
 

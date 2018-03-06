@@ -21,8 +21,8 @@ export class TeamDetailPositionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  isSavedHeadline(type: string){
-    if(type !== this.savedPositionType){
+  isSavedHeadline(type: string) {
+    if (type !== this.savedPositionType) {
       this.savedPositionType = type;
       return false;
     }

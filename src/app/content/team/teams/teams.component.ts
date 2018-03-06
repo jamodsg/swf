@@ -23,10 +23,10 @@ export class TeamsComponent {
   public seasons$: Observable<ISeason[]>;
 
   constructor(private categoryService: CategoryService,
-              private clubService: ClubService,
-              private locationService: LocationService,
-              private seasonService: SeasonService,
-              private teamService: TeamService) {
+    private clubService: ClubService,
+    private locationService: LocationService,
+    private seasonService: SeasonService,
+    private teamService: TeamService) {
     this.categories$ = categoryService.categories$;
     this.seasons$ = seasonService.seasons$;
     this.clubs$ = clubService.clubs$;

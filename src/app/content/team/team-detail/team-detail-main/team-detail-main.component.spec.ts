@@ -8,9 +8,9 @@ describe('TeamDetailMainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeamDetailMainComponent ]
+      declarations: [TeamDetailMainComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

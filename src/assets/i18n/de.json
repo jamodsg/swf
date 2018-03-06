@@ -532,7 +532,8 @@
         "honorary": "Ehrenmitglied",
         "member": "Mitglied",
         "none": "Kein Mitglied",
-        "teenager": "Jugendliche"
+        "teenager": "Jugendliche",
+        "false": "Kein Mitglied"
       },
       "detail": {
         "drive": {

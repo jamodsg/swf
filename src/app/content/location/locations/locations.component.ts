@@ -18,8 +18,8 @@ export class LocationsComponent {
   public locations$: Observable<ILocation[]>;
 
   constructor(private categoryService: CategoryService,
-              private categoryTypeService: CategoryTypeService,
-              private locationService: LocationService,) {
+    private categoryTypeService: CategoryTypeService,
+    private locationService: LocationService, ) {
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;
     this.locations$ = locationService.locations$;

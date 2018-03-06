@@ -52,17 +52,17 @@ export class TeamEditComponent implements OnInit {
   @ViewChild('description') description: QuillEditorComponent;
 
   constructor(public snackBar: MatSnackBar,
-              private teamService: TeamService,
-              private categoryTypeService: CategoryTypeService,
-              private memberService: MemberService,
-              private seasonService: SeasonService,
-              private clubService: ClubService,
-              private categoryService: CategoryService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router,
-              private locationService: LocationService,
-              private userService: UserService) {
+    private teamService: TeamService,
+    private categoryTypeService: CategoryTypeService,
+    private memberService: MemberService,
+    private seasonService: SeasonService,
+    private clubService: ClubService,
+    private categoryService: CategoryService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private locationService: LocationService,
+    private userService: UserService) {
     this.users$ = userService.users$;
     this.members$ = memberService.members$;
     this.clubs$ = clubService.clubs$;
