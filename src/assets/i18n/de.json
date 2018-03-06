@@ -1062,6 +1062,12 @@
         "management": {
           "title": "Aufgaben / Positionen"
         },
+        "matches": {
+          "title": "Spielplan & Ergebnisse"
+        },
+        "media": {
+          "title": "Dateien"
+        },
         "photo": {
           "description": "Bildbeschreibung",
           "noClub": "Mannschaft gehört nicht zu einem Verein",
@@ -1085,6 +1091,9 @@
         },
         "removeTeam": "Mannschaft löschen",
         "saveTeam": "Mannschaft speichern",
+        "standings": {
+          "title": "Tabellen"
+        },
         "subTitle": "Untertitel",
         "timeLine": {
           "title": "Erfolge / Ereignisse"

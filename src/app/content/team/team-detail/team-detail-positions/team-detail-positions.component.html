@@ -29,7 +29,9 @@
           <span *ngFor="let category of categories | filterBy: ['id'] : position.type">{{category.title}}</span>
         </h3>
         <span matLine *ngFor="let member of members | filterBy: ['id'] : position.assignedMember">
+          <a style="color: orangered" [routerLink]="['/members/detail', member.id]">
             {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
+          </a>
             ({{position.position}})
         </span>
       </mat-list-item>
