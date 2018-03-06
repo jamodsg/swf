@@ -20,6 +20,7 @@
 
           <mat-tab label="{{'general.teams.edit.management.title' | translate}}">
             <team-detail-positions [team]="team"
+                                   [categories]="categories$ | async"
                                    [members]="members$ | async">
             </team-detail-positions>
           </mat-tab>

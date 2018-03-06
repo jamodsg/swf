@@ -89,7 +89,7 @@ export class TeamEditComponent implements OnInit {
       assignedSeason: this.team.assignedSeason,
       creation: this.initCreation(),
       assignedTrainings: this.initAssignedTrainings(),
-      // assignedPositions: this.initAssignedPositions(),
+      assignedPositions: this.initAssignedPositions(),
       // assignedPlayers: this.team.assignedPlayers,
       assignedEvents: this.initAssignedEvents()
     });

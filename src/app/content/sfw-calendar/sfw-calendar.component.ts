@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import * as moment from 'moment';
+import * as $ from 'jquery';
+// import 'fullcalendar';
 
 @Component({
   selector: 'calendar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sfw-calendar.component.html',
   styleUrls: ['./sfw-calendar.component.scss']
 })
