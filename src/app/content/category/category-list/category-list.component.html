@@ -1,38 +1,55 @@
-<div fxLayout="row" fxLayoutWrap="wrap" [formGroup]="form">
+<div fxLayout="row"
+     fxLayoutWrap="wrap"
+     [formGroup]="form">
 
-  <div fxFlex.gt-xs="25"
-       fxFlex.gt-sm="25"
-       fxFlex.gt-md="30"
+  <mat-form-field style="margin-top: 25px"
+                  fxFlex.gt-sm="19"
+                  fxFlex="100">
+    <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
+      <mat-option [value]="categories.length" *ngIf="categories">
+        {{ 'general.pagination.allItems' | translate}}
+      </mat-option>
+      <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
+        {{ 'general.items' | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field style="margin-top: 25px"
+                  fxFlexOffset.gt-sm="2"
+                  fxFlex.gt-sm="19"
+                  fxFlex="100">
+    <mat-select placeholder="{{ 'general.pagination.filterByCategory' | translate}}"
+                formControlName="categoryTypeControl">
+      <mat-option [value]="">{{ 'general.pagination.allItems' | translate}}</mat-option>
+      <mat-option *ngFor="let categoryType of categoryTypes" [value]="categoryType.id">
+        {{ 'general.menu.' + categoryType.link + '.main' | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div style="margin-top: 25px"
+       fxFlexOffset.gt-sm="2"
+       fxFlex.gt-sm="31"
        fxFlex="100">
-    <mat-form-field style="width: 95%">
-      <mat-select placeholder="{{ 'general.pagination.itemsPerPage' | translate}}" formControlName="limit">
-        <mat-option [value]="categories.length" *ngIf="categories">
-          {{ 'general.pagination.allItems' | translate}}
-        </mat-option>
-        <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
-          {{ 'general.items' | translate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <input style="width: 95%;padding: 10px" placeholder="{{ 'general.typeToFilter' | translate}}"
+           formControlName="searchFor"/>
   </div>
 
-  <div fxFlex.gt-xs="50"
-       fxFlex.gt-sm="40"
-       fxFlex="100"
-       style="margin-bottom: 15px">
-    <input style="padding:10px; width: 90%"
-      placeholder="{{ 'general.typeToFilter' | translate}}"
-      formControlName="searchFor"/>
-  </div>
-
-  <div fxFlex.gt-xs="25"
-       fxFlex.gt-sm="35"
-       fxFlex="100"
-       style="margin-bottom: 15px">
-    <a mat-raised-button color="primary" [routerLink]="['./edit/new']">
+  <div style="margin-top: 25px"
+       fxFlexOffset.gt-sm="2"
+       fxFlex.gt-sm="25"
+       fxFlex="100">
+    <button type="button" mat-raised-button color="primary" [routerLink]="['./edit/new']">
       {{ 'general.categories.list.createCategory' | translate}}
-    </a>
+    </button>
   </div>
+</div>
+
+<div style="margin-top: 25px"
+     fxLayout="row"
+     fxLayoutWrap="wrap"
+     [formGroup]="form">
 
   <div fxFlex="100"
        *ngIf="categories && categoryTypes; else loadingTemplate">
@@ -43,7 +60,9 @@
                    [footerHeight]="50"
                    [rowHeight]="'auto'"
                    [limit]="form.controls['limit'].value"
-                   [rows]="categories | orderBy: ['title'] | filterBy: ['title'] : form.controls['searchFor'].value">
+                   [rows]="categories | orderBy: ['title']
+                   | filterBy: ['title'] : form.controls['searchFor'].value
+                   | filterBy: ['assignedCategoryType'] : form.controls['categoryTypeControl'].value">
       <ngx-datatable-column name="{{'general.categories.list.colTitles.title' | translate}}">
         <ng-template let-row="row" let-value="id" ngx-datatable-cell-template>
           {{row.title}}

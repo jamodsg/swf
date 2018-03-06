@@ -27,7 +27,8 @@ export class CategoryListComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       searchFor: '',
-      limit: 10
+      limit: 10,
+      categoryTypeControl: ''
     });
   }
 
