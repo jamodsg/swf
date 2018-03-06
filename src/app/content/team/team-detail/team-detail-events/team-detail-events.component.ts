@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ITeam } from '../../../../shared/interfaces/team/team.interface';
 import { ITimeLineEvent } from '../../../../shared/interfaces/time-line-event.interface';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IClub } from '../../../../shared/interfaces/club/club.interface';
 
 @Component({
   selector: 'team-detail-events',
@@ -15,7 +14,8 @@ export class TeamDetailEventsComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
