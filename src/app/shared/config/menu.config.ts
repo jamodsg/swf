@@ -15,25 +15,13 @@ export const MENUITEMS = [
     state: 'uploader',
     name: 'uploader',
     type: 'link',
-    icon: 'file_upload',
-    badge: [
-      {
-        type: 'yellow',
-        value: '?'
-      }
-    ],
+    icon: 'file_upload'
   },
   {
     state: 'articles',
     name: 'article',
     type: 'sub',
     icon: 'text_format',
-    badge: [
-      {
-        type: 'red',
-        value: '!'
-      }
-    ],
     children: [
       {
         state: '',
@@ -69,12 +57,6 @@ export const MENUITEMS = [
     name: 'location',
     type: 'sub',
     icon: 'location_on',
-    badge: [
-      {
-        type: 'yellow',
-        value: '?'
-      }
-    ],
     children: [
       {
         state: '',
@@ -85,12 +67,7 @@ export const MENUITEMS = [
         state: 'map',
         name: 'map',
         icon: 'map'
-      }/*,
-      {
-        state: 'edit',
-        name: 'create',
-        icon: 'note_add'
-      }*/
+      }
     ]
   },
   {
@@ -98,12 +75,6 @@ export const MENUITEMS = [
     name: 'member',
     type: 'sub',
     icon: 'nature_people',
-    badge: [
-      {
-        type: 'red',
-        value: '!'
-      }
-    ],
     children: [
       {
         state: '',
@@ -126,25 +97,13 @@ export const MENUITEMS = [
     state: 'settings',
     name: 'setting',
     type: 'link',
-    icon: 'settings',
-    badge: [
-      {
-        type: 'yellow',
-        value: '?'
-      }
-    ]
+    icon: 'settings'
   },
   {
     state: 'sponsors',
     name: 'sponsor',
     type: 'sub',
     icon: 'euro_symbol',
-    badge: [
-      {
-        type: 'yellow',
-        value: '?'
-      }
-    ],
     children: [
       {
         state: '',
@@ -163,12 +122,6 @@ export const MENUITEMS = [
     name: 'team',
     type: 'sub',
     icon: 'people_outline',
-    badge: [
-      {
-        type: 'red',
-        value: '!'
-      }
-    ],
     children: [
       {
         state: '',
