@@ -54,9 +54,9 @@ export class DashboardComponent implements OnInit {
   ];
 
   constructor(private fb: FormBuilder,
-              private categoryService: CategoryService,
-              private memberService: MemberService,
-              private matchService: MatchService) {
+    private categoryService: CategoryService,
+    private memberService: MemberService,
+    private matchService: MatchService) {
     this.angularVersion = VERSION.full;
     this.env = environment;
     this.categories$ = categoryService.categories$;

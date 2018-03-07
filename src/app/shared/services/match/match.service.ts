@@ -13,7 +13,7 @@ export class MatchService {
 
   matches$: Observable<IMatch[]>;
 
-  constructor(private afs: AngularFirestore,) {
+  constructor(private afs: AngularFirestore, ) {
     this.collectionRef = this.afs.collection<IMatch>(this.path);
     this.matches$ = this.collectionRef.valueChanges();
   }
@@ -50,6 +50,7 @@ export class MatchService {
       isImported: true,
       isHomeTeam: true,
       isOfficialMatch: true,
+      assignedTeamCategory: '',
       startDate: new Date(),
       endDate: null,
       matchLink: '',

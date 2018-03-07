@@ -24,8 +24,8 @@ export class ClubDetailStatisticsComponent implements OnInit {
   ngOnInit() {
   }
 
-  isCurrentSeason(season: ISeason){
-    if(season !== this.savedSeason){
+  isCurrentSeason(season: ISeason) {
+    if (season !== this.savedSeason) {
       this.savedSeason = season;
       return false;
     }

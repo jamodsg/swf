@@ -16,6 +16,7 @@ export interface IMatch {
   isImported: boolean;
   isOfficialMatch: boolean;
   isHomeTeam: boolean;
+  assignedTeamCategory: string;
 
   matchType?: string;
   endDate: Date;

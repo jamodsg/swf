@@ -9,12 +9,28 @@
       <mat-list-item *ngFor="let match of matches">
         <img style="border-radius: 0" mat-list-avatar src="{{match.homeTeam.logoURL}}" alt="{{match.homeTeam.title}}">
         <img style="border-radius: 0" mat-list-avatar src="{{match.guestTeam.logoURL}}" alt="{{match.guestTeam.title}}">
-        <h3 matLine>{{match.homeTeam.title}} &ndash; {{match.guestTeam.title}}</h3>
+
+        <div mat-list-text fxFlex="row">
+          <span fxFlex="70">{{match.homeTeam.title}} &ndash; {{match.guestTeam.title}}</span>
+          <span fxFlex="30">Test</span>
+        </div>
+
+        <!--  <mat-form-field>
+            <input matInput placeholder="0" />
+          </mat-form-field>
+
+          <span>:</span>
+
+          <mat-form-field>
+            <input matInput placeholder="0"/>
+          </mat-form-field>
+
         <p matLine>
-          <span *ngFor="let category of categories | filterBy: ['id'] : match.assignedTeamCategory">{{category.title}}</span>
+          <span
+            *ngFor="let category of categories | filterBy: ['id'] : match.assignedTeamCategory">{{category.title}}</span>
           - {{match.matchType}}
           - {{match.startDate | date: 'dd.MM.yy HH:mm'}}
-        </p>
+        </p>-->
       </mat-list-item>
     </mat-list>
 

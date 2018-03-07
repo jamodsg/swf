@@ -243,7 +243,8 @@
             <div style="max-height: 40vh;"
                  [perfectScrollbar]="config">
               <match-list [categories]="categories$ | async"
-                          [matches]="matches$ | async | orderBy: ['startDate'] | matchFilter : 'startDate' : '>=' | matchFilter: 'endDate' : '<=' : inTwoWeeks">
+                          [showResultInputs]="false"
+                          [matches]="matches$ | async | orderBy: ['startDate'] | matchFilter : 'endDate' : '>=' | matchFilter: 'endDate' : '<=' : inTwoWeeks">
               </match-list>
             </div>
           </mat-tab>
@@ -251,6 +252,7 @@
             <div style="max-height: 40vh;"
                  [perfectScrollbar]="config">
               <match-list [categories]="categories$ | async"
+                          [showResultInputs]="true"
                           [matches]="matches$ | async | orderBy: ['-endDate'] | matchFilter : 'endDate' : '<=' | matchFilter: 'endDate' : '>=' : inLastTwoWeeks">
               </match-list>
             </div>
@@ -259,6 +261,7 @@
             <div style="max-height: 40vh;"
                  [perfectScrollbar]="config">
               <match-list [categories]="categories$ | async"
+                          [showResultInputs]="true"
                           [matches]="matches$ | async | matchNoResultFilter |orderBy: ['-endDate'] | matchFilter : 'endDate' : '<='">
               </match-list>
             </div>

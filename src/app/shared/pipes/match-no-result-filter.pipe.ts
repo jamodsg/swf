@@ -13,7 +13,7 @@ export class MatchNoResultFilterPipe implements PipeTransform {
     }
 
     return matches.filter((match: IMatch) => {
-      console.log(match.result);
+      return !match.result;
     });
   }
 

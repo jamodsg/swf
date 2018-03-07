@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   MatCardModule,
   MatFormFieldModule,
-  MatIconModule, MatListModule,
+  MatIconModule, MatInputModule, MatListModule,
   MatOptionModule,
   MatProgressSpinnerModule,
   MatSelectModule,
@@ -86,8 +86,11 @@ import { MatchNoResultFilterPipe } from './pipes/match-no-result-filter.pipe';
   ],
   imports: [
     CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatSelectModule,
     NgPipesModule,
     RouterModule,
     TranslateModule
