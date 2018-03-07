@@ -67,6 +67,11 @@ export class SettingsComponent implements OnInit {
         this.application.downtime = changes.downtime;
         this.application.social = changes.social;
         this.application.staticPages = changes.staticPages;
+
+        if(!this.form.invalid){
+          this.saveSettings();
+        }
+
       });
     }
 
