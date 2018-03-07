@@ -37,6 +37,8 @@ import { ClubManagementListComponent } from './club-edit/club-management/club-ma
 import { ClubHonoraryListComponent } from './club-edit/club-honoraries/club-honorary-list/club-honorary-list.component';
 import { ClubDetailStatisticsComponent } from './club-detail/club-detail-statistics/club-detail-statistics.component';
 import { MemberStateService } from '../../shared/services/member/member-state.service';
+import { SeasonService } from '../../shared/services/season/season.service';
+import { TeamService } from '../../shared/services/team/team.service';
 
 @NgModule({
   imports: [
@@ -85,7 +87,9 @@ import { MemberStateService } from '../../shared/services/member/member-state.se
     LocationService,
     MemberService,
     MemberStateService,
-    PendingChangesGuard
+    PendingChangesGuard,
+    SeasonService,
+    TeamService
   ]
 })
 

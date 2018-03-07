@@ -1,11 +1,12 @@
-<div fxLayout="row" fxLayoutWrap="wrap">
+<div fxLayout="row"
+     fxLayoutWrap="wrap" *ngIf="clubs$; else loadingTemplate">
 
   <div fxFlex.gt-xs="33"
        fxFlex="100"
        *ngFor="let club of clubs$">
     <mat-card>
       <mat-card-header class="mt-0">
-        <img matCardAvatar [src]="club.logoURL">
+        <img style="border-radius: 0" matCardAvatar [src]="club.logoURL">
         <mat-card-subtitle>
           <a class="font-weight-bold mat-text-primary" target="_blank"
              *ngIf="club.fussballde.clubUrl"
@@ -31,3 +32,7 @@
   </div>
 
 </div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

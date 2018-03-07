@@ -11,13 +11,14 @@
 
   <mat-list>
     <mat-list-item
-      *ngFor="let honorary of members | filterBy: ['clubData.assignedClub']: club.id | filterBy: ['clubData.status'] : 2">
-      <!--<mat-list-item *ngIf="articles; else loadingTemplate">
-        <!--<img mat-list-avatar src="{{item.photo}}" alt="">
-        <h3 matLine> {{(articles | filterBy: ['id'] : honorary.assignedArticle)[0].title}} </h3>
+      *ngFor="let honorary of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday'] | filterBy: ['clubData.assignedClub']: club.id | filterBy: ['clubData.status'] : 2">
+      <mat-list-item>
+        <!--<img mat-list-avatar src="{{item.photo}}" alt="">-->
+        <h3 matLine> <!--{{(articles | filterBy: ['id'] : honorary.assignedArticle)[0].title}} -->
+          {{honorary.mainData.lastName}} {{honorary.mainData.firstName}} {{honorary.mainData.birthday | date: 'dd.MM.yy'}}
+        </h3>
         <p matLine> since {{honorary.startDate}} </p>
-      </mat-list-item>-->
-      {{honorary}}
+      </mat-list-item>
     </mat-list-item>
   </mat-list>
 

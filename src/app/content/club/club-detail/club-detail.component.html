@@ -45,7 +45,9 @@
             </mat-tab>
 
             <mat-tab label="{{ 'general.clubs.edit.statistics.title' | translate}}">
-              <club-detail-statistics [members]="members$ | async"
+              <club-detail-statistics [teams]="teams$ | async"
+                                      [seasons]="seasons$ | async"
+                                      [members]="members$ | async"
                                       [club]="club">
               </club-detail-statistics>
             </mat-tab>
