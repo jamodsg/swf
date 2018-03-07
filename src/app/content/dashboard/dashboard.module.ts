@@ -14,6 +14,10 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 import { SharedModule } from '../../shared/shared.module';
 import { MemberService } from '../../shared/services/member/member.service';
+import { MatchService } from '../../shared/services/match/match.service';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { CategoryService } from '../../shared/services/category/category.service';
+import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 
 @NgModule({
   imports: [
@@ -27,6 +31,7 @@ import { MemberService } from '../../shared/services/member/member.service';
     MatProgressBarModule,
     MatTabsModule,
     NgxDatatableModule,
+    PerfectScrollbarModule,
     RouterModule.forChild(DashboardRoutes),
     SharedModule
   ],
@@ -34,6 +39,9 @@ import { MemberService } from '../../shared/services/member/member.service';
     DashboardComponent
   ],
   providers: [
+    CategoryService,
+    CategoryTypeService,
+    MatchService,
     MemberService
   ]
 })

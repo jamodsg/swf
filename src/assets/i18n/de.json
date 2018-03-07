@@ -483,6 +483,11 @@
         "fromExternalLink": "von externem Link laden"
       }
     },
+    "matches": {
+      "list": {
+        "noMatches": "Es wurden keine Spiele gefunden."
+      }
+    },
     "media": {
       "centerTitle": "Mediencenter",
       "filter": {

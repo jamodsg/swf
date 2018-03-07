@@ -3,24 +3,26 @@ export interface IMatch {
   id?: string;
 
   homeTeam: {
-    logo: string;
+    logoURL: string;
     externalTeamLink: string;
     title: string;
   };
   guestTeam: {
-    logo: string;
+    logoURL: string;
     externalTeamLink: string;
     title: string;
   };
 
+  isImported: boolean;
+  isOfficialMatch: boolean;
   isHomeTeam: boolean;
 
   matchType?: string;
-  matchEndDate: Date;
+  endDate: Date;
   matchLink: string;
-  matchStartDate: Date;
+  startDate: Date;
 
-  result: {
+  result?: {
     otherEvent: string;
     homeTeamGoals: number | '';
     guestTeamGoals: number | '';

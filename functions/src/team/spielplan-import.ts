@@ -417,7 +417,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             isImported: true,
             isOfficialMatch: true,
             isHomeTeam: isHomeTeam,
-            // assignedSeason: assignedSeason,
+            assignedTeamCategory: assignedTeamCategory,
             assignedTeam: assignedTeam,
             homeTeam: homeTeam,
             guestTeam: guestTeam,

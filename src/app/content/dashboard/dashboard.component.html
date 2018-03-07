@@ -239,14 +239,35 @@
       </mat-card-title>
       <mat-card-content>
         <mat-tab-group [dynamicHeight]="true">
-          <mat-tab label="{{'general.dashboard.upComingMatches' | translate}}"></mat-tab>
-          <mat-tab label="{{'general.dashboard.lastMatches' | translate}}"></mat-tab>
-          <mat-tab label="{{'general.dashboard.matchesWithoutResult' | translate}}"></mat-tab>
+          <mat-tab label="{{'general.dashboard.upComingMatches' | translate}}">
+            <div style="max-height: 40vh;"
+                 [perfectScrollbar]="config">
+              <match-list [categories]="categories$ | async"
+                          [matches]="matches$ | async | orderBy: ['startDate'] | matchFilter : 'startDate' : '>=' | matchFilter: 'endDate' : '<=' : inTwoWeeks">
+              </match-list>
+            </div>
+          </mat-tab>
+          <mat-tab label="{{'general.dashboard.lastMatches' | translate}}">
+            <div style="max-height: 40vh;"
+                 [perfectScrollbar]="config">
+              <match-list [categories]="categories$ | async"
+                          [matches]="matches$ | async | orderBy: ['-endDate'] | matchFilter : 'endDate' : '<=' | matchFilter: 'endDate' : '>=' : inLastTwoWeeks">
+              </match-list>
+            </div>
+          </mat-tab>
+          <mat-tab label="{{'general.dashboard.matchesWithoutResult' | translate}}">
+            <div style="max-height: 40vh;"
+                 [perfectScrollbar]="config">
+              <match-list [categories]="categories$ | async"
+                          [matches]="matches$ | async | matchNoResultFilter |orderBy: ['-endDate'] | matchFilter : 'endDate' : '<='">
+              </match-list>
+            </div>
+          </mat-tab>
         </mat-tab-group>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="card-widget">
+    <!--<mat-card class="card-widget">
       <mat-card-content class="pb-0">
         <div fxLayout="row"
              fxLayoutAlign="start center"
@@ -324,7 +345,7 @@
           </div>
         </div>
       </mat-card-content>
-    </mat-card>
+    </mat-card>-->
   </div>
 
 </div>

@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   MatCardModule,
   MatFormFieldModule,
-  MatIconModule,
+  MatIconModule, MatListModule,
   MatOptionModule,
   MatProgressSpinnerModule,
   MatSelectModule,
@@ -29,6 +29,9 @@ import { UserAvatarComponent } from './components/user/user-avatar/user-avatar.c
 import { UserService } from './services/user/user.service';
 import { RouterModule } from '@angular/router';
 import { BirthdayRangeFilterPipe } from './pipes/birthday-range-filter.pipe';
+import { MatchListComponent } from './components/match/match-list/match-list.component';
+import { MatchFilterPipe } from './pipes/match-filter.pipe';
+import { MatchNoResultFilterPipe } from './pipes/match-no-result-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -37,13 +40,16 @@ import { BirthdayRangeFilterPipe } from './pipes/birthday-range-filter.pipe';
     AccordionDirective,
     BirthdayFilterPipe,
     CategoryFilterPipe,
+    MatchFilterPipe,
+    MatchNoResultFilterPipe,
     IsEmptyPipe,
     ToggleFullscreenDirective,
     SanitizeHtmlPipe,
     SnackbarComponent,
     LoadingIndicatorComponent,
     UserAvatarComponent,
-    BirthdayRangeFilterPipe
+    BirthdayRangeFilterPipe,
+    MatchListComponent
   ],
   entryComponents: [
     SnackbarComponent
@@ -55,6 +61,8 @@ import { BirthdayRangeFilterPipe } from './pipes/birthday-range-filter.pipe';
     BirthdayFilterPipe,
     BirthdayRangeFilterPipe,
     CategoryFilterPipe,
+    MatchFilterPipe,
+    MatchNoResultFilterPipe,
     CommonModule,
     CreationModule,
     FlexLayoutModule,
@@ -73,13 +81,16 @@ import { BirthdayRangeFilterPipe } from './pipes/birthday-range-filter.pipe';
     SanitizeHtmlPipe,
     ToggleFullscreenDirective,
     TranslateModule,
-    UserAvatarComponent
+    UserAvatarComponent,
+    MatchListComponent
   ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
+    MatListModule,
     NgPipesModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   providers: [
     MenuItemsService,
