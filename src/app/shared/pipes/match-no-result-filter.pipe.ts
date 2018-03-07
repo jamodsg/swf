@@ -1,8 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IMember } from '../interfaces/member/member.interface';
-import { Moment } from 'moment';
 import { IMatch } from '../interfaces/match.interface';
-import moment = require('moment');
 
 @Pipe({
   name: 'matchNoResultFilter'

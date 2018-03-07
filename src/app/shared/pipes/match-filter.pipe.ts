@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IMember } from '../interfaces/member/member.interface';
 import { Moment } from 'moment';
 import { IMatch } from '../interfaces/match.interface';
-import moment = require('moment');
+import * as moment from 'moment';
 
 @Pipe({
   name: 'matchFilter'
@@ -16,10 +15,10 @@ export class MatchFilterPipe implements PipeTransform {
     }
 
     return matches.filter((match: IMatch) => {
-      if(searchOption === '>='){
+      if (searchOption === '>=') {
         return !dateTime ? match[searchField] >= moment().toISOString() : match[searchField] >= dateTime.toISOString();
       }
-      if(searchOption === '<='){
+      if (searchOption === '<=') {
         return !dateTime ? match[searchField] <= moment().toISOString() : match[searchField] <= dateTime.toISOString();
       }
     });
