@@ -125,7 +125,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             link: 'location.types'
           };
 
-          if (values.docs.length === 0) {
+          if (values.empty) {
             assignedLocationCategoryType = categoryTypeData.id = db.collection(categoryTypePath).doc().id;
             categoryTypeData.creation = {
               from: 'system',
@@ -149,7 +149,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
           };
 
           // CategoryType
-          if (values.docs.length === 0) {
+          if (values.empty) {
             assignedTeamCategoryType = categoryTypeData.id = db.collection(categoryTypePath).doc().id;
             categoryTypeData.creation = {
               from: 'system',
@@ -175,7 +175,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             description: 'Alle erfassten ' + locationCategoryTitle + ' in der Region'
           };
 
-          if (values.docs.length === 0) {
+          if (values.empty) {
             assignedLocationCategory = categoryData.id = db.collection(categoryPath).doc().id;
             categoryData.creation = {
               from: 'system',
@@ -202,7 +202,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             description: 'Alle erfassten ' + teamCategoryTitle
           };
 
-          if (values.docs.length === 0) {
+          if (values.empty) {
             assignedTeamCategory = categoryData.id = db.collection(categoryPath).doc().id;
             categoryData.creation = {
               from: 'system',
@@ -240,7 +240,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             description: 'Alle erfassten ' + assignedTeamMainCategoryTitle + ' Mannschaften'
           };
 
-          if (values.docs.length === 0) {
+          if (values.empty) {
             assignedTeamMainCategory = categoryData.id = db.collection(categoryPath).doc().id;
             categoryData.creation = {
               from: 'system',
@@ -402,7 +402,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             assignedTeam = values.docs[0].id;
           }
         });
-    })/*.then(() => {
+    }).then(() => {
       // Match
       return db.collection(matchPath)
         .where('homeTeam', '==', homeTeam)
@@ -415,8 +415,9 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
 
           let matchData: any = {
             isImported: true,
+            isOfficialMatch: true,
             isHomeTeam: isHomeTeam,
-            assignedSeason: assignedSeason,
+            // assignedSeason: assignedSeason,
             assignedTeam: assignedTeam,
             homeTeam: homeTeam,
             guestTeam: guestTeam,
@@ -427,7 +428,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             location: assignedLocation
           };
 
-          if (values.docs.length === 0) {
+          if (values.empty) {
             matchData.id = db.collection(matchPath).doc().id;
             matchData.creation = {
               from: 'system',
@@ -440,6 +441,6 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
           }
         });
 
-    })*/.catch((error: any) => console.error(error));
+    }).catch((error: any) => console.error(error));
 
 });

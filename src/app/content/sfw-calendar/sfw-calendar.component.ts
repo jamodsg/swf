@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
 import * as $ from 'jquery';
-// import 'fullcalendar';
+import 'fullcalendar';
 
 @Component({
   selector: 'calendar',
