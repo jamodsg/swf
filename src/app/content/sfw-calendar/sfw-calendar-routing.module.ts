@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { SFWCalendarComponent } from './sfw-calendar.component';
+import { CalendarDashboardComponent } from './calendar-dashboard/calendar-dashboard.component';
 
 export const sfwCalendarRoutes: Routes = [
 
   {
     path: '',
-    component: SFWCalendarComponent,
+    component: CalendarDashboardComponent,
     pathMatch: 'full'
   },
   {
