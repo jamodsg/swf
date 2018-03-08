@@ -3,17 +3,10 @@ import { memberRoutingModule } from './member-routing.module';
 import { MembersComponent } from './members/members.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { MemberResolver } from './member.resolver';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '../../shared/shared.module';
 import { MemberService } from '../../shared/services/member/member.service';
 import {
-  MatButtonModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatListModule,
-  MatNativeDateModule,
-  MatSnackBarModule,
+  MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatListModule, MatNativeDateModule, MatSelectModule, MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
@@ -40,16 +33,19 @@ import { TeamService } from '../../shared/services/team/team.service';
 import { MemberDetailOpinionsComponent } from './member-detail/member-detail-opinions/member-detail-opinions.component';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
+import { IsEmptyPipe } from '../../shared/pipes/is-empty.pipe';
+import { BirthdayModule } from '../../shared/components/birthday/birthday.module';
 
 @NgModule({
   imports: [
-    FlexLayoutModule,
+    BirthdayModule,
     MatButtonModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
     MatNativeDateModule,
+    MatSelectModule,
     MatSnackBarModule,
     MatTabsModule,
     memberRoutingModule,
@@ -59,6 +55,7 @@ import { CategoryTypeService } from '../../shared/services/category-type/categor
   ],
   declarations: [
     FameMemberComponent,
+    IsEmptyPipe,
     MemberDetailComponent,
     MemberDetailMainComponent,
     MemberDetailDriveComponent,

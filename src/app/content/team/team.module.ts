@@ -11,7 +11,7 @@ import {
   MatCheckboxModule,
   MatDatepickerModule,
   MatFormFieldModule,
-  MatInputModule, MatListModule, MatSnackBarModule,
+  MatInputModule, MatListModule, MatSelectModule, MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
 import { TeamDetailComponent } from './team-detail/team-detail.component';
@@ -38,16 +38,18 @@ import { TeamDetailPositionsComponent } from './team-detail/team-detail-position
 import { TimeLineModule } from '../../shared/components/time-line/time-line.module';
 import { TeamDetailEventsComponent } from './team-detail/team-detail-events/team-detail-events.component';
 import { TeamDetailTrainingComponent } from './team-detail/team-detail-training/team-detail-training.component';
+import { CreationModule } from '../../shared/components/creation/creation.module';
 
 @NgModule({
   imports: [
-    FlexLayoutModule,
+    CreationModule,
     MatButtonModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatSelectModule,
     MatSnackBarModule,
     MatTabsModule,
     QuillModule,

@@ -19,7 +19,6 @@ import {
   MatTableModule,
   MatTabsModule
 } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { MemberService } from '../../shared/services/member/member.service';
 import { LocationDetailMainComponent } from './location-detail/location-detail-main/location-detail-main.component';
@@ -43,29 +42,30 @@ import { ChartsModule } from 'ng2-charts';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PublicationModule } from '../../shared/components/publication/publication.module';
+import { CreationModule } from '../../shared/components/creation/creation.module';
+import { SharedCategoryModule } from '../../shared/components/category/shared-category.module';
 
 @NgModule({
   imports: [
     AgmCoreModule,
     ChartsModule,
-    FlexLayoutModule,
+    CreationModule,
     HttpClientModule,
     locationRoutingModule,
     MatButtonModule,
-    MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatInputModule,
     MatListModule,
     MatOptionModule,
     MatSelectModule,
-    MatTableModule,
     MatTabsModule,
-    MediaModule,
+    MatInputModule,
+    /*MatTableModule,
+    MediaModule, */
     PerfectScrollbarModule,
     PublicationModule,
     QuillModule,
-    ReactiveFormsModule,
+    SharedCategoryModule,
     SharedModule
   ],
   declarations: [

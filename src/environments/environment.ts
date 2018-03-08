@@ -13,5 +13,5 @@ export const environment = {
     storageBucket: 'sfw-dev.appspot.com',
     messagingSenderId: '241078219173'
   },
-  routerTracing: true
+  routerTracing: false
 };

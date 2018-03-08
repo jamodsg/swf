@@ -5,21 +5,9 @@ import { SettingsSocialDataComponent } from './settings/settings-social-data/set
 import { StaticPagesComponent } from './settings/static-pages/static-pages.component';
 import { StaticPageComponent } from './settings/static-pages/static-page/static-page.component';
 import { SharedModule } from '../../shared/shared.module';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatSelectModule,
-  MatSnackBarModule,
-  MatTabsModule
-} from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatSelectModule, MatSnackBarModule, MatTabsModule } from '@angular/material';
 import { ApplicationService } from '../../shared/services/application/application.service';
 import { ApplicationResolver } from './application.resolver';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { StaticPageFormComponent } from './settings/static-pages/static-page-form/static-page-form.component';
 import { CategoryService } from '../../shared/services/category/category.service';
@@ -27,11 +15,8 @@ import { CategoryTypeService } from '../../shared/services/category-type/categor
 
 @NgModule({
   imports: [
-    FlexLayoutModule,
     MatButtonModule,
-    MatCardModule,
     MatCheckboxModule,
-    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,

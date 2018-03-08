@@ -19,17 +19,17 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class AuthService implements OnDestroy {
 
   public user$: Observable<IUser>;
-  private mouseEvents: ISubscription;
-  private timer: ISubscription;
-  private authSubscription: ISubscription;
+  // private mouseEvents: ISubscription;
+  // private timer: ISubscription;
+  // private authSubscription: ISubscription;
 
   constructor(private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase,
-    private afs: AngularFirestore, ) {
+              private db: AngularFireDatabase,
+              private afs: AngularFirestore,) {
     this.user$ = this.afAuth.authState
       .switchMap(user => {
         if (user) {
-          this.updateOnConnect();
+          // this.updateOnConnect();
           // this.updateOnIdle();
           return this.afs.doc<IUser>(`users/${user.uid}`).valueChanges();
         } else {
@@ -39,9 +39,9 @@ export class AuthService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authSubscription.unsubscribe();
-    this.mouseEvents.unsubscribe();
-    this.timer.unsubscribe();
+    //this.authSubscription.unsubscribe();
+    //this.mouseEvents.unsubscribe();
+    //this.timer.unsubscribe();
   }
 
   get id(): string {
@@ -51,14 +51,14 @@ export class AuthService implements OnDestroy {
   signIn(credentials) {
     return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(
-      (authUser: firebase.User) => {
-        if (authUser.emailVerified) {
-          return this.updateUser({
-            emailVerified: authUser.emailVerified,
-            email: authUser.email
-          });
+        (authUser: firebase.User) => {
+          if (authUser.emailVerified) {
+            return this.updateUser({
+              emailVerified: authUser.emailVerified,
+              email: authUser.email
+            });
+          }
         }
-      }
       );
   }
 
@@ -82,41 +82,41 @@ export class AuthService implements OnDestroy {
       });
   }
 
-  resendVerificationMail(): Promise<any> {
+  /* resendVerificationMail(): Promise<any> {
     return this.afAuth.auth.currentUser.sendEmailVerification();
-  }
+  } */
 
   sendPasswordResetEmail(email: string): Promise<any> {
     return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
   signOut(): Promise<any> {
-    return this.updateUser({ onlineStatus: 'offline' }).then(() => {
-      // this.mouseEvents.unsubscribe();
-      // this.timer.unsubscribe();
-      return this.afAuth.auth.signOut();
-    });
+    //return this.updateUser({ onlineStatus: 'offline' }).then(() => {
+    // this.mouseEvents.unsubscribe();
+    // this.timer.unsubscribe();
+    return this.afAuth.auth.signOut();
+    //});
   }
 
-
+  /*
   private updateOnConnect() {
     return this.db.object('.info/connected').valueChanges().do(connected => {
       console.log(connected);
-      /*
+
         let status = connected.$value ? 'online' : 'offline'
         return this.setUser({
           onlineStatus: status
         });
       })
       .subscribe();
-    /*const userStatusDatabaseRef = firebase.database().ref(`/status/${this.id}`);
+    const userStatusDatabaseRef = firebase.database().ref(`/status/${this.id}`);
 
     return this.afs.doc('.info').valueChanges().subscribe((connected: any) => {
       console.log(connected);
       const status = connected.$value ? 'online' : 'offline';
       return this.setUser({
         onlineStatus: status
-      }); */
+      });
     });
   }
 
@@ -167,6 +167,7 @@ export class AuthService implements OnDestroy {
     return this.checkAuthorization(user, allowed);
   }
 
+  /*
   canRead(user: IUser): boolean {
     const allowed = ['admin', 'editor', 'subscriber'];
     return this.checkAuthorization(user, allowed);
@@ -180,7 +181,7 @@ export class AuthService implements OnDestroy {
   canDelete(user: IUser): boolean {
     const allowed = ['admin'];
     return this.checkAuthorization(user, allowed);
-  }
+  } */
 
   public getCreation(): ICreation {
     return {

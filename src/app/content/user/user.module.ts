@@ -7,15 +7,14 @@ import { userRoutes } from './user-routing.module';
 import { UserService } from '../../shared/services/user/user.service';
 import { SharedModule } from '../../shared/shared.module';
 import { UserListComponent } from './user-list/user-list.component';
-import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
 
 @NgModule({
   imports: [
-    FlexLayoutModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     RouterModule.forChild(userRoutes),
     SharedModule
   ],

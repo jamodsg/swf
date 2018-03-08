@@ -32,6 +32,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { OptionsComponent } from './options/options.component';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { MenuComponent } from './menu/menu.component';
+import { ToggleFullscreenDirective } from '../../shared/directives/fullscreen/toggle-fullscreen.directive';
+import { AccordionAnchorDirective, AccordionDirective, AccordionLinkDirective } from '../../shared/directives/accordion';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -42,12 +44,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 @NgModule({
   declarations: [
+    AccordionDirective,
+    AccordionAnchorDirective,
+    AccordionLinkDirective,
     AdminComponent,
     HeaderComponent,
     SidebarComponent,
     NotificationComponent,
     OptionsComponent,
-    MenuComponent
+    MenuComponent,
+    ToggleFullscreenDirective
   ],
   imports: [
     AgmCoreModule.forRoot({ apiKey: googleMapsConfig.apiKey }),

@@ -25,18 +25,16 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MediaModule } from '../../shared/components/media/media.module';
 import { SponsorItemComponent } from './sponsors/sponsor-item/sponsor-item.component';
 import { SponsorFilterComponent } from './sponsors/sponsor-filter/sponsor-filter.component';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SponsorDetailComponent } from './sponsor-detail/sponsor-detail.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { SharedCategoryModule } from '../../shared/components/category/shared-category.module';
 
 @NgModule({
   imports: [
     RouterModule.forChild(sponsorRoutes),
-    FlexLayoutModule,
     MatButtonModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -50,9 +48,10 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MediaModule,
+    // MediaModule,
     PerfectScrollbarModule,
     QuillModule,
+    SharedCategoryModule,
     SharedModule
   ],
   declarations: [

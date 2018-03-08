@@ -11,9 +11,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../../../environments/environment';
 import { AuthGuard } from '../../shared/services/auth/auth.guard';
 import { AuthService } from '../../shared/services/auth/auth.service';
-import { EditorGuard } from '../../shared/services/auth/editor.guard';
 import { UnAuthGuard } from '../../shared/services/auth/unauth.guard';
 import { mainRoutes } from './main.routing';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -22,6 +22,7 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
+    AngularFireDatabaseModule,
     CommonModule,
     HttpClientModule,
     RouterModule.forChild(mainRoutes),
@@ -39,8 +40,8 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFireAuth,
     AuthGuard,
     AuthService,
-    EditorGuard,
-    UnAuthGuard,
+    // EditorGuard,
+    UnAuthGuard
   ]
 })
 export class MainModule { }

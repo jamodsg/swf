@@ -11,7 +11,7 @@ import { ClubService } from '../../shared/services/club/club.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule, MatDatepickerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule,
-  MatNativeDateModule, MatSnackBarModule,
+  MatNativeDateModule, MatSelectModule, MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
 import { QuillModule } from 'ngx-quill';
@@ -39,9 +39,11 @@ import { ClubDetailStatisticsComponent } from './club-detail/club-detail-statist
 import { MemberStateService } from '../../shared/services/member/member-state.service';
 import { SeasonService } from '../../shared/services/season/season.service';
 import { TeamService } from '../../shared/services/team/team.service';
+import { CreationModule } from '../../shared/components/creation/creation.module';
 
 @NgModule({
   imports: [
+    CreationModule,
     FlexLayoutModule,
     MatButtonModule,
     MatDatepickerModule,
@@ -50,6 +52,7 @@ import { TeamService } from '../../shared/services/team/team.service';
     MatInputModule,
     MatListModule,
     MatNativeDateModule,
+    MatSelectModule,
     MatSnackBarModule,
     MatTabsModule,
     MediaModule,

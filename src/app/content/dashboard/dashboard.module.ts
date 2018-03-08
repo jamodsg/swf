@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import {
-  MatIconModule, MatCardModule, MatButtonModule, MatListModule, MatProgressBarModule, MatMenuModule,
-  MatTabsModule
-} from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule, MatListModule, MatMenuModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -18,18 +13,19 @@ import { MatchService } from '../../shared/services/match/match.service';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
+import { BirthdayModule } from '../../shared/components/birthday/birthday.module';
+import { MatchModule } from '../../shared/components/match/match.module';
 
 @NgModule({
   imports: [
+    BirthdayModule,
     ChartsModule,
-    FlexLayoutModule,
     MatButtonModule,
-    MatCardModule,
-    MatIconModule,
     MatListModule,
     MatMenuModule,
     MatProgressBarModule,
     MatTabsModule,
+    MatchModule,
     NgxDatatableModule,
     PerfectScrollbarModule,
     RouterModule.forChild(DashboardRoutes),
@@ -46,4 +42,5 @@ import { CategoryTypeService } from '../../shared/services/category-type/categor
   ]
 })
 
-export class DashboardModule { }
+export class DashboardModule {
+}

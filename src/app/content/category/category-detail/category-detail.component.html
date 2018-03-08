@@ -36,9 +36,9 @@
                 {{'general.tables.importedViaScript'}}
               </span>
               <creation-date [creation]="category.creation.at"></creation-date>
-              <user-avatar *ngIf="category.creation.from !== 'system'"
+              <!-- ToDo: Avatar: <user-avatar *ngIf="category.creation.from !== 'system'"
                            [userId]="category.creation.from">
-              </user-avatar>
+              </user-avatar>-->
             </td>
           </tr>
         </table>
