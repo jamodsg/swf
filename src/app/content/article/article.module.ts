@@ -8,7 +8,7 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
-import { MatButtonModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatSelectModule, MatSnackBarModule } from '@angular/material';
 import { ArticleDashboardComponent } from './article-dashboard/article-dashboard.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
@@ -17,6 +17,8 @@ import { ArticleMatchesComponent } from './article-matches/article-matches.compo
 @NgModule({
   imports: [
     MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
     MatSnackBarModule,
     RouterModule.forChild(articleRoutes),
     SharedModule
