@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IArticle } from '../../../shared/interfaces/article.interface';
 import { ICategory } from '../../../shared/interfaces/category.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { IUser } from '../../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'article-list',
@@ -12,6 +13,7 @@ export class ArticleListComponent {
 
   @Input() articles: IArticle[];
   @Input() categories: ICategory[];
+  @Input() users: IUser[];
 
   @Output() remove = new EventEmitter(false);
   @Output() update = new EventEmitter(false);
@@ -24,8 +26,9 @@ export class ArticleListComponent {
 
   ngOnInit() {
     this.form = this.fb.group({
-      searchFor: '',
-      limit: 10
+      author: '',
+      status: '',
+      tags: ''
     });
   }
 

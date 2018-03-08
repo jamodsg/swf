@@ -132,7 +132,9 @@
         "wordCount": "Wörter"
       },
       "list": {
-        "allArticles": "Alle Artikel anzeigen",
+        "allAuthors": "Alle Artikel anzeigen",
+        "allStatus": "Alle Artikel",
+        "allTags": "Alle Schlagworte",
         "articlesPerPage": "Artikel pro Seite",
         "colTitles": {
           "articleDate": "Datum",
@@ -147,12 +149,18 @@
           "isMatch": "Spielbericht?"
         },
         "createArticle": "Artikel erstellen",
-        "filterByAssignedSeason": "Spielzeit",
-        "filterByAssignedTeam": "Mannschaft",
-        "filterTitle": "Artikel filtern nach",
+        "filterByAuthor": "Vom Author",
+        "filterByStatus": "Mit dem Status",
+        "filterByTags": "Mit den Schlagwort",
         "noFilteredResult": "Es wurden noch keine Artikel mit diesen Suchkriterien erstellt",
         "noResult": "Es wurden noch keine Artikel erstellt",
         "title": "Artikel"
+      },
+      "matches": {
+        "all": "Spiele",
+        "draw": "Unentschieden",
+        "lost": "Niederlagen",
+        "won": "Siege"
       }
     },
     "buttons": {

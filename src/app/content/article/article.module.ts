@@ -8,11 +8,16 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
-import { MatButtonModule, MatFormFieldModule, MatSelectModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatSelectModule, MatSnackBarModule, MatTabsModule } from '@angular/material';
 import { ArticleDashboardComponent } from './article-dashboard/article-dashboard.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { ArticleMatchesComponent } from './article-matches/article-matches.component';
+import { MatchModule } from '../../shared/components/match/match.module';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { MatchService } from '../../shared/services/match/match.service';
+import { MemberService } from '../../shared/services/member/member.service';
+import { UserService } from '../../shared/services/user/user.service';
 
 @NgModule({
   imports: [
@@ -20,11 +25,11 @@ import { ArticleMatchesComponent } from './article-matches/article-matches.compo
     MatFormFieldModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatTabsModule,
+    MatchModule,
+    PerfectScrollbarModule,
     RouterModule.forChild(articleRoutes),
     SharedModule
-    // MarkdownModule,
-    // TabsModule,
-    // TagInputModule
   ],
   declarations: [
     ArticleListComponent,
@@ -33,32 +38,15 @@ import { ArticleMatchesComponent } from './article-matches/article-matches.compo
     ArticleEditComponent,
     ArticleDetailComponent,
     ArticleMatchesComponent
-    /* ArticleActionsComponent,
-    ArticleDashboardComponent,
-    ArticleDetailComponent,
-    ArticleEditComponent,
-    ArticleFormComponent,
-    ArticleSidebarComponent,
-    ArticleTextComponent,
-    EmptyFilterPipe,
-    MarkdownPreviewComponent,
-    MatchDashboardComponent,
-    /* ArticleSidebarComponent,
-    ArticleTextComponent,
-    // Autosize, */
   ],
   providers: [
     ArticleResolver,
     ArticleService,
     CategoryService,
-    CategoryTypeService
-    /*Ng2BootstrapModule,
-    UserService,
-    LocationService,
+    CategoryTypeService,
     MatchService,
-    TeamService,
-    PublicationService,
-    WINDOW_PROVIDER */
+    MemberService,
+    UserService
   ]
 })
 

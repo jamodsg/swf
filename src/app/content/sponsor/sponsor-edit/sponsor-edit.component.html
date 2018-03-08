@@ -151,25 +151,5 @@
 </form>
 
 <ng-template #loadingTemplate>
-  Lade ...
+  <loading-indicator></loading-indicator>
 </ng-template>
-
-
-<!--<sponsor-edit-main
-  [form]="form"
-  [sponsor]="sponsor"
-  [categoryTypes]="categoryTypeService.getCategoryTypes() | async | filterBy: ['link']: 'sponsors.types'"
-  [sponsors]="categoryService.getCategories() | async"
-  (setLogo)="setLogo($event)">
-</sponsor-edit-main>
-
- <button class="btn btn-success" (click)="saveSponsor()" [disabled]="!form.valid ||isSubmitting || isCanceled">
-    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" *ngIf="isSubmitting"></i>
-    {{ sponsor.id
-    ? ('general.sponsors.edit.updateSponsor' | translate)
-    : ('general.sponsors.edit.saveSponsor' | translate)}}
-  </button>
-  <button class="btn btn-danger" (click)="cancel()" [disabled]="isSubmitting || isCanceled">
-    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" *ngIf="isCanceled"></i>
-    {{'general.cancel' | translate}}
-  </button>-->

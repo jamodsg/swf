@@ -1,6 +1,95 @@
-<h3>Spiele</h3>
-<ul>
-  <li>Letzte Spiele</li>
-  <li>Nächste Spiele</li>
-  <li>Fehlende Ergebnisse</li>
-</ul>
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="25"
+       fxFlex="100">
+
+    <mat-card class="card-widget mat-grey">
+      <div mat-card-widget>
+        <div class="pl-0">
+          <h2 mat-card-widget-title></h2>
+          <p>{{'general.articles.matches.all' | translate}}</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25"
+       fxFlex="100">
+    <mat-card class="card-widget mat-teal">
+      <div mat-card-widget>
+        <div class="pl-0">
+          <h2 mat-card-widget-title></h2>
+          <p>{{'general.articles.matches.won' | translate}}</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25"
+       fxFlex="100">
+    <mat-card class="card-widget mat-yellow">
+      <div mat-card-widget>
+        <div class="pl-0">
+          <h2 mat-card-widget-title></h2>
+          <p>{{'general.articles.matches.draw' | translate}}</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25"
+       fxFlex="100">
+    <mat-card class="card-widget mat-red">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>email</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title></h2>
+          <p>{{'general.articles.matches.lost' | translate}}</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<div fxLayout="row"
+     fxLayoutWrap="wrap">
+<div fxFlex="100">
+  <mat-card>
+    <mat-card-title>
+      <h2 mat-card-widget-title>{{'general.dashboard.matches' | translate}}</h2>
+      <hr>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-tab-group [dynamicHeight]="true">
+        <mat-tab label="{{'general.dashboard.upComingMatches' | translate}}">
+          <div style="max-height: 65vh;"
+               [perfectScrollbar]="config">
+            <match-list [categories]="categories$ | async"
+                        [showResultInputs]="false"
+                        [matches]="matches$ | async | orderBy: ['startDate'] | matchFilter : 'endDate' : '>='">
+            </match-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="{{'general.dashboard.lastMatches' | translate}}">
+          <div style="max-height: 65vh;"
+               [perfectScrollbar]="config">
+            <match-list [categories]="categories$ | async"
+                        [showResultInputs]="true"
+                        [matches]="matches$ | async | orderBy: ['-endDate'] | matchFilter : 'endDate' : '<='">
+            </match-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="{{'general.dashboard.matchesWithoutResult' | translate}}">
+          <div style="max-height: 65vh;"
+               [perfectScrollbar]="config">
+            <match-list [categories]="categories$ | async"
+                        [showResultInputs]="true"
+                        [matches]="matches$ | async | matchNoResultFilter | orderBy: ['-endDate'] | matchFilter : 'endDate' : '<='">
+            </match-list>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
