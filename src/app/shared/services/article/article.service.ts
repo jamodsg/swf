@@ -6,6 +6,8 @@ import {
   AngularFirestoreCollection
 } from 'angularfire2/firestore';
 import { AuthService } from '../auth/auth.service';
+import { IPublication } from '../../interfaces/publication.interface';
+import * as moment from 'moment';
 
 @Injectable()
 export class ArticleService {
@@ -37,13 +39,20 @@ export class ArticleService {
     return this.afs.doc<IArticle>(this.path + '/' + articleId).valueChanges();
   }
 
-  setNewArticle(): IArticle {
-    return {
+  setNewArticle(): Observable<IArticle> {
+    const publication: IPublication = {
+      status: 0,
+      date: moment().toISOString(),
+      time: '',
+      from: this.authService.id
+    };
+    return Observable.of({
       id: this.afs.createId(),
+      publication: publication,
       title: '',
       text: '',
       creation: this.authService.getCreation()
-    };
+    });
   }
 
 }

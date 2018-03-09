@@ -11,7 +11,8 @@ import { IUser } from '../../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'articles',
-  templateUrl: './articles.component.html'
+  templateUrl: './articles.component.html',
+  styleUrls: ['articles.component.scss']
 })
 
 export class ArticlesComponent {

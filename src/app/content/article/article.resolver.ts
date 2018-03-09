@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/operator/first';
 import 'rxjs/operator/map';
 import 'rxjs/operator/take';
+import { IClub } from '../../shared/interfaces/club/club.interface';
 
 @Injectable()
 export class ArticleResolver implements Resolve<IArticle> {
@@ -15,10 +16,13 @@ export class ArticleResolver implements Resolve<IArticle> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IArticle> {
+
+    if (route.params['articleId'] === 'new') {
+      return this.articleService.setNewArticle();
+    }
+
     return this.articleService.getArticleById(route.params['articleId']).take(1).map((article: IArticle) => {
-      if (route.params['articleId'] === 'new') {
-        return this.articleService.setNewArticle();
-      } else if (article && article.id) {
+      if (article && article.id) {
         return article;
       } else {
         this.router.navigate(['/articles']).then();

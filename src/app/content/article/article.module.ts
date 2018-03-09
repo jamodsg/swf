@@ -8,7 +8,7 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
-import { MatButtonModule, MatFormFieldModule, MatSelectModule, MatSnackBarModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatListModule, MatSelectModule, MatSidenavModule, MatSnackBarModule, MatTabsModule, MatToolbarModule } from '@angular/material';
 import { ArticleDashboardComponent } from './article-dashboard/article-dashboard.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
@@ -18,14 +18,19 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { MatchService } from '../../shared/services/match/match.service';
 import { MemberService } from '../../shared/services/member/member.service';
 import { UserService } from '../../shared/services/user/user.service';
+import { PaginationService } from '../../shared/services/pagination/pagination.service';
+import { ScrollableDirective } from '../../shared/directives/scrollable/scrollable.directive';
 
 @NgModule({
   imports: [
     MatButtonModule,
     MatFormFieldModule,
+    MatListModule,
     MatSelectModule,
+    MatSidenavModule,
     MatSnackBarModule,
     MatTabsModule,
+    MatToolbarModule,
     MatchModule,
     PerfectScrollbarModule,
     RouterModule.forChild(articleRoutes),
@@ -37,7 +42,8 @@ import { UserService } from '../../shared/services/user/user.service';
     ArticleDashboardComponent,
     ArticleEditComponent,
     ArticleDetailComponent,
-    ArticleMatchesComponent
+    ArticleMatchesComponent,
+    ScrollableDirective
   ],
   providers: [
     ArticleResolver,
@@ -46,6 +52,7 @@ import { UserService } from '../../shared/services/user/user.service';
     CategoryTypeService,
     MatchService,
     MemberService,
+    PaginationService,
     UserService
   ]
 })

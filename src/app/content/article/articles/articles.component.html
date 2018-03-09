@@ -3,8 +3,17 @@
   <div fxFlex="100">
     <mat-card>
       <mat-card-title>
-        <mat-icon>list</mat-icon>
-        {{'general.menu.article.main' | translate}}
+        <mat-toolbar-row>
+          <mat-icon>list</mat-icon>
+          {{'general.menu.article.main' | translate}}
+          <span class="spacer"></span>
+          <a mat-raised-button
+                  [routerLink]="['/articles/edit/new']"
+                  color="primary">
+            <mat-icon>add</mat-icon>
+          </a>
+        </mat-toolbar-row>
+
       </mat-card-title>
       <mat-card-subtitle></mat-card-subtitle>
       <mat-card-content>

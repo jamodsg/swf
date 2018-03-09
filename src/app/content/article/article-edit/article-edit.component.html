@@ -1,3 +1,72 @@
-<p>
-  article-edit works!
-</p>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav
+               mode="side"
+               position="end"
+               class="app-sidenav">
+    <div fxLayout="row"
+         fxLayoutWrap="wrap">
+      <div fxFlex="100" style="border: 1px solid red">
+        <h1>Post Settings</h1>
+
+        <div style="height: 100px;background-color: #7c7c7c" >Upload Image</div>
+
+        <h3>PostUrl + Preview</h3>
+        <h3>Publish Date</h3>
+        <h3>Tag-List</h3>
+        <h3>Excerpt</h3>
+        <h3>Author</h3>
+        <h3>Meta Data</h3>
+        <h3>Twitter Card</h3>
+        <h3>Facebook Card</h3>
+        <h3>Feature this post</h3>
+
+        <button>Delete Post</button>
+
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon class="md-24" >menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="page-wrap">
+    Example Content area<br><br><br><br><br><br><br>
+  </div>
+</mat-sidenav-container>
+
+
+
+<!--<div fxLayout="row"
+     style="margin-top: 15px"
+     fxLayoutWrap="wrap">
+
+  <div fxFlexOffset.gt-sm="2"
+       fxFlex.gt-sm="10"
+       fxFlex="100">
+    Draft
+  </div>
+
+
+  <div fxFlexOffset.gt-sm="50"
+       fxFlex.gt-sm="14"
+       fxFlex="100">
+    3
+  </div>
+</div>
+
+<div [fxLayout]="'direction'"
+     fxLayoutAlign="center center">
+
+  <div fxFlex.gt-sm="80"
+       fxFlex="100">
+    Titel<br/>
+    Text
+  </div>
+</div>
+
+
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>-->

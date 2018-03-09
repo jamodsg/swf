@@ -35,7 +35,17 @@ export class CalendarDashboardComponent implements OnInit {
       window.open(event.url, 'gcalevent', 'width=700,height=600');
       return false;
     },*/
-    events: [],
+    events: function(start, end, timezone, callback) {
+      console.log('123');
+      this.memberService.members$.subscribe((members: IMember[]) => {
+        console.log(members.length);
+        this.loadBirthdays(members).then((events: ICalendarEvent[]) => {
+          this.isInitialized = true;
+          console.log('callback');
+          callback(this.setEvents(events));
+        });
+      });
+    },
     eventLimit: true, // allow "more" link when too many events
     firstDay: 1,
     fixedWeekCount: true,
@@ -65,15 +75,10 @@ export class CalendarDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    let e = this.memberService.members$;
-    e.subscribe((members: IMember[]) => {
-      this.loadBirthdays(members).then((events: ICalendarEvent[]) => this.setEvents(events));
-    });
   }
 
   loadBirthdays(members: IMember[]): Promise<ICalendarEvent[]> {
-
-    // add the birthday for this year and the last & next one
+    console.log('--- ' + members.length + ' ---');
     let years = [];
     years.push(moment().subtract('1', 'year').format('YYYY'));
     years.push(moment().format('YYYY'));
@@ -91,19 +96,6 @@ export class CalendarDashboardComponent implements OnInit {
       }
     });
     return Promise.resolve(this.events);
-  }
-
-  setEvents(events: ICalendarEvent[]) {
-    const cal = $('calendar');
-    if (events && events.length > 0) {
-      events.forEach(el => {
-        console.log(el);
-        cal.fullCalendar('renderEvent', el);
-      });
-      cal.fullCalendar('rerenderEvents');
-      cal.fullCalendar('refetchEvents');
-    }
-    this.isInitialized = true;
   }
 
   onDateChanged($event) {
