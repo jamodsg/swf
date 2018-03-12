@@ -88,6 +88,9 @@ export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPubli
           .then(
             () => {
               msg = {
+                to: ['thomas.handle@gmail.com'],
+                from: 'mitglieder@sfwinterbach.com',
+                subject: 'Mitglieder des Monats für die Woche ' + now.week() + '/' + now.format('YY'),
                 templateId: 'fc184c8b-b721-450f-add7-69ef4d20fe10',
                 substitutionWrappers: ['{{', '}}'],
                 substitutions: {
