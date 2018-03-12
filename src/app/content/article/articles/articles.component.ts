@@ -22,9 +22,9 @@ export class ArticlesComponent {
   public users$: Observable<IUser[]>;
 
   constructor(private articleService: ArticleService,
-              private userService: UserService,
-              private categoryService: CategoryService,
-              public snackBar: MatSnackBar) {
+    private userService: UserService,
+    private categoryService: CategoryService,
+    public snackBar: MatSnackBar) {
     this.users$ = userService.users$;
     this.articles$ = articleService.articles$;
     this.categories$ = categoryService.categories$;

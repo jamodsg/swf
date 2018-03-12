@@ -15,7 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserModule,
     BrowserAnimationsModule,
     environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
-    RouterModule.forRoot(appRoutes, {enableTracing: environment.routerTracing})
+    RouterModule.forRoot(appRoutes, { enableTracing: environment.routerTracing })
   ],
   bootstrap: [
     AppComponent

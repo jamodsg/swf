@@ -32,8 +32,8 @@ export class ScrollableDirective {
     const target = <Document>$event.target;
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     const isReachingTop = scrollTop < this.topOffset;
-    const isReachingBottom = ( target.body.offsetHeight - (window.innerHeight + scrollTop) ) < this.bottomOffset;
-    const emitValue: ScrollEvent = {isReachingBottom, isReachingTop, originalEvent: $event, isWindowEvent: true};
+    const isReachingBottom = (target.body.offsetHeight - (window.innerHeight + scrollTop)) < this.bottomOffset;
+    const emitValue: ScrollEvent = { isReachingBottom, isReachingTop, originalEvent: $event, isWindowEvent: true };
     this.onScroll.emit(emitValue);
   }
 
@@ -43,7 +43,7 @@ export class ScrollableDirective {
     const offsetHeight = target.offsetHeight;
     const isReachingTop = target.scrollTop < this.topOffset;
     const isReachingBottom = (scrollPosition - offsetHeight) < this.bottomOffset;
-    const emitValue: ScrollEvent = {isReachingBottom, isReachingTop, originalEvent: $event, isWindowEvent: false};
+    const emitValue: ScrollEvent = { isReachingBottom, isReachingTop, originalEvent: $event, isWindowEvent: false };
     this.onScroll.emit(emitValue);
   }
 

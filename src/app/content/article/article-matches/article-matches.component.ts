@@ -26,9 +26,9 @@ export class ArticleMatchesComponent implements OnInit {
   @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
 
   constructor(private fb: FormBuilder,
-              private categoryService: CategoryService,
-              private memberService: MemberService,
-              private matchService: MatchService) {
+    private categoryService: CategoryService,
+    private memberService: MemberService,
+    private matchService: MatchService) {
     this.categories$ = categoryService.categories$;
     this.matches$ = matchService.matches$;
   }

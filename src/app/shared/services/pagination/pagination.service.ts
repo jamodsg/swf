@@ -77,7 +77,7 @@ export class PaginationService {
         let values = arr.map((snapshot) => {
           const data = snapshot.payload.doc.data();
           const doc = snapshot.payload.doc;
-          return {...data, doc};
+          return { ...data, doc };
         });
 
         values = this.query.prepend ? values.reverse() : values;

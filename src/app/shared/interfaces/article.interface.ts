@@ -13,8 +13,10 @@ export interface IArticle {
   title: string;
   subTitle?: string;
 
-  text: string;
+  postImage?: string;
+  postURL?: string;
 
+  text: string;
 
   articleDate?: Date;
 
@@ -28,11 +30,15 @@ export interface IArticle {
   assignedSeason?: ISeason;
   assignedMatch?: IMatch;
 
-  postImage?: string;
-  postUrl?: string;
-
   isFeaturedPost?: boolean;
 
-  metaTitle?: string;
-  metaDescription?: string;
+  social: {
+    provider: {
+      type: string; // local, facebook, twitter etc.
+      description: string;
+      imageURL: string;
+      title: string;
+    }[];
+  }[];
+
 }

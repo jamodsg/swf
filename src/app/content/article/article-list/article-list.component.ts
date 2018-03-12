@@ -24,7 +24,7 @@ export class ArticleListComponent {
   public form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              public paginationService: PaginationService) {
+    public paginationService: PaginationService) {
   }
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class ArticleListComponent {
       sorting: '-'
     });
 
-    this.paginationService.init('articles', 'articleDate', { reverse: true, prepend: false});
+    this.paginationService.init('articles', 'articleDate', { reverse: true, prepend: false });
   }
 
   scrollHandler(event: ScrollEvent) {

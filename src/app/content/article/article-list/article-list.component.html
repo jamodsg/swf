@@ -89,7 +89,14 @@
 
       </mat-list>
 
-      <p *ngIf="paginationService.done | async">{{'general.articles.list.noResult' | translate}}</p>
+      <p *ngIf="paginationService.done | async" style="text-align: center">
+        {{'general.articles.list.noResult' | translate}}.<br /><br />
+        <a mat-raised-button
+           [routerLink]="['/articles/edit/new']"
+           color="primary">{{'general.articles.list.addArticle'}}
+        </a>
+      </p>
+
       <loading-indicator *ngIf="paginationService.loading | async"></loading-indicator>
 
     </div>
