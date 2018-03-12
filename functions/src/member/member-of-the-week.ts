@@ -9,7 +9,9 @@ const SENDGRID_API_KEY = functions.config().sendgrid.key;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-export const memberOfTheWeekCron = functions.pubsub.topic('daily-tick').onPublish(() => {
+export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPublish(() => {
+
+  const collectionString = 'member-of-the-week';
 
     return admin.firestore().collection('members').get()
       .then((values) => {
@@ -32,35 +34,30 @@ export const memberOfTheWeekCron = functions.pubsub.topic('daily-tick').onPublis
 
         if (memberList.length > 0) {
 
-          console.log(memberList);
-
           let clubList = memberList.filter((member: any) => {
             return member.clubData && member.clubData.status && member.clubData.status > 0 && member.clubData.status !== 2;
           });
           const clubSample = clubList[Math.floor(Math.random() * clubList.length)];
-          const clubId = admin.firestore().collection('member-of-the-week').doc().id;
-          console.log(clubId);
-          console.log(clubSample);
+          const clubId = admin.firestore().collection(collectionString).doc().id;
 
           let ahList = memberList.filter((member: any) => {
             return member.ahData && member.ahData.status && member.ahData.status > 0;
           });
           const ahSample = ahList[Math.floor(Math.random() * ahList.length)];
-          const ahId = admin.firestore().collection('member-of-the-week').doc().id;
+          const ahId = admin.firestore().collection(collectionString).doc().id;
 
           let playerList = memberList.filter((member: any) => {
             return member.dfbData;
           });
           const playerSample = playerList[Math.floor(Math.random() * playerList.length)];
-          const playerId = admin.firestore().collection('member-of-the-week').doc().id;
+          const playerId = admin.firestore().collection(collectionString).doc().id;
 
           let honoraryList = memberList.filter((member: any) => {
             return member.clubData && member.clubData.status && member.clubData.status === 2;
           });
           const honorarySample = honoraryList[Math.floor(Math.random() * honoraryList.length)];
-          const honoraryId = admin.firestore().collection('member-of-the-week').doc().id;
+          const honoraryId = admin.firestore().collection(collectionString).doc().id;
 
-          const collectionString = 'member-of-the-week/' + now.format('YY') + '/' + now.week();
 
           admin.firestore().collection(collectionString).doc(clubId).create({
             type: 'club',

@@ -1,6 +1,7 @@
 <div fxLayout="row"
      fxLayoutWrap="wrap"
-     [formGroup]="form">
+     [formGroup]="form"
+     *ngIf="users$ | async as users; else loadingTemplate">
 
   <div fxFlex="100"
        formGroupName="publication">
@@ -17,9 +18,8 @@
     </mat-form-field>
 
     <mat-form-field fxFlexOffset="2"
-                    fxFlex="49">
+                    fxFlex="49"><!-- atp-time-picker-->
       <input matInput
-             atp-time-picker
              formControlName="time"
              placeholder="{{'general.publication.publicationTimeLabel' | translate}}">
     </mat-form-field>
@@ -31,7 +31,7 @@
       <mat-select placeholder="{{'general.publication.choosePublisher' | translate}}"
                   formControlName="from">
         <mat-option value="system">{{'general.creation.viaScript' | translate}}</mat-option>
-        <mat-option *ngFor="let user of users$ | async | orderBy: ['firstName', 'lastName', 'email']"
+        <mat-option *ngFor="let user of users | orderBy: ['firstName', 'lastName', 'email']"
                     [value]="user.id">
           {{user.firstName && user.lastName ? user.firstName + ' ' + user.lastName : user.email}}
         </mat-option>
@@ -52,3 +52,7 @@
   </div>
 
 </div>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

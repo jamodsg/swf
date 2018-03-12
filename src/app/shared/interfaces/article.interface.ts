@@ -32,7 +32,7 @@ export interface IArticle {
 
   isFeaturedPost?: boolean;
 
-  social: {
+  social?: {
     provider: {
       type: string; // local, facebook, twitter etc.
       description: string;

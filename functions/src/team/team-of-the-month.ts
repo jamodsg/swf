@@ -9,7 +9,9 @@ const SENDGRID_API_KEY = functions.config().sendgrid.key;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-export const teamOfTheWeekCron = functions.pubsub.topic('monthly-tick').onPublish((event: any) => {
+export const teamOfTheWeekCron = functions.pubsub.topic('monthly-tick').onPublish(() => {
+
+  const collectionString = 'team-of-the-month';
 
   return admin.firestore().collection('teams').get()
     .then((values) => {
@@ -33,11 +35,12 @@ export const teamOfTheWeekCron = functions.pubsub.topic('monthly-tick').onPublis
       if (teamList.length > 0) {
         const sample = teamList[Math.floor(Math.random() * teamList.length)];
 
-        const id = admin.firestore().collection('team-of-the-week').doc().id;
+        const id = admin.firestore().collection(collectionString).doc().id;
 
-        admin.firestore().collection('team-of-the-week').doc(id).create({
+
+        admin.firestore().collection(collectionString).doc(id).create({
           assignedTeamId: sample.id,
-          week: now.week() + '-' + now.format('YY')
+          week: now.format('YY') + '/' + now.format('MM')
         }).then(
           () => {
             msg = {
