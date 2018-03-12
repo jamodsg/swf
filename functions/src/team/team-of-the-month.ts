@@ -32,7 +32,7 @@ export const teamOfTheWeekCron = functions.pubsub.topic('monthly-tick').onPublis
 
       const now = moment();
 
-      if (teamList.length > 0) {
+      // if (teamList.length > 0) {
         const sample = teamList[Math.floor(Math.random() * teamList.length)];
 
         const id = admin.firestore().collection(collectionString).doc().id;
@@ -55,10 +55,11 @@ export const teamOfTheWeekCron = functions.pubsub.topic('monthly-tick').onPublis
                 monthString: now.month()
               }
             };
+            return sgMail.send(msg);
           }
         );
 
-      } else {
+      /* } else {
         msg = {
           to: ['thomas.handle@gmail.com'],
           from: 'mitglieder@sfwinterbach.com',
@@ -71,8 +72,7 @@ export const teamOfTheWeekCron = functions.pubsub.topic('monthly-tick').onPublis
             monthString: now.month()
           }
         };
-      }
-      return sgMail.send(msg);
+      } */
     });
 
 });

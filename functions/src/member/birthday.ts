@@ -40,8 +40,6 @@ export const birthdayReminderCron = functions.pubsub.topic('daily-tick').onPubli
         return true;
       }
 
-      console.log(birthdayList);
-
       const welcomeMsg = {
         to: ['thomas.handle@gmail.com', 'mail@r-klein.com', 'ronnyhassel@gmail.com'],
         from: 'Geburtstage@sfwinterbach.com',
