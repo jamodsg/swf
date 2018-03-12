@@ -95,10 +95,10 @@ export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPubli
                 substitutionWrappers: ['{{', '}}'],
                 substitutions: {
                   adminName: 'Thomas',
-                  clubMember: clubSample.id,
-                  ahMember: ahSample,
-                  player: playerSample,
-                  honorary: honorarySample,
+                  clubMember: 'Verein: ' + clubSample.mainData.firstName + ' ' + clubSample.mainData.lastName,
+                  ahMember: 'AH: ' + ahSample.mainData.firstName + ' ' + ahSample.mainData.lastName,
+                  player: 'Spieler: ' + playerSample.mainData.firstName + ' ' + playerSample.mainData.lastName,
+                  honorary: 'Ehrenmitglied: ' + honorarySample.mainData.firstName + ' ' + honorarySample.mainData.lastName,
                   weekString: now.week(),
                   dateString: now.format('LL') + ' bis ' + now.add(6, 'days').format('LL')
                 }
