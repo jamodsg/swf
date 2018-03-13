@@ -38,9 +38,9 @@ export const teamOfTheWeekCron = functions.pubsub.topic('monthly-tick').onPublis
         const id = admin.firestore().collection(collectionString).doc().id;
 
 
-        admin.firestore().collection(collectionString).doc(id).create({
+        admin.firestore().collection(collectionString).doc(now.format('YY') + '-' + now.format('MM')).create({
           assignedTeamId: sample.id,
-          week: now.format('YY') + '/' + now.format('MM')
+          week: now.format('YY') + '-' + now.format('MM')
         }).then(
           () => {
             msg = {

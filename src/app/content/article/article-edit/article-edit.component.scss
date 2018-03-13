@@ -8,7 +8,7 @@
 .page-wrap {
   display: flex;
   flex-direction: column;
-  max-height: 90vh;
+  min-height: 90vh;
 }
 
 .app-sidenav {

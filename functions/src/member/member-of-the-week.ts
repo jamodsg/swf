@@ -54,33 +54,39 @@ export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPubli
         });
         const honorarySample = honoraryList[Math.floor(Math.random() * honoraryList.length)];
 
+        const docId: string = now.week() + '-' + now.format('YY');
 
-        admin.firestore().collection(collectionString).doc(now.week() + '-' + now.format('YY')).create(
-          [
-            {
-              type: 'club',
-              assignedMemberId: clubSample.id,
-              week: now.week() + '-' + now.format('YY')
-            },
-            {
-              type: 'ah',
-              assignedMemberId: ahSample.id,
-              week: now.week() + '-' + now.format('YY')
-            },
-            {
-              type: 'player',
-              assignedMemberId: playerSample.id,
-              week: now.week() + '-' + now.format('YY')
-            },
-            {
-              type: 'honorary',
-              assignedMemberId: honorarySample.id,
-              week: now.week() + '-' + now.format('YY')
-            }
-          ])
+        let data: any = {};
+        data[docId] = [
+          {
+            type: 'club',
+            week: docId,
+            assignedMemberId: clubSample.id,
+          },
+          {
+            type: 'ah',
+            week: docId,
+            assignedMemberId: ahSample.id,
+          },
+          {
+            type: 'player',
+            week: docId,
+            assignedMemberId: playerSample.id
+          },
+          {
+            type: 'honorary',
+            week: docId,
+            assignedMemberId: honorarySample.id
+          }
+        ];
+
+
+        admin.firestore().collection(collectionString)
+          .doc(docId)
+          .create(data)
           .then(
             () => {
-              msg = {
+              /*msg = {
                 to: ['thomas.handle@gmail.com'],
                 from: 'mitglieder@sfwinterbach.com',
                 subject: 'Mitglieder des Monats für die Woche ' + now.week() + '/' + now.format('YY'),
@@ -96,7 +102,7 @@ export const memberOfTheWeekCron = functions.pubsub.topic('weekly-tick').onPubli
                   dateString: now.format('LL') + ' bis ' + now.add(6, 'days').format('LL')
                 }
               };
-              return sgMail.send(msg);
+              return sgMail.send(msg);*/
             });
       });
   }

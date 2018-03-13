@@ -35,6 +35,7 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import { IsEmptyPipe } from '../../shared/pipes/is-empty.pipe';
 import { BirthdayModule } from '../../shared/components/birthday/birthday.module';
+import { MemberOfTheWeekService } from '../../shared/services/member/member-of-the-week.service';
 
 @NgModule({
   imports: [
@@ -78,6 +79,7 @@ import { BirthdayModule } from '../../shared/components/birthday/birthday.module
     CategoryService,
     CategoryTypeService,
     ClubService,
+    MemberOfTheWeekService,
     MemberResolver,
     MemberService,
     MemberStateService,

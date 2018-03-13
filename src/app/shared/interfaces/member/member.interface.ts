@@ -2,12 +2,10 @@ import { IAddress } from '../address.interface';
 import { IContact } from '../contact.interface';
 import { IProfile } from './profile.interface';
 import { ICreation } from '../creation.interface';
-import { ICategory } from '../category.interface';
 import { IClubData } from './club-data.interface';
 import { IClubDFBData } from './club-dfb-data.interface';
 import { IClubAHData } from './club-ah-data.interface';
 import { IInterview } from './interview.interface';
-import { IArticle } from '../article.interface';
 import { IOpinion } from './opinion.interface';
 
 export interface IMember {

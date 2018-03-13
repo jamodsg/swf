@@ -668,6 +668,13 @@
           "value": "Eintrag / Antwort"
         }
       },
+      "fame": {
+        "club": "Vereinsmitglied",
+        "honorary": "Ehrenmitglied",
+        "ah": "AH-Mitglied",
+        "player": "Spieler",
+        "viewProfile": "Profil anzeigen"
+      },
       "statistics": {
         "ahTitle": "Alte Herren",
         "birthdayTitle": "Geburtstagsliste",
