@@ -1,72 +1,74 @@
-<mat-sidenav-container>
-  <mat-sidenav #sidenav
-               mode="side"
-               position="end"
-               class="app-sidenav">
-    <div fxLayout="row"
-         fxLayoutWrap="wrap">
-      <div fxFlex="100" style="border: 1px solid red">
-        <h1>Post Settings</h1>
+<div fxLayout="row"
+     fxLayoutWrap="wrap"
+     [formGroup]="form">
 
-        <div style="height: 100px;background-color: #7c7c7c" >Upload Image</div>
+  <div class="page">
 
-        <h3>PostUrl + Preview</h3>
-        <h3>Publish Date</h3>
-        <h3>Tag-List</h3>
-        <h3>Excerpt</h3>
-        <h3>Author</h3>
-        <h3>Meta Data</h3>
-        <h3>Twitter Card</h3>
-        <h3>Facebook Card</h3>
-        <h3>Feature this post</h3>
+    <div class="overlay"></div>
 
-        <button>Delete Post</button>
+    <div class="header">
+      <h2 class="title">Document Name</h2>
 
-      </div>
+      <input
+        class="title-document"
+        type="text"
+        name="documentTitle"
+        placeholder="Testing"
+        (change)="updateDocument()"
+        formControlName="title"><!--
+        (ngModelOptions)="{ debounce: 500 }"-->
+
+      <p *ngIf="enableWordsCount && !viewSrcMode" class="words">Words: <span class="counter">{{words}}</span></p>
+      <p *ngIf="enableCharactersCount && !viewSrcMode" class="characters">Characters: <span class="counter">{{characters}}</span>
+      </p>
     </div>
-  </mat-sidenav>
-  <mat-toolbar color="primary">
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon class="md-24" >menu</mat-icon>
-    </button>
-  </mat-toolbar>
-  <div class="page-wrap">
-    Example Content area<br><br><br><br><br><br><br>
+
+
+    <div class="g mnone">
+      <!-- editor-headers -->
+
+      <div class="editor-header editor-header--first">
+        <h3 class="title">Markdown</h3>
+        <div class="zen-wrapper">
+          <div class="zen-page">
+            <a class="toggle-zen-mode" (click)="toggle()">Toggle Zen Mode</a><!-- zenmode.toggle() -->
+            <div id="zen"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-header">
+        <h3 class="title">Preview</h3>
+        <a [ngClass]="viewSrcMode ? 'preview-mode-toggle-html' : 'preview-mode-toggle-src'" (click)="toggleView()">Toggle
+          Mode</a>
+      </div>
+
+
+      <!-- editor -->
+      <div id="editor1" class="g-b g-b--t1of2 split split-editor">
+        <!--<div id="editor" class="ui-resizable-e" ></div>-->
+        <!-- [mode]="'sql'"
+            [theme]="'eclipse'" -->
+        <textarea ace-editor
+                  class="ui-resizable-e"
+                  formControlName="text"
+                  [options]="options"
+                  [readOnly]="false"
+                  [autoUpdateContent]="true"
+                  [durationBeforeCallback]="1000"
+                  (textChanged)="onChange($event)"
+                  style="min-height: 200px; width:100%; overflow: auto;"></textarea>
+      </div>
+
+      <!-- preview -->
+      <!-- deBounce="150" -->
+      <div id="preview1" class="g-b g-b--t1of2 split split-preview">
+        <div id="preview" class="preview-html"><!-- preview -->
+        </div>
+      </div>
+
+
+    </div>
   </div>
-</mat-sidenav-container>
 
-
-
-<!--<div fxLayout="row"
-     style="margin-top: 15px"
-     fxLayoutWrap="wrap">
-
-  <div fxFlexOffset.gt-sm="2"
-       fxFlex.gt-sm="10"
-       fxFlex="100">
-    Draft
-  </div>
-
-
-  <div fxFlexOffset.gt-sm="50"
-       fxFlex.gt-sm="14"
-       fxFlex="100">
-    3
-  </div>
 </div>
-
-<div [fxLayout]="'direction'"
-     fxLayoutAlign="center center">
-
-  <div fxFlex.gt-sm="80"
-       fxFlex="100">
-    Titel<br/>
-    Text
-  </div>
-</div>
-
-
-
-<ng-template #loadingTemplate>
-  <loading-indicator></loading-indicator>
-</ng-template>-->

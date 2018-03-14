@@ -20,9 +20,14 @@ import { MemberService } from '../../shared/services/member/member.service';
 import { UserService } from '../../shared/services/user/user.service';
 import { PaginationService } from '../../shared/services/pagination/pagination.service';
 import { ScrollableDirective } from '../../shared/directives/scrollable/scrollable.directive';
+import { PreviewDirective } from './article-edit/preview/preview.directive';
+import { ZenModeDirective } from './article-edit/zen-mode/zen-mode.directive';
+import { ZenModeToggleDirective } from './article-edit/zen-mode-toggle/zen-mode-toggle.directive';
+import { AceEditorModule } from 'ng2-ace-editor';
 
 @NgModule({
   imports: [
+    AceEditorModule,
     MatButtonModule,
     MatFormFieldModule,
     MatListModule,
@@ -43,7 +48,10 @@ import { ScrollableDirective } from '../../shared/directives/scrollable/scrollab
     ArticleEditComponent,
     ArticleDetailComponent,
     ArticleMatchesComponent,
-    ScrollableDirective
+    PreviewDirective,
+    ScrollableDirective,
+    ZenModeDirective,
+    ZenModeToggleDirective
   ],
   providers: [
     ArticleResolver,
