@@ -9,11 +9,15 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
+    "@types/cheerio": "^0.22.7",
+    "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.4",
     "firebase": "^4.9.1",
     "firebase-admin": "^5.8.2",
     "firebase-functions": "^0.8.1",
-    "moment": "^2.20.1"
+    "htmlparser2": "^3.9.2",
+    "moment": "^2.20.1",
+    "request": "^2.85.0"
   },
   "devDependencies": {
     "tslint": "^5.9.1",

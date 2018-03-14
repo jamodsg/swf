@@ -218,11 +218,11 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
     }).then(() => {
       // Other-Team-Categories
       let assignedTeamMainCategoryTitle: string;
-      if(teamCategoryTitle.indexOf('Junioren') > -1){
+      if (teamCategoryTitle.indexOf('Junioren') > -1) {
         assignedTeamMainCategoryTitle = 'Junioren';
-      } else if (teamCategoryTitle.indexOf('Altherren') > -1){
+      } else if (teamCategoryTitle.indexOf('Altherren') > -1) {
         assignedTeamMainCategoryTitle = 'Altherren';
-      } else if(teamCategoryTitle.indexOf('Frauen') > -1){
+      } else if (teamCategoryTitle.indexOf('Frauen') > -1) {
         assignedTeamMainCategoryTitle = 'Frauen';
       } else {
         assignedTeamMainCategoryTitle = 'Herren';
@@ -360,7 +360,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         subTitle = subTitle.slice(0, -2);
       }
 
-      if (((subTitle.indexOf('Winterbach') > -1) || subTitle.indexOf('Bliesen') > -1) && subTitle.indexOf('SG') > -1 && teamCategoryTitle.indexOf('Junioren') > -1){
+      if (((subTitle.indexOf('Winterbach') > -1) || subTitle.indexOf('Bliesen') > -1) && subTitle.indexOf('SG') > -1 && teamCategoryTitle.indexOf('Junioren') > -1) {
         subTitle = 'SG SF Winterbach';
       }
 
@@ -370,6 +370,8 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         .where('assignedClub', '==', assignedClub)
         .where('subTitle', '==', subTitle)
         .where('assignedSeason', '==', assignedSeason)
+        //.where('externalTeamLink', '==', isHomeTeam ? description[2] : description[5])
+        //.where('logoURL', '==', isHomeTeam ? description[3] : description[6])
         .get()
         .then((values: FirebaseFirestore.QuerySnapshot) => {
 
@@ -377,15 +379,15 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             title: teamCategoryTitle,
             subTitle: subTitle,
             assignedSeason: assignedSeason,
-            externalTeamLink: isHomeTeam ? description[2] : description[5],
             isOfficialTeam: true,
-            logoURL: isHomeTeam ? description[3] : description[6],
             assignedClub: assignedClub,
-            assignedTeamCategories: assignedTeamCategory !== assignedTeamMainCategory ? [ assignedTeamCategory, assignedTeamMainCategory] : [ assignedTeamCategory ]
+            assignedTeamCategories: assignedTeamCategory !== assignedTeamMainCategory ? [assignedTeamCategory, assignedTeamMainCategory] : [assignedTeamCategory]
           };
 
           if (values.empty) {
             assignedTeam = teamData.id = db.collection(teamPath).doc().id;
+            teamData.externalTeamLink = isHomeTeam ? description[2] : description[5];
+            teamData.logoURL = isHomeTeam ? description[3] : description[6];
             teamData.assignedPlayers = [];
             teamData.assignedPositions = [];
             teamData.assignedTrainings = [];
@@ -403,7 +405,8 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
           }
         });
     }).then(() => {
-      // Match
+      return true;
+      /* Match
       return db.collection(matchPath)
         .where('homeTeam', '==', homeTeam)
         .where('guestTeam', '==', guestTeam)
@@ -439,7 +442,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
           else {
             return values.docs[0].ref.set(matchData, {merge: true});
           }
-        });
+        });*/
 
     }).catch((error: any) => console.error(error));
 
