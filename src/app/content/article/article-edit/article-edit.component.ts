@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as screenfull from "screenfull";
 import { MatDialog } from '@angular/material';
 import { MarkdownHelpComponent } from './markdown-help/markdown-help.component';
-import { CountmeService } from 'ngx-countme';
 
 @Component({
   selector: 'article-edit',
