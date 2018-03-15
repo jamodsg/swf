@@ -109,10 +109,4 @@ export class AdminComponent implements OnInit, OnDestroy {
       }, 350);
     }
   }
-
-  signOut(): void {
-    this.authService.signOut().then(
-      () => this.router.navigate(['/login']),
-      (error: any) => console.log(error));
-  }
 }

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-
 import * as screenfull from 'screenfull';
 import { AuthService } from '../../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';

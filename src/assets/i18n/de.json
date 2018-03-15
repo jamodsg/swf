@@ -132,6 +132,7 @@
         "wordCount": "Wörter"
       },
       "list": {
+        "addArticle": "Neuer Artikel",
         "allAuthors": "Alle Artikel anzeigen",
         "allStatus": "Alle Artikel",
         "allTags": "Alle Schlagworte",

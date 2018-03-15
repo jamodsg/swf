@@ -67,7 +67,7 @@ export class MemberService {
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 
-  getProfileImage(member: IMember){
+  getProfileImage(member: IMember) {
     return member.profileImageUrl
       ? member.profileImageUrl
       : (member.mainData.gender === 'female'

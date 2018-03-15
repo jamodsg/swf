@@ -8,7 +8,18 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
-import { MatButtonModule, MatFormFieldModule, MatListModule, MatSelectModule, MatSidenavModule, MatSnackBarModule, MatTabsModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatListModule,
+  MatMenuModule, MatRadioModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
 import { ArticleDashboardComponent } from './article-dashboard/article-dashboard.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
@@ -20,17 +31,19 @@ import { MemberService } from '../../shared/services/member/member.service';
 import { UserService } from '../../shared/services/user/user.service';
 import { PaginationService } from '../../shared/services/pagination/pagination.service';
 import { ScrollableDirective } from '../../shared/directives/scrollable/scrollable.directive';
-import { PreviewDirective } from './article-edit/preview/preview.directive';
-import { ZenModeDirective } from './article-edit/zen-mode/zen-mode.directive';
-import { ZenModeToggleDirective } from './article-edit/zen-mode-toggle/zen-mode-toggle.directive';
+import { MarkdownHelpComponent } from './article-edit/markdown-help/markdown-help.component';
 import { AceEditorModule } from 'ng2-ace-editor';
+import { ArticleEditSidebarComponent } from './article-edit/article-edit-sidebar/article-edit-sidebar.component';
 
 @NgModule({
   imports: [
     AceEditorModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatListModule,
+    MatMenuModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
     MatSnackBarModule,
@@ -42,16 +55,18 @@ import { AceEditorModule } from 'ng2-ace-editor';
     SharedModule
   ],
   declarations: [
-    ArticleListComponent,
-    ArticlesComponent,
     ArticleDashboardComponent,
-    ArticleEditComponent,
     ArticleDetailComponent,
+    ArticleEditComponent,
+    ArticleEditSidebarComponent,
+    ArticleListComponent,
     ArticleMatchesComponent,
-    PreviewDirective,
+    ArticlesComponent,
+    MarkdownHelpComponent,
     ScrollableDirective,
-    ZenModeDirective,
-    ZenModeToggleDirective
+  ],
+  entryComponents: [
+    MarkdownHelpComponent
   ],
   providers: [
     ArticleResolver,
