@@ -46,13 +46,18 @@ export class ArticleService {
       time: '',
       from: this.authService.id
     };
-    return Observable.of({
+    const article: IArticle = {
       id: this.afs.createId(),
       publication: publication,
       title: '',
+      subTitle: '',
       text: '',
-      creation: this.authService.getCreation()
-    });
+      articleDate: moment().toISOString(),
+      postURL: '',
+      creation: this.authService.getCreation(),
+      isFeaturedPost: false
+    };
+    return Observable.of(article);
   }
 
 }

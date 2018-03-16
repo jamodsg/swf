@@ -92,7 +92,7 @@
       <p *ngIf="paginationService.done | async" style="text-align: center">
         {{'general.articles.list.noResult' | translate}}.<br /><br />
         <a mat-raised-button
-           [routerLink]="['/articles/edit/new']"
+           [routerLink]="['/articles/create']"
            color="primary">{{'general.articles.list.addArticle' | translate}}
         </a>
       </p>

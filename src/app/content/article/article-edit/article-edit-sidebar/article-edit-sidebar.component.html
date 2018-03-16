@@ -1,68 +1,176 @@
-<mat-card style="margin-top: 30px;" class="card-demo"
-          [formGroup]="form">
+<mat-tab-group [formGroup]="form" [dynamicHeight]="true"
+               *ngIf="categories && categoryTypes && locations && matches && members && seasons && teams; else loadingTemplate">
+  <mat-tab label="Artikel-Daten">
 
-  <mat-card-title>Layout Children with 'layout-align'</mat-card-title>
-  <mat-card-subtitle></mat-card-subtitle>
-  <mat-card-content>
-    <div class="containerX">
-      <div class="colorNested box" [class.taller]="options.direction != 'row'">
-        <div [fxLayout]="options.direction" [fxLayoutAlign]="layoutAlign()" style="height: 100%;">
-          <div class="blocks one">1</div>
-          <div class="blocks" [class.two_h]="options.direction == 'row'"
-               [class.two_w]="options.direction != 'row'">2
-          </div>
-          <div class="blocks three">3</div>
-          <div class="blocks" [class.four_h]="options.direction == 'row'"
-               [class.four_w]="options.direction != 'row'">4
-          </div>
-          <div class="blocks fives">5</div>
+    <div [fxLayout]="'column'" [fxLayoutAlign]="'space-between stretch'">
+
+      <div style="border: 1px solid #cecece; min-height: 150px; text-align: center">
+        Post Image
+      </div>
+
+      <div class="row">
+        <mat-form-field fxFlex.gt-sm="49"
+                        fxFlex="100"
+                        hintLabel="Max 50 characters">
+          <input matInput maxlength="50" formControlName="subTitle"
+                 placeholder="{{'general.articles.edit.subTitle' | translate}}">
+        </mat-form-field>
+
+        <mat-form-field fxFlexOffset.gt-sm="2"
+                        fxFlex.gt-sm="49"
+                        fxFlex="100">
+          <input matInput formControlName="postURL"
+                 placeholder="{{'general.articles.edit.postURL' | translate}}">
+          <mat-hint align="end">
+            <a *ngIf="form.get('postURL').value" [href]="form.get('postURL').value">Visit Link</a>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field fxFlex.gt-sm="49"
+                        fxFlex="100">
+          <input matInput maxlength="24" formControlName="articleDate"
+                 placeholder="{{'general.articles.edit.articleDate' | translate}}">
+        </mat-form-field>
+
+        <div fxFlexOffset.gt-sm="2"
+             fxFlex.gt-sm="49"
+             fxFlex="100">
+          <tag-input formControlName="assignedTags"
+                     [editable]="true">
+          </tag-input>
         </div>
       </div>
-    </div>
-  </mat-card-content>
-  <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxHide fxHide.gt-sm="false">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around stretch"
-          class="demo_controls">
-      <div>
-        <div>Layout Direction</div>
-        <mat-radio-group formControlName="direction" name="direction" fxLayout="column">
-          <mat-radio-button value="row">row</mat-radio-button>
-          <mat-radio-button value="column">column</mat-radio-button>
-        </mat-radio-group>
+
+      <div class="row">
+        <mat-form-field formGroupName="creation"
+                        fxFlex.gt-sm="49"
+                        fxFlex="100">
+          <mat-select placeholder="{{'general.articles.edit.author' | translate}}"
+                      formControlName="by">
+            <mat-option
+              *ngFor="let member of members | orderBy: ['mainData.firstName', 'mainData.lastName', 'mainData.birthday']"
+              [value]="member.id">
+              {{member.mainData.firstName}} {{member.mainData.lastName}}
+              {{ member.mainData.birthday | date: 'dd.MM.yy' }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlexOffset.gt-sm="2"
+                        fxFlex.gt-sm="49"
+                        fxFlex="100">
+          <mat-select placeholder="{{'general.articles.edit.assignedLocation' | translate}}"
+                      formControlName="assignedLocation">
+            <mat-option
+              *ngFor="let location of locations | orderBy: ['title']"
+              [value]="location.id">
+              {{location.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div>
-        <div>Alignment in Layout Direction
-          ({{options.direction == 'row' ? 'horizontal' : 'vertical'}})
-        </div>
-        <mat-radio-group formControlName="mainAxis" name="mainAxis" fxLayout="column">
-          <mat-radio-button value="">none</mat-radio-button>
-          <mat-radio-button value="start">start (default)</mat-radio-button>
-          <mat-radio-button value="center">center</mat-radio-button>
-          <mat-radio-button value="end">end</mat-radio-button>
-          <mat-radio-button value="space-around">space-around</mat-radio-button>
-          <mat-radio-button value="space-between">space-between</mat-radio-button>
-          <mat-radio-button value="space-evenly">space-evenly</mat-radio-button>
-        </mat-radio-group>
+
+      <div class="row">
+        <mat-form-field fxFlex.gt-sm="49"
+                        fxFlex="100">
+          <mat-select placeholder="{{'general.articles.edit.assignedTeams' | translate}}"
+                      formControlName="assignedTeams" multiple>
+            <mat-optgroup *ngFor="let season of seasons | orderBy: ['-title']"
+                          [label]="season.title">
+              <mat-option
+                *ngFor="let team of teams | filterBy: ['assignedSeason'] : season.id | orderBy: ['title', 'subTitle']"
+                [value]="team.id">
+                {{team.title}} {{team.subTitle}}
+              </mat-option>
+            </mat-optgroup>
+
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlexOffset.gt-sm="2"
+                        fxFlex.gt-sm="49"
+                        fxFlex="100">
+          <mat-select placeholder="{{'general.articles.edit.assignedArticleCategories' | translate}}"
+                      formControlName="assignedCategories" multiple>
+            <mat-optgroup *ngFor="let categoryType of categoryTypes"
+                          [label]="'general.menu.' + categoryType.link + '.main' | translate">
+              <mat-option
+                *ngFor="let category of categories | filterBy: ['assignedCategoryType'] : categoryType.id | orderBy: ['title']"
+                [value]="category.id">
+                {{category.title}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div>
-        <div>Alignment in Perpendicular Direction
-          ({{options.direction == 'column' ? 'horizontal' : 'vertical'}})
-        </div>
-        <mat-radio-group formControlName="crossAxis" name="crossAxis" fxLayout="column">
-          <mat-radio-button value="none"><em>none</em></mat-radio-button>
-          <mat-radio-button value="start">start</mat-radio-button>
-          <mat-radio-button value="center">center</mat-radio-button>
-          <mat-radio-button value="end">end</mat-radio-button>
-          <mat-radio-button value="stretch">stretch (default)</mat-radio-button>
-        </mat-radio-group>
+
+      <div class="row">
+        <mat-checkbox fxFlex="100"
+                      formControlName="isFeaturedPost">
+          {{'general.articles.edit.isFeaturedPost' | translate}}
+        </mat-checkbox>
       </div>
+
+      <div class="row">
+        <mat-checkbox fxFlex="100"
+                      formControlName="isMatch">
+          {{'general.articles.edit.isArticleAMatch' | translate}}
+        </mat-checkbox>
+      </div>
+
+      <div class="row">
+        <button (click)="remove.emit()"
+                type="button"
+                mat-raised-button color="warn">
+          {{'general.articles.edit.deleteArticle' | translate}}
+        </button>
+      </div>
+
     </div>
-  </mat-card-actions>
-  <mat-card-footer style="width:95%;">
-    <div class="hint forceAbove" style="padding-left:50px;">
-      &lt;div fxLayout="{{ options.direction }}"
-      <span style="padding-left: 30px">fxLayoutAlign="{{ layoutAlign() }}"</span>
-      &gt;
+  </mat-tab>
+
+  <mat-tab label="Soziale Netzwerke">
+    <ul>
+      <li>Facebook, Twitter und Co.</li>
+    </ul>
+  </mat-tab>
+
+  <mat-tab [disabled]="!form.get('isMatch').value"
+           label="Spieldaten">
+
+    <div class="row">
+      <mat-form-field fxFlex.gt-sm="49"
+                      fxFlex="100">
+        <mat-select placeholder="{{'general.articles.edit.assignedMatch' | translate}}"
+                    formControlName="assignedMatch">
+          <mat-option *ngFor="let match of matches | orderBy: ['title']"
+                      [value]="match.id">
+            {{match.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-  </mat-card-footer>
-</mat-card>
+
+    <ul>
+      <li>Ergebnis</li>
+      <li>Besondere Vorkomnisse</li>
+      <li>Aufstellung setzen (Drag & Drop)</li>
+      <li>Kapitän setzen</li>
+      <li>Vorkomnisse eingeben:
+        <ul>
+          <li>Torchancen (von Spieler, Minute, Text)</li>
+          <li>Auswechselungen (Minute, Spieler A, Spieler B)</li>
+          <li>Tore (Minute, Torschütze, Vorlage, Text)</li>
+          <li>Gelbe und rote Karten (Spieler, MMinute, Text)</li>
+        </ul>
+      </li>
+    </ul>
+  </mat-tab>
+
+</mat-tab-group>
+
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
+</ng-template>

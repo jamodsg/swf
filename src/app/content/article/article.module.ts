@@ -9,9 +9,9 @@ import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import {
-  MatButtonModule,
+  MatButtonModule, MatCheckboxModule,
   MatDialogModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatInput, MatInputModule,
   MatListModule,
   MatMenuModule, MatRadioModule,
   MatSelectModule,
@@ -34,13 +34,20 @@ import { ScrollableDirective } from '../../shared/directives/scrollable/scrollab
 import { MarkdownHelpComponent } from './article-edit/markdown-help/markdown-help.component';
 import { AceEditorModule } from 'ng2-ace-editor';
 import { ArticleEditSidebarComponent } from './article-edit/article-edit-sidebar/article-edit-sidebar.component';
+import { TagInputModule } from 'ngx-chips';
+import { LocationService } from '../../shared/services/location/location.service';
+import { TeamService } from '../../shared/services/team/team.service';
+import { SeasonService } from '../../shared/services/season/season.service';
+import { SharedCategoryModule } from '../../shared/components/category/shared-category.module';
 
 @NgModule({
   imports: [
     AceEditorModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatInputModule,
     MatListModule,
     MatMenuModule,
     MatRadioModule,
@@ -52,7 +59,9 @@ import { ArticleEditSidebarComponent } from './article-edit/article-edit-sidebar
     MatchModule,
     PerfectScrollbarModule,
     RouterModule.forChild(articleRoutes),
-    SharedModule
+    SharedModule,
+    SharedCategoryModule,
+    TagInputModule
   ],
   declarations: [
     ArticleDashboardComponent,
@@ -73,9 +82,12 @@ import { ArticleEditSidebarComponent } from './article-edit/article-edit-sidebar
     ArticleService,
     CategoryService,
     CategoryTypeService,
+    LocationService,
     MatchService,
     MemberService,
     PaginationService,
+    SeasonService,
+    TeamService,
     UserService
   ]
 })

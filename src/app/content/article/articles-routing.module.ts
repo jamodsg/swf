@@ -21,6 +21,13 @@ export const articleRoutes: Routes = [
     component: ArticleMatchesComponent
   },
   {
+    path: 'create',
+    component: ArticleEditComponent,
+    resolve: {
+      article: ArticleResolver
+    }
+  },
+  {
     path: 'edit/:articleId',
     component: ArticleEditComponent,
     resolve: {

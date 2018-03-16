@@ -1,37 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatSidenav } from '@angular/material';
+import { ICategory } from '../../../../shared/interfaces/category.interface';
+import { ICategoryType } from '../../../../shared/interfaces/category-type.interface';
+import { ILocation } from '../../../../shared/interfaces/location.interface';
+import { ITeam } from '../../../../shared/interfaces/team/team.interface';
+import { ISeason } from '../../../../shared/interfaces/season.interface';
+import { IMatch } from '../../../../shared/interfaces/match.interface';
+import { IMember } from '../../../../shared/interfaces/member/member.interface';
 
 @Component({
   selector: 'article-edit-sidebar',
   templateUrl: './article-edit-sidebar.component.html',
   styleUrls: ['./article-edit-sidebar.component.scss']
 })
-export class ArticleEditSidebarComponent implements OnInit {
+export class ArticleEditSidebarComponent {
 
-  public form: FormGroup;
-  public options = {
-    direction :  'row',
-    mainAxis  : 'space-around',
-    crossAxis :  'center'
-  };
+  @Input() notifications: MatSidenav;
+  @Input() form: FormGroup;
+  @Input() categories: ICategory[];
+  @Input() categoryTypes: ICategoryType[];
+  @Input() locations: ILocation[];
+  @Input() matches: IMatch[];
+  @Input() members: IMember[];
+  @Input() seasons: ISeason[];
+  @Input() teams: ITeam[];
 
-  constructor(private fb: FormBuilder) { }
+  @Output() remove: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      direction: '',
-      mainAxis: '',
-      crossAxis: ''
-    });
-
-    this.form.valueChanges.subscribe((changes: any) => {
-      this.options = changes;
-    });
-  }
-
-  layoutAlign() {
-    console.log(this.options);
-    return `${this.options.mainAxis} ${this.options.crossAxis}`;
+  constructor() {
   }
 
 }

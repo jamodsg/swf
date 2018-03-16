@@ -37,6 +37,11 @@ export const MENUITEMS = [
         state: 'dashboard',
         name: 'dashboard',
         icon: 'trending_up'
+      },
+      {
+        state: 'create',
+        name: 'create',
+        icon: 'wrap_text'
       }
     ]
   },

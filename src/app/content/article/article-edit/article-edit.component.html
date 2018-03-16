@@ -1,4 +1,5 @@
 <div class="page-wrap"
+     *ngIf="categoryTypes$ | async as categoryTypes; else loadingTemplate"
      [formGroup]="form">
 
   <div class="header">
@@ -55,12 +56,16 @@
                    mode="over"
                    fxFlex="60"
                    opened="false">
-
-        <button style="float: right" mat-icon-button color="accent" (click)="notifications.close()">
-          <mat-icon aria-label="Close">exit_to_app</mat-icon>
-        </button>
-
-        <article-edit-sidebar><!-- [form]="form" -->
+        <article-edit-sidebar (remove)="remove()"
+                              [notifications]="notifications"
+                              [categoryTypes]="categoryTypes | categoryFilter : 'link' : ['article.types', 'team.types']"
+                              [categories]="categories$ | async"
+                              [locations]="locations$ | async"
+                              [matches]="matches$ | async"
+                              [members]="members$ | async"
+                              [seasons]="seasons$ | async"
+                              [teams]="teams$ | async"
+                              [form]="form">
         </article-edit-sidebar>
       </mat-sidenav>
 
@@ -95,8 +100,8 @@
         <mat-toolbar-row>
           <h3 class="title">Preview</h3>
           <span class="toolbar-spacer"></span>
-          <a class="toolbar-icon" (click)="toggleView()">{{viewSrcMode}}
-            <mat-icon *ngIf="viewSrcMode; else codeTemplate">eye</mat-icon>
+          <a class="toolbar-icon" (click)="toggleView()">
+            <mat-icon>eye</mat-icon>
           </a>
         </mat-toolbar-row>
       </mat-toolbar>
@@ -104,21 +109,15 @@
   </div>
 
   <div class="content">
-    <!-- editor
-         class="g-b g-b--t1of2 split split-editor"
-         -->
-
     <textarea fxFlex.gt-sm="50"
               fxFlex="100"
-              style="padding: 0 16px;margin: 0;overflow: auto;"
+              style="padding: 0 16px;margin: 0;overflow: auto;border: none;"
               formControlName="text">
     </textarea>
-
-    <div id="preview1" class="g-b g-b--t1of2 split split-preview">
-      <div id="preview" class="preview-html"><!-- preview -->
-      </div>
+    <div fxFlex.gt-sm="50"
+         fxFlex="100">
+      <pre>{{form.getRawValue() | json}}</pre>
     </div>
-
   </div>
 
   <footer style="padding: 5px;" *ngIf="!viewSrcMode">
@@ -129,7 +128,7 @@
 
 </div>
 
-<ng-template #codeTemplate>
-  <mat-icon>code</mat-icon>
+<ng-template #loadingTemplate>
+  <loading-indicator></loading-indicator>
 </ng-template>
 

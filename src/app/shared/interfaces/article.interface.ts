@@ -18,15 +18,18 @@ export interface IArticle {
 
   text: string;
 
-  articleDate?: Date;
+  articleDate?: string;
 
   creation: ICreation;
   publication?: IPublication;
 
   assignedCategories?: ICategory[];
+
   assignedTags?: ITag[];
+  assignedLocation?: ILocation;
   assignedTeams?: ITeam[];
-  assignedLocation?: ILocation | '';
+
+
   assignedSeason?: ISeason;
   assignedMatch?: IMatch;
 

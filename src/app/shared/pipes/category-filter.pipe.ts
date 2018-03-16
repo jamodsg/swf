@@ -1,25 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ISponsor } from '../interfaces/sponsor.interface';
 
 @Pipe({
   name: 'categoryFilter'
 })
 export class CategoryFilterPipe implements PipeTransform {
 
-  transform(items: any[], searchField: string, categoryIds: string[]): ISponsor[] {
+  transform(items: any[], searchField: string, values: string[]): any[] {
     if (!items) {
       return;
     }
 
-    if (!categoryIds || categoryIds.length === 0) {
+    if (!values || values.length === 0) {
       return items;
     }
 
-    return items.filter((item: any) => {
-      return categoryIds.some((cat) => {
+    let retItems =  items.filter((item: any) => {
+      return values.some((cat) => {
         return item[searchField] === cat;
       });
     });
+
+    return retItems;
   }
 
 }

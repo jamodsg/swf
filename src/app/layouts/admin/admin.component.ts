@@ -35,9 +35,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   public config: PerfectScrollbarConfigInterface = {};
 
   constructor(private router: Router,
-    public translate: TranslateService,
-    public authService: AuthService,
-    private zone: NgZone) {
+              public translate: TranslateService,
+              public authService: AuthService,
+              private zone: NgZone) {
 
     translate.addLangs(['de', 'en', 'fr']);
     translate.setDefaultLang('de');
@@ -83,7 +83,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   isOver(): boolean {
-    if (this.url.indexOf('/articles/edit') > -1 || this.url === '/calendar') {
+    if (this.url === '/articles/create' || this.url.indexOf('/articles/edit') > -1 || this.url === '/calendar') {
       return true;
     } else {
       return this.mediaMatcher.matches;

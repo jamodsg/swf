@@ -17,7 +17,7 @@ export class ArticleResolver implements Resolve<IArticle> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IArticle> {
 
-    if (route.params['articleId'] === 'new') {
+    if (Object.keys(route.params).length === 0) {
       return this.articleService.setNewArticle();
     }
 
