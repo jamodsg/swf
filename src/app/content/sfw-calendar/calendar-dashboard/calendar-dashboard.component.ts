@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MemberService } from '../../../shared/services/member/member.service';
-import { IMember } from '../../../shared/interfaces/member/member.interface';
 import { ICalendarEvent } from '../../../shared/interfaces/calendar-event.interface';
 import 'fullcalendar';
-import * as moment from 'moment';
 import * as $ from 'jquery';
+import * as moment from 'moment';
 import { CalendarComponent } from 'ap-angular2-fullcalendar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'calendar-dashboard',
@@ -30,21 +29,11 @@ export class CalendarDashboardComponent implements OnInit {
     defaultDate: moment().toISOString(),
     displayEventEnd: true,
     editable: false,
-    /*eventClick: function (event) {
+    events: [],
+    eventClick: function (event) {
       // opens events in a popup window
-      window.open(event.url, 'gcalevent', 'width=700,height=600');
+      // window.open(event.url, 'gcalevent', 'width=700,height=600');
       return false;
-    },*/
-    events: function(start, end, timezone, callback) {
-      console.log('123');
-      this.memberService.members$.subscribe((members: IMember[]) => {
-        console.log(members.length);
-        this.loadBirthdays(members).then((events: ICalendarEvent[]) => {
-          this.isInitialized = true;
-          console.log('callback');
-          callback(this.setEvents(events));
-        });
-      });
     },
     eventLimit: true, // allow "more" link when too many events
     firstDay: 1,
@@ -69,37 +58,15 @@ export class CalendarDashboardComponent implements OnInit {
     weekNumberTitle: 'KW'
   };
 
-  public events: ICalendarEvent[] = [];
-
-  constructor(private memberService: MemberService) {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-  }
-
-  loadBirthdays(members: IMember[]): Promise<ICalendarEvent[]> {
-    console.log('--- ' + members.length + ' ---');
-    let years = [];
-    years.push(moment().subtract('1', 'year').format('YYYY'));
-    years.push(moment().format('YYYY'));
-    years.push(moment().add('1', 'year').format('YYYY'));
-
-    members.forEach((member: IMember) => {
-      if (member.mainData.birthday) {
-        for (let i in years) {
-          let event: ICalendarEvent = {
-            title: 'Geburtstag ' + member.mainData.firstName + ' ' + member.mainData.lastName,
-            start: moment(member.mainData.birthday).set('year', years[i]).format('YYYY-MM-DD')
-          };
-          this.events.push(event);
-        }
-      }
+    this.route.data.subscribe((data: { calendarEvents: ICalendarEvent[] }) => {
+      let cal = $('calendar');
+      cal.fullCalendar('renderEvents', data.calendarEvents, true);
+      this.isInitialized = true;
     });
-    return Promise.resolve(this.events);
-  }
-
-  onDateChanged($event) {
-    console.log($event);
   }
 
 }
