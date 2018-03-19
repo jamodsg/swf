@@ -1137,6 +1137,21 @@
           "title": "Trainingszeiten und -Orte"
         }
       },
+      "fame": {
+        "categories": "Kategorien",
+        "draws": "Unentschieden",
+        "loss": "Niederlagen",
+        "management": "Mannschaftsbetreuung",
+        "noPhoto": "Es wurde noch kein Mannschaftsfoto hochgeladen",
+        "playerList": "Spielerliste",
+        "players": "Spieler",
+        "photoDescription": "Bild-Beschreibung",
+        "positions": "Aufgaben innerhalb der Mannschaft",
+        "season": "Spielzeit",
+        "title": "Mannschaft des Monats",
+        "viewProfile": "Details anzeigen",
+        "wins": "Siege"
+      },
       "list": {
         "allTeams": "Alle Mannschaften anzeigen",
         "colTitles": {

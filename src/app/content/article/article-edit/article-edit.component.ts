@@ -67,17 +67,17 @@ export class ArticleEditComponent implements OnInit {
   ];
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private articleService: ArticleService,
-              private categoryService: CategoryService,
-              private categoryTypeService: CategoryTypeService,
-              private locationService: LocationService,
-              private matchService: MatchService,
-              private memberService: MemberService,
-              private seasonService: SeasonService,
-              private teamService: TeamService,
-              public dialog: MatDialog,
-              private fb: FormBuilder) {
+    private router: Router,
+    private articleService: ArticleService,
+    private categoryService: CategoryService,
+    private categoryTypeService: CategoryTypeService,
+    private locationService: LocationService,
+    private matchService: MatchService,
+    private memberService: MemberService,
+    private seasonService: SeasonService,
+    private teamService: TeamService,
+    public dialog: MatDialog,
+    private fb: FormBuilder) {
     this.sf = screenfull;
     this.categories$ = categoryService.categories$;
     this.categoryTypes$ = categoryTypeService.categoryTypes$;

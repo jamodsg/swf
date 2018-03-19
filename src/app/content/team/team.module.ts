@@ -39,6 +39,7 @@ import { TimeLineModule } from '../../shared/components/time-line/time-line.modu
 import { TeamDetailEventsComponent } from './team-detail/team-detail-events/team-detail-events.component';
 import { TeamDetailTrainingComponent } from './team-detail/team-detail-training/team-detail-training.component';
 import { CreationModule } from '../../shared/components/creation/creation.module';
+import { TeamOfTheMonthService } from '../../shared/services/team/team-of-the-month.service';
 
 @NgModule({
   imports: [
@@ -82,6 +83,7 @@ import { CreationModule } from '../../shared/components/creation/creation.module
     LocationService,
     MemberService,
     SeasonService,
+    TeamOfTheMonthService,
     TeamResolver,
     TeamService,
     UserService
