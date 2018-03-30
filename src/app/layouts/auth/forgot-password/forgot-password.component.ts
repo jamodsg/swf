@@ -65,11 +65,11 @@ export class ForgotPasswordComponent implements OnInit {
         // this.toggleSignInForm();
         this.form.reset();
       }).catch(
-      (error: any) => {
-        this.showAlert('forgotPasswordAlertContainer');
-        this.alertService.error(error);
-        this.isLoading = false;
-      });
+        (error: any) => {
+          this.showAlert('forgotPasswordAlertContainer');
+          this.alertService.error(error);
+          this.isLoading = false;
+        });
   }
 
   showAlert(target) {

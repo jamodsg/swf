@@ -3,11 +3,11 @@
 
 <div fxLayout="row"
      fxLayoutWrap="wrap"
+     *ngIf="members; else loadingTemplate"
      [formGroup]="form">
 
   <div fxFlex="100"
-       formArrayName="opinions"><!--
-       *ngIf="members; else loadingTemplate"-->
+       formArrayName="opinions">
 
     <button mat-raised-button
             style="margin-bottom: 25px"
@@ -30,21 +30,21 @@
           <div fxFlex="100"
                style="margin-bottom: 40px;">
             <button mat-raised-button
-                    [disabled]="form.get('opinions')['controls'][i]['controls']['type'].value === 'textField'"
-                    (click)="toggleMemberLookup.emit({'id': i, 'type': 'textField' })"
+                    [disabled]="form.get('opinions')['controls'][i]['controls']['type'].value === 'text'"
+                    (click)="toggleMemberLookup.emit({'id': i, 'type': 'text' })"
                     color="primary">
               {{'general.members.edit.opinions.perTextField' | translate}}
             </button>
 
             <button mat-raised-button
-                    [disabled]="form.get('opinions')['controls'][i]['controls']['type'].value === 'selectField'"
-                    (click)="toggleMemberLookup.emit({'id': i, 'type': 'selectField' })"
+                    [disabled]="form.get('opinions')['controls'][i]['controls']['type'].value === 'select'"
+                    (click)="toggleMemberLookup.emit({'id': i, 'type': 'select' })"
                     color="primary">
               {{'general.members.edit.opinions.perSelectField' | translate}}
             </button>
           </div>
 
-          <div *ngIf="form.get('opinions')['controls'][i]['controls']['type'].value === 'textField'"
+          <div *ngIf="form.get('opinions')['controls'][i]['controls']['type'].value === 'text'"
                fxFlex.gt-sm="90"
                fxFlex="100"
                formGroupName="name">
@@ -66,7 +66,7 @@
             </div>
           </div>
 
-          <div *ngIf="form.get('opinions')['controls'][i]['controls']['type'].value === 'selectField'"
+          <div *ngIf="form.get('opinions')['controls'][i]['controls']['type'].value === 'select'"
                fxFlex.gt-sm="90"
                fxFlex="100"
                formGroupName="assignedMember">

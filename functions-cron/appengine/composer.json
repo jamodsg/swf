@@ -1,0 +1,6 @@
+{
+    "require": {
+        "google/proto-client": "^0.33.0",
+        "google/cloud": "^0.56.0"
+    }
+}

@@ -3,6 +3,7 @@
 // add cronJobs via gcloud console:
 // gcloud app deploy app.yaml cron.yaml
 // https://console.cloud.google.com/logs
+// gcloud app browse
 
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
@@ -23,4 +24,5 @@ export const driveMemberCron = member.driveMemberCron;
 import * as team from './team';
 export const spielplanCron = team.spielplanCron;
 export const teamCron = team.teamOfTheMonthCron;
-export const wettbewerbeCron = team.wettbewerbeCron;
+// export const wettbewerbeCron = team.wettbewerbeCron;
+export const deleteMatchCron = team.deleteMatchCron;

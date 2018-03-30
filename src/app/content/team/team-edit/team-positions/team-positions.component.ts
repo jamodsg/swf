@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
 import { ICategory } from '../../../../shared/interfaces/category.interface';
@@ -8,7 +8,7 @@ import { ICategoryType } from '../../../../shared/interfaces/category-type.inter
   selector: 'team-positions',
   templateUrl: './team-positions.component.html'
 })
-export class TeamPositionsComponent implements OnChanges {
+export class TeamPositionsComponent {
 
   @Input() form: FormGroup;
   @Input() members: IMember[];
@@ -18,19 +18,14 @@ export class TeamPositionsComponent implements OnChanges {
   @Output() addPosition: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() removePosition: EventEmitter<number> = new EventEmitter<number>(false);
 
-  public teamPositions: ICategory[];
-
   constructor() {
   }
 
-  ngOnChanges() {
-    if (this.categories && this.categoryTypes) {
-      this.teamPositions = this.categories.filter((category: ICategory) => {
-        return category.assignedCategoryType === this.categoryTypes.filter((categoryType: ICategoryType) => {
-          return categoryType.link === 'team.position.types';
-        })[0].id;
-      });
-    }
+  deleteFromTeam(memberId: string) {
+    let players = this.form.get('assignedPlayers').value;
+    const index = players.indexOf(memberId);
+    players.splice(index, 1);
+    this.form['controls']['assignedPlayers'].patchValue(players);
   }
 
 }

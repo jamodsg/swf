@@ -55,7 +55,21 @@ export class ArticleService {
       articleDate: moment().toISOString(),
       postURL: '',
       creation: this.authService.getCreation(),
-      isFeaturedPost: false
+      isFeaturedPost: false,
+      meta: {
+        main: {
+          description: '',
+          title: ''
+        },
+        facebook: {
+          description: '',
+          title: ''
+        },
+        twitter: {
+          description: '',
+          title: ''
+        }
+      }
     };
     return Observable.of(article);
   }

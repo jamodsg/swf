@@ -27,7 +27,7 @@ export class AccordionLinkDirective implements OnInit, OnDestroy {
   protected _open: boolean;
   protected nav: AccordionDirective;
 
-  constructor( @Inject(AccordionDirective) nav: AccordionDirective) {
+  constructor(@Inject(AccordionDirective) nav: AccordionDirective) {
     this.nav = nav;
   }
 

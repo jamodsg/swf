@@ -117,7 +117,31 @@
         "publishNow": "Jetzt veröffentlichen",
         "saveAsDraft": "Als Entwurf speichern",
         "settings": "Einstellungen",
-        "sidebar": "Weitere Einstellungen",
+        "sidebar": {
+          "meta": {
+            "facebook": {
+              "description": "Open Graph Daten",
+              "descriptionInput": "Beschreibung",
+              "title": "Facebook",
+              "titleInput": "Titel"
+            },
+            "main": {
+              "description": "Inhalte für Suchmaschinen",
+              "descriptionInput": "Beschreibung",
+              "imageInput": "Foto",
+              "title": "Meta-Daten",
+              "titleInput": "Titel"
+            },
+            "twitter": {
+              "description": "Strukturierte Daten",
+              "descriptionInput": "Beschreibung",
+              "imageInput": "Foto",
+              "title": "Twitter",
+              "titleInput": "Titel"
+            }
+          },
+          "title": "Weitere Einstellungen"
+        },
         "teamName": "Verknüpfte Mannschaft",
         "text": "Der Artikel-Text",
         "textLabel": "Der Text",
@@ -616,6 +640,7 @@
           "phoneMobile": "Telefon (mobil)",
           "phoneWork": "Telefon (dienstl.)",
           "salutation": "Anrede",
+          "title": "Titel",
           "years": "Jahre",
           "zodiac": "Sternzeichen"
         },
@@ -755,6 +780,9 @@
         "interviews": "Interviews",
         "profile": "Steckbriefe",
         "statistics": "Statistiken"
+      },
+      "newsletter": {
+        "main": "Newsletter"
       },
       "season": {
         "main": "Spielzeiten",

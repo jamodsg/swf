@@ -1,24 +1,37 @@
-<div fxLayout="column">
-  <div fxFlex="100">
+<div fxLayout="column"
+     [formGroup]="form">
+  <div fxFlex="100"
+       *ngIf="matches && categories; else loadingTemplate">
 
-    <p *ngIf="matches && matches.length === 0">{{'general.matches.list.noMatches' | translate}}</p>
+    <p *ngIf="matches.length === 0">{{'general.matches.list.noMatches' | translate}}</p>
 
-    <mat-list dense
-              *ngIf="matches && categories; else loadingTemplate">
+    <!--<mat-list dense
+              formGroupName="matches">
 
       <mat-list-item *ngFor="let match of matches">
         <img style="border-radius: 0" mat-list-avatar src="{{match.homeTeam.logoURL}}" alt="{{match.homeTeam.title}}">
         <img style="border-radius: 0" mat-list-avatar src="{{match.guestTeam.logoURL}}" alt="{{match.guestTeam.title}}">
 
-        <h3 matLine>{{match.homeTeam.title}} &ndash; {{match.guestTeam.title}}</h3>
+        <h3 matLine>
+          {{match.homeTeam.title}} &ndash; {{match.guestTeam.title}}
+          <span style="position: absolute; right: 0;" *ngIf="showResultInputs">
+            <input matInput style="width: 35px;" type="number"/>:
+            <input matInput style="width: 35px;" type="number"/>
+            <span style="margin: 0 5px;">ODER</span>
+            <select name="event">
+              <option>abgesagt</option>
+            </select>
+          </span>
+        </h3>
 
         <p matLine>
-          <span *ngFor="let category of categories | filterBy: ['id'] : match.assignedTeamCategory">{{category.title}}</span>
+          <span
+            *ngFor="let category of categories | filterBy: ['id'] : match.assignedTeamCategory">{{category.title}}</span>
           - {{match.matchType}}
           - {{match.startDate | date: 'dd.MM.yy HH:mm'}}
         </p>
       </mat-list-item>
-    </mat-list>
+    </mat-list>-->
 
   </div>
 </div>

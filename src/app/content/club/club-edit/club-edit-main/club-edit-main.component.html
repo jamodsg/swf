@@ -113,9 +113,15 @@
   <div fxFlexOffset.gt-sm="5"
        fxFlex.gt-sm="30"
        fxFlex.gt-xs="100">
-    <div style="height: 500px; width: 100%; background-color: #7c7c7c; margin-top: 25px">Vereinswappen: Upload und Anzeige</div>
+    <h3>Wappen</h3><!-- (uploadCompleted)="logoUploadCompleted.emit($event)"  -->
+    <media-uploader [form]="form"
+                    [uploaderConfig]="uploaderConfig"
+                    (downloadUrl)='getDownloadUrl(event$)'
+                    [uploaderOptions]="uploaderOptions">
+    </media-uploader>
+    <br />
+    <img [src]="imageUrl" height="280" width="300"/>
   </div>
-
 </div>
 
 <ng-template #loadingTemplate>

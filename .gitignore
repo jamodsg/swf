@@ -9,6 +9,7 @@
 # dependencies
 /node_modules
 
+
 # IDEs and editors
 /.idea
 .project
@@ -35,9 +36,11 @@ testem.log
 /typings
 
 src/app/config
+/php
 package-lock.json
 functions/package-lock.json
 functions/node_modules
+/api-client-python
 functions/*.js
 functions/firebase-debug.log
 functions/**/*.js

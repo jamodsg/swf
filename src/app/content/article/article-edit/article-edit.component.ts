@@ -97,8 +97,9 @@ export class ArticleEditComponent implements OnInit {
       title: [this.article.title, [Validators.required, Validators.minLength(10)]],
       subTitle: [this.article.subTitle],
       text: [this.article.text, [Validators.required, Validators.minLength(10)]],
-      publication: this.article.publication,
+      publication: this.initPublication(),
       creation: this.initCreation(),
+      meta: this.initMetaData(),
       articleDate: this.article.articleDate,
       // postImage: string;
       postURL: [this.article.postURL],
@@ -113,7 +114,34 @@ export class ArticleEditComponent implements OnInit {
     });
 
     this.form.valueChanges.subscribe((changes: any) => {
-      delete changes.isMatch;
+      console.log(changes);
+      changes.isMatch = null;
+    });
+  }
+
+  initMetaData(): FormGroup {
+    return this.fb.group({
+      main: this.fb.group({
+        title: this.article.meta.main.title,
+        description: this.article.meta.main.description,
+      }),
+      facebook: this.fb.group({
+        title: this.article.meta.facebook.title,
+        description: this.article.meta.facebook.description,
+      }),
+      twitter: this.fb.group({
+        title: this.article.meta.twitter.title,
+        description: this.article.meta.twitter.description,
+      }),
+    });
+  }
+
+  initPublication(): FormGroup {
+    return this.fb.group({
+      by: this.article.publication.from,
+      date: this.article.publication.date,
+      time: this.article.publication.time,
+      status: this.article.publication.status
     });
   }
 

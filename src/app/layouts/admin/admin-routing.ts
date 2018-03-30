@@ -35,6 +35,10 @@ export const adminRoutes: Routes = [
         loadChildren: '../../content/member/member.module#MemberModule'
       },
       {
+        path: 'newsletter',
+        loadChildren: '../../content/newsletter/newsletter.module#NewsletterModule'
+      },
+      {
         path: 'uploader',
         loadChildren: '../../content/uploader/uploader.module#UploaderModule'
       },

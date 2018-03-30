@@ -10,7 +10,7 @@ import { IClub } from '../../../../shared/interfaces/club/club.interface';
   templateUrl: './team-edit-main.component.html',
   styleUrls: ['./team-edit-main.component.scss']
 })
-export class TeamEditMainComponent implements OnInit {
+export class TeamEditMainComponent {
 
   @Input() form: FormGroup;
   @Input() categoryTypes: ICategoryType[];
@@ -22,9 +22,6 @@ export class TeamEditMainComponent implements OnInit {
   public shortTitleMaxLength: number = 25;
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }

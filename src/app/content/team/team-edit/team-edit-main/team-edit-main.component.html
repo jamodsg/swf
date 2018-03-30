@@ -4,7 +4,7 @@
       [formGroup]="form">
 
   <div fxLayout="row"
-       fxLayoutWrap="wrap" >
+       fxLayoutWrap="wrap">
 
     <div fxFlex.gt-sm="50"
          fxFlex="100">
@@ -31,7 +31,8 @@
       <div fxLayout="row" fxLayoutWrap="wrap">
         <mat-form-field fxFlex="100">
           <mat-select placeholder="{{'general.teams.edit.assignedCategories' | translate}}"
-                      formControlName="assignedTeamCategories" multiple>
+                      formControlName="assignedTeamCategories"
+                      multiple>
             <mat-option *ngFor="let category of categories | orderBy: ['title']"
                         [value]="category.id">
               {{category.title}}

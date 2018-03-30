@@ -1,23 +1,24 @@
 <div fxLayout="row"
-     fxLayoutWrap="wrap"
-     *ngIf="teams$ | async as teams; else loadingTemplate">
+     fxLayoutWrap="wrap">
 
   <div fxFlex="100"
-       *ngFor="let teamOfTheMonth of teamsOfTheMonth$ | async | filterBy: ['month']: currentMonth">
+       *ngIf="teams$ | async as teams; else loadingTemplate">
     <mat-card
-      *ngFor="let team of teams | filterBy: ['id'] : teamOfTheMonth.assignedTeamId">
-      <mat-card-content>
-        <div fxLayout="row">
-          <div fxFlex.gt-sm="35"
-               fxFlex="100">
-            <h1>{{'general.teams.fame.title' | translate}} <b>{{getTitle()}}</b></h1>
-            <h3 style="margin: 25px 0;">
-              <img *ngIf="team.logoURL" [src]="team.logoURL"/>
-              {{team.title}} ({{team.subTitle}})
-            </h3>
+      *ngFor="let teamOfTheMonth of teamsOfTheMonth$ | async | filterBy: ['month']: currentMonth">
+      <mat-card-content
+        *ngFor="let team of teams | filterBy: ['id'] : teamOfTheMonth.assignedTeamId">
 
-            <p class="mt-xs mb-xs" *ngIf="seasons$ |async as seasons; else loadingTemplate">
-              {{'general.teams.fame.season' | translate}}
+        <div fxLayout="row">
+          <span fxFlex.gt-sm="35"
+                fxFlex="100">
+            <h1>{{'general.teams.fame.title' | translate}} <b>{{getTitle()}}</b></h1>
+
+            <img *ngIf="team.logoURL" [src]="team.logoURL"/>
+
+            <h3 style="margin: 25px 0;"> {{team.title}} ({{team.subTitle}})</h3>
+
+            <p class="mt-xs mb-xs" *ngIf="seasons$ | async as seasons; else loadingTemplate">
+              {{'general.teams.fame.season' | translate}}:
               <span *ngFor="let season of seasons |filterBy: ['id']: team.assignedSeason">
                   {{season.title}}
                 </span>
@@ -25,7 +26,7 @@
 
 
             <p *ngIf="categories$ | async as categories; else loadingTemplate">
-              {{'general.teams.fame.categories' | translate}}
+              {{'general.teams.fame.categories' | translate}}:
               <span *ngFor="let assignedCategory of team.assignedTeamCategories; let last = last">
                   <a [routerLink]="['/categories/detail',category.id ]"
                      *ngFor="let category of categories | filterBy: ['id'] : assignedCategory">
@@ -34,27 +35,42 @@
                 </span>
             </p>
 
-            <!-- ToDo: Aufgaben hinzufügen -->
-            <span class="block mt-xs mb-xs">{{'general.teams.fame.positions' | translate}}: Christian Klee</span>
-            <span class="block mt-xs mb-xs">{{'general.teams.fame.management' | translate}}:Trainer: Thorsten Kunz, Betreuer: Frank Fuchs</span>
+
+            <h3 style="margin-top: 25px;">{{'general.teams.edit.management.title' | translate}}</h3>
+            <span class="block mt-xs mb-xs" *ngIf="!team.assignedPositions.length">
+              {{'general.teams.edit.position.noPosition' | translate}}
+            </span>
+
+            <p *ngIf="members$ | async as members; else loadingTemplate">
+            <span class="block mt-xs mb-xs" *ngFor="let position of team.assignedPositions | orderBy: 'position.type'">
+              {{position.title}}
+              <a [routerLink]="['/members/detail', position.assignedMember]">
+                {{(members | filterBy: ['id'] : position.assignedMember)[0].mainData.lastName}} {{(members | filterBy: ['id'] : position.assignedMember)[0].mainData.firstName}}
+                {{ (members | filterBy: ['id'] : position.assignedMember)[0].mainData.birthday | date: 'dd.MM.yy'}}
+                ({{position.position}})
+              </a>
+            </span>
+            </p>
 
             <h3 style="margin-top: 25px">{{'general.teams.fame.playerList' | translate}}
               ({{team.assignedPlayers.length}} {{'general.teams.fame.players' | translate}})
             </h3>
-            <ul>
-              <li *ngFor="let player of team.assignedPlayers">
-                {{player}}
+            <ul *ngIf="members$ | async as members; else loadingTemplate">
+              <li *ngFor="let playerId of team.assignedPlayers">
+                <a [routerLink]="['/members/detail', playerId]">
+                  {{ (members | filterBy: ['id'] : playerId)[0].mainData.lastName}}
+                  {{ (members | filterBy: ['id'] : playerId)[0].mainData.firstName}}
+                  {{ (members | filterBy: ['id'] : playerId)[0].mainData.birthday | date: 'dd.MM.yy'}}
+                </a>
               </li>
             </ul>
-
 
             <a [routerLink]="['/teams/detail', team.id]"
                mat-raised-button
                color="primary">{{'general.teams.fame.viewProfile' | translate}}
             </a>
+          </span>
 
-
-          </div>
           <div fxFlex.gt-sm="55"
                fxFlex="100">
             <figure *ngIf="team.photoURL; else noPhotoTemplate">

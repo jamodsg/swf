@@ -31,4 +31,7 @@ export class StaticPagesComponent implements OnInit {
   ngOnInit() {
   }
 
+  setSelectedStaticPageData(i: number) {
+    this.setSelectedStaticPage.emit(i);
+  }
 }

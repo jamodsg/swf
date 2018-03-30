@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatListModule, MatMenuModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatListModule, MatMenuModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';

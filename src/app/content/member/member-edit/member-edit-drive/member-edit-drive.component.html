@@ -3,16 +3,14 @@
      [formGroup]="form">
 
   <div fxFlex.gt-sm="32"
-       fxFlex.gt-xs="100">
+       fxFlex="100"
+       formGroupName="clubData">
 
-    <h3>{{'general.members.detail.drive.club' | translate}}</h3>
+    <div fxLayout="column">
 
-    <div fxLayout="row"
-         fxLayoutWrap="wrap"
-         formGroupName="clubData">
+      <h3>{{'general.members.detail.drive.club' | translate}}</h3>
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <mat-select placeholder="{{'general.members.detail.drive.clubData.status' | translate}}"
                     formControlName="status">
           <mat-option *ngFor="let status of memberStateService.getMemberStates()"
@@ -21,16 +19,13 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.drive.clubData.payment' | translate}}"
                formControlName="payment"/>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                formControlName="joined"
                [matDatepicker]="clubJoinedPicker"
@@ -42,9 +37,7 @@
         </mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                formControlName="left"
                [matDatepicker]="clubLeftPicker"
@@ -56,7 +49,7 @@
         </mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field fxFlex="100">
+      <mat-form-field>
         <mat-select placeholder="{{'general.teams.edit.assignedClub' | translate}}"
                     formControlName="assignedClub">
           <!--<mat-option *ngFor="let status of memberStateService.getMemberStates()"
@@ -70,15 +63,15 @@
 
   <div fxFlexOffset="2"
        fxFlex.gt-sm="32"
-       fxFlex.gt-xs="100">
-    <h3>{{'general.members.detail.drive.ah' | translate}}</h3>
+       fxFlex.gt-xs="100"
+       formGroupName="ahData">
 
-    <div fxLayout="row"
-         fxLayoutWrap="wrap"
-         formGroupName="ahData">
+    <div fxLayout="column">
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <h3>{{'general.members.detail.drive.ah' | translate}}</h3>
+
+
+      <mat-form-field>
         <mat-select placeholder="{{'general.members.detail.drive.clubData.status' | translate}}"
                     formControlName="status">
           <mat-option *ngFor="let status of memberStateService.getAHStates()"
@@ -87,16 +80,13 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.drive.ahData.payment' | translate}}"
                formControlName="payment"/>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                formControlName="joined"
                [matDatepicker]="ahJoinedPicker"
@@ -108,9 +98,7 @@
         </mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                formControlName="left"
                [matDatepicker]="ahLeftPicker"
@@ -127,47 +115,38 @@
 
   <div fxFlexOffset="2"
        fxFlex.gt-sm="32"
-       fxFlex.gt-xs="100">
+       fxFlex.gt-xs="100"
+       formGroupName="dfbData">
 
-    <h3>{{'general.members.detail.drive.dfb.title' | translate}}</h3>
+    <div fxLayout="column">
 
-    <div fxLayout="row"
-         fxLayoutWrap="wrap"
-         formGroupName="dfbData">
+      <h3>{{'general.members.detail.drive.dfb.title' | translate}}</h3>
 
-      <mat-form-field fxFlex.gt-sm="32"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.drive.dfb.ageGroup' | translate}}"
                formControlName="ageGroup"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="32"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.drive.dfb.playerStatus' | translate}}"
                formControlName="playerStatus"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="32"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.drive.dfb.allowedToPlay' | translate}}"
                formControlName="allowedToPlay"/>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.drive.dfb.passNumber' | translate}}"
                formControlName="passNumber"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                formControlName="passPrint"
                [matDatepicker]="passPrintPicker"
@@ -179,8 +158,7 @@
         </mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                formControlName="eligibleForFriendlyMatches"
                [matDatepicker]="eligibleForFriendlyMatchesPicker"
@@ -192,9 +170,7 @@
         </mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex="100">
+      <mat-form-field>
         <input matInput
                formControlName="eligibleForOfficialMatches"
                [matDatepicker]="eligibleForOfficialMatchesPicker"
@@ -206,19 +182,20 @@
         </mat-datepicker>
       </mat-form-field>
 
-      <!--
-         <mat-list-item *ngIf="member.dfbData.guestPlayer && member.dfbData.guestPlayer.guestRight !== ''">
-           <span>{{'general.members.detail.drive.dfb.guest' | translate}}</span>
-           <span style="font-weight: normal">
+
+      <mat-list-item *ngIf="member.dfbData.guestPlayer && member.dfbData.guestPlayer.guestRight !== ''">
+        <span>{{'general.members.detail.drive.dfb.guest' | translate}}</span>
+        <span style="font-weight: normal">
              {{ member.dfbData.guestPlayer.guestRight }} <br/>
              {{ member.dfbData.guestPlayer.season }} <br/>
              {{ member.dfbData.guestPlayer.type }}
            </span>
-         </mat-list-item>
-         <mat-list-item *ngIf="member.dfbData.signOut">
-           <span>{{'general.members.detail.drive.dfb.signOut' | translate}}</span>
-           {{ member.dfbData.signOut }}
-         </mat-list-item>-->
+      </mat-list-item>
+      <mat-list-item *ngIf="member.dfbData.signOut">
+        <span>{{'general.members.detail.drive.dfb.signOut' | translate}}</span>
+        {{ member.dfbData.signOut }}
+      </mat-list-item>
+
     </div>
   </div>
 </div>

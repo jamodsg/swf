@@ -44,4 +44,19 @@ export interface IArticle {
     }[];
   }[];
 
+  meta: {
+    main: {
+      description: string;
+      title: string;
+    },
+    facebook: {
+      description: string;
+      title: string;
+    },
+    twitter: {
+      description: string;
+      title: string;
+    }
+  };
+
 }

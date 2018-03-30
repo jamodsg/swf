@@ -13,5 +13,8 @@ export const environment = {
     storageBucket: 'sfw-dev.appspot.com',
     messagingSenderId: '241078219173'
   },
+  googleCalendar: {
+    id: '41q3u1q8pfh26dm1lpkuh7lsrs@group.calendar.google.com'
+  },
   routerTracing: false
 };

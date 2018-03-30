@@ -26,14 +26,14 @@
           </button>
         </div>
 
-        <mat-menu #menu="matMenu">
+        <mat-menu #menu="matMenu" formGroupName="publication">
           <div style="padding: 10px 20px;">
             <h4>Ready to publish your post?</h4>
 
-            <mat-radio-group class="radio-group" formControlName="publication">
+            <mat-radio-group class="radio-group" formControlName="status">
               <mat-radio-button class="radio-button"
                                 *ngFor="let publication of publicationOptions"
-                                [value]="publication.value">
+                                [value]="publication.value" style="margin: 10px 0">
                 {{publication.text}}<br/>
                 <span style="color: #cecece">{{publication.description}}</span>
               </mat-radio-button>
@@ -109,6 +109,7 @@
   </div>
 
   <div class="content">
+    <pre>{{form.getRawValue() | json}}</pre>
     <textarea fxFlex.gt-sm="50"
               fxFlex="100"
               style="padding: 0 16px;margin: 0;overflow: auto;border: none;"

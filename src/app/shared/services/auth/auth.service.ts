@@ -51,14 +51,14 @@ export class AuthService implements OnDestroy {
   signIn(credentials) {
     return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(
-      (authUser: firebase.User) => {
-        if (authUser.emailVerified) {
-          return this.updateUser({
-            emailVerified: authUser.emailVerified,
-            email: authUser.email
-          });
+        (authUser: firebase.User) => {
+          if (authUser.emailVerified) {
+            return this.updateUser({
+              emailVerified: authUser.emailVerified,
+              email: authUser.email
+            });
+          }
         }
-      }
       );
   }
 

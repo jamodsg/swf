@@ -1,6 +1,11 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
+export const deleteMatch = functions.database.ref('/match-fixtures/{season}/{matchNumber}').onDelete((event: any) => {
+  console.log(event);
+  console.log('deleted');
+});
+
 export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{matchNumber}').onWrite((event: any) => {
 
   const data = event.data.val();
@@ -405,8 +410,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
           }
         });
     }).then(() => {
-      return true;
-      /* Match
+      // Match
       return db.collection(matchPath)
         .where('homeTeam', '==', homeTeam)
         .where('guestTeam', '==', guestTeam)
@@ -417,6 +421,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
         .then((values: FirebaseFirestore.QuerySnapshot) => {
 
           let matchData: any = {
+            title: data.subject,
             isImported: true,
             isOfficialMatch: true,
             isHomeTeam: isHomeTeam,
@@ -428,7 +433,7 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
             matchType: matchType,
             startDate: data.startDate,
             endDate: data.endDate,
-            location: assignedLocation
+            location: assignedLocation,
           };
 
           if (values.empty) {
@@ -437,12 +442,17 @@ export const spielplanCron = functions.database.ref('/match-fixtures/{season}/{m
               from: 'system',
               at: new Date()
             };
+            matchData.result = {
+              otherEvent: '',
+              homeTeamGoals: '',
+              guestTeamGoals: ''
+            };
             return db.collection(matchPath).doc(matchData.id).set(matchData);
           }
           else {
             return values.docs[0].ref.set(matchData, {merge: true});
           }
-        });*/
+        });
 
     }).catch((error: any) => console.error(error));
 

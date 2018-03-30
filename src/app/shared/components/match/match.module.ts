@@ -3,10 +3,12 @@ import { MatchFilterPipe } from '../../pipes/match-filter.pipe';
 import { MatchNoResultFilterPipe } from '../../pipes/match-no-result-filter.pipe';
 import { MatchListComponent } from './match-list/match-list.component';
 import { SharedModule } from '../../shared.module';
-import { MatListModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatListModule } from '@angular/material';
 
 @NgModule({
   imports: [
+    MatFormFieldModule,
+    MatInputModule,
     MatListModule,
     SharedModule
   ],

@@ -1,4 +1,5 @@
-runtime: python27
+#runtime: python27
+runtime: php55
 api_version: 1
 threadsafe: true
 
@@ -10,15 +11,17 @@ handlers:
   login: admin
   secure: always
 
-- url: /.*
-  script: main.app
+- url: /
+  script: ../../php/standings/web/index.php
+  login: admin
+  secure: always
 
-libraries:
-- name: webapp2
-  version: latest
-- name: pycrypto
-  version: latest
-- name: ssl
-  version: latest
+#libraries:
+#- name: webapp2
+#  version: latest
+#- name: pycrypto
+#  version: latest
+#- name: ssl
+#  version: latest
 
-instance_class: F1
+#instance_class: F1

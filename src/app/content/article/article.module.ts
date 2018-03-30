@@ -9,11 +9,14 @@ import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CategoryTypeService } from '../../shared/services/category-type/category-type.service';
 import {
-  MatButtonModule, MatCheckboxModule,
-  MatDialogModule,
-  MatFormFieldModule, MatInput, MatInputModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule, MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule,
   MatListModule,
-  MatMenuModule, MatRadioModule,
+  MatMenuModule,
+  MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
@@ -39,6 +42,10 @@ import { LocationService } from '../../shared/services/location/location.service
 import { TeamService } from '../../shared/services/team/team.service';
 import { SeasonService } from '../../shared/services/season/season.service';
 import { SharedCategoryModule } from '../../shared/components/category/shared-category.module';
+import { SidebarMetaDataComponent } from './article-edit/article-edit-sidebar/sidebar-meta-data/sidebar-meta-data.component';
+import { ApplicationService } from '../../shared/services/application/application.service';
+import { SidebarMatchDataComponent } from './article-edit/article-edit-sidebar/sidebar-match-data/sidebar-match-data.component';
+import { SidebarMainDataComponent } from './article-edit/article-edit-sidebar/sidebar-main-data/sidebar-main-data.component';
 
 @NgModule({
   imports: [
@@ -46,6 +53,7 @@ import { SharedCategoryModule } from '../../shared/components/category/shared-ca
     MatButtonModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
@@ -73,11 +81,15 @@ import { SharedCategoryModule } from '../../shared/components/category/shared-ca
     ArticlesComponent,
     MarkdownHelpComponent,
     ScrollableDirective,
+    SidebarMetaDataComponent,
+    SidebarMatchDataComponent,
+    SidebarMainDataComponent,
   ],
   entryComponents: [
     MarkdownHelpComponent
   ],
   providers: [
+    ApplicationService,
     ArticleResolver,
     ArticleService,
     CategoryService,

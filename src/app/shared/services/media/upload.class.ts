@@ -1,29 +1,24 @@
-import { ICreation } from '../../interfaces/creation.interface';
 import { Observable } from 'rxjs/Observable';
 
 export class Upload {
 
-  id: string;
-  path: string;
   file: File;
 
+  downloadUrl$: Observable<string> | string;
+  percentage$: Observable<number>;
+  isActive: boolean;
+  error: Observable<any>;
+
+  /*
   assignedObjects: {
     id: string;
     type: string;
   }[];
 
   previewImage: string;
+  snapshot: Observable<any>; */
 
-  downloadUrl: Observable<string> | string;
-  percentage: Observable<number>;
-  isActive: boolean;
-  snapshot: Observable<any>;
-
-  error: Observable<any>;
-
-  creation: ICreation;
-
-  constructor(file: File) {
+  constructor(file) {
     this.file = file;
   }
 }

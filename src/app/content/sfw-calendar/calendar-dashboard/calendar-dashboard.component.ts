@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import * as moment from 'moment';
 import { CalendarComponent } from 'ap-angular2-fullcalendar';
 import { ActivatedRoute } from '@angular/router';
+import { Options } from 'fullcalendar';
 
 @Component({
   selector: 'calendar-dashboard',
@@ -14,58 +15,60 @@ import { ActivatedRoute } from '@angular/router';
 export class CalendarDashboardComponent implements OnInit {
 
   @ViewChild('calendar') calendar: CalendarComponent;
-
+  calendarOptions: Options;
   public isInitialized: boolean = false;
-
-  calendarOptions: Object = {
-    allDayText: 'ganztägig',
-    buttonText: {
-      today: 'Heute',
-      month: 'Monat',
-      week: 'Woche',
-      day: 'Tag',
-      list: 'Liste'
-    },
-    defaultDate: moment().toISOString(),
-    displayEventEnd: true,
-    editable: false,
-    events: [],
-    eventClick: function (event) {
-      // opens events in a popup window
-      // window.open(event.url, 'gcalevent', 'width=700,height=600');
-      return false;
-    },
-    eventLimit: true, // allow "more" link when too many events
-    firstDay: 1,
-    fixedWeekCount: true,
-    footer: true,
-    header: {
-      left: 'title',
-      center: 'month, basicWeek, basicDay', // agendaWeek,
-      right: 'today prev,next'
-    },
-    height: '100',
-    locale: 'de',
-    slotDuration: '15',
-    slotLabelFormat: 'hh:mm',
-    timeFormat: 'hh:mm',
-    timezone: 'local',
-    validRange: {
-      start: moment().subtract('1', 'years').startOf('year').format('YYYY-MM-DD'),
-      end: moment().add('1', 'years').endOf('year').format('YYYY-MM-DD'),
-    },
-    weekNumbers: true,
-    weekNumberTitle: 'KW'
-  };
 
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { calendarEvents: ICalendarEvent[] }) => {
+    this.route.data.subscribe((data: { calendarEvents: any[] }) => {
+
       let cal = $('calendar');
       cal.fullCalendar('renderEvents', data.calendarEvents, true);
       this.isInitialized = true;
+
+      this.calendarOptions = {
+        allDayText: 'ganztägig',
+        buttonText: {
+          today: 'Heute',
+          month: 'Monat',
+          week: 'Woche',
+          day: 'Tag',
+          list: 'Liste'
+        },
+        defaultDate: moment().toISOString(),
+        displayEventEnd: true,
+        editable: false,
+        events: data.calendarEvents,
+        eventClick: function(event) {
+          // opens events in a popup window
+          // window.open(event.url, 'gcalevent', 'width=700,height=600');
+          return false;
+        },
+        eventLimit: true, // allow "more" link when too many events
+        firstDay: 1,
+        fixedWeekCount: true,
+        footer: true,
+        header: {
+          left: 'title',
+          center: 'month, basicWeek, basicDay', // agendaWeek,
+          right: 'today prev,next'
+        },
+        // height: '100',
+        locale: 'de',
+        // slotDuration: '15',
+        slotLabelFormat: 'hh:mm',
+        timeFormat: 'hh:mm',
+        timezone: 'local',
+        validRange: {
+          start: moment().subtract('6', 'months').format('YYYY-MM-DD'),
+          end: moment().add('1', 'years').endOf('year').format('YYYY-MM-DD'),
+        },
+        weekNumbers: true,
+        weekNumberTitle: 'KW'
+      };
+
     });
   }
 

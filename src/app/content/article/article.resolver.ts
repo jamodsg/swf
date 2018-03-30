@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/operator/first';
 import 'rxjs/operator/map';
 import 'rxjs/operator/take';
-import { IClub } from '../../shared/interfaces/club/club.interface';
 
 @Injectable()
 export class ArticleResolver implements Resolve<IArticle> {

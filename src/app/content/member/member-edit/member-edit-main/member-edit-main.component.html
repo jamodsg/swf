@@ -3,15 +3,13 @@
      [formGroup]="form">
 
   <div fxFlex.gt-sm="32"
-       fxFlex.gt-xs="100"
+       fxFlex="100"
        formGroupName="mainData">
 
-    <div fxLayout="row"
-         fxLayoutWrap="wrap">
-      <h3 fxFlex="100">{{'general.members.detail.main.person' | translate}}</h3>
+    <div fxLayout="column">
+      <h3>{{'general.members.detail.main.person' | translate}}</h3>
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <mat-select placeholder="{{'general.members.detail.main.gender' | translate}}"
                     formControlName="gender">
           <mat-option [value]="'female'">{{ 'general.members.detail.main.female' | translate}}</mat-option>
@@ -19,24 +17,19 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
-               placeholder="{{'general.members.detail.main.salutation' | translate}}"
+               placeholder="{{'general.members.detail.main.title' | translate}}"
                formControlName="title"/>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="49"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{member.mainData.firstName}}"
                formControlName="firstName"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="49"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{member.mainData.lastName}}"
                formControlName="lastName"/>
@@ -44,46 +37,39 @@
     </div>
   </div>
 
-  <div fxFlexOffset="2"
+  <div fxFlexOffset.gt-sm="2"
        fxFlex.gt-sm="32"
-       fxFlex.gt-xs="100"
+       fxFlex="100"
        formGroupName="contact">
 
-    <div fxLayout="row"
-         fxLayoutWrap="wrap">
-      <h3 fxFlex="100">{{'general.members.detail.main.contact' | translate}}</h3>
+    <div fxLayout="column">
+      <h3>{{'general.members.detail.main.contact' | translate}}</h3>
 
-      <mat-form-field fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.main.email' | translate}}"
                formControlName="email"/>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="48"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.main.phoneHome' | translate}}"
                formControlName="phoneHome"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="50"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.main.phoneMobile' | translate}}"
                formControlName="phoneMobile"/>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="48"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.main.phoneWork' | translate}}"
                formControlName="phoneWork"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="50"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.members.detail.main.fax' | translate}}"
                formControlName="fax"/>
@@ -91,48 +77,39 @@
     </div>
   </div>
 
-  <div fxFlexOffset="2"
+  <div fxFlexOffset.gt-sm="2"
        fxFlex.gt-sm="32"
-       fxFlex.gt-xs="100"
+       fxFlex="100"
        formGroupName="address">
 
-    <div fxLayout="row"
-         fxLayoutWrap="wrap">
-      <h3 fxFlex="100">{{'general.members.detail.main.address' | translate}}</h3>
+    <div fxLayout="column">
+      <h3>{{'general.members.detail.main.address' | translate}}</h3>
 
-      <mat-form-field fxFlex.gt-sm="69"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.users.edit.personal.streetName' | translate}}"
                formControlName="streetName"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="1"
-                      fxFlex.gt-sm="30"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.users.edit.personal.houseNumber' | translate}}"
                formControlName="houseNumber"/>
       </mat-form-field>
 
-      <mat-form-field fxFlex.gt-sm="20"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.users.edit.personal.zip' | translate}}"
                formControlName="zip"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="38"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.users.edit.personal.city' | translate}}"
                formControlName="city"/>
       </mat-form-field>
 
-      <mat-form-field fxFlexOffset="2"
-                      fxFlex.gt-sm="38"
-                      fxFlex.gt-xs="100">
+      <mat-form-field>
         <input matInput
                placeholder="{{'general.users.edit.personal.county' | translate}}"
                formControlName="county"/>
@@ -141,15 +118,15 @@
     </div>
   </div>
 
-  <div fxFlexOffset.gt-sm="68"
-       fxFlex.gt-sm="32"
-       fxFlex="100">
-    <div fxLayout="row"
-         fxLayoutWrap="wrap">
-      <h3 fxFlex="100">{{'general.members.detail.main.comment' | translate}}</h3>
+</div>
+
+<div fxLayout="row"
+     fxLayoutWrap="wrap"
+     [formGroup]="form">
+  <div fxFlex="100">
+      <h3>{{'general.members.detail.main.comment' | translate}}</h3>
       <quill-editor [style]="{height: '150px'}"
                     formControlName="comment">
       </quill-editor>
-    </div>
   </div>
 </div>

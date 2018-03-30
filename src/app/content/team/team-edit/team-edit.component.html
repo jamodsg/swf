@@ -30,7 +30,7 @@
               <mat-tab label="{{'general.teams.edit.management.title' | translate}}">
                 <team-positions [form]="form"
                                 [categories]="categories$ | async"
-                                [categoryTypes]="categoryTypes$ | async"
+                                [categoryTypes]="categoryTypes$ | async | filterBy: ['link']: 'team.position.types'"
                                 [members]="members$ | async"
                                 (addPosition)="addPosition($event)"
                                 (removePosition)="removePosition($event)">
@@ -47,9 +47,6 @@
 
               <mat-tab label="{{'general.teams.edit.timeLine.title' | translate}}">
                 <h3>{{'general.teams.edit.timeLineTitle' | translate}}</h3>
-
-                <!--(delete)="delete.emit($event)"
-                (cancel)="cancel($event)" -->
                 <time-line [showLinks]="true"
                            (cancel)="removeEvent($event)"
                            (add)="addEvent($event)"

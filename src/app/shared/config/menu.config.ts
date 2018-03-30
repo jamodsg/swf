@@ -6,6 +6,12 @@ export const MENUITEMS = [
     icon: 'dashboard'
   },
   {
+    state: 'newsletter',
+    name: 'newsletter',
+    type: 'link',
+    icon: 'email'
+  },
+  {
     state: 'calendar',
     name: 'event',
     type: 'link',
@@ -148,7 +154,19 @@ export const MENUITEMS = [
   {
     state: 'users',
     name: 'user',
-    type: 'link',
-    icon: 'people'
+    icon: 'people',
+    type: 'sub',
+    children: [
+      {
+        state: '',
+        name: 'main',
+        icon: 'list',
+      },
+      {
+        state: 'roles',
+        name: 'roles',
+        icon: ''
+      }
+    ]
   }
 ];

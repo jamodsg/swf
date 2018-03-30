@@ -69,7 +69,6 @@ export class MemberEditComponent implements OnInit {
     this.form.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe((changes: IClub) => {
       this.member = Object.assign({}, this.member, changes);
       if (!this.form.invalid) {
-        console.log(changes);
         this.saveMember();
       }
     });
@@ -194,12 +193,9 @@ export class MemberEditComponent implements OnInit {
     control.removeAt($event);
   }
 
-  // Das sagen die anderen
-  toggleMemberLookup($event: { id: number, type: string }) {
-    const ctrl: FormControl = (<any>this.form).controls['opinions']['controls'][$event.id].controls['type'];
-    ctrl.setValue($event.type);
-  }
-
+  /**
+   * Opinions from others
+   */
   initOpinions(): FormArray {
     const formArray = [];
     if (this.member.opinions) {
@@ -212,30 +208,36 @@ export class MemberEditComponent implements OnInit {
 
   initOpinion(opinion: IOpinion): FormGroup {
     return this.fb.group({
-      type: [opinion ? opinion.type : 'selectField'],
+      type: [opinion ? opinion.type : 'select'],
       name: this.initNameModel(),
       assignedMember: this.initAssignedMemberModel(),
       comment: [opinion ? opinion.comment : '', [Validators.required]]
     });
   }
 
+  // Das sagen die anderen
+  toggleMemberLookup($event: { id: number, type: string }) {
+    const ctrl: FormControl = (<any>this.form).controls['opinions']['controls'][$event.id].controls['type'];
+    ctrl.setValue($event.type);
+  }
+
   initNameModel() {
     return this.fb.group({
-      firstName: ['', [Validators.required, Validators.maxLength(100)]],
-      lastName: ['', [Validators.required, Validators.maxLength(100)]],
+      firstName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      lastName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
     });
   }
 
-  initAssignedMemberModel() {
+  initAssignedMemberModel(): FormGroup {
     return this.fb.group({
-      assignedMember: ['', [Validators.required, Validators.maxLength(100)]],
+      assignedMember: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]]
     });
   }
 
   addOpinion(): void {
     const control = <FormArray>this.form.controls['opinions'];
     const opinion: IOpinion = {
-      type: 'selectField',
+      type: 'select',
       name: '',
       assignedMember: null,
       comment: ''

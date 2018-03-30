@@ -3,21 +3,42 @@
      *ngIf="members; else loadingTemplate"
      [formGroup]="form">
 
-  <!--<mat-form-field fxFlex.gt-sm="40"
-                  fxFlex.gt-xs="100">
-    <mat-select placeholder="{{'general.teams.edit.position.players' | translate}}"
-                formControlName="assignedPlayers" multiple>
-      <mat-option
-        *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
-        [value]="member.id">
-        {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>-->
+  <div fxFlex.gt-sm="45"
+       fxFlex.gt-xs="100">
 
-  <div fxFlexOffset="1"
-       fxFlex.gt-sm="59"
-       fxFlex.gt-xs="100" *ngIf="categories && categoryTypes; else loadingTemplate">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="{{'general.teams.edit.position.players' | translate}}"
+                    formControlName="assignedPlayers"
+                    multiple>
+          <mat-option
+            *ngFor="let member of members | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday']"
+            [value]="member.id">
+            {{member.mainData.lastName}} {{member.mainData.firstName}} {{ member.mainData.birthday | date: 'dd.MM.yy'}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <h3>{{'general.teams.edit.position.players' | translate}}</h3>
+      <mat-list dense fxFlex="100">
+        <mat-list-item *ngFor="let memberId of form.get('assignedPlayers').value">
+          <span mat-line>
+          {{ (members | filterBy: ['id'] : memberId)[0].mainData.lastName }}
+          {{ (members | filterBy: ['id'] : memberId)[0].mainData.firstName }}
+          {{ (members | filterBy: ['id'] : memberId)[0].mainData.birthday | date: 'dd.MM.yy' }}
+          </span>
+          <button mat-icon-button (click)="deleteFromTeam(memberId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <div fxFlexOffset="5"
+       fxFlex.gt-sm="50"
+       fxFlex.gt-xs="100"
+       *ngIf="categories && categoryTypes; else loadingTemplate">
 
     <p>{{'general.teams.edit.position.description' | translate}}</p>
 
@@ -31,7 +52,7 @@
              fxFlex="100">
           <team-position-form
             (removePosition)="removePosition.emit($event)"
-            [categories]="teamPositions"
+            [categories]="categories | filterBy: ['assignedCategoryType']: categoryTypes[0].id"
             [members]="members"
             [form]="form.controls['assignedPositions']['controls'][i]">
           </team-position-form>

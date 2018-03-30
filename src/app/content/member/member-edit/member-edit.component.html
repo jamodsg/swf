@@ -50,9 +50,9 @@
               <member-edit-other-opinions (add)="addOpinion($event)"
                                           (delete)="removeOpinion($event)"
                                           (toggleMemberLookup)="toggleMemberLookup($event)"
-                                          [members]="null"
+                                          [members]="members$ | async"
                                           [form]="form">
-              </member-edit-other-opinions><!-- members$ | async-->
+              </member-edit-other-opinions>
             </mat-tab>
             <!--<mat-tab label="{{'general.members.tabs.media' | translate}}">
               <p>Mit dem Mitglied verknüpfte Fotos, Videos etc.</p>

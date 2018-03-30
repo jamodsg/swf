@@ -8,6 +8,7 @@ import { CalendarModule } from 'ap-angular2-fullcalendar';
 import { MemberService } from '../../shared/services/member/member.service';
 import { CalendarDashboardComponent } from './calendar-dashboard/calendar-dashboard.component';
 import { EventsResolver } from './events.resolver';
+import { CalendarService } from '../../shared/services/calendar/calendar.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { EventsResolver } from './events.resolver';
     CalendarDashboardComponent
   ],
   providers: [
+    CalendarService,
     EventsResolver,
     MemberService
   ]

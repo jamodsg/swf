@@ -37,18 +37,17 @@ export class MediaItemService {
     return this.afs.doc<IMediaItem>(this.path + '/' + mediaItemId).valueChanges();
   }
 
-  setNewMediaItem(upload: Upload): IMediaItem {
+  /* setNewMediaItem(upload: Upload): IMediaItem {
     return {
       id: upload.id,
       assignedObjects: upload.assignedObjects,
       downloadUrl: upload.downloadUrl,
       name: upload.file.name,
       size: upload.file.size,
-      type: upload.file.type,
+      type: upload.file.t,
       isExternal: false,
       creation: this.authService.getCreation()
     };
-  }
-
+  } */
 
 }

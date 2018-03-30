@@ -8,6 +8,7 @@ import { ITeam } from '../../../../shared/interfaces/team/team.interface';
 import { ISeason } from '../../../../shared/interfaces/season.interface';
 import { IMatch } from '../../../../shared/interfaces/match.interface';
 import { IMember } from '../../../../shared/interfaces/member/member.interface';
+import { ApplicationService } from '../../../../shared/services/application/application.service';
 
 @Component({
   selector: 'article-edit-sidebar',
@@ -28,7 +29,7 @@ export class ArticleEditSidebarComponent {
 
   @Output() remove: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
-  constructor() {
+  constructor(public applicationService: ApplicationService) {
   }
 
 }
